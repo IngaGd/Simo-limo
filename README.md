@@ -14,5 +14,5 @@ To run the applications in development mode, run these commands in terminal:
 
 The following `npm` commands that are available from the projects root:
 
-`npm run test` - run all tests.\
-`npm run build` - build the application.\
+`npm run test` - run all tests.
+`npm run build` - build the application.
