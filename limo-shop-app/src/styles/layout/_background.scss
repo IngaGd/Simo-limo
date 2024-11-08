@@ -5,6 +5,9 @@ $string-gutter: 3rem;
 .wallpaper {
   background-color: $color-primary-1;
   height: 100vh;
+  position: absolute;
+  top: 0;
+  z-index: 1;
 
   display: grid;
   grid-template-columns: $spacing-xxl 1fr $spacing-xxl;
