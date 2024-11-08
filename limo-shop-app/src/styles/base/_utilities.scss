@@ -1,0 +1,6 @@
+@use "../variables/index" as *;
+
+// margins
+.m-xl {
+  margin: $spacing-xxl;
+}

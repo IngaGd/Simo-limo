@@ -1,0 +1,23 @@
+@use "../variables/index" as *;
+
+$string-gutter: 3rem;
+
+.wallpaper {
+  background-color: $color-primary-1;
+  height: 100vh;
+
+  display: grid;
+  grid-template-columns: $spacing-xxl 1fr $spacing-xxl;
+
+  .straps {
+    grid-column: 2;
+
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: $string-gutter;
+
+    .strap {
+      background-color: $color-primary-2;
+    }
+  }
+}
