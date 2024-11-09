@@ -1,0 +1,11 @@
+@use "../../../../styles/variables/index" as *;
+
+.title {
+  font-size: $font-size-m;
+  padding: $spasing-xxs;
+  color: $color-primary-1;
+  background-color: rgba($color-primary-3, 0.7);
+  position: absolute;
+  z-index: 3;
+  align-self: flex-end;
+}
