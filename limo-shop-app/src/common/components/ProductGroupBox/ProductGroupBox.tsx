@@ -1,11 +1,14 @@
 import { allAssets } from "../../../assets/assets";
 import styles from "./productGroupBox.module.scss";
+import ProductGroupTitle from "./ProductGroupTitle";
 
 export default function ProductGroupBox() {
-  const productGroupClass = `${styles.product}`;
   return (
-    <div className={productGroupClass}>
-      <img src={allAssets[`limo`]} alt="" className={styles.img} />
+    <div className={styles.product}>
+      <div className={styles.box}>
+        <img src={allAssets[`limo`]} alt="" className={styles.img} />
+      </div>
+      <ProductGroupTitle />
     </div>
   );
 }
