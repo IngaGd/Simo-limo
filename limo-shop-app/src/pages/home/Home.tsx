@@ -1,3 +1,4 @@
+import DescriptionTableDropDown from "../../common/components/DescriptionTableDropDown";
 import ProductGroupBox from "../../common/components/ProductGroupBox";
 import styles from "./home.module.scss";
 
@@ -7,6 +8,7 @@ export default function Home() {
     <>
       <div className={homeClass}>
         <ProductGroupBox />
+        <DescriptionTableDropDown />
       </div>
     </>
   );

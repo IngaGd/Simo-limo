@@ -1,0 +1,7 @@
+@use "../variables/index" as *;
+
+@mixin box-size-m {
+  display: flex;
+  width: $width-size-m;
+  height: $height-size-m;
+}

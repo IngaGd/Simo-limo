@@ -1,2 +1,40 @@
+@use "../../../styles/variables/index" as *;
+@use "../../../styles/abstracts/index" as *;
+
 .table {
+  @include box-size-m;
+  background-color: rgba($color-primary-2, 1);
+  margin-top: -15rem;
+  padding: 16rem $spacing-xs $spacing-xs $spacing-xs;
+  font-size: $font-size-s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .active,
+  .purchasing,
+  .quantity,
+  .price,
+  .details {
+    display: flex;
+    color: $color-primary-3;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.purchasing {
+  justify-content: space-between;
+}
+
+.quantity,
+.price {
+  flex-direction: column;
+}
+
+.details {
+  flex-direction: row;
+  gap: 1rem;
 }

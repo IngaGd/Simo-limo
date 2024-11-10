@@ -1,7 +1,8 @@
+@use "../../../styles/variables/index" as *;
+@use "../../../styles/abstracts/index" as *;
+
 .product {
-  display: flex;
-  width: 36rem;
-  height: 32rem;
+  @include box-size-m;
 
   .box,
   .img {

@@ -1,0 +1,13 @@
+@use "../../../../styles/variables/index" as *;
+
+.button {
+  font-family: inherit;
+  padding-left: $spacing-xxs;
+  padding-right: $spacing-xxs;
+  padding-top: $spacing-xxxxxs;
+  padding-bottom: $spacing-xxxxxs;
+}
+
+// .padding-s {
+//   padding: $spacing-xxxxs $spacing-xxs $spacing-xxxxs $spacing-xxs;
+// }

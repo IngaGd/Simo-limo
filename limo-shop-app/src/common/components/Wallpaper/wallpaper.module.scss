@@ -12,7 +12,7 @@ $string-gutter: 3rem;
   z-index: 1;
 
   display: grid;
-  grid-template-columns: $spacing-xxl 1fr $spacing-xxl;
+  grid-template-columns: $viewpowr-spacing-l 1fr $viewpowr-spacing-l;
 
   .straps {
     grid-column: 2;
