@@ -12,7 +12,7 @@ $string-gutter: 3rem;
   z-index: 1;
 
   display: grid;
-  grid-template-columns: $viewpowr-spacing-l 1fr $viewpowr-spacing-l;
+  grid-template-columns: 10% 80% 10%;
 
   .straps {
     grid-column: 2;
@@ -23,7 +23,6 @@ $string-gutter: 3rem;
 
     .strap {
       background-color: $color-primary-2;
-      width: 10rem;
     }
   }
 }
