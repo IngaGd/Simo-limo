@@ -1,0 +1,11 @@
+@use "../../../styles/variables/" as *;
+
+.container {
+  display: grid;
+  position: absolute;
+  z-index: 2;
+  height: 10vh;
+  width: 100%;
+  grid-template-columns: 45% 10% 45%;
+  color: $color-primary-3;
+}
