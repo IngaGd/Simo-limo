@@ -3,11 +3,16 @@
 
 .product {
   @include box-size-m;
+  position: absolute;
+  z-index: 4;
+  cursor: pointer;
 
   .box,
   .img {
     width: 100%;
     height: 100%;
+    position: absolute;
+    z-index: 4;
     .img {
       object-fit: cover;
     }

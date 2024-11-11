@@ -1,17 +1,29 @@
-@use "../../../styles/variables/index" as *;
-@use "../../../styles/abstracts/index" as *;
+@use "../../../../styles/variables/index" as *;
+@use "../../../../styles/abstracts/index" as *;
+
+.active {
+  position: absolute;
+  z-index: 3;
+  top: 32rem;
+  transition: all 800ms ease-out;
+}
+
+.hidden {
+  position: absolute;
+  z-index: 3;
+  top: 0rem;
+  transition: all 800ms ease-in;
+}
 
 .table {
-  @include box-size-m;
   background-color: rgba($color-primary-2, 1);
-  margin-top: -15rem;
-  padding: 16rem $spacing-xs $spacing-xs $spacing-xs;
+  padding: 1rem $spacing-xs $spacing-xs $spacing-xs;
   font-size: $font-size-s;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 1rem;
 
-  .active,
   .purchasing,
   .quantity,
   .price,
@@ -19,10 +31,6 @@
     display: flex;
     color: $color-primary-3;
   }
-}
-
-.hidden {
-  display: none;
 }
 
 .purchasing {
