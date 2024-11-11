@@ -7,7 +7,12 @@ export default function Home() {
   return (
     <>
       <div className={homeClass}>
-        <ProductGroupBox />
+        <div className={styles.box}>
+          <ProductGroupBox />
+        </div>
+        <div className={styles.box}>
+          <ProductGroupBox />
+        </div>
       </div>
     </>
   );
