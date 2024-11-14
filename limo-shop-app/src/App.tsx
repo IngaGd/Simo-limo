@@ -1,16 +1,9 @@
-import Header from "./common/components/Header";
-import WallPaper from "./common/components/Wallpaper";
-import Home from "./pages/home/Home";
+import { RouterProvider } from "react-router-dom";
 import "./styles/main.scss";
+import { router } from "./router";
 
 function App() {
-  return (
-    <>
-      <WallPaper />
-      <Header />
-      <Home />
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

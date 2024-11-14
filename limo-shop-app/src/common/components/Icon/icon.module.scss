@@ -1,12 +1,12 @@
 @use "../../../styles/variables/index";
 
-.containerLeft {
+.envelop {
   display: flex;
   align-items: center;
   justify-content: flex-end;
 }
 
-.containerRight {
+.cart {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -15,4 +15,9 @@
 .size {
   width: 4rem;
   height: 4rem;
+}
+
+.dots {
+  width: 2rem;
+  height: 2rem;
 }

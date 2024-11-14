@@ -1,0 +1,54 @@
+@use "../../../../styles/variables/index" as *;
+@use "../../../../styles/abstracts/index" as *;
+
+.active {
+  position: absolute;
+  z-index: 3;
+  top: 31rem;
+  transition: all 800ms ease-out;
+}
+
+.hidden {
+  position: absolute;
+  z-index: 3;
+  top: 0rem;
+  transition: all 800ms ease-in;
+}
+
+.table {
+  background-color: rgba($color-primary-2, 1);
+  padding: 2rem $spacing-xs $spacing-xs $spacing-xs;
+  border: 1px solid black;
+  border-radius: 3px;
+  font-size: $font-size-s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+
+  .purchasing,
+  .quantity,
+  .price,
+  .details {
+    display: flex;
+    color: $color-primary-3;
+  }
+}
+
+.purchasing {
+  justify-content: space-between;
+}
+
+.quantity,
+.price {
+  flex-direction: column;
+}
+
+.details {
+  flex-direction: row;
+  gap: 2rem;
+}
+
+.description {
+  display: flex;
+}
