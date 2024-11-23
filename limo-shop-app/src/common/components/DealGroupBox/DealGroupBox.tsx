@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { allAssets } from "../../../assets/assets";
-import DescriptionTableDropDown from "./DescriptionTableDropDown";
+import { DescriptionTableDropDown } from "./DescriptionTableDropDown";
 import styles from "./productGroupBox.module.scss";
-import ProductGroupTitle from "./ProductGroupTitle";
+import { ProductGroupTitle } from "./ProductGroupTitle";
 
-export default function DealGroupBox() {
+export function DealGroupBox() {
   const [isActive, setIsActive] = useState(false);
   return (
     <div

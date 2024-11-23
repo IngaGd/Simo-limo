@@ -1,4 +1,4 @@
-import Button from "../../Button/Button";
+import { Button } from "../../Button/Button";
 import styles from "./descriptionTableDropDown.module.scss";
 import { DropDownProps } from "./descriptionTableDropDown.types";
 
@@ -12,7 +12,7 @@ const quantity = "1";
 const currency = "Eur";
 const plusIcon = "+";
 
-export default function DescriptionTableDropDown({ isActive }: DropDownProps) {
+export function DescriptionTableDropDown({ isActive }: DropDownProps) {
   return (
     <div className={isActive ? `${styles.active}` : `${styles.hidden}`}>
       <div className={`${styles.table}`}>

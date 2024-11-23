@@ -1,8 +1,8 @@
-import DealGroupBox from "../../common/components/DealGroupBox";
-import ProductGroupBox from "../../common/components/ProductGroupBox";
+import { DealGroupBox } from "../../common/components/DealGroupBox";
+import { ProductGroupBox } from "../../common/components/ProductGroupBox";
 import styles from "./home.module.scss";
 
-export default function Home() {
+export function Home() {
   const homeClass = `${styles.home}`;
 
   return (

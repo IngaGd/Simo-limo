@@ -1,1 +1,1 @@
-export { default } from "./Wallpaper";
+export * from "./Wallpaper";

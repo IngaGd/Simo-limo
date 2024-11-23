@@ -1,8 +1,8 @@
 import { IconCart, IconEnvelop } from "../Icon/Icon";
-import Logo from "../Logo/Logo";
+import { Logo } from "../Logo/Logo";
 import styles from "./header.module.scss";
 
-export default function Header() {
+export function Header() {
   return (
     <header className={styles.container}>
       <IconEnvelop />

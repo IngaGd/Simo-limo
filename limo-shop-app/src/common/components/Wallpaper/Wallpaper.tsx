@@ -1,6 +1,6 @@
 import styles from "./wallpaper.module.scss";
 
-export default function WallPaper() {
+export function WallPaper() {
   return (
     <>
       <div className={styles.wallpaper}>

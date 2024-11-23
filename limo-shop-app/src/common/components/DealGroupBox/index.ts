@@ -1,1 +1,1 @@
-export { default } from "./DealGroupBox";
+export * from "./DealGroupBox";
