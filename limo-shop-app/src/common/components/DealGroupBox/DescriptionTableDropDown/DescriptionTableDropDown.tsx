@@ -1,4 +1,4 @@
-import { ButtonSecond } from "../../Button/ButtonSecond";
+import { ButtonSecond } from "components/Button";
 // import { IconThreeDots } from "../../Icon/Icon";
 import styles from "./descriptionTableDropDown.module.scss";
 import { DropDownProps } from "./descriptionTableDropDown.types";

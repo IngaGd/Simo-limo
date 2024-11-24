@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { allAssets } from "../../../assets/assets";
+import { allAssets } from "src/assets";
 import { DescriptionTableDropDown } from "./DescriptionTableDropDown";
 import styles from "./productGroupBox.module.scss";
 import { ProductGroupTitle } from "./ProductGroupTitle";

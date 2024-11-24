@@ -1,4 +1,4 @@
-import { allAssets } from "../../../assets/assets";
+import { allAssets } from "src/assets";
 import styles from "./logo.module.scss";
 
 export function Logo() {

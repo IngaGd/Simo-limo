@@ -1,5 +1,5 @@
 import { IconCart, IconEnvelop } from "../Icon/Icon";
-import { Logo } from "../Logo/Logo";
+import { Logo } from "components/Logo";
 import styles from "./header.module.scss";
 
 export function Header() {
