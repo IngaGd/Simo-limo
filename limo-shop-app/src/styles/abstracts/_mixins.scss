@@ -5,3 +5,8 @@
   width: $width-size-m;
   height: $height-size-m;
 }
+
+@mixin position-absolute-4 {
+  position: absolute;
+  z-index: 4;
+}

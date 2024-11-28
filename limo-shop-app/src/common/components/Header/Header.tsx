@@ -1,4 +1,4 @@
-import { IconCart, IconEnvelop } from "../Icon/Icon";
+import { IconCart, IconEnvelop } from "components/Icon";
 import { Logo } from "components/Logo";
 import styles from "./header.module.scss";
 

@@ -3,19 +3,6 @@
 
 .product {
   @include box-size-m;
-  position: absolute;
-  z-index: 4;
+  @include position-absolute-4;
   cursor: pointer;
-
-  .box,
-  .img {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: 4;
-    border-radius: 3px;
-    .img {
-      object-fit: cover;
-    }
-  }
 }
