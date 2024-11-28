@@ -1,0 +1,11 @@
+@use "../../../styles/abstracts/index" as *;
+
+.item {
+  width: 30rem;
+  height: 30rem;
+}
+
+.group {
+  @include box-size-m;
+  @include position-absolute-4;
+}
