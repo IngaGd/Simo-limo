@@ -1,0 +1,29 @@
+@use "../../styles/abstracts/index" as *;
+
+.item {
+  margin-top: 15vh;
+  height: 75vh;
+  width: 70%;
+  position: absolute;
+  z-index: 2;
+
+  display: grid;
+  justify-self: anchor-center;
+  grid-template-columns: 40% 60%;
+  padding-top: 5rem;
+
+  .image {
+    display: flex;
+    // justify-content: center;
+    padding-top: 5rem;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .description {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+  }
+}
