@@ -1,9 +1,9 @@
 //import { DealGroupBox } from "components/DealGroupBox";
 import { ProductGroupBox } from "components/ProductGroupBox";
-import styles from "./home.module.scss";
+import styles from "./homePage.module.scss";
 import { DealGroupBox } from "components/DealGroupBox";
 
-export function Home() {
+export function HomePage() {
   const homeClass = `${styles.home}`;
 
   return (
