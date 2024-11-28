@@ -1,4 +1,4 @@
-@use "../../../styles/variables/index";
+@use "../../../styles/variables/index" as *;
 
 .envelop {
   display: flex;
@@ -20,4 +20,12 @@
 .dots {
   width: 2rem;
   height: 2rem;
+}
+
+.envelop,
+.cart,
+.size,
+.dots {
+  color: $color-primary-3;
+  cursor: pointer;
 }

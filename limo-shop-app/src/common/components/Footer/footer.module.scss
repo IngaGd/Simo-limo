@@ -1,3 +1,5 @@
+@use "../../../styles/variables/index" as *;
+
 .container {
   display: flex;
   align-items: center;
@@ -8,4 +10,19 @@
   z-index: 2;
   align-items: center;
   justify-content: center;
+  a {
+    padding-top: $spacing-xxxxs;
+    padding-bottom: $spacing-xxxxs;
+    padding-left: $spacing-xxs;
+    padding-right: $spacing-xxs;
+    color: $color-primary-3;
+    text-decoration: none;
+  }
+  a:hover {
+    background-color: $color-primary-3;
+    color: $color-primary-1;
+    transition: all 0.3s;
+    border-radius: 3px;
+    cursor: pointer;
+  }
 }

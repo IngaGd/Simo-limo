@@ -1,8 +1,9 @@
-@use "../../../styles/variables/" as *;
+@use "../../../styles/variables/index" as *;
 
 .container {
   display: grid;
   position: absolute;
+  align-items: center;
   z-index: 2;
   height: 15vh;
   width: 100%;

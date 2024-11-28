@@ -1,3 +1,9 @@
+import { Item } from "src/common/components/Item";
+
 export function ItemsPage() {
-  return <div>Items</div>;
+  return (
+    <div>
+      <Item />
+    </div>
+  );
 }
