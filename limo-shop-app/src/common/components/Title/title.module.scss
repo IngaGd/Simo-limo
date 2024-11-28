@@ -1,0 +1,39 @@
+@use "../../../styles/variables/index" as *;
+
+.title-group {
+  color: $color-primary-1;
+  background-color: rgba($color-primary-3, 0.7);
+
+  position: absolute;
+  z-index: 4;
+  align-self: flex-end;
+}
+
+.title-item {
+  color: $color-primary-1;
+  background-color: rgba($color-primary-3, 0.7);
+}
+
+.size-s {
+  font-size: $font-size-s;
+  padding-top: $spacing-xxxxxs;
+  padding-bottom: $spacing-xxxxxs;
+  padding-left: $spacing-xxxs;
+  padding-right: $spacing-xxxs;
+}
+
+.size-m {
+  font-size: $font-size-m;
+  padding-top: $spacing-xxxxs;
+  padding-bottom: $spacing-xxxxs;
+  padding-left: $spacing-xxs;
+  padding-right: $spacing-xxs;
+}
+
+.size-l {
+  font-size: $font-size-m;
+  padding-top: $spacing-xxxs;
+  padding-bottom: $spacing-xxxs;
+  padding-left: $spacing-xs;
+  padding-right: $spacing-xs;
+}
