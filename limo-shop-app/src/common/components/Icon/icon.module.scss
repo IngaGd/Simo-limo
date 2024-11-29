@@ -1,31 +1,25 @@
 @use "../../../styles/variables/index" as *;
 
-.envelop {
+.envelope,
+.bag {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  color: $color-primary-3;
+  cursor: pointer;
+  &:hover {
+    //transform: translateY(-10%);
+    transform: scale(1.25);
+    transition: all 0.3s ease-in-out;
+  }
 }
-
-.cart {
-  display: flex;
-  align-items: center;
+.envelope {
+  justify-self: flex-end;
+}
+.bag {
   justify-content: flex-start;
 }
 
-.size {
+.medium {
   width: 4rem;
   height: 4rem;
-}
-
-.dots {
-  width: 2rem;
-  height: 2rem;
-}
-
-.envelop,
-.cart,
-.size,
-.dots {
-  color: $color-primary-3;
-  cursor: pointer;
 }

@@ -7,13 +7,13 @@ export function Header() {
   return (
     <header className={styles.container}>
       <Link to="/contacts">
-        <IconEnvelop />
+        <IconEnvelop size="medium" />
       </Link>
       <Link to="/">
         <Logo />
       </Link>
       <Link to="/cart">
-        <IconCart />
+        <IconCart size="medium" />
       </Link>
     </header>
   );

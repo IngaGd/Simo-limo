@@ -1,30 +1,13 @@
-import {
-  PiEnvelopeThin,
-  PiShoppingCartSimpleThin,
-  PiDotsThreeOutlineThin,
-} from "react-icons/pi";
+import { PiEnvelopeThin, PiShoppingBagThin } from "react-icons/pi";
 import styles from "./icon.module.scss";
+import { IconProps } from "./icon.types";
 
-export function IconEnvelop() {
+export function IconEnvelop({ size }: IconProps) {
   return (
-    <div className={styles.envelop}>
-      <PiEnvelopeThin className={styles.size} />
-    </div>
+    <PiEnvelopeThin className={`${styles.envelope} ${styles[`${size}`]}`} />
   );
 }
 
-export function IconCart() {
-  return (
-    <div className={styles.cart}>
-      <PiShoppingCartSimpleThin className={styles.size} />
-    </div>
-  );
-}
-
-export function IconThreeDots() {
-  return (
-    <div>
-      <PiDotsThreeOutlineThin className={styles.dots} />
-    </div>
-  );
+export function IconCart({ size }: IconProps) {
+  return <PiShoppingBagThin className={`${styles.bag} ${styles[`${size}`]}`} />;
 }
