@@ -17,6 +17,7 @@
 
 .table {
   background-color: rgba($color-primary-2, 1);
+  box-shadow: 0px 2px 5px rgba($color-primary-3, 0.1);
   padding: 1rem $spacing-xs $spacing-xs $spacing-xs;
   font-size: $font-size-s;
   display: flex;
@@ -45,4 +46,26 @@
 .details {
   flex-direction: row;
   gap: 2rem;
+}
+
+.description {
+  display: -webkit-box;
+  display: -moz-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+}
+
+.link {
+  text-decoration: none;
+  color: $color-primary-3;
+  padding: 0.25rem 1rem 0.25rem 1rem;
+  border: 1px solid black;
+  border-radius: 2px;
+  width: fit-content;
+  margin-bottom: 2rem;
+  &:hover {
+    @include hover-dark;
+  }
 }

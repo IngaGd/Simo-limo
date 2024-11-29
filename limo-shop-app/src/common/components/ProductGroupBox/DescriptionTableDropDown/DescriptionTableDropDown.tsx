@@ -1,7 +1,6 @@
 import { Button } from "components/Button";
 import styles from "./descriptionTableDropDown.module.scss";
 import { DropDownProps } from "./descriptionTableDropDown.types";
-import { IconThreeDots } from "components/Icon";
 import { Link } from "react-router-dom";
 
 const text1 =
@@ -18,13 +17,10 @@ export function DescriptionTableDropDown({ isActive }: DropDownProps) {
   return (
     <div className={isActive ? `${styles.active}` : `${styles.hidden}`}>
       <div className={`${styles.table}`}>
-        <p className={`${styles.description}`}>
-          {text1}
-          <Link to="/items">
-            {" "}
-            <IconThreeDots />
-          </Link>
-        </p>
+        <p className={`${styles.description}`}>{text1}</p>
+        <Link to="/items" className={styles.link}>
+          Plačiau
+        </Link>
         <div className={`${styles.purchasing}`}>
           <div className={`${styles.quantity}`}>
             <div> {text2}</div>
