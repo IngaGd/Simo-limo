@@ -1,7 +1,7 @@
 .home {
   margin-top: 15vh;
-  height: 75vh;
-  width: 70%;
+  height: 100%;
+  width: 75%;
   position: absolute;
   z-index: 2;
 
@@ -11,7 +11,13 @@
 
   .box {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     padding: 5rem;
+  }
+
+  @media screen and (max-width: 976px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 30rem;
   }
 }

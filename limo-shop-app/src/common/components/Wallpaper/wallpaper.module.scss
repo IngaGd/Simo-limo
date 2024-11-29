@@ -12,7 +12,14 @@ $string-gutter: 3rem;
   z-index: 1;
 
   display: grid;
-  grid-template-columns: 1fr 100rem 1fr;
+  grid-template-columns: 1fr 75% 1fr;
+  // grid-template-rows: ;
+
+  @media screen and (max-width: 976px) {
+    grid-template-columns: 1fr 85% 1fr;
+    // height: min-content;
+    height: 150vh;
+  }
 
   .straps {
     grid-column: 2;

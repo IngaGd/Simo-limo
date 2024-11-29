@@ -9,7 +9,7 @@ export function Header() {
       <Link to="/contacts">
         <IconEnvelop size="medium" />
       </Link>
-      <Link to="/">
+      <Link to="/" className={styles.logo}>
         <Logo />
       </Link>
       <Link to="/cart">
