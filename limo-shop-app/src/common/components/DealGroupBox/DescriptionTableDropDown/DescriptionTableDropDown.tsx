@@ -2,6 +2,7 @@ import { ButtonSecond } from "components/Button";
 // import { IconThreeDots } from "../../Icon/Icon";
 import styles from "./descriptionTableDropDown.module.scss";
 import { DropDownProps } from "./descriptionTableDropDown.types";
+import { Link } from "react-router-dom";
 
 const text1 =
   "Exclusive limonadų asorti: šio mėnesio riboto leidimo kūriniai ir populiariausi gėrimai vienoje dešimties ";
@@ -17,10 +18,10 @@ export function DescriptionTableDropDown({ isActive }: DropDownProps) {
   return (
     <div className={isActive ? `${styles.active}` : `${styles.hidden}`}>
       <div className={`${styles.table}`}>
-        <div className={`${styles.description}`}>
-          {text1}
-          {/* <IconThreeDots /> */}
-        </div>
+        <p className={`${styles.description}`}>{text1}</p>
+        <Link to="/items" className={styles.link}>
+          Plačiau
+        </Link>
         <div className={`${styles.purchasing}`}>
           <div className={`${styles.quantity}`}>
             <div> {text2}</div>

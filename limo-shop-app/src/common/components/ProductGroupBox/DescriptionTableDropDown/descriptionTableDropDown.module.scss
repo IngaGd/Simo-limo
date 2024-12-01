@@ -17,7 +17,7 @@
 
 .table {
   background-color: rgba($color-primary-2, 1);
-  box-shadow: 0px 2px 5px rgba($color-primary-3, 0.1);
+  border: 1px solid black;
   padding: 1rem $spacing-xs $spacing-xs $spacing-xs;
   font-size: $font-size-s;
   display: flex;
@@ -64,7 +64,7 @@
   border: 1px solid black;
   border-radius: 2px;
   width: fit-content;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   &:hover {
     @include hover-dark;
   }
