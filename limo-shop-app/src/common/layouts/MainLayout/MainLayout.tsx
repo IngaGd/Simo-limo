@@ -1,15 +1,16 @@
 import { Outlet } from "react-router-dom";
 import { Header } from "components/Header";
-import { WallPaper } from "components/Wallpaper";
 import { Footer } from "components/Footer";
+import styles from "./mainLayout.module.scss";
 
 export function MainLayout() {
   return (
     <>
-      <WallPaper />
-      <Header />
-      <Outlet />
-      <Footer />
+      <div className={styles.container}>
+        <Header />
+        <Outlet />
+        <Footer />
+      </div>
     </>
   );
 }

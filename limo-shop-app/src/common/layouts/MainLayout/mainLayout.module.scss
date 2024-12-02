@@ -1,0 +1,26 @@
+.container {
+  // display: grid;
+  // grid-template-rows: 10rem (min-content) 10rem;
+  // height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+
+  // .header {
+  //   grid-row: 1;
+  // }
+
+  // .outlet {
+  //   grid-row: 2;
+  // }
+
+  // .footer {
+  //   grid-row: 3;
+  // }
+
+  // @media screen and (max-width: 976px) {
+  //   // height: auto;
+  //   grid-template-rows: 10rem (min-content) 5rem;
+  // }
+}

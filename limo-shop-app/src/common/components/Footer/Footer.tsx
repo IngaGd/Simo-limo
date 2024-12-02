@@ -5,7 +5,7 @@ const text = "Sąlygos";
 
 export function Footer() {
   return (
-    <div className={styles.container}>
+    <div className={styles.footer}>
       <Link to="/terms">{text}</Link>
     </div>
   );

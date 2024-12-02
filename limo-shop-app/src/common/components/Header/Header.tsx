@@ -5,7 +5,7 @@ import styles from "./header.module.scss";
 
 export function Header() {
   return (
-    <header className={styles.container}>
+    <header className={styles.header}>
       <Link to="/contacts">
         <IconEnvelop size="medium" />
       </Link>

@@ -1,15 +1,14 @@
 @use "../../../styles/variables/index" as *;
 
-.container {
+.footer {
+  justify-content: flex-end;
+
   display: flex;
   align-items: center;
-  margin-top: 90vh;
-  height: 10vh;
   width: 100%;
-  position: absolute;
-  z-index: 2;
   align-items: center;
   justify-content: center;
+  padding: 2rem;
   a {
     padding-top: $spacing-xxxxs;
     padding-bottom: $spacing-xxxxs;
@@ -24,5 +23,8 @@
     transition: all 0.3s;
     border-radius: 3px;
     cursor: pointer;
+  }
+
+  @media screen and (max-width: 976px) {
   }
 }
