@@ -1,21 +1,22 @@
-//import { DealGroupBox } from "components/DealGroupBox";
-import { ProductGroupBox } from "components/ProductGroupBox";
-import styles from "./homePage.module.scss";
-import { DealGroupBox } from "components/DealGroupBox";
+import styles from "./home.module.scss";
+
+import image1 from "src/assets/images/limo.jpg";
+import image2 from "src/assets/images/drop.jpg";
+import { ProductGroup } from "src/common/components/ProductGroup";
+
+const group = [
+  { id: 1, title: "Dešimtinė juodo serbento", imagePath: image1 },
+  { id: 1, title: "Dešimtinė juodo serbento", imagePath: image2 },
+];
 
 export function HomePage() {
-  const homeClass = `${styles.home}`;
-
   return (
-    <>
-      <div className={homeClass}>
-        <div className={styles.box}>
-          <ProductGroupBox />
+    <div className={styles.home}>
+      {group?.map((g) => (
+        <div className={styles.box} key={g.id}>
+          <ProductGroup title={g.title} imagePath={g.imagePath} />
         </div>
-        <div className={styles.box}>
-          <DealGroupBox />
-        </div>
-      </div>
-    </>
+      ))}
+    </div>
   );
 }

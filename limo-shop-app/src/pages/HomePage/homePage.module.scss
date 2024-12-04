@@ -1,23 +1,21 @@
 .home {
-  margin-top: 15vh;
-  height: 100%;
   width: 75%;
-  position: absolute;
-  z-index: 2;
+  height: auto;
 
   display: grid;
-  justify-self: anchor-center;
+  align-self: anchor-center;
   grid-template-columns: 1fr 1fr;
 
   .box {
     display: flex;
     justify-content: space-around;
-    padding: 5rem;
   }
 
   @media screen and (max-width: 976px) {
+    padding-top: 3rem;
+    padding-bottom: 2rem;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
-    gap: 30rem;
+    gap: 3rem;
   }
 }

@@ -1,23 +1,22 @@
-import { Container } from "src/common/components/Container";
-import { ContainerType } from "src/common/components/Container/container.types";
-import { Image } from "src/common/components/Image";
-import { ImageAsset } from "src/common/components/Image/image.types";
 import styles from "./home.module.scss";
+
+import image1 from "src/assets/images/limo.jpg";
+import image2 from "src/assets/images/drop.jpg";
+import { ProductGroup } from "src/common/components/ProductGroup";
+
+const group = [
+  { id: 1, title: "Dešimtinė juodo serbento", imagePath: image1 },
+  { id: 1, title: "Dešimtinė juodo serbento", imagePath: image2 },
+];
 
 export function Home() {
   return (
     <div className={styles.home}>
-      <div className={styles.box}>
-        <Container containerType={ContainerType.ImageOfGroup}>
-          <Image image={ImageAsset.Limo} />
-        </Container>
-      </div>
-
-      <div className={styles.box}>
-        <Container containerType={ContainerType.ImageOfGroup}>
-          <Image image={ImageAsset.Limo} />
-        </Container>
-      </div>
+      {group?.map((g) => (
+        <div className={styles.box} key={g.id}>
+          <ProductGroup title={g.title} imagePath={g.imagePath} />
+        </div>
+      ))}
     </div>
   );
 }
