@@ -1,3 +1,3 @@
 export type DropDownProps = {
-  isActive: Boolean;
+  description: string;
 };

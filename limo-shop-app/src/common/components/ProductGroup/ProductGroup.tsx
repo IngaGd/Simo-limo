@@ -9,7 +9,11 @@ import { Image } from "../Image";
 import { ContainerType } from "../Container/container.types";
 import { ProductGroupProps } from "./productGroup.types";
 
-export function ProductGroup({ title, imagePath }: ProductGroupProps) {
+export function ProductGroup({
+  title,
+  imagePath,
+  description,
+}: ProductGroupProps) {
   const [isActive, setIsActive] = useState(false);
   return (
     <div
@@ -24,10 +28,7 @@ export function ProductGroup({ title, imagePath }: ProductGroupProps) {
           titleSize={TitleSize.Medium}
         />
       </Container>
-
-      <div className={styles.description}>
-        <DescriptionTableDropDown />
-      </div>
+      <DescriptionTableDropDown description={description} />
     </div>
   );
 }
