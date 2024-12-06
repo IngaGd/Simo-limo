@@ -1,5 +1,5 @@
 .home {
-  width: 75%;
+  width: 100%;
   height: 100%;
   display: grid;
   justify-self: flex-start;
@@ -10,17 +10,20 @@
 
   .box {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: flex-start;
-    border: 1px solid black;
   }
 
   @media screen and (max-width: 976px) {
-    width: 100%;
     height: auto;
     margin-top: 4rem;
     grid-template-columns: 1fr;
     grid-template-rows: auto;
     gap: 6rem;
+
+    .box {
+      display: flex;
+      justify-content: center;
+    }
   }
 }

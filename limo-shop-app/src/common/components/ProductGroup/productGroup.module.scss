@@ -5,24 +5,22 @@
   @include product-group;
   height: 32rem;
   @media screen and (max-width: 976px) {
-    height: 28rem;
   }
 }
 
 .active {
   @include product-group;
   height: 50rem;
+  background-color: rgba($color-primary-2, 1);
   @media screen and (max-width: 976px) {
-    height: 40rem;
   }
 }
 
-.description {
+.dropDown {
   display: flex;
   width: 36rem;
   align-self: flex-end;
 
   @media screen and (max-width: 976px) {
-    width: 30rem;
   }
 }

@@ -3,8 +3,39 @@
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
+  background-image: linear-gradient(
+    90deg,
+    pink 0%,
+    pink 14%,
+    white 14%,
+    white 17.2%,
+    pink 17.2%,
+    pink 31.2%,
+    white 31.2%,
+    white 34.4%,
+    pink 34.4%,
+    pink 48.4%,
+    white 48.4%,
+    white 51.6%,
+    pink 51.6%,
+    pink 65.6%,
+    white 65.6%,
+    white 68.8%,
+    pink 68.8%,
+    pink 82.8%,
+    white 82.8%,
+    white 86%,
+    pink 86%,
+    pink 100%
+  );
+  // 14
+  // 3.2
+  margin-left: 14rem;
+  margin-right: 14rem;
 
   @media screen and (max-width: 976px) {
     height: auto;
+    margin-left: 2rem;
+    margin-right: 2rem;
   }
 }

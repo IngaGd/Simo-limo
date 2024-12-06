@@ -1,29 +1,45 @@
 @use "../../../../styles/variables/index" as *;
 @use "../../../../styles/abstracts/index" as *;
 
-.active {
-  position: absolute;
-  z-index: 3;
-  // top: 32rem;
-  transition: all 800ms ease-out;
-}
-
-.hidden {
-  overflow: hidden;
-  height: 0;
-  transition: height 800ms ease-in;
-}
-
 .table {
   background-color: rgba($color-primary-2, 1);
 
   display: flex;
   width: 36rem;
   align-self: flex-end;
+  border: 1px solid black;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 1rem;
+  padding-top: 5rem;
+  border-radius: 3px;
+  font-size: $font-size-s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
 
-  @media screen and (max-width: 976px) {
-    width: 30rem;
+  .purchasing,
+  .quantity,
+  .price,
+  .details {
+    display: flex;
+    color: $color-primary-3;
   }
+}
+
+.purchasing {
+  justify-content: space-between;
+}
+
+.quantity,
+.price {
+  flex-direction: column;
+}
+
+.details {
+  flex-direction: row;
+  gap: 2rem;
 }
 
 .description {
