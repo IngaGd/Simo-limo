@@ -1,6 +1,6 @@
 import { useState } from "react";
 // import { allAssets } from "src/assets";
-// import { DescriptionTableDropDown } from "./DescriptionTableDropDown";
+import { DescriptionTableDropDown } from "./DescriptionTableDropDown";
 import styles from "./productGroup.module.scss";
 import { Title } from "components/Title";
 import { TitleSize, TitleType } from "../Title/title.types";
@@ -16,14 +16,18 @@ export function ProductGroup({ title, imagePath }: ProductGroupProps) {
       className={isActive ? styles.product : styles.active}
       onClick={() => setIsActive((isActive) => !isActive)}
     >
-      <Title
-        titleType={TitleType.Group}
-        title={title}
-        titleSize={TitleSize.Medium}
-      />
       <Container containerType={ContainerType.ImageOfGroup}>
         <Image imagePath={imagePath} />
+        <Title
+          titleType={TitleType.Group}
+          title={title}
+          titleSize={TitleSize.Medium}
+        />
       </Container>
+
+      <div className={styles.description}>
+        <DescriptionTableDropDown />
+      </div>
     </div>
   );
 }
