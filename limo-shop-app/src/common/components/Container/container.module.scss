@@ -7,4 +7,14 @@
 
 .group {
   @include box-size-m;
+  border-radius: 3px;
+  position: absolute;
+  z-index: 1;
+
+  @media screen and (max-width: 976px) {
+    width: 30.32rem;
+    height: 29.16rem;
+    margin-top: -0.16rem;
+    margin-left: -0.16rem;
+  }
 }

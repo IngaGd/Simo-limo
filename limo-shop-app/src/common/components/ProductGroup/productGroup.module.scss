@@ -2,12 +2,27 @@
 @use "../../../styles/abstracts/index" as *;
 
 .product {
+  @include product-group;
   height: 32rem;
-  border: 1px solid black;
-  cursor: pointer;
+  @media screen and (max-width: 976px) {
+    height: 28rem;
+  }
 }
 
 .active {
-  border: 1px solid black;
-  padding-bottom: 32rem;
+  @include product-group;
+  height: 50rem;
+  @media screen and (max-width: 976px) {
+    height: 40rem;
+  }
+}
+
+.description {
+  display: flex;
+  width: 36rem;
+  align-self: flex-end;
+
+  @media screen and (max-width: 976px) {
+    width: 30rem;
+  }
 }

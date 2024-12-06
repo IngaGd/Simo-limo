@@ -16,3 +16,13 @@
   color: $color-primary-1;
   transition: all 0.3s;
 }
+
+@mixin product-group {
+  display: flex;
+  cursor: pointer;
+  transition: height 800ms ease;
+  overflow: hidden;
+  &:nth-child(4) {
+    align-items: flex-end;
+  }
+}

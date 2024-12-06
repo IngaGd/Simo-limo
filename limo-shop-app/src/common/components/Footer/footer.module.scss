@@ -1,7 +1,7 @@
 @use "../../../styles/variables/index" as *;
 
 .footer {
-  justify-content: flex-end;
+  justify-self: flex-end;
 
   display: flex;
   align-items: center;
@@ -9,6 +9,7 @@
   align-items: center;
   justify-content: center;
   padding: 2rem;
+
   a {
     padding-top: $spacing-xxxxs;
     padding-bottom: $spacing-xxxxs;
@@ -26,5 +27,6 @@
   }
 
   @media screen and (max-width: 976px) {
+    padding-top: 10rem;
   }
 }

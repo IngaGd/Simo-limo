@@ -6,6 +6,7 @@
   margin: 0;
   padding: 0;
   box-sizing: inherit;
+  scroll-behavior: smooth;
 }
 
 html {
@@ -20,10 +21,7 @@ body {
   font-weight: $font-weight-regular;
   line-height: 1.5;
   position: relative;
-  //width: 100%;
-  // min-height: 100vh;
   position: relative;
-  // padding-left: 3rem;
   background-image: linear-gradient(
     90deg,
     white 0%,
@@ -53,8 +51,4 @@ body {
     white 88%,
     white 100%
   );
-  //11
-  //2
-  //background-size: cover;
-  //background-attachment: fixed;
 }

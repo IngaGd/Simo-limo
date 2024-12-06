@@ -1,11 +1,11 @@
 @use "../../../styles/variables/index" as *;
 
 .header {
-  justify-content: flex-start;
+  justify-self: flex-start;
 
   display: grid;
   align-items: center;
-  height: auto;
+  height: 10rem;
   width: 100%;
   grid-template-columns: 1fr (min-content) 1fr;
 }

@@ -5,8 +5,9 @@
   background-color: rgba($color-primary-3, 0.7);
 
   position: absolute;
-  z-index: 4;
+  z-index: 2;
   align-self: flex-end;
+  border-radius: 3px;
 }
 
 .title-item {
