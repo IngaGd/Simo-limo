@@ -1,8 +1,0 @@
-@use "../../../styles/variables/index" as *;
-@use "../../../styles/abstracts/index" as *;
-
-.product {
-  @include box-size-m;
-  @include position-absolute-4;
-  cursor: pointer;
-}
