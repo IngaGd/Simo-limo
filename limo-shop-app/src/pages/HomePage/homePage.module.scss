@@ -1,5 +1,5 @@
 .home {
-  width: 100%;
+  width: 75%;
   height: 100%;
   display: grid;
   justify-self: flex-start;
@@ -15,6 +15,7 @@
   }
 
   @media screen and (max-width: 976px) {
+    width: 100%;
     height: auto;
     margin-top: 4rem;
     grid-template-columns: 1fr;
