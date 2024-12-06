@@ -8,4 +8,9 @@
   height: 10rem;
   width: 100%;
   grid-template-columns: 1fr (min-content) 1fr;
+
+  .icon {
+    margin-top: 1.4rem;
+    // background-color: yellow;
+  }
 }
