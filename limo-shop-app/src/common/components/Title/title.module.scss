@@ -12,7 +12,9 @@
 
 .title-item {
   color: $color-primary-1;
+  position: relative;
   background-color: rgba($color-primary-3, 0.7);
+  border: 1px solid black;
 }
 
 .size-s {

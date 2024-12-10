@@ -13,12 +13,12 @@ export function Item({ group }: GroupTypes) {
       <div className={styles.image}>
         <Container containerType={ContainerType.ImageOfItem}>
           <Image imagePath={group.imagePath} />
-          <Title
-            title={group.title}
-            titleSize={TitleSize.Medium}
-            titleType={TitleType.Item}
-          />
         </Container>
+        <Title
+          title={group.title}
+          titleSize={TitleSize.Medium}
+          titleType={TitleType.Item}
+        />
       </div>
       <div className={styles.description}>
         <Text text={group.description} />

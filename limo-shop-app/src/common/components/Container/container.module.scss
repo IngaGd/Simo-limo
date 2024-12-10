@@ -3,6 +3,17 @@
 .item {
   width: 30rem;
   height: 30rem;
+
+  @media screen and (max-width: 1035px) {
+    width: 45rem;
+    height: 40rem;
+  }
+
+  @media screen and (max-width: 976px) {
+    width: 36rem;
+    height: 32rem;
+    border: 1px solid black;
+  }
 }
 
 .group {
