@@ -1,5 +1,3 @@
-export type ProductGroupProps = {
-  title: string;
-  imagePath: string;
-  description: string;
+export type GroupTypes = {
+  group: { id: number; title: string; imagePath: string; description: string };
 };

@@ -7,28 +7,24 @@ import { TitleSize, TitleType } from "../Title/title.types";
 import { Container } from "../Container";
 import { Image } from "../Image";
 import { ContainerType } from "../Container/container.types";
-import { ProductGroupProps } from "./productGroup.types";
+import { GroupTypes } from "./productGroup.types";
 
-export function ProductGroup({
-  title,
-  imagePath,
-  description,
-}: ProductGroupProps) {
+export function ProductGroup({ group }: GroupTypes) {
   const [isActive, setIsActive] = useState(false);
   return (
     <div
-      className={isActive ? styles.product : styles.active}
+      className={isActive ? styles.active : styles.product}
       onClick={() => setIsActive((isActive) => !isActive)}
     >
       <Container containerType={ContainerType.ImageOfGroup}>
-        <Image imagePath={imagePath} />
+        <Image imagePath={group.imagePath} />
         <Title
           titleType={TitleType.Group}
-          title={title}
+          title={group.title}
           titleSize={TitleSize.Medium}
         />
       </Container>
-      <DescriptionTableDropDown description={description} />
+      <DescriptionTableDropDown group={group} />
     </div>
   );
 }

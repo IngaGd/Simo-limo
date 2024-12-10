@@ -1,9 +1,7 @@
 import { Button } from "components/Button";
 import styles from "./descriptionTableDropDown.module.scss";
-// import { DropDownProps } from "./descriptionTableDropDown.types";
 import { Link } from "react-router-dom";
-import { DropDownProps } from "./descriptionTableDropDown.types";
-//import { DropDownProps } from "./descriptionTableDropDown.types";
+import { GroupTypes } from "../productGroup.types";
 
 const text1 = "Kiekis";
 const text2 = "Kaina";
@@ -13,12 +11,11 @@ const quantity = "1";
 const currency = "Eur";
 const plusIcon = "+";
 
-export function DescriptionTableDropDown({ description }: DropDownProps) {
+export function DescriptionTableDropDown({ group }: GroupTypes) {
   return (
-    // <div className={isActive ? `${styles.active}` : `${styles.hidden}`}>
     <div className={`${styles.table}`}>
-      <p className={`${styles.description}`}>{description}</p>
-      <Link to="/items" className={styles.link}>
+      <p className={`${styles.description}`}>{group.description}</p>
+      <Link to={`/items/${group.id}`} className={styles.link}>
         Plačiau
       </Link>
       <div className={`${styles.purchasing}`}>
@@ -39,6 +36,5 @@ export function DescriptionTableDropDown({ description }: DropDownProps) {
         <Button text={buttonText} />
       </div>
     </div>
-    // </div>
   );
 }
