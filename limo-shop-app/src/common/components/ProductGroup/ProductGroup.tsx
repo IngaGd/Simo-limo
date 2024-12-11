@@ -11,12 +11,15 @@ import { GroupTypes } from "./productGroup.types";
 
 export function ProductGroup({ group }: GroupTypes) {
   const [isActive, setIsActive] = useState(false);
+  const handleClick = () => {
+    setIsActive((isActive) => !isActive);
+  };
   return (
-    <div
-      className={isActive ? styles.active : styles.product}
-      onClick={() => setIsActive((isActive) => !isActive)}
-    >
-      <Container containerType={ContainerType.ImageOfGroup}>
+    <div className={isActive ? styles.active : styles.product}>
+      <Container
+        containerType={ContainerType.ImageOfGroup}
+        handleClick={handleClick}
+      >
         <Image imagePath={group.imagePath} />
         <Title
           titleType={TitleType.Group}

@@ -8,4 +8,5 @@ export enum ContainerType {
 export type ContainerProps = {
   children: ReactNode;
   containerType: ContainerType;
+  handleClick: () => void;
 };
