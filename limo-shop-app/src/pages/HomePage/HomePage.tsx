@@ -7,12 +7,7 @@ export function HomePage() {
     <div className={styles.home}>
       {group?.map((group) => (
         <div className={styles.box} key={group.id}>
-          <ProductGroup
-            // title={g.title}
-            // imagePath={g.imagePath}
-            // description={g.descripiton}
-            group={group}
-          />
+          <ProductGroup group={group} />
         </div>
       ))}
     </div>
