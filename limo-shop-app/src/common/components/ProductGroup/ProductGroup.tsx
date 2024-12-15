@@ -12,7 +12,7 @@ import { GroupTypes } from "./productGroup.types";
 export function ProductGroup({ group }: GroupTypes) {
   const [isActive, setIsActive] = useState(false);
   const handleClick = () => {
-    setIsActive((isActive) => !isActive);
+    setIsActive(!isActive);
   };
   return (
     <div className={isActive ? styles.active : styles.product}>
