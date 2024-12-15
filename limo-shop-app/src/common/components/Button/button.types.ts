@@ -1,3 +1,3 @@
 export type ButtonProps = {
-  text: String;
+  buttonLabel: String;
 };

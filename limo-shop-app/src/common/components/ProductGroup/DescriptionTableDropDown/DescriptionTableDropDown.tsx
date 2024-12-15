@@ -47,7 +47,7 @@ export function DescriptionTableDropDown({ group }: GroupTypes) {
             <div>{currency}</div>
           </div>
         </div>
-        <Button text={buttonText} />
+        <Button buttonLabel={buttonText} />
       </div>
     </div>
   );

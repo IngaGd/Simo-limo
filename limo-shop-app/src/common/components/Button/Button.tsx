@@ -1,7 +1,7 @@
 import { ButtonProps } from "./button.types";
 import styles from "./button.module.scss";
 
-export function Button({ text }: ButtonProps) {
+export function Button({ buttonLabel }: ButtonProps) {
   const buttonClass = `${styles.button} `;
-  return <button className={buttonClass}>{text}</button>;
+  return <button className={buttonClass}>{buttonLabel}</button>;
 }
