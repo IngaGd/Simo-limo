@@ -6,7 +6,7 @@ import { ContactsPage } from "./pages/ContactsPage";
 import { CartPage } from "./pages/CartPage";
 import { TermsPage } from "./pages/TermsPage";
 
-export const router = createBrowserRouter([
+const routes = [
   {
     path: "/",
     element: <MainLayout />,
@@ -18,4 +18,14 @@ export const router = createBrowserRouter([
       { path: "/terms", element: <TermsPage /> },
     ],
   },
-]);
+];
+
+export const router = createBrowserRouter(routes, {
+  future: {
+    v7_relativeSplatPath: true,
+    v7_fetcherPersist: true,
+    v7_normalizeFormMethod: true,
+    v7_partialHydration: true,
+    v7_skipActionErrorRevalidation: true,
+  },
+});
