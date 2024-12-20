@@ -17,7 +17,7 @@
   transition: all 0.3s;
 }
 
-@mixin product-group {
+@mixin product-list {
   display: flex;
   cursor: pointer;
   transition: height 800ms ease;

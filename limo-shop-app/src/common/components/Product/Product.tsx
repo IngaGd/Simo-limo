@@ -1,33 +1,45 @@
 import { useState } from "react";
-// import { allAssets } from "src/assets";
 import { DescriptionTableDropDown } from "./DescriptionTableDropDown";
-import styles from "./productGroup.module.scss";
+import styles from "./product.module.scss";
 import { Title } from "components/Title";
 import { TitleSize, TitleType } from "../Title/title.types";
 import { Container } from "../Container";
 import { Image } from "../Image";
 import { ContainerType } from "../Container/container.types";
-import { GroupTypes } from "./productGroup.types";
+import { ProductPropsTypes } from "./product.types";
 
-export function ProductGroup({ group }: GroupTypes) {
+export function Product({
+  productList,
+  addToCart,
+  handleIncrement,
+  productQuantity,
+  handleDecrement,
+}: ProductPropsTypes) {
   const [isActive, setIsActive] = useState(false);
   const handleClick = () => {
     setIsActive(!isActive);
   };
+
   return (
     <div className={isActive ? styles.active : styles.product}>
       <Container
-        containerType={ContainerType.ImageOfGroup}
+        containerType={ContainerType.ImageOfProductList}
         handleClick={handleClick}
       >
-        <Image imagePath={group.imagePath} />
+        <Image imagePath={productList.imagePath} />
         <Title
-          titleType={TitleType.Group}
-          title={group.title}
+          titleType={TitleType.ProductList}
+          title={productList.title}
           titleSize={TitleSize.Medium}
         />
       </Container>
-      <DescriptionTableDropDown group={group} />
+      <DescriptionTableDropDown
+        productList={productList}
+        addToCart={addToCart}
+        handleIncrement={handleIncrement}
+        handleDecrement={handleDecrement}
+        productQuantity={productQuantity}
+      />
     </div>
   );
 }

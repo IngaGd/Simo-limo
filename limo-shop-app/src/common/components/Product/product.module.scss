@@ -2,14 +2,14 @@
 @use "../../../styles/abstracts/index" as *;
 
 .product {
-  @include product-group;
+  @include product-list;
   height: 32rem;
   @media screen and (max-width: 976px) {
   }
 }
 
 .active {
-  @include product-group;
+  @include product-list;
   height: 50rem;
   background-color: rgba($color-primary-2, 1);
   @media screen and (max-width: 976px) {

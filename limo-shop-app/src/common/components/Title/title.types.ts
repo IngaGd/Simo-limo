@@ -1,5 +1,5 @@
 export enum TitleType {
-  Group = "title-group",
+  ProductList = "title-product-list",
   Item = "title-item",
 }
 
