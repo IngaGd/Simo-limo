@@ -1,7 +1,14 @@
 import { useState } from "react";
-import { productList } from "src/assets/mok-data/productList";
 
-export function useHandleQuantity() {
+export function useHandleQuantity(
+  productList: {
+    id: number;
+    title: string;
+    imagePath: string;
+    description: string;
+    price: number;
+  }[]
+) {
   const [quantities, setQuantities] = useState(
     productList.map((product) => ({ id: product.id, qty: 1 }))
   );

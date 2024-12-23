@@ -1,4 +1,12 @@
 export type ButtonProps = {
   buttonLabel: String;
-  handleClick?: () => void;
+  handleClick?:
+    | ((p: {
+        id: number;
+        title: string;
+        price: number;
+        description: string;
+        imagePath: string;
+      }) => void)
+    | undefined;
 };

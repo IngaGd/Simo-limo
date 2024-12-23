@@ -1,10 +1,7 @@
 import { useState } from "react";
-import { useHandleQuantity } from "./useHandleQuantity";
 import { CartItemsType } from "../context/globalContext.types";
 
-export function useAddToCart() {
-  const { quantities } = useHandleQuantity();
-
+export function useAddToCart(quantities: { id: number; qty: number }[]) {
   const [cartItems, setCartItems] = useState<CartItemsType>([]);
   const addToCart = (p: {
     id: number;

@@ -1,4 +1,4 @@
-import { QuantityType } from "src/common/types/types";
+import { QuantityType } from "src/common/context/globalContext.types";
 
 export type ProductPropsTypes = {
   productList: {
@@ -10,7 +10,13 @@ export type ProductPropsTypes = {
   };
   productQuantity?: number;
   quantities?: Array<QuantityType>;
-  addToCart?: () => void;
-  handleIncrement?: (id: number) => void;
-  handleDecrement?: (id: number) => void;
+  addToCart?: (p: {
+    id: number;
+    title: string;
+    price: number;
+    description: string;
+    imagePath: string;
+  }) => void;
+  handleIncrement?: React.MouseEventHandler<HTMLDivElement> | undefined;
+  handleDecrement?: React.MouseEventHandler<HTMLDivElement> | undefined;
 };
