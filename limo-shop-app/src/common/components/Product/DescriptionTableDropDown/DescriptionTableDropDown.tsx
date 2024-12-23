@@ -43,7 +43,9 @@ export function DescriptionTableDropDown({
             <div>{currency}</div>
           </div>
         </div>
-        <Button buttonLabel={buttonText} handleClick={addToCart} />
+        <Link to={"/cart"}>
+          <Button buttonLabel={buttonText} handleClick={addToCart} />
+        </Link>
       </div>
     </div>
   );
