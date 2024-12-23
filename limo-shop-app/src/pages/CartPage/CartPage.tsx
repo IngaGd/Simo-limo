@@ -1,16 +1,16 @@
-import { useState } from "react";
+import { useContext } from "react";
+import { GlobalContext } from "src/common/context/GlobalContext";
+import { GlobalContextType } from "src/common/context/globalContext.types";
 
 export function CartPage() {
-  const [items, setItems] = useState([
-    // { id: 0, title: "", quantity: 0, totalPrice: 0 },
-    { id: 1, title: "preke1", quantity: 4, totalPrice: 60 },
-    { id: 2, title: "preke2", quantity: 8, totalPrice: 70 },
-  ]);
+  const { cartItems } = useContext(GlobalContext) as GlobalContextType;
+
   return (
     <div>
       <div>
-        {items.map((item) => (
-          <div key={item.id}>
+        Items:{" "}
+        {cartItems.map((item) => (
+          <div key={item.id} style={{ display: "flex" }}>
             <div>{item.title}</div>
             <div>{item.quantity}</div>
             <div>{item.totalPrice}</div>

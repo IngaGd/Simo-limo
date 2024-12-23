@@ -1,31 +1,28 @@
-import { createContext, useState } from "react";
+import { createContext } from "react";
 import {
   GlobalContextProviderProps,
   GlobalContextType,
 } from "./globalContext.types";
+import { useAddToCart } from "../hooks/useAddToCart";
+import { useHandleQuantity } from "../hooks/useHandleQuantity";
 
-export const GlobalContext = createContext<GlobalContextType | undefined>(
-  undefined
-);
+export const GlobalContext = createContext<GlobalContextType | null>(null);
 
 export const GlobalContextProvider = ({
   children,
 }: GlobalContextProviderProps) => {
-  const [quantity, setQuantity] = useState<number>(1);
-
-  const handleIncrement = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1);
-  };
-
-  const handleDecrement = () => {
-    if (quantity) {
-      setQuantity((prevQuantity) => prevQuantity - 1);
-    }
-  };
+  const { quantities, handleIncrement, handleDecrement } = useHandleQuantity();
+  const { addToCart, cartItems } = useAddToCart();
 
   return (
     <GlobalContext.Provider
-      value={{ quantity, handleIncrement, handleDecrement }}
+      value={{
+        quantities,
+        handleIncrement,
+        handleDecrement,
+        addToCart,
+        cartItems,
+      }}
     >
       {children}
     </GlobalContext.Provider>

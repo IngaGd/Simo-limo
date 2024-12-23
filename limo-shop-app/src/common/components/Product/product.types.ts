@@ -1,3 +1,5 @@
+import { QuantityType } from "src/common/types/types";
+
 export type ProductPropsTypes = {
   productList: {
     id: number;
@@ -7,16 +9,8 @@ export type ProductPropsTypes = {
     price: number;
   };
   productQuantity?: number;
+  quantities?: Array<QuantityType>;
   addToCart?: () => void;
-  handleIncrement?: () => void;
-  handleDecrement?: () => void;
+  handleIncrement?: (id: number) => void;
+  handleDecrement?: (id: number) => void;
 };
-
-export type CartItemType = {
-  id: number;
-  title: string;
-  quantity: number;
-  totalPrice: number;
-};
-
-export type CartItemsType = Array<CartItemType>;
