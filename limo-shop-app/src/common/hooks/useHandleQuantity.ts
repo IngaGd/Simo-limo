@@ -26,5 +26,5 @@ export function useHandleQuantity(
     );
   };
 
-  return { quantities, handleIncrement, handleDecrement };
+  return { quantities, handleIncrement, handleDecrement, setQuantities };
 }

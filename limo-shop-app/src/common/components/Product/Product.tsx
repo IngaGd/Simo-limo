@@ -8,13 +8,7 @@ import { Image } from "../Image";
 import { ContainerType } from "../Container/container.types";
 import { ProductPropsTypes } from "./product.types";
 
-export function Product({
-  productList,
-  addToCart,
-  handleIncrement,
-  productQuantity,
-  handleDecrement,
-}: ProductPropsTypes) {
+export function Product({ product }: ProductPropsTypes) {
   const [isActive, setIsActive] = useState(false);
   const handleClick = () => {
     setIsActive(!isActive);
@@ -26,20 +20,14 @@ export function Product({
         containerType={ContainerType.ImageOfProductList}
         handleClick={handleClick}
       >
-        <Image imagePath={productList.imagePath} />
+        <Image imagePath={product.imagePath} />
         <Title
           titleType={TitleType.ProductList}
-          title={productList.title}
+          title={product.title}
           titleSize={TitleSize.Medium}
         />
       </Container>
-      <DescriptionTableDropDown
-        productList={productList}
-        addToCart={addToCart}
-        handleIncrement={handleIncrement}
-        handleDecrement={handleDecrement}
-        productQuantity={productQuantity}
-      />
+      <DescriptionTableDropDown product={product} />
     </div>
   );
 }

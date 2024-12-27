@@ -12,7 +12,7 @@ export const GlobalContext = createContext<GlobalContextType | null>(null);
 export const GlobalContextProvider = ({
   children,
 }: GlobalContextProviderProps) => {
-  const { quantities, handleIncrement, handleDecrement } =
+  const { quantities, handleIncrement, handleDecrement, setQuantities } =
     useHandleQuantity(productList);
   const { addToCart, cartItems, removeItemFromCart } =
     useHandleCart(quantities);
@@ -26,6 +26,7 @@ export const GlobalContextProvider = ({
         addToCart,
         cartItems,
         removeItemFromCart,
+        setQuantities,
       }}
     >
       {children}

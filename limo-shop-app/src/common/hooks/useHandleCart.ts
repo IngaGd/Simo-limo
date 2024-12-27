@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CartItemsType } from "../context/globalContext.types";
+import { GlobalContext } from "../context/GlobalContext";
 
 export function useHandleCart(quantities: { id: number; qty: number }[]) {
   const [cartItems, setCartItems] = useState<CartItemsType>([]);
+  // const { setQuantities } = useContext(GlobalContext);
 
   useEffect(() => {
     const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
@@ -25,15 +27,31 @@ export function useHandleCart(quantities: { id: number; qty: number }[]) {
   }) => {
     const cartItemQantity =
       quantities.find((element) => element.id === p.id)?.qty || 0;
-    setCartItems((prevItems) => [
-      ...prevItems,
-      {
-        id: p.id,
-        title: p.title,
-        quantity: cartItemQantity,
-        totalPrice: cartItemQantity * Number(p.price),
-      },
-    ]);
+    const cartItemExist = cartItems.find((element) => element.id === p.id);
+
+    if (cartItemExist) {
+      setCartItems(
+        cartItems.map((item) =>
+          item.id === p.id
+            ? {
+                ...cartItemExist,
+                quantity: cartItemExist.quantity + cartItemQantity,
+              }
+            : item
+        )
+      );
+    } else {
+      setCartItems((prevItems) => [
+        ...prevItems,
+        {
+          id: p.id,
+          title: p.title,
+          quantity: cartItemQantity,
+          totalPrice: cartItemQantity * Number(p.price),
+        },
+      ]);
+    }
+    // setQuantities({ qty: 0 });
   };
 
   const removeItemFromCart = (id: number) => {
