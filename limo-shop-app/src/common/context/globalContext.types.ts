@@ -9,7 +9,7 @@ export type CartItemType = {
   id: number;
   title: string;
   quantity: number;
-  totalPrice: number;
+  price: number;
 };
 
 export type CartItemsType = Array<CartItemType>;

@@ -45,7 +45,7 @@ export function useHandleCart(quantities: { id: number; qty: number }[]) {
           id: p.id,
           title: p.title,
           quantity: cartItemQantity,
-          totalPrice: cartItemQantity * Number(p.price),
+          price: Number(p.price),
         },
       ]);
     }

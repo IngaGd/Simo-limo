@@ -25,7 +25,7 @@ export function CartPage() {
           <div key={item.id} style={{ display: "flex" }}>
             <div>{item.title}</div>
             <div>{item.quantity}</div>
-            <div>{item.totalPrice}</div>
+            <div>{item.price * item.quantity}</div>
             <Button
               buttonLabel={buttonText1}
               handleClick={() => removeItemFromCart(item.id)}
