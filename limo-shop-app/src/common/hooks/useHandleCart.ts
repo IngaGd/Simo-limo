@@ -1,10 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { CartItemsType } from "../context/globalContext.types";
-import { GlobalContext } from "../context/GlobalContext";
 
 export function useHandleCart(quantities: { id: number; qty: number }[]) {
   const [cartItems, setCartItems] = useState<CartItemsType>([]);
-  // const { setQuantities } = useContext(GlobalContext);
 
   useEffect(() => {
     const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
@@ -26,7 +24,7 @@ export function useHandleCart(quantities: { id: number; qty: number }[]) {
     imagePath: string;
   }) => {
     const cartItemQantity =
-      quantities.find((element) => element.id === p.id)?.qty || 0;
+      quantities.find((element) => element.id === p.id)?.qty || 1;
     const cartItemExist = cartItems.find((element) => element.id === p.id);
 
     if (cartItemExist) {
@@ -51,7 +49,6 @@ export function useHandleCart(quantities: { id: number; qty: number }[]) {
         },
       ]);
     }
-    // setQuantities({ qty: 0 });
   };
 
   const removeItemFromCart = (id: number) => {
@@ -60,5 +57,35 @@ export function useHandleCart(quantities: { id: number; qty: number }[]) {
     );
   };
 
-  return { cartItems, addToCart, removeItemFromCart };
+  const handleIncrementCartItem = (id: number) => {
+    setCartItems(
+      cartItems.map((item) => {
+        if (item.id === id) {
+          return { ...item, quantity: item.quantity + 1 };
+        } else {
+          return item;
+        }
+      })
+    );
+  };
+
+  const handleDecrementCartItem = (id: number) => {
+    setCartItems(
+      cartItems.map((item) => {
+        if (item.id === id && item.quantity > 1) {
+          return { ...item, quantity: item.quantity - 1 };
+        } else {
+          return item;
+        }
+      })
+    );
+  };
+
+  return {
+    cartItems,
+    addToCart,
+    removeItemFromCart,
+    handleIncrementCartItem,
+    handleDecrementCartItem,
+  };
 }

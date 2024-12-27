@@ -14,8 +14,13 @@ export const GlobalContextProvider = ({
 }: GlobalContextProviderProps) => {
   const { quantities, handleIncrement, handleDecrement, setQuantities } =
     useHandleQuantity(productList);
-  const { addToCart, cartItems, removeItemFromCart } =
-    useHandleCart(quantities);
+  const {
+    addToCart,
+    cartItems,
+    removeItemFromCart,
+    handleIncrementCartItem,
+    handleDecrementCartItem,
+  } = useHandleCart(quantities);
 
   return (
     <GlobalContext.Provider
@@ -27,6 +32,8 @@ export const GlobalContextProvider = ({
         cartItems,
         removeItemFromCart,
         setQuantities,
+        handleIncrementCartItem,
+        handleDecrementCartItem,
       }}
     >
       {children}

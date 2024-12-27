@@ -6,11 +6,16 @@ import { GlobalContextType } from "src/common/context/globalContext.types";
 const buttonText1 = "Pašalinti";
 const buttonText2 = "Pirkti";
 const buttonText3 = "Išvalyti";
+const plusIcon = "+";
+const minusIcon = "-";
 
 export function CartPage() {
-  const { cartItems, removeItemFromCart } = useContext(
-    GlobalContext
-  ) as GlobalContextType;
+  const {
+    cartItems,
+    removeItemFromCart,
+    handleIncrementCartItem,
+    handleDecrementCartItem,
+  } = useContext(GlobalContext) as GlobalContextType;
 
   return (
     <div>
@@ -25,6 +30,26 @@ export function CartPage() {
               buttonLabel={buttonText1}
               handleClick={() => removeItemFromCart(item.id)}
             />
+            <div
+              onClick={() => handleIncrementCartItem(item.id)}
+              style={{
+                width: "50px",
+                border: "1px solid black",
+                cursor: "pointer",
+              }}
+            >
+              {plusIcon}
+            </div>
+            <div
+              onClick={() => handleDecrementCartItem(item.id)}
+              style={{
+                width: "50px",
+                border: "1px solid black",
+                cursor: "pointer",
+              }}
+            >
+              {minusIcon}
+            </div>
           </div>
         ))}
       </div>
