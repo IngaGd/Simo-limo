@@ -81,11 +81,16 @@ export function useHandleCart(quantities: { id: number; qty: number }[]) {
     );
   };
 
+  const handleEmptyTheCart = () => {
+    setCartItems([]);
+  };
+
   return {
     cartItems,
     addToCart,
     removeItemFromCart,
     handleIncrementCartItem,
     handleDecrementCartItem,
+    handleEmptyTheCart,
   };
 }

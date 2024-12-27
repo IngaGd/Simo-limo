@@ -29,6 +29,7 @@ export type GlobalContextType = {
   handleDecrementCartItem: (id: number) => void;
   removeItemFromCart: (id: number) => void;
   setQuantities: (quantities: Array<QuantityType>) => void;
+  handleEmptyTheCart: () => void;
   cartItems: CartItemsType;
 };
 

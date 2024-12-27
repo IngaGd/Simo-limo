@@ -20,6 +20,7 @@ export const GlobalContextProvider = ({
     removeItemFromCart,
     handleIncrementCartItem,
     handleDecrementCartItem,
+    handleEmptyTheCart,
   } = useHandleCart(quantities);
 
   return (
@@ -34,6 +35,7 @@ export const GlobalContextProvider = ({
         setQuantities,
         handleIncrementCartItem,
         handleDecrementCartItem,
+        handleEmptyTheCart,
       }}
     >
       {children}

@@ -18,6 +18,7 @@ export function useHandleQuantity(
       prevQuantity.map((q) => (q.id === id ? { ...q, qty: q.qty + 1 } : q))
     );
   };
+
   const handleDecrement = (id: number) => {
     setQuantities((prevQuantity) =>
       prevQuantity.map((q) =>
