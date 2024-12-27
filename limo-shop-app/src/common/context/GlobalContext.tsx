@@ -3,7 +3,7 @@ import {
   GlobalContextProviderProps,
   GlobalContextType,
 } from "./globalContext.types";
-import { useAddToCart } from "../hooks/useAddToCart";
+import { useHandleCart } from "../hooks/useHandleCart";
 import { useHandleQuantity } from "../hooks/useHandleQuantity";
 import { productList } from "src/assets/mok-data/productList";
 
@@ -14,7 +14,8 @@ export const GlobalContextProvider = ({
 }: GlobalContextProviderProps) => {
   const { quantities, handleIncrement, handleDecrement } =
     useHandleQuantity(productList);
-  const { addToCart, cartItems } = useAddToCart(quantities);
+  const { addToCart, cartItems, removeItemFromCart } =
+    useHandleCart(quantities);
 
   return (
     <GlobalContext.Provider
@@ -24,6 +25,7 @@ export const GlobalContextProvider = ({
         handleDecrement,
         addToCart,
         cartItems,
+        removeItemFromCart,
       }}
     >
       {children}
