@@ -10,7 +10,12 @@
   grid-template-columns: 1fr (min-content) 1fr;
 
   .icon {
-    margin-top: 1.4rem;
-    // background-color: yellow;
+    margin-top: 0.8rem;
+  }
+
+  .quantity {
+    position: absolute;
+    left: 80.2rem;
+    top: 2rem;
   }
 }
