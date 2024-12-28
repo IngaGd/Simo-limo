@@ -65,12 +65,10 @@ export function DescriptionTableDropDown({ product }: ProductPropsTypes) {
             <div>{currency}</div>
           </div>
         </div>
-        <Link to={"/cart"}>
-          <Button
-            buttonLabel={buttonText}
-            handleClick={() => handleAddToCart(product)}
-          />
-        </Link>
+        <Button
+          buttonLabel={buttonText}
+          handleClick={() => handleAddToCart(product)}
+        />
       </div>
     </div>
   );
