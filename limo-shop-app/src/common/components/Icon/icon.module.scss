@@ -1,7 +1,7 @@
 @use "../../../styles/variables/index" as *;
 
 .envelope,
-.bag {
+.cart {
   display: flex;
   align-items: center;
   color: $color-primary-3;
@@ -16,7 +16,7 @@
   justify-self: flex-end;
   margin-right: 2rem;
 }
-.bag {
+.cart {
   justify-content: flex-start;
   margin-left: 2rem;
 }

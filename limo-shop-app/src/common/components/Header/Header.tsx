@@ -20,11 +20,15 @@ export function Header() {
         <Logo />
       </Link>
       <Link to="/cart" className={styles.icon}>
-        <IconCart size="medium" />
+        <div className={styles.counter}>
+          <IconCart size="medium" />
+          {cartItems.length > 0 && (
+            <div className={styles.quantity}>
+              <span className={styles.number}>{sumQuantities}</span>
+            </div>
+          )}
+        </div>
       </Link>
-      {cartItems.length > 0 && (
-        <span className={styles.quantity}>{sumQuantities}</span>
-      )}
     </header>
   );
 }

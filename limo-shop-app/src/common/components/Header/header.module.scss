@@ -13,9 +13,22 @@
     margin-top: 0.8rem;
   }
 
-  .quantity {
-    position: absolute;
-    left: 80.2rem;
-    top: 2rem;
+  .counter {
+    position: relative;
+    .quantity {
+      position: absolute;
+      top: -1.6rem;
+      left: 2.9rem;
+      width: 1.6rem;
+      height: 1.6rem;
+      border-radius: 50%;
+      background-color: $color-primary-3;
+      .number {
+        top: -0.4rem;
+        left: 0.35rem;
+        position: absolute;
+        color: $color-primary-1;
+      }
+    }
   }
 }

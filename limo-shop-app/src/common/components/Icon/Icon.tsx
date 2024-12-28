@@ -9,5 +9,7 @@ export function IconEnvelop({ size }: IconProps) {
 }
 
 export function IconCart({ size }: IconProps) {
-  return <BsFillBasket2Fill className={`${styles.bag} ${styles[`${size}`]}`} />;
+  return (
+    <BsFillBasket2Fill className={`${styles.cart} ${styles[`${size}`]}`} />
+  );
 }
