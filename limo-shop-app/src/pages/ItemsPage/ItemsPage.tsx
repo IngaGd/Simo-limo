@@ -10,5 +10,5 @@ export function ItemsPage() {
   if (!item) {
     return <div>Item not found</div>;
   }
-  return <Item productList={item} />;
+  return <Item product={item} />;
 }

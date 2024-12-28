@@ -7,21 +7,21 @@ import { ContainerType } from "../Container/container.types";
 import { ProductPropsTypes } from "../Product/product.types";
 import { Image } from "../Image";
 
-export function Item({ productList }: ProductPropsTypes) {
+export function Item({ product }: ProductPropsTypes) {
   return (
     <div className={styles.item}>
       <div className={styles.image}>
         <Container containerType={ContainerType.ImageOfItem}>
-          <Image imagePath={productList.imagePath} />
+          <Image imagePath={product.imagePath} />
         </Container>
         <Title
-          title={productList.title}
+          title={product.title}
           titleSize={TitleSize.Medium}
           titleType={TitleType.Item}
         />
       </div>
       <div className={styles.description}>
-        <Text text={productList.description} />
+        <Text text={product.description} />
       </div>
     </div>
   );
