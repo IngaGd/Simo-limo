@@ -6,12 +6,14 @@ import {
 import { useHandleCart } from "../hooks/useHandleCart";
 import { useHandleQuantity } from "../hooks/useHandleQuantity";
 import { productList } from "src/assets/mok-data/productList";
+import { useHandleProductList } from "../hooks/useHandleProductList";
 
 export const GlobalContext = createContext<GlobalContextType | null>(null);
 
 export const GlobalContextProvider = ({
   children,
 }: GlobalContextProviderProps) => {
+  const { products } = useHandleProductList();
   const { quantities, handleIncrement, handleDecrement, setQuantities } =
     useHandleQuantity(productList);
   const {
@@ -36,6 +38,7 @@ export const GlobalContextProvider = ({
         handleIncrementCartItem,
         handleDecrementCartItem,
         handleEmptyTheCart,
+        products,
       }}
     >
       {children}

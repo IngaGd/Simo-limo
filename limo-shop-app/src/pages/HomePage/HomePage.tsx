@@ -1,11 +1,13 @@
 import styles from "./homePage.module.scss";
 import { Product } from "src/common/components/Product";
-import { productList } from "../../assets/mok-data/productList";
+import { useHandleProductList } from "src/common/hooks/useHandleProductList";
 
 export function HomePage() {
+  const { products } = useHandleProductList();
+
   return (
     <div className={styles.home}>
-      {productList?.map((p) => (
+      {products?.map((p) => (
         <div className={styles.box} key={p.id}>
           <Product product={p} />
         </div>
