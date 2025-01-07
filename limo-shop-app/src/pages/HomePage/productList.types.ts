@@ -2,4 +2,4 @@
 
 import { ProductObject } from "src/common/components/Product/product.types";
 
-export type ProductListType = ProductObject[];
+export type ProductListType = ProductObject[] | undefined;

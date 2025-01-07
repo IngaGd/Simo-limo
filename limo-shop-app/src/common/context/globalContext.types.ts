@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { ProductListType } from "src/pages/HomePage/productList.types";
 
 export type QuantityType = {
   id: number;
@@ -31,6 +32,7 @@ export type GlobalContextType = {
   setQuantities: (quantities: Array<QuantityType>) => void;
   handleEmptyTheCart: () => void;
   cartItems: CartItemsType;
+  products: ProductListType;
 };
 
 export type GlobalContextProviderProps = {

@@ -13,7 +13,7 @@ export function useHandleProductList() {
     const getProductData = async () => {
       try {
         const response = await fetch(productsUrl, { method: "GET" });
-        if (!response) {
+        if (!response.ok) {
           throw new Error("Response status: ", response.status);
         }
         const responseJson = await response.json();
