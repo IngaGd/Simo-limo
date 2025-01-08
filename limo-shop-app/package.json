@@ -12,7 +12,10 @@
   },
   "dependencies": {
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "@react-oauth/google": "^0.12.1",
     "@types/node": "^22.9.3",
+    "google-spreadsheet": "^4.1.4",
+    "jwt-decode": "^4.0.0",
     "path": "^0.12.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

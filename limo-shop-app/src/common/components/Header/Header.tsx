@@ -29,6 +29,7 @@ export function Header() {
           )}
         </div>
       </Link>
+      {/* <Link to="/login">Login</Link> */}
     </header>
   );
 }
