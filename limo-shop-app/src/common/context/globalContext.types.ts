@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { ProductListType } from "src/pages/HomePage/productList.types";
+import { ProductListType } from "src/pages/Home/productList.types";
 
 export type QuantityType = {
   id: number;

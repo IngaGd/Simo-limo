@@ -1,21 +1,26 @@
 import { createBrowserRouter } from "react-router-dom";
-import { HomePage } from "./pages/HomePage/HomePage";
+
 import { MainLayout } from "./common/layouts/MainLayout/MainLayout";
-import { ItemsPage } from "./pages/ItemsPage";
-import { ContactsPage } from "./pages/ContactsPage";
-import { CartPage } from "./pages/CartPage";
-import { TermsPage } from "./pages/TermsPage";
+import { Home } from "./pages/Home/Home";
+import { Items } from "./pages/Items";
+import { Contacts } from "./pages/Contacts";
+import { Cart } from "./pages/Cart";
+import { Terms } from "./pages/Terms";
+import { Login } from "./pages/Login/Login";
+import { Purchasing } from "./pages/Purchasing/Purchasing";
 
 const routes = [
   {
     path: "/",
     element: <MainLayout />,
     children: [
-      { path: "/", element: <HomePage /> },
-      { path: "/items/:id", element: <ItemsPage /> },
-      { path: "/contacts", element: <ContactsPage /> },
-      { path: "/cart", element: <CartPage /> },
-      { path: "/terms", element: <TermsPage /> },
+      { path: "/", element: <Home /> },
+      { path: "/items/:id", element: <Items /> },
+      { path: "/contacts", element: <Contacts /> },
+      { path: "/cart", element: <Cart /> },
+      { path: "/terms", element: <Terms /> },
+      { path: "/login", element: <Login /> },
+      { path: "/purchasing", element: <Purchasing /> },
     ],
   },
 ];

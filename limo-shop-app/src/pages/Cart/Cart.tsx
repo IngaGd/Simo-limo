@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "src/common/components/Button";
 import { GlobalContext } from "src/common/context/GlobalContext";
 import { GlobalContextType } from "src/common/context/globalContext.types";
@@ -9,7 +10,7 @@ const buttonText3 = "Išvalyti";
 const plusIcon = "+";
 const minusIcon = "-";
 
-export function CartPage() {
+export function Cart() {
   const {
     cartItems,
     removeItemFromCart,
@@ -54,7 +55,7 @@ export function CartPage() {
               </div>
             </div>
           ))}
-          <Button buttonLabel={buttonText2} />
+          <Link to="/purchasing">FORMUPTI UŽSAKYMĄ</Link>
           <Button
             buttonLabel={buttonText3}
             handleClick={() => handleEmptyTheCart()}
