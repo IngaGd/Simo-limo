@@ -3,14 +3,10 @@ import { ProductObject } from "../components/Product/product.types";
 import { QuantityType } from "../context/globalContext.types";
 
 export function useHandleQuantity(products: ProductObject[] = []) {
-  console.log("products from useHandleQuantity: ", products);
-
   const [quantities, setQuantities] = useState<Array<QuantityType>>([]);
 
-  console.log("quantities: ", quantities);
-
   useEffect(() => {
-    products
+    products.length > 0
       ? setQuantities(products.map((product) => ({ id: product.id, qty: 1 })))
       : null;
   }, [products]);
