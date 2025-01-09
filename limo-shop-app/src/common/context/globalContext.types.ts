@@ -11,6 +11,7 @@ export type CartItemType = {
   title: string;
   quantity: number;
   price: number;
+  imagePath: string;
 };
 
 export type CartItemsType = Array<CartItemType>;

@@ -46,6 +46,7 @@ export function useHandleCart(quantities: { id: number; qty: number }[]) {
           title: p.title,
           quantity: cartItemQantity,
           price: Number(p.price),
+          imagePath: p.imagePath,
         },
       ]);
     }

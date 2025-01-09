@@ -1,6 +1,9 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "src/common/components/Button";
+import { Container } from "src/common/components/Container";
+import { ContainerType } from "src/common/components/Container/container.types";
+import { Image } from "src/common/components/Image";
 import { GlobalContext } from "src/common/context/GlobalContext";
 import { GlobalContextType } from "src/common/context/globalContext.types";
 
@@ -26,6 +29,9 @@ export function Cart() {
           Items:{" "}
           {cartItems.map((item) => (
             <div key={item.id} style={{ display: "flex" }}>
+              <Container containerType={ContainerType.ImageOfItem}>
+                <Image imagePath={item.imagePath} />
+              </Container>
               <div>{item.title}</div>
               <div>{item.quantity}</div>
               <div>{item.price * item.quantity}</div>
