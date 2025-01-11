@@ -14,8 +14,6 @@ export function Product({ product }: ProductPropsTypes) {
     setIsActive(!isActive);
   };
 
-  console.log("Product component: ", product.imagePath);
-
   return (
     <div className={isActive ? styles.active : styles.product}>
       <Container

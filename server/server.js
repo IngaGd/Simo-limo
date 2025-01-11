@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const { google } = require("googleapis");
+const { v4: uuidv4 } = require("uuid");
 const cors = require("cors");
 const path = require("path");
 const fs = require("fs");
@@ -20,7 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(bodyParser.json());
 
-const pathToJson = path.join(__dirname, "simo-limo-credentials.json");
+const pathToJson = path.join(__dirname, "limo.json");
 const credentials = JSON.parse(fs.readFileSync(pathToJson));
 
 const auth = new google.auth.GoogleAuth({
@@ -64,7 +65,41 @@ app.get("/api/products", async (req, res) => {
   }
 });
 
-app.get("api/login", (req, res) => {
+app.post("/api/order", async (req, res) => {
+  console.log("Request received on /api/order");
+
+  const orderNo = uuidv4();
+  //const params = [orderNo, req.body.products, req.body.purchaser];
+  const { products, purchaser, termsConfirmed } = req.body;
+  console.log(
+    "Payload being sent to Google Sheets:",
+    products,
+    purchaser,
+    termsConfirmed
+  );
+
+  try {
+    await sheets.spreadsheets.values.append({
+      spreadsheetId: PRODUCT_LIST_ID,
+      range: "Orders!A2",
+      valueInputOption: "USER_ENTERED",
+      insertDataOption: "INSERT_ROWS",
+      resource: {
+        majorDimension: "ROWS",
+        values: [
+          [JSON.stringify(purchaser), JSON.stringify(termsConfirmed), orderNo],
+        ],
+      },
+    });
+    res.status(200).json("Data saved");
+  } catch (error) {
+    console.error("Error updating data:", error);
+    res.status(500).json("Error updating data");
+  }
+  //res.send("settin order");
+});
+
+app.get("/api/login", (req, res) => {
   res.render("");
 });
 
