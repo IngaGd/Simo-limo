@@ -12,6 +12,7 @@ const port = 8080;
 
 const corsOptions = {
   origin: ["http://localhost:5173"],
+  //origin: [`http://${process.env.SERVER_URL}:${port}`],
   credentials: true,
   optionsSuccessStatus: 200,
 };
@@ -70,13 +71,8 @@ app.post("/api/order", async (req, res) => {
 
   const orderNo = uuidv4();
   //const params = [orderNo, req.body.products, req.body.purchaser];
-  const { products, purchaser, termsConfirmed } = req.body;
-  console.log(
-    "Payload being sent to Google Sheets:",
-    products,
-    purchaser,
-    termsConfirmed
-  );
+  const { purchaser } = req.body;
+  console.log("Payload being sent to Google Sheets:", purchaser.name);
 
   try {
     await sheets.spreadsheets.values.append({
@@ -87,7 +83,13 @@ app.post("/api/order", async (req, res) => {
       resource: {
         majorDimension: "ROWS",
         values: [
-          [JSON.stringify(purchaser), JSON.stringify(termsConfirmed), orderNo],
+          [
+            purchaser.name,
+            purchaser.surname,
+            purchaser.email,
+            purchaser.address,
+            orderNo,
+          ],
         ],
       },
     });

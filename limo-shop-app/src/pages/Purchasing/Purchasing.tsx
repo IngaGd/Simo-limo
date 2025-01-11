@@ -23,7 +23,7 @@ export function Purchasing() {
 
   const [purchaser, setPurchaser] = useState({
     name: "",
-    surName: "",
+    surname: "",
     email: "",
     address: "",
   });
@@ -49,7 +49,7 @@ export function Purchasing() {
       purchaser: purchaser,
       termsConfirmed: confirmTerms,
     });
-    setData({ order });
+    setData({ purchaser });
   };
 
   console.log("order in purchasing: ", order);
@@ -70,13 +70,13 @@ export function Purchasing() {
             />
           </div>
           <div>
-            <label htmlFor="surName">Pavardė</label>
+            <label htmlFor="surname">Pavardė</label>
             <input
-              id="surName"
-              name="surName"
+              id="surname"
+              name="surname"
               type="text"
               required
-              value={purchaser.surName}
+              value={purchaser.surname}
               onChange={handleChange}
             />
           </div>
