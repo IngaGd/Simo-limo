@@ -71,8 +71,15 @@ app.post("/api/order", async (req, res) => {
 
   const orderNo = uuidv4();
   //const params = [orderNo, req.body.products, req.body.purchaser];
-  const { purchaser } = req.body;
-  console.log("Payload being sent to Google Sheets:", purchaser.name);
+  const { products, purchaser, termsConfirmed } = req.body;
+  console.log(
+    "Payload being sent to Google Sheets:",
+    purchaser.name,
+    termsConfirmed,
+    products,
+    "title: ",
+    products[0].title
+  );
 
   try {
     await sheets.spreadsheets.values.append({
@@ -89,6 +96,27 @@ app.post("/api/order", async (req, res) => {
             purchaser.email,
             purchaser.address,
             orderNo,
+            termsConfirmed,
+            products[0].title,
+          ],
+          [
+            purchaser.name,
+            purchaser.surname,
+            purchaser.email,
+            purchaser.address,
+            orderNo,
+            termsConfirmed,
+            products[1]?.title,
+          ],
+          ,
+          [
+            purchaser.name,
+            purchaser.surname,
+            purchaser.email,
+            purchaser.address,
+            orderNo,
+            termsConfirmed,
+            products[2]?.title,
           ],
         ],
       },
