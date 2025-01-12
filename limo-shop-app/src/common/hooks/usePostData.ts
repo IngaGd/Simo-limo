@@ -29,7 +29,7 @@ export function usePostData() {
           console.error("Error: ", response.status, response.statusText);
         }
       } catch (error) {
-        console.error("Error: ", error.message);
+        console.error("Error: ", error);
       }
     };
     postData();

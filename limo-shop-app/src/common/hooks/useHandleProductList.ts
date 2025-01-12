@@ -12,7 +12,7 @@ export function useHandleProductList() {
       try {
         const response = await fetch(productsUrl, { method: "GET" });
         if (!response.ok) {
-          throw new Error("Response status: ", response.status);
+          throw new Error("Data failed to fetch");
         }
         const responseJson = await response.json();
         const productData = responseJson.map((row: string) => {
@@ -26,7 +26,7 @@ export function useHandleProductList() {
         });
         setProducts(productData);
       } catch (error) {
-        console.log(error.message);
+        console.log(error);
       }
     };
     getProductData();

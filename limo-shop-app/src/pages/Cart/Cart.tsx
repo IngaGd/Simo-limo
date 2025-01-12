@@ -8,8 +8,7 @@ import { GlobalContext } from "src/common/context/GlobalContext";
 import { GlobalContextType } from "src/common/context/globalContext.types";
 
 const buttonText1 = "Pašalinti";
-const buttonText2 = "Pirkti";
-const buttonText3 = "Išvalyti";
+const buttonText2 = "Išvalyti";
 const plusIcon = "+";
 const minusIcon = "-";
 
@@ -63,7 +62,7 @@ export function Cart() {
           ))}
           <Link to="/purchasing">FORMUPTI UŽSAKYMĄ</Link>
           <Button
-            buttonLabel={buttonText3}
+            buttonLabel={buttonText2}
             handleClick={() => handleEmptyTheCart()}
           />
         </div>

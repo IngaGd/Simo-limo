@@ -18,8 +18,8 @@ export function Purchasing() {
     purchaser: {},
     termsConfirmed: false,
   });
-  const [formSubmitSuccess, setFormSubmitSuccess] = useState(false);
-  const [formSubmitError, setFormSubmitError] = useState(false);
+  //const [formSubmitSuccess, setFormSubmitSuccess] = useState(false);
+  //const [formSubmitError, setFormSubmitError] = useState(false);
 
   const [purchaser, setPurchaser] = useState({
     name: "",
