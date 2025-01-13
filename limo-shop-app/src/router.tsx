@@ -6,7 +6,7 @@ import { Items } from "./pages/Items";
 import { Contacts } from "./pages/Contacts";
 import { Cart } from "./pages/Cart";
 import { Terms } from "./pages/Terms";
-import { Login } from "./pages/Login/Login";
+//import { Login } from "./pages/Login/Login";
 import { Purchasing } from "./pages/Purchasing/Purchasing";
 
 const routes = [
@@ -19,7 +19,7 @@ const routes = [
       { path: "/contacts", element: <Contacts /> },
       { path: "/cart", element: <Cart /> },
       { path: "/terms", element: <Terms /> },
-      { path: "/login", element: <Login /> },
+      //{ path: "/login", element: <Login /> },
       { path: "/purchasing", element: <Purchasing /> },
     ],
   },

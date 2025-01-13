@@ -15,13 +15,14 @@ export function useHandleProductList() {
           throw new Error("Data failed to fetch");
         }
         const responseJson = await response.json();
-        const productData = responseJson.map((row: string) => {
+        const productData = responseJson.map((column: string) => {
           return {
-            id: parseInt(row[0]),
-            title: row[1],
-            imagePath: row[2],
-            description: row[3],
-            price: Number(row[4]),
+            id: parseInt(column[0]),
+            title: column[1],
+            //imagePath: `${URL}${column[2]}`,
+            imagePath: column[2],
+            description: column[3],
+            price: Number(column[4]),
           };
         });
         setProducts(productData);
