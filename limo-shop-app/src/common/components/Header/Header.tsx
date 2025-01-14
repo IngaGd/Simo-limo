@@ -13,13 +13,13 @@ export function Header() {
 
   return (
     <header className={styles.header}>
-      <Link to="/contacts" className={styles.icon}>
+      <Link to="/contacts" className={styles.envelope}>
         <IconEnvelop size="large" />
       </Link>
       <Link to="/" className={styles.logo}>
         <Logo />
       </Link>
-      <Link to="/cart" className={styles.icon}>
+      <Link to="/cart" className={styles.cart}>
         <div className={styles.counter}>
           <IconCart size="medium" />
           {cartItems.length > 0 && (

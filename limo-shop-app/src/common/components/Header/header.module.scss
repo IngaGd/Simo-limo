@@ -9,8 +9,14 @@
   width: 100%;
   grid-template-columns: 1fr (min-content) 1fr;
 
-  .icon {
+  .envelope,
+  .cart {
     margin-top: 0.8rem;
+  }
+
+  .envelope {
+    display: flex;
+    justify-content: flex-end;
   }
 
   .counter {
