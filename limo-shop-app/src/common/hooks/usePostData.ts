@@ -4,14 +4,15 @@ const URL = import.meta.env.VITE_URL;
 
 export function usePostData() {
   const orderUrl = `${URL}order`;
-  console.log(orderUrl);
-
-  const [data, setData] = useState({});
-  console.log("usePost data: ", data);
+  const [data, setData] = useState<Object | null>(null);
+  const [message, setMessage] = useState<String | null>(null);
+  console.log("Message state: ", message);
 
   useEffect(() => {
     const postData = async () => {
       if (!data) return;
+      console.log("UseEffect data: ", data);
+
       try {
         const response = await fetch(orderUrl, {
           method: "POST",
@@ -24,7 +25,8 @@ export function usePostData() {
 
         if (response.ok) {
           const result = await response.json();
-          console.log("result", result);
+          console.log("result", result.message);
+          setMessage(result.message);
         } else {
           console.error("Error: ", response.status, response.statusText);
         }
@@ -32,10 +34,9 @@ export function usePostData() {
         console.error("Error: ", error);
       }
     };
+
     postData();
   }, [data]);
 
-  return { setData };
+  return { setData, message };
 }
-
-//{"products":[{"id":1,"title":"Dešimtinė juodo serbento","quantity":1,"totalPrice":30.99}],"purchaser":{"name":"Pineple","surName":"nana","email":"inga.gudaite@gmail.com","address":"Rinktinės 3A-77, Vilnius"},"termsConfirmed":true}

@@ -34,10 +34,6 @@ const sheets = google.sheets({ version: "v4", auth });
 const PRODUCT_LIST_ID = process.env.PRODUCT_LIST_SPREADSHEET_ID;
 console.log("Spreadsheet ID:", PRODUCT_LIST_ID);
 
-app.get("/api", (req, res) => {
-  res.json({ limo: ["obuoliu", "serbentu"] });
-});
-
 app.get("/api/products", async (req, res) => {
   console.log("Request received on /api/products");
   try {
@@ -70,7 +66,6 @@ app.post("/api/order", async (req, res) => {
   console.log("Request received on /api/order");
 
   const orderNo = uuidv4();
-  //const params = [orderNo, req.body.products, req.body.purchaser];
   const { products, purchaser, termsConfirmed } = req.body;
   console.log(
     "Payload being sent to Google Sheets:",
@@ -81,6 +76,25 @@ app.post("/api/order", async (req, res) => {
     products[0].title
   );
 
+  const arrOfProducts = [];
+  products.forEach((product) => {
+    arrOfProducts.push([
+      product.id,
+      product.title,
+      product.quantity,
+      product.totalPrice,
+    ]);
+  });
+  console.log("arrOfProducts: ", arrOfProducts);
+
+  const orderValues = (arr1, arr2) => {
+    let arr = [];
+    for (const element of arr2) {
+      arr.push(arr1.concat(element));
+    }
+    return arr;
+  };
+
   try {
     await sheets.spreadsheets.values.append({
       spreadsheetId: PRODUCT_LIST_ID,
@@ -89,7 +103,7 @@ app.post("/api/order", async (req, res) => {
       insertDataOption: "INSERT_ROWS",
       resource: {
         majorDimension: "ROWS",
-        values: [
+        values: orderValues(
           [
             purchaser.name,
             purchaser.surname,
@@ -97,36 +111,47 @@ app.post("/api/order", async (req, res) => {
             purchaser.address,
             orderNo,
             termsConfirmed,
-            products[0].title,
           ],
-          [
-            purchaser.name,
-            purchaser.surname,
-            purchaser.email,
-            purchaser.address,
-            orderNo,
-            termsConfirmed,
-            products[1]?.title,
-          ],
-          ,
-          [
-            purchaser.name,
-            purchaser.surname,
-            purchaser.email,
-            purchaser.address,
-            orderNo,
-            termsConfirmed,
-            products[2]?.title,
-          ],
-        ],
+          arrOfProducts
+        ),
+        // [
+        //   [
+        //     purchaser.name,
+        //     purchaser.surname,
+        //     purchaser.email,
+        //     purchaser.address,
+        //     orderNo,
+        //     termsConfirmed,
+        //     products[0].title,
+        //   ],
+        //   [
+        //     purchaser.name,
+        //     purchaser.surname,
+        //     purchaser.email,
+        //     purchaser.address,
+        //     orderNo,
+        //     termsConfirmed,
+        //     products[1]?.title,
+        //   ],
+        //   ,
+        //   [
+        //     purchaser.name,
+        //     purchaser.surname,
+        //     purchaser.email,
+        //     purchaser.address,
+        //     orderNo,
+        //     termsConfirmed,
+        //     products[2]?.title,
+        //   ],
+        // ],
       },
     });
-    res.status(200).json("Data saved");
+    res.status(200).json({ message: "Užsakymas priimtas" });
   } catch (error) {
     console.error("Error updating data:", error);
     res.status(500).json("Error updating data");
   }
-  //res.send("settin order");
+  //res.json({ message: "Užsakymas priimtas" });
 });
 
 app.get("/api/login", (req, res) => {

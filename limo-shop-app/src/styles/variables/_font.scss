@@ -1,6 +1,8 @@
 @font-face {
   font-family: "courier";
-  src: url("../../assets/font/Courier-BOLD.ttf");
+  src: url("assets/font/Courier-BOLD.ttf") format("turetype");
+  font-weight: 700;
+  font-style: normal;
 }
 
 $font-family-main: "courier", monospace;

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "src/common/context/GlobalContext";
 import { GlobalContextType } from "src/common/context/globalContext.types";
 import { usePostData } from "src/common/hooks/usePostData";
@@ -10,14 +10,12 @@ import { usePostData } from "src/common/hooks/usePostData";
 
 export function Purchasing() {
   const { cartItems } = useContext(GlobalContext) as GlobalContextType;
-  const { setData } = usePostData();
+  const { setData, message } = usePostData();
+  console.log("Message in purchasing: ", message);
+  console.log("TypeOf message in purchasing: ", typeof message);
 
   const [confirmTerms, setConfirmTerms] = useState(false);
-  const [order, setOrder] = useState({
-    products: {},
-    purchaser: {},
-    termsConfirmed: false,
-  });
+  const [order, setOrder] = useState<Object | null>(null);
   //const [formSubmitSuccess, setFormSubmitSuccess] = useState(false);
   //const [formSubmitError, setFormSubmitError] = useState(false);
 
@@ -49,10 +47,13 @@ export function Purchasing() {
       purchaser: purchaser,
       termsConfirmed: confirmTerms,
     });
-    setData({ purchaser });
+    console.log("Handle SUBMIT order data: ", order);
   };
 
-  console.log("order in purchasing: ", order);
+  useEffect(() => {
+    if (!order) return;
+    setData(order);
+  }, [order]);
 
   return (
     <div>
