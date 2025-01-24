@@ -8,18 +8,35 @@ import { usePostData } from "src/common/hooks/usePostData";
 // const email = "El. paštas";
 // const address = "Adresas";
 
+type PurchasingInputs = {
+  products: {
+    id: number;
+    title: string;
+    quantity: number;
+    totalPrice: number;
+  }[];
+  purchaser: Purchaser;
+  termsConfirmed: boolean;
+};
+
+type Purchaser = {
+  name: string;
+  surname: string;
+  email: string;
+  address: string;
+};
+
 export function Purchasing() {
   const { cartItems } = useContext(GlobalContext) as GlobalContextType;
-  const { setData, message } = usePostData();
-  console.log("Message in purchasing: ", message);
-  console.log("TypeOf message in purchasing: ", typeof message);
+  const { setData, response } = usePostData();
+  console.log("Message in purchasing: ", response);
 
   const [confirmTerms, setConfirmTerms] = useState(false);
-  const [order, setOrder] = useState<Object | null>(null);
+  const [order, setOrder] = useState<PurchasingInputs | null>(null);
   //const [formSubmitSuccess, setFormSubmitSuccess] = useState(false);
   //const [formSubmitError, setFormSubmitError] = useState(false);
 
-  const [purchaser, setPurchaser] = useState({
+  const [purchaser, setPurchaser] = useState<Purchaser>({
     name: "",
     surname: "",
     email: "",

@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const helmet = require("helmet");
 const { google } = require("googleapis");
 const { v4: uuidv4 } = require("uuid");
 const cors = require("cors");
@@ -13,6 +14,7 @@ const port = 8080;
 const corsOptions = {
   origin: ["http://localhost:5173"],
   //origin: [`http://${process.env.SERVER_URL}:${port}`],
+  methods: ["GET", "POST"],
   credentials: true,
   optionsSuccessStatus: 200,
 };
@@ -21,6 +23,19 @@ app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(bodyParser.json());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      useDefaults: false,
+      directives: {
+        "default-src": ["'self'"],
+        "script-src": ["'self'"],
+        "img-src": ["'none'"],
+        "connect-src": ["'self'", "googleapis.com"],
+      },
+    },
+  })
+);
 
 const pathToJson = path.join(__dirname, "limo.json");
 const credentials = JSON.parse(fs.readFileSync(pathToJson));
@@ -69,10 +84,8 @@ app.post("/api/order", async (req, res) => {
   const { products, purchaser, termsConfirmed } = req.body;
   console.log(
     "Payload being sent to Google Sheets:",
-    purchaser.name,
-    termsConfirmed,
-    products,
-    "title: ",
+    purchaser.firstName,
+    purchaser.termsConfirmed,
     products[0].title
   );
 
@@ -105,48 +118,18 @@ app.post("/api/order", async (req, res) => {
         majorDimension: "ROWS",
         values: orderValues(
           [
-            purchaser.name,
-            purchaser.surname,
+            purchaser.firstName,
+            purchaser.lastName,
             purchaser.email,
             purchaser.address,
             orderNo,
-            termsConfirmed,
+            purchaser.termsConfirmed,
           ],
           arrOfProducts
         ),
-        // [
-        //   [
-        //     purchaser.name,
-        //     purchaser.surname,
-        //     purchaser.email,
-        //     purchaser.address,
-        //     orderNo,
-        //     termsConfirmed,
-        //     products[0].title,
-        //   ],
-        //   [
-        //     purchaser.name,
-        //     purchaser.surname,
-        //     purchaser.email,
-        //     purchaser.address,
-        //     orderNo,
-        //     termsConfirmed,
-        //     products[1]?.title,
-        //   ],
-        //   ,
-        //   [
-        //     purchaser.name,
-        //     purchaser.surname,
-        //     purchaser.email,
-        //     purchaser.address,
-        //     orderNo,
-        //     termsConfirmed,
-        //     products[2]?.title,
-        //   ],
-        // ],
       },
     });
-    res.status(200).json({ message: "Užsakymas priimtas" });
+    res.status(200).json({ status: 200, message: "Užsakymas priimtas" });
   } catch (error) {
     console.error("Error updating data:", error);
     res.status(500).json("Error updating data");

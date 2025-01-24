@@ -5,8 +5,8 @@ const URL = import.meta.env.VITE_URL;
 export function usePostData() {
   const orderUrl = `${URL}order`;
   const [data, setData] = useState<Object | null>(null);
-  const [message, setMessage] = useState<String | null>(null);
-  console.log("Message state: ", message);
+  const [response, setResponse] = useState<Object | null>(null);
+  console.log("Response in usePostData: ", response);
 
   useEffect(() => {
     const postData = async () => {
@@ -26,7 +26,7 @@ export function usePostData() {
         if (response.ok) {
           const result = await response.json();
           console.log("result", result.message);
-          setMessage(result.message);
+          setResponse({ status: result.status, message: result.message });
         } else {
           console.error("Error: ", response.status, response.statusText);
         }
@@ -38,5 +38,5 @@ export function usePostData() {
     postData();
   }, [data]);
 
-  return { setData, message };
+  return { setData, response };
 }

@@ -7,7 +7,8 @@ import { Contacts } from "./pages/Contacts";
 import { Cart } from "./pages/Cart";
 import { Terms } from "./pages/Terms";
 //import { Login } from "./pages/Login/Login";
-import { Purchasing } from "./pages/Purchasing/Purchasing";
+//import { Purchasing } from "./pages/Purchasing/Purchasing";
+import { PurchasingFormHook } from "./pages/Purchasing/PurchasingFormHook";
 
 const routes = [
   {
@@ -20,7 +21,9 @@ const routes = [
       { path: "/cart", element: <Cart /> },
       { path: "/terms", element: <Terms /> },
       //{ path: "/login", element: <Login /> },
-      { path: "/purchasing", element: <Purchasing /> },
+      //{ path: "/purchasing", element: <Purchasing /> },
+
+      { path: "/purchasing", element: <PurchasingFormHook /> },
     ],
   },
 ];
