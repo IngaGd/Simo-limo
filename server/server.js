@@ -7,6 +7,11 @@ const cors = require("cors");
 const path = require("path");
 const fs = require("fs");
 const bodyParser = require("body-parser");
+const createDOMPurify = require("dompurify");
+const { JSDOM } = require("jsdom");
+
+const window = new JSDOM("").window;
+const DOMPurify = createDOMPurify(window);
 
 const app = express();
 const port = 8080;
@@ -31,7 +36,7 @@ app.use(
         "default-src": ["'self'"],
         "script-src": ["'self'"],
         "img-src": ["'none'"],
-        "connect-src": ["'self'", "googleapis.com"],
+        "connect-src": ["'self'", "https://sheets.googleapis.com"],
       },
     },
   })
@@ -118,10 +123,13 @@ app.post("/api/order", async (req, res) => {
         majorDimension: "ROWS",
         values: orderValues(
           [
-            purchaser.firstName,
-            purchaser.lastName,
-            purchaser.email,
-            purchaser.address,
+            DOMPurify.sanitize(purchaser.firstName),
+            DOMPurify.sanitize(purchaser.lastName),
+            DOMPurify.sanitize(purchaser.phone),
+            DOMPurify.sanitize(purchaser.email),
+            DOMPurify.sanitize(purchaser.street),
+            DOMPurify.sanitize(purchaser.town),
+            DOMPurify.sanitize(purchaser.postCode),
             orderNo,
             purchaser.termsConfirmed,
           ],
