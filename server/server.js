@@ -9,6 +9,7 @@ const fs = require("fs");
 const bodyParser = require("body-parser");
 const createDOMPurify = require("dompurify");
 const { JSDOM } = require("jsdom");
+const { body, validationResult } = require("express-validator");
 
 const window = new JSDOM("").window;
 const DOMPurify = createDOMPurify(window);
@@ -82,68 +83,148 @@ app.get("/api/products", async (req, res) => {
   }
 });
 
-app.post("/api/order", async (req, res) => {
-  console.log("Request received on /api/order");
+app.post(
+  "/api/order",
+  [
+    body("purchaser.firstName")
+      .notEmpty()
+      .withMessage("Privalomas laukas")
+      .bail()
+      .isLength({ min: 2, max: 50 })
+      .withMessage("Vardas gali būti nuo 2 iki 50 simbolių.")
+      .bail()
+      .isString()
+      .matches(/^[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ' -]+$/)
+      .withMessage("Pašalinkite negalimus simbolius, galimi - raidės, (-), (')")
+      .trim()
+      .escape(),
+    body("purchaser.lastName")
+      .notEmpty()
+      .withMessage("Privalomas laukas")
+      .bail()
+      .isLength({ min: 2, max: 50 })
+      .withMessage("Vardas gali būti nuo 2 iki 50 simbolių.")
+      .bail()
+      .isString()
+      .matches(/^[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ' -]+$/)
+      .withMessage("Pašalinkite negalimus simbolius, galimi - raidės, (-), (')")
+      .trim()
+      .escape(),
+    body("purchaser.phone")
+      .notEmpty()
+      .withMessage("Privalomas laukas")
+      .bail()
+      .matches(/^\+?[0-9]{1,4}[0-9]{6,14}$/)
+      .withMessage("Telefono numerio pavyzdys (pavyzdys: +370656789)."),
+    body("purchaser.email")
+      .notEmpty()
+      .withMessage("Privalomas laukas")
+      .bail()
+      .isEmail()
+      .normalizeEmail()
+      .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
+    body("purchaser.street")
+      .notEmpty()
+      .withMessage("Privalomas laukas")
+      .bail()
+      .isLength({ min: 2, max: 50 })
+      .withMessage("Gatvės pavadinimas gali būti nuo 2 iki 50 simbolių.")
+      .bail()
+      .isString()
+      .matches(/^[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ' -]+$/)
+      .withMessage("Pašalinkite negalimus simbolius, galimi - raidės, (-), (')")
+      .trim()
+      .escape(),
+    body("purchaser.town")
+      .notEmpty()
+      .withMessage("Privalomas laukas")
+      .bail()
+      .isLength({ min: 2, max: 50 })
+      .withMessage("Gatvės pavadinimas gali būti nuo 2 iki 50 simbolių.")
+      .bail()
+      .isString()
+      .matches(/^[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ' -]+$/)
+      .withMessage("Pašalinkite negalimus simbolius, galimi - raidės, (-), (')")
+      .trim()
+      .escape(),
+    body("purchaser.postCode")
+      .notEmpty()
+      .withMessage("Privalomas laukas")
+      .bail()
+      .isString()
+      .replace()
+      .matches(/^[A-Z]{2}\d{4,10}$/)
+      .withMessage("Pašto kodo pavyzdys LT01234"),
+    // sanitizeBody("notifyOnReply").toBoolean(),
+  ],
+  async (req, res) => {
+    console.log("Request received on /api/order");
 
-  const orderNo = uuidv4();
-  const { products, purchaser, termsConfirmed } = req.body;
-  console.log(
-    "Payload being sent to Google Sheets:",
-    purchaser.firstName,
-    purchaser.termsConfirmed,
-    products[0].title
-  );
-
-  const arrOfProducts = [];
-  products.forEach((product) => {
-    arrOfProducts.push([
-      product.id,
-      product.title,
-      product.quantity,
-      product.totalPrice,
-    ]);
-  });
-  console.log("arrOfProducts: ", arrOfProducts);
-
-  const orderValues = (arr1, arr2) => {
-    let arr = [];
-    for (const element of arr2) {
-      arr.push(arr1.concat(element));
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
     }
-    return arr;
-  };
 
-  try {
-    await sheets.spreadsheets.values.append({
-      spreadsheetId: PRODUCT_LIST_ID,
-      range: "Orders!A2",
-      valueInputOption: "USER_ENTERED",
-      insertDataOption: "INSERT_ROWS",
-      resource: {
-        majorDimension: "ROWS",
-        values: orderValues(
-          [
-            DOMPurify.sanitize(purchaser.firstName),
-            DOMPurify.sanitize(purchaser.lastName),
-            DOMPurify.sanitize(purchaser.phone),
-            DOMPurify.sanitize(purchaser.email),
-            DOMPurify.sanitize(purchaser.street),
-            DOMPurify.sanitize(purchaser.town),
-            DOMPurify.sanitize(purchaser.postCode),
-            orderNo,
-            purchaser.termsConfirmed,
-          ],
-          arrOfProducts
-        ),
-      },
+    const orderNo = uuidv4();
+    const { products, purchaser, termsConfirmed } = req.body;
+    console.log(
+      "Payload being sent to Google Sheets:",
+      purchaser.firstName,
+      purchaser.termsConfirmed,
+      products[0].title
+    );
+
+    const arrOfProducts = [];
+    products.forEach((product) => {
+      arrOfProducts.push([
+        product.id,
+        product.title,
+        product.quantity,
+        product.totalPrice,
+      ]);
     });
-    res.status(200).json({ status: 200, message: "Užsakymas priimtas" });
-  } catch (error) {
-    console.error("Error updating data:", error);
-    res.status(500).json("Error updating data");
+    console.log("arrOfProducts: ", arrOfProducts);
+
+    const orderValues = (arr1, arr2) => {
+      let arr = [];
+      for (const element of arr2) {
+        arr.push(arr1.concat(element));
+      }
+      return arr;
+    };
+
+    try {
+      await sheets.spreadsheets.values.append({
+        spreadsheetId: PRODUCT_LIST_ID,
+        range: "Orders!A2",
+        valueInputOption: "USER_ENTERED",
+        insertDataOption: "INSERT_ROWS",
+        resource: {
+          majorDimension: "ROWS",
+          values: orderValues(
+            [
+              DOMPurify.sanitize(purchaser.firstName),
+              DOMPurify.sanitize(purchaser.lastName),
+              DOMPurify.sanitize(purchaser.phone),
+              DOMPurify.sanitize(purchaser.email),
+              DOMPurify.sanitize(purchaser.street),
+              DOMPurify.sanitize(purchaser.town),
+              DOMPurify.sanitize(purchaser.postCode),
+              orderNo,
+              purchaser.termsConfirmed,
+            ],
+            arrOfProducts
+          ),
+        },
+      });
+      res.status(200).json({ status: 200, message: "Užsakymas priimtas" });
+    } catch (error) {
+      console.error("Error updating data:", error);
+      res.status(500).json("Error updating data");
+    }
+    //res.json({ message: "Užsakymas priimtas" });
   }
-  //res.json({ message: "Užsakymas priimtas" });
-});
+);
 
 app.get("/api/login", (req, res) => {
   res.render("");

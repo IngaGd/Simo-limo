@@ -16,7 +16,7 @@ type Purchaser = {
   email: string;
   street: string;
   town: string;
-  postCode: number;
+  postCode: string;
   termsConfirmed: boolean;
 };
 
@@ -45,16 +45,19 @@ export function PurchasingFormHook() {
       email: "",
       street: "",
       town: "",
-      postCode: 0,
+      postCode: "",
       termsConfirmed: false,
     },
   });
 
   const { cartItems } = useContext(GlobalContext) as GlobalContextType;
   const { setData, response } = usePostData();
+  //const [message, setMessage] = useState("");
   console.log("Message in purchasing: ", response);
 
   const [order, setOrder] = useState<PurchasingInputs | null>(null);
+
+  //console.log("messageForUser :", messageForUser);
 
   const orderProduct = cartItems.map((item) => ({
     id: item.id,
@@ -135,16 +138,8 @@ export function PurchasingFormHook() {
     postCode: {
       required: "Privalomas laukas",
       pattern: {
-        value: /^\d{5}$/,
-        message: "Pašto kodo pavyzdys 01234",
-      },
-      minLength: {
-        value: 5,
-        message: "Pašto kodas turi būti 5 skaitmenų",
-      },
-      maxLength: {
-        value: 5,
-        message: "Pašto kodas turi būti 5 skaitmenų",
+        value: /^[A-Z]{2}\d{4,10}$/,
+        message: "Pašto kodo pavyzdys LT01234",
       },
     },
   };
@@ -158,7 +153,7 @@ export function PurchasingFormHook() {
       email: DOMPurify.sanitize(data.email),
       street: DOMPurify.sanitize(data.street),
       town: DOMPurify.sanitize(data.town),
-      postCode: Number.isFinite(data.postCode) ? data.postCode : 0,
+      postCode: DOMPurify.sanitize(data.postCode),
       termsConfirmed: data.termsConfirmed,
     };
     setOrder({
@@ -179,18 +174,27 @@ export function PurchasingFormHook() {
         <div>
           <div>
             <label>Vardas</label>
-            <input {...register("firstName", validationOptions.firstName)} />
+            <input
+              type="text"
+              {...register("firstName", validationOptions.firstName)}
+            />
             <p>{errors.firstName?.message}</p>
+            {/* {response?.map((resp, index) => (
+              <p key={index}>{resp.message}</p>
+            ))} */}
           </div>
           <div>
             <label>Pavardė</label>
-            <input {...register("lastName", validationOptions.lastName)} />
+            <input
+              type="text"
+              {...register("lastName", validationOptions.lastName)}
+            />
             <p>{errors.lastName?.message}</p>
           </div>
         </div>
         <div>
           <label>Telefono Nr.</label>
-          <input {...register("phone", validationOptions.phone)} />
+          <input type="text" {...register("phone", validationOptions.phone)} />
           <p>{errors.phone?.message}</p>
         </div>
         <div>
@@ -200,17 +204,23 @@ export function PurchasingFormHook() {
         </div>
         <div>
           <label>Gatvės pavadinimas</label>
-          <input {...register("street", validationOptions.street)} />
+          <input
+            type="text"
+            {...register("street", validationOptions.street)}
+          />
           <p>{errors.street?.message}</p>
         </div>
         <div>
           <label>Miestas</label>
-          <input {...register("town", validationOptions.town)} />
+          <input type="text" {...register("town", validationOptions.town)} />
           <p>{errors.town?.message}</p>
         </div>
         <div>
           <label>Pašto kodas</label>
-          <input {...register("postCode", validationOptions.postCode)} />
+          <input
+            type="text"
+            {...register("postCode", validationOptions.postCode)}
+          />
           <p>{errors.postCode?.message}</p>
         </div>
         <div>
