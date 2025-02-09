@@ -36,15 +36,14 @@ app.use(
       directives: {
         "default-src": ["'self'"],
         "script-src": ["'self'"],
-        "img-src": ["'none'"],
+        //"img-src": ["'none'"],
         "connect-src": ["'self'", "https://sheets.googleapis.com"],
       },
     },
   })
 );
 
-const pathToJson = path.join(__dirname, "limo.json");
-const credentials = JSON.parse(fs.readFileSync(pathToJson));
+const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS);
 
 const auth = new google.auth.GoogleAuth({
   credentials,
