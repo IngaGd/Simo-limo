@@ -28,6 +28,7 @@ type PurchasingInputs = {
     totalPrice: number;
   }[];
   purchaser: Purchaser;
+  paymentStatus: string;
 };
 
 export function PurchasingFormHook() {
@@ -51,13 +52,16 @@ export function PurchasingFormHook() {
   });
 
   const { cartItems } = useContext(GlobalContext) as GlobalContextType;
-  const { setData, response } = usePostData();
+  const { setData, errorResponse, response, orderId, paymentStatus } =
+    usePostData();
   //const [message, setMessage] = useState("");
-  console.log("Message in purchasing: ", response);
 
   const [order, setOrder] = useState<PurchasingInputs | null>(null);
 
-  //console.log("messageForUser :", messageForUser);
+  console.log("errorResponse :", errorResponse);
+  console.log("response: ", response);
+  console.log("ordeId: ", orderId);
+  console.log("paymentStatus: ", paymentStatus);
 
   const orderProduct = cartItems.map((item) => ({
     id: item.id,
@@ -159,6 +163,7 @@ export function PurchasingFormHook() {
     setOrder({
       products: orderProduct,
       purchaser: sanitizedData,
+      paymentStatus: "pending",
     });
     console.log("Submitted Data:", order);
   };
@@ -170,77 +175,127 @@ export function PurchasingFormHook() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      {response?.redirectToPayment === true ? (
         <div>
+          <div> {response.message}</div>
+          <button>Pereiti prie apmoėjimo</button>
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <label>Vardas</label>
-            <input
-              type="text"
-              {...register("firstName", validationOptions.firstName)}
-            />
-            <p>{errors.firstName?.message}</p>
-            {/* {response?.map((resp, index) => (
-              <p key={index}>{resp.message}</p>
-            ))} */}
+            <div>
+              <label>Vardas</label>
+              <input
+                type="text"
+                {...register("firstName", validationOptions.firstName)}
+              />
+              <p>{errors.firstName?.message}</p>
+              <p>
+                {
+                  errorResponse?.find(
+                    (el) => el.field === "purchaser.firstName"
+                  )?.message
+                }
+              </p>
+            </div>
+            <div>
+              <label>Pavardė</label>
+              <input
+                type="text"
+                {...register("lastName", validationOptions.lastName)}
+              />
+              <p>{errors.lastName?.message}</p>
+              <p>
+                {
+                  errorResponse?.find((el) => el.field === "purchaser.lastName")
+                    ?.message
+                }
+              </p>
+            </div>
           </div>
           <div>
-            <label>Pavardė</label>
+            <label>Telefono Nr.</label>
             <input
               type="text"
-              {...register("lastName", validationOptions.lastName)}
+              {...register("phone", validationOptions.phone)}
             />
-            <p>{errors.lastName?.message}</p>
+            <p>{errors.phone?.message}</p>
+            <p>
+              {
+                errorResponse?.find((el) => el.field === "purchaser.phone")
+                  ?.message
+              }
+            </p>
           </div>
-        </div>
-        <div>
-          <label>Telefono Nr.</label>
-          <input type="text" {...register("phone", validationOptions.phone)} />
-          <p>{errors.phone?.message}</p>
-        </div>
-        <div>
-          <label>E-paštas</label>
-          <input {...register("email", validationOptions.email)} />
-          <p>{errors.email?.message}</p>
-        </div>
-        <div>
-          <label>Gatvės pavadinimas</label>
-          <input
-            type="text"
-            {...register("street", validationOptions.street)}
-          />
-          <p>{errors.street?.message}</p>
-        </div>
-        <div>
-          <label>Miestas</label>
-          <input type="text" {...register("town", validationOptions.town)} />
-          <p>{errors.town?.message}</p>
-        </div>
-        <div>
-          <label>Pašto kodas</label>
-          <input
-            type="text"
-            {...register("postCode", validationOptions.postCode)}
-          />
-          <p>{errors.postCode?.message}</p>
-        </div>
-        <div>
-          <label>Sutinku su pirkimo sąlygomos</label>
-          <input
-            type="checkbox"
-            {...register("termsConfirmed", {
-              required:
-                "Prašome pažymtėti, kad sutinkate su pirkimo salygomis.",
-            })}
-            onChange={(e) => {
-              setValue("termsConfirmed", e.target.checked);
-            }}
-          />
-          <p>{errors.termsConfirmed?.message}</p>
-        </div>
-        <input type="submit" />
+          <div>
+            <label>E-paštas</label>
+            <input {...register("email", validationOptions.email)} />
+            <p>{errors.email?.message}</p>
+            <p>
+              {
+                errorResponse?.find((el) => el.field === "purchaser.email")
+                  ?.message
+              }
+            </p>
+          </div>
+          <div>
+            <label>Gatvės pavadinimas</label>
+            <input
+              type="text"
+              {...register("street", validationOptions.street)}
+            />
+            <p>{errors.street?.message}</p>
+            <p>
+              {
+                errorResponse?.find((el) => el.field === "purchaser.street")
+                  ?.message
+              }
+            </p>
+          </div>
+          <div>
+            <label>Miestas</label>
+            <input type="text" {...register("town", validationOptions.town)} />
+            <p>{errors.town?.message}</p>
+            <p>
+              {
+                errorResponse?.find((el) => el.field === "purchaser.town")
+                  ?.message
+              }
+            </p>
+          </div>
+          <div>
+            <label>Pašto kodas</label>
+            <input
+              type="text"
+              {...register("postCode", validationOptions.postCode)}
+            />
+            <p>{errors.postCode?.message}</p>
+            <p>
+              {
+                errorResponse?.find((el) => el.field === "purchaser.postCode")
+                  ?.message
+              }
+            </p>
+          </div>
+          <div>
+            <label>Sutinku su pirkimo sąlygomos</label>
+            <input
+              type="checkbox"
+              {...register("termsConfirmed", {
+                required:
+                  "Prašome pažymtėti, kad sutinkate su pirkimo salygomis.",
+              })}
+              onChange={(e) => {
+                setValue("termsConfirmed", e.target.checked);
+              }}
+            />
+            <p>{errors.termsConfirmed?.message}</p>
+          </div>
+          <input type="submit" />
 
-        {/* <button>Pereiti prie apmokėjimo</button> */}
-      </form>
+          {/* <button>Pereiti prie apmokėjimo</button> */}
+        </form>
+      )}
     </div>
   );
 }

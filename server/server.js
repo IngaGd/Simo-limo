@@ -10,6 +10,7 @@ const bodyParser = require("body-parser");
 const createDOMPurify = require("dompurify");
 const { JSDOM } = require("jsdom");
 const { body, validationResult } = require("express-validator");
+const { log } = require("util");
 
 const window = new JSDOM("").window;
 const DOMPurify = createDOMPurify(window);
@@ -43,7 +44,10 @@ app.use(
   })
 );
 
-const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS);
+const pathToJson = path.join(__dirname, "limo.json");
+const credentials = JSON.parse(fs.readFileSync(pathToJson));
+
+//const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS);
 
 const auth = new google.auth.GoogleAuth({
   credentials,
@@ -165,7 +169,8 @@ app.post(
     }
 
     const orderNo = uuidv4();
-    const { products, purchaser, termsConfirmed } = req.body;
+
+    const { products, purchaser, paymentStatus } = req.body;
     console.log(
       "Payload being sent to Google Sheets:",
       purchaser.firstName,
@@ -184,10 +189,10 @@ app.post(
     });
     console.log("arrOfProducts: ", arrOfProducts);
 
-    const orderValues = (arr1, arr2) => {
+    const orderValues = (arr1, arr2, status) => {
       let arr = [];
       for (const element of arr2) {
-        arr.push(arr1.concat(element));
+        arr.push(arr1.concat(element).concat(status));
       }
       return arr;
     };
@@ -212,16 +217,22 @@ app.post(
               orderNo,
               purchaser.termsConfirmed,
             ],
-            arrOfProducts
+            arrOfProducts,
+            paymentStatus
           ),
         },
       });
-      res.status(200).json({ status: 200, message: "Užsakymas priimtas" });
+      res.status(200).json({
+        status: 200,
+        message: "Užsakymas apdorojamas",
+        orderId: `${orderNo}`,
+        paymentStatus: "pending",
+        redirectToPayment: true,
+      });
     } catch (error) {
       console.error("Error updating data:", error);
       res.status(500).json("Error updating data");
     }
-    //res.json({ message: "Užsakymas priimtas" });
   }
 );
 

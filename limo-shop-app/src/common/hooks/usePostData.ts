@@ -2,17 +2,27 @@ import { useEffect, useState } from "react";
 
 const URL = import.meta.env.VITE_URL;
 
-export type ResponseObject = {
+export type ErrorResponseObject = {
   status: number;
   field: string;
   message: string;
 };
 
+export type ResponseObject = {
+  status: number;
+  message: string;
+  redirectToPayment: boolean;
+};
+
 export function usePostData() {
   const orderUrl = `${URL}order`;
   const [data, setData] = useState<Object | null>(null);
-  const [response, setResponse] = useState<Response | null>(null);
-  console.log("Response in usePostData: ", response);
+  const [response, setResponse] = useState<ResponseObject | null>(null);
+  const [orderId, setOrderId] = useState<string | null>(null);
+  const [paymentStatus, setPaymentStatus] = useState<string | null>(null);
+  const [errorResponse, setErrorResponse] = useState<
+    ErrorResponseObject[] | null
+  >(null);
 
   useEffect(() => {
     const postData = async () => {
@@ -29,14 +39,21 @@ export function usePostData() {
         });
         console.log("JSON.stringify(data):", JSON.stringify(data));
 
+        if (!response) return;
+
         if (response.ok) {
           const result = await response.json();
           console.log("result", result.message);
-          // setResponse({ status: result.status, message: result.message });
+          setResponse({
+            status: result.status,
+            message: result.message,
+            redirectToPayment: result.redirectToPayment,
+          });
+          setOrderId(result.orderId);
+          setPaymentStatus(result.paymentStatus);
         } else {
           const errorResult = await response.json();
           console.log("errorResult: ", errorResult);
-          console.error("Error: ", errorResult.errors);
           const errorObject = errorResult.errors.map(
             (errorsArray: { path: string; msg: string }) => {
               return {
@@ -46,7 +63,7 @@ export function usePostData() {
               };
             }
           );
-          setResponse(errorObject);
+          setErrorResponse(errorObject);
           console.log("setResponse: ", errorObject);
         }
       } catch (error) {
@@ -57,5 +74,5 @@ export function usePostData() {
     postData();
   }, [data]);
 
-  return { setData, response };
+  return { setData, errorResponse, response, orderId, paymentStatus };
 }
