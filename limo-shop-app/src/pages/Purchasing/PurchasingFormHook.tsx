@@ -4,6 +4,7 @@ import { GlobalContext } from "src/common/context/GlobalContext";
 import { GlobalContextType } from "src/common/context/globalContext.types";
 import { usePostData } from "src/common/hooks/usePostData";
 import DOMPurify from "dompurify";
+import { Checkout } from "../Checkout/Checkout";
 
 // const name = "Vardas";
 // const surname = "Pavardė";
@@ -31,6 +32,8 @@ type PurchasingInputs = {
   paymentStatus: string;
 };
 
+const URL = import.meta.env.VITE_URL;
+
 export function PurchasingFormHook() {
   const {
     register,
@@ -50,18 +53,13 @@ export function PurchasingFormHook() {
       termsConfirmed: false,
     },
   });
+  const orderUrl = `${URL}order`;
 
   const { cartItems } = useContext(GlobalContext) as GlobalContextType;
-  const { setData, errorResponse, response, orderId, paymentStatus } =
-    usePostData();
-  //const [message, setMessage] = useState("");
+  const { setData, errorResponse, response, orderId } = usePostData(orderUrl);
+  const [orderAmount, setOrderAmount] = useState<string | undefined>();
 
   const [order, setOrder] = useState<PurchasingInputs | null>(null);
-
-  console.log("errorResponse :", errorResponse);
-  console.log("response: ", response);
-  console.log("ordeId: ", orderId);
-  console.log("paymentStatus: ", paymentStatus);
 
   const orderProduct = cartItems.map((item) => ({
     id: item.id,
@@ -168,18 +166,33 @@ export function PurchasingFormHook() {
     console.log("Submitted Data:", order);
   };
 
+  const amount = order?.products
+    .map((product) => product.totalPrice)
+    .reduce((a, b) => a + b)
+    .toFixed(2)
+    .toString();
+
   useEffect(() => {
     if (!order) return;
     setData(order);
+    setOrderAmount(amount);
   }, [order]);
+
+  useEffect(() => {
+    if (response?.redirectToPayment === true) {
+      setOrder(null);
+    }
+  }, [response]);
 
   return (
     <div>
       {response?.redirectToPayment === true ? (
-        <div>
-          <div> {response.message}</div>
-          <button>Pereiti prie apmoėjimo</button>
-        </div>
+        <Checkout
+          message={response.message}
+          orderId={orderId}
+          amount={orderAmount}
+          userIp={response.userIp}
+        />
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
