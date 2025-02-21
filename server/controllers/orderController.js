@@ -67,6 +67,7 @@ exports.createOrder = async (req, res) => {
       orderId: `${orderNo}`,
       paymentStatus: "pending",
       redirectToPayment: true,
+      userIp: req.userIp,
     });
   } catch (error) {
     console.error("Error updating data:", error);
