@@ -1,24 +1,24 @@
 import { useEffect, useState } from "react";
 
-const URL = import.meta.env.VITE_URL;
-
-export type ErrorResponseObject = {
+type ErrorResponseObject = {
   status: number;
   field: string;
   message: string;
 };
 
-export type ResponseObject = {
+type ResponseObject = {
   status: number;
   message: string;
-  redirectToPayment: boolean;
+  paymentStatus?: string;
+  redirectToPayment?: boolean;
+  userIp?: string;
+  redirectUrl?: string;
 };
 
-export function usePostData() {
-  const orderUrl = `${URL}order`;
+export function usePostData(url: string) {
   const [data, setData] = useState<Object | null>(null);
   const [response, setResponse] = useState<ResponseObject | null>(null);
-  const [orderId, setOrderId] = useState<string | null>(null);
+  const [orderId, setOrderId] = useState<string>("");
   const [paymentStatus, setPaymentStatus] = useState<string | null>(null);
   const [errorResponse, setErrorResponse] = useState<
     ErrorResponseObject[] | null
@@ -30,7 +30,9 @@ export function usePostData() {
       console.log("UseEffect data: ", data);
 
       try {
-        const response = await fetch(orderUrl, {
+        console.log(url);
+
+        const response = await fetch(url, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -43,12 +45,16 @@ export function usePostData() {
 
         if (response.ok) {
           const result = await response.json();
-          console.log("result", result.message);
+          console.log("result", result);
           setResponse({
             status: result.status,
             message: result.message,
+            paymentStatus: result.paymentStatus,
             redirectToPayment: result.redirectToPayment,
+            userIp: result.userIp,
+            redirectUrl: result.redirectUrl,
           });
+          console.log("UserIp: ", result.userIp);
           setOrderId(result.orderId);
           setPaymentStatus(result.paymentStatus);
         } else {
