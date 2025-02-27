@@ -7,9 +7,14 @@ const DOMPurify = createDOMPurify(window);
 
 exports.createOrder = async (req, res) => {
   console.log("Request received on /api/order");
+
   const orderNo = uuidv4();
 
-  const { products, purchaser, paymentStatus } = req.body;
+  const { _csrf, products, purchaser, paymentStatus } = req.body;
+  if (_csrf !== req.csrfToken) {
+    return res.status(403).send("CSRF token missmatch");
+  }
+
   console.log(
     "Payload being sent to Google Sheets:",
     purchaser.firstName,

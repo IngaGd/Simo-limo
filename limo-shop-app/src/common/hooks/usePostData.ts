@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 type ErrorResponseObject = {
   status: number;
-  field: string;
+  field?: string;
   message: string;
 };
 
@@ -37,6 +37,7 @@ export function usePostData(url: string) {
           headers: {
             "Content-Type": "application/json",
           },
+          credentials: "include",
           body: JSON.stringify(data),
         });
         console.log("JSON.stringify(data):", JSON.stringify(data));

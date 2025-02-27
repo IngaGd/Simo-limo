@@ -22,6 +22,7 @@ type Purchaser = {
 };
 
 type PurchasingInputs = {
+  _csrf: string;
   products: {
     id: number;
     title: string;
@@ -58,8 +59,8 @@ export function PurchasingFormHook() {
   const { cartItems } = useContext(GlobalContext) as GlobalContextType;
   const { setData, errorResponse, response, orderId } = usePostData(orderUrl);
   const [orderAmount, setOrderAmount] = useState<string | undefined>();
-
   const [order, setOrder] = useState<PurchasingInputs | null>(null);
+  const [csrfToken, setCsrfToken] = useState("");
 
   const orderProduct = cartItems.map((item) => ({
     id: item.id,
@@ -159,6 +160,7 @@ export function PurchasingFormHook() {
       termsConfirmed: data.termsConfirmed,
     };
     setOrder({
+      _csrf: csrfToken,
       products: orderProduct,
       purchaser: sanitizedData,
       paymentStatus: "pending",
@@ -179,10 +181,27 @@ export function PurchasingFormHook() {
   }, [order]);
 
   useEffect(() => {
-    if (response?.redirectToPayment === true) {
-      setOrder(null);
-    }
-  }, [response]);
+    console.log("URL in forn: ", `${URL}csrf-token`);
+  }, []);
+
+  useEffect(() => {
+    const fetchCsrfToken = async () => {
+      try {
+        const response = await fetch(`${URL}csrf-token`, {
+          method: "GET",
+          credentials: "include",
+        });
+        if (!response.ok) {
+          throw new Error("Data failed fetch");
+        }
+        const responseJson = await response.json();
+        setCsrfToken(responseJson.csrfToken);
+      } catch (error) {
+        console.log("Error: ", error);
+      }
+    };
+    fetchCsrfToken();
+  }, []);
 
   return (
     <div>
@@ -196,6 +215,7 @@ export function PurchasingFormHook() {
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
+            <input type="hidden" name="_csrf" value={csrfToken} />
             <div>
               <label>Vardas</label>
               <input
