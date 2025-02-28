@@ -21,6 +21,11 @@
   }
 }
 
+.cartItem {
+  width: 20rem;
+  height: 20rem;
+}
+
 .productList {
   @include box-size-m;
   border-radius: 3px;

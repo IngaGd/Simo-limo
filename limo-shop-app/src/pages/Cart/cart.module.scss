@@ -1,0 +1,57 @@
+@use "../../styles/abstracts/index" as *;
+@use "../../styles/variables/index" as *;
+
+.cart {
+  width: 70%;
+  height: 100%;
+  padding-top: 4rem;
+  align-self: center;
+}
+
+.list {
+  display: grid;
+  gap: 2rem;
+}
+
+.item {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  border: 1px solid black;
+  border-radius: 3px;
+  padding: 1rem;
+}
+
+.description {
+  height: 80%;
+  align-self: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .title {
+    font-size: 1.8rem;
+  }
+}
+
+.btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 1rem;
+
+  .btnCount {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.removeCart {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.link {
+  @include link-button;
+}

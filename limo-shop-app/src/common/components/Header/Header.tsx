@@ -13,23 +13,28 @@ export function Header() {
 
   return (
     <header className={styles.header}>
-      <Link to="/contacts" className={styles.envelope}>
-        <IconEnvelop size="large" />
-      </Link>
-      <Link to="/" className={styles.logo}>
-        <Logo />
-      </Link>
-      <Link to="/cart" className={styles.cart}>
-        <div className={styles.counter}>
-          <IconCart size="medium" />
-          {cartItems.length > 0 && (
-            <div className={styles.quantity}>
-              <span className={styles.number}>{sumQuantities}</span>
-            </div>
-          )}
-        </div>
-      </Link>
-      {/* <Link to="/login">Login</Link> */}
+      <div className={styles.nav}>
+        <Link to="/contacts" className={styles.envelope}>
+          <IconEnvelop size="large" />
+        </Link>
+        <Link to="/" className={styles.logo}>
+          <Logo />
+        </Link>
+        <Link to="/cart" className={styles.cart}>
+          <div className={styles.counter}>
+            <IconCart size="medium" />
+            {cartItems.length > 0 && (
+              <div className={styles.quantity}>
+                <span className={styles.number}>{sumQuantities}</span>
+              </div>
+            )}
+          </div>
+        </Link>
+        {/* <Link to="/login">Login</Link> */}
+      </div>
+      <p className={styles.slogan}>
+        Pasaulis gražesnis, kai turi šaldytuve limonado.
+      </p>
     </header>
   );
 }

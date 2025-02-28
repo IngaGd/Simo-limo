@@ -2,7 +2,7 @@
 @use "../../../../styles/abstracts/index" as *;
 
 .table {
-  background-color: rgba($color-primary-2, 1);
+  background-color: $color-primary-1;
 
   display: flex;
   width: 36rem;

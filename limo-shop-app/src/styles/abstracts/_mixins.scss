@@ -26,3 +26,20 @@
     align-items: flex-end;
   }
 }
+
+@mixin link-button {
+  display: flex;
+  background-color: $color-primary-3;
+  color: $color-primary-1;
+  text-decoration: none;
+  padding: 0.5rem;
+  border: 1px solid black;
+  border-radius: 3px;
+  justify-content: center;
+  &:hover {
+    color: $color-primary-3;
+    background-color: $color-primary-1;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+}

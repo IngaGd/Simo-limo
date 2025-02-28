@@ -1,0 +1,51 @@
+@use "../../styles/abstracts/index" as *;
+@use "../../styles/variables/index" as *;
+
+.content {
+  display: grid;
+  align-self: center;
+  width: 50%;
+}
+
+.form {
+  display: grid;
+
+  border: 1px solid black;
+  padding: 2rem 10rem 3rem 10rem;
+  border-radius: 3px;
+  align-self: center;
+  margin-top: 3rem;
+
+  p {
+    color: coral;
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+}
+
+.heading {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 2rem;
+  font-weight: 700;
+}
+
+.input {
+  display: grid;
+  font-family: "Courier New", Courier, monospace;
+  input {
+    padding: 0.5rem 1rem;
+  }
+}
+
+.checkbox {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1.5rem 1rem;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.btn {
+  @include link-button;
+}

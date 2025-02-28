@@ -3,39 +3,56 @@
 .header {
   justify-self: flex-start;
 
-  display: grid;
-  align-items: center;
-  height: 10rem;
+  //display: grid;
+  //align-items: center;
+  height: 12rem;
   width: 100%;
-  grid-template-columns: 1fr (min-content) 1fr;
+  //grid-template-columns: [start] 1fr (min-content) 1fr [end];
+  // grid-template-rows: 1fr 2rem;
 
-  .envelope,
-  .cart {
-    margin-top: 0.8rem;
-  }
+  .nav {
+    // grid-row: 1;
+    // grid-template-columns: start/end;
 
-  .envelope {
     display: flex;
-    justify-content: flex-end;
-  }
+    width: 100%;
+    justify-content: center;
+    align-items: center;
 
-  .counter {
-    position: relative;
-    .quantity {
-      position: absolute;
-      top: -1.6rem;
-      left: 2.9rem;
-      width: 1.6rem;
-      height: 1.6rem;
-      border-radius: 50%;
-      background-color: $color-primary-3;
-      cursor: pointer;
-      .number {
-        top: -0.4rem;
-        left: 0.35rem;
+    .envelope,
+    .cart {
+      margin-top: 0.8rem;
+    }
+
+    .envelope {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .counter {
+      position: relative;
+      .quantity {
         position: absolute;
-        color: $color-primary-1;
+        top: -1.6rem;
+        left: 2.9rem;
+        width: 1.6rem;
+        height: 1.6rem;
+        border-radius: 50%;
+        background-color: $color-primary-3;
+        cursor: pointer;
+        .number {
+          top: -0.4rem;
+          left: 0.35rem;
+          position: absolute;
+          color: $color-primary-1;
+        }
       }
     }
+  }
+
+  .slogan {
+    font-size: 1.6rem;
+    padding: 0.5rem;
+    justify-self: center;
   }
 }
