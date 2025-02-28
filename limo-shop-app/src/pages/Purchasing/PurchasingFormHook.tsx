@@ -5,6 +5,8 @@ import { GlobalContextType } from "src/common/context/globalContext.types";
 import { usePostData } from "src/common/hooks/usePostData";
 import DOMPurify from "dompurify";
 import { Checkout } from "../Checkout/Checkout";
+import { validationOptions } from "./purchasing.logic";
+import styles from "./purchasing.module.scss";
 
 // const name = "Vardas";
 // const surname = "Pavardė";
@@ -69,83 +71,7 @@ export function PurchasingFormHook() {
     totalPrice: item.price * item.quantity,
   }));
 
-  const validationOptions = {
-    firstName: {
-      required: "Privalomas laukas",
-      pattern: {
-        value: /^[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ' -]+$/,
-        message: "Pašalinkite negalimus simbolius, galimi - raidės, (-), (')",
-      },
-      minLength: { value: 2, message: "Vardas turi būti ne mažiau 2 raidžių." },
-      maxLength: {
-        value: 50,
-        message: "Vardas turi būti ne daugiau 50 raidžių.",
-      },
-    },
-    lastName: {
-      required: "Privalomas laukas",
-      pattern: {
-        value: /^[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ' -]+$/,
-        message: "Pašalinkite negalimus simbolius, galimi - raidės, (-), (')",
-      },
-      minLength: {
-        value: 2,
-        message: "Pavardė turi būti ne mažiau 2 raidžių.",
-      },
-      maxLength: {
-        value: 50,
-        message: "Pavardė turi būti ne daugiau 50 raidžių.",
-      },
-    },
-    phone: {
-      required: "Privalomas laukas",
-      pattern: {
-        value: /^\+?[0-9]{1,4}[0-9]{6,14}$/,
-        message: "Telefono numerio pavyzdys (pavyzdys: +370656789).",
-      },
-    },
-    email: {
-      required: "Privalomas laukas",
-      pattern: {
-        value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-        message: "Neteisingai suvestas el. pašto adresas.",
-      },
-    },
-    street: {
-      required: "Privalomas laukas",
-      pattern: {
-        value: /^[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ' -]+$/,
-        message: "Pašalinkite negalimus simbolius, galimi - raidės, (-), (')",
-      },
-      minLength: { value: 2, message: "Vardas turi būti ne mažiau 2 raidžių." },
-      maxLength: {
-        value: 50,
-        message: "Gatvė turi būti ne daugiau 50 raidžių.",
-      },
-    },
-    town: {
-      required: "Privalomas laukas",
-      pattern: {
-        value: /^[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ' -]+$/,
-        message: "Pašalinkite negalimus simbolius, galimi - raidės, (-), (')",
-      },
-      minLength: {
-        value: 2,
-        message: "Miestas turi būti ne mažiau 2 raidžių.",
-      },
-      maxLength: {
-        value: 50,
-        message: "Miestas turi būti ne daugiau 50 raidžių.",
-      },
-    },
-    postCode: {
-      required: "Privalomas laukas",
-      pattern: {
-        value: /^[A-Z]{2}\d{4,10}$/,
-        message: "Pašto kodo pavyzdys LT01234",
-      },
-    },
-  };
+  const validationRules = validationOptions();
 
   const onSubmit: SubmitHandler<Purchaser> = (data) => {
     const sanitizedData = {
@@ -181,10 +107,6 @@ export function PurchasingFormHook() {
   }, [order]);
 
   useEffect(() => {
-    console.log("URL in forn: ", `${URL}csrf-token`);
-  }, []);
-
-  useEffect(() => {
     const fetchCsrfToken = async () => {
       try {
         const response = await fetch(`${URL}csrf-token`, {
@@ -204,7 +126,7 @@ export function PurchasingFormHook() {
   }, []);
 
   return (
-    <div>
+    <div className={styles.content}>
       {response?.redirectToPayment === true ? (
         <Checkout
           message={response.message}
@@ -213,44 +135,50 @@ export function PurchasingFormHook() {
           userIp={response.userIp}
         />
       ) : (
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div>
-            <input type="hidden" name="_csrf" value={csrfToken} />
-            <div>
-              <label>Vardas</label>
-              <input
-                type="text"
-                {...register("firstName", validationOptions.firstName)}
-              />
-              <p>{errors.firstName?.message}</p>
-              <p>
-                {
-                  errorResponse?.find(
-                    (el) => el.field === "purchaser.firstName"
-                  )?.message
-                }
-              </p>
-            </div>
-            <div>
-              <label>Pavardė</label>
-              <input
-                type="text"
-                {...register("lastName", validationOptions.lastName)}
-              />
-              <p>{errors.lastName?.message}</p>
-              <p>
-                {
-                  errorResponse?.find((el) => el.field === "purchaser.lastName")
-                    ?.message
-                }
-              </p>
-            </div>
+        <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+          <input type="hidden" name="_csrf" value={csrfToken} />
+          <div className={styles.heading}>
+            Užpildykite kontaktinius duomenis
           </div>
-          <div>
-            <label>Telefono Nr.</label>
+          <div className={styles.input}>
+            <label htmlFor="firstName">Vardas</label>
             <input
+              id="firstName"
               type="text"
-              {...register("phone", validationOptions.phone)}
+              autoComplete="on"
+              {...register("firstName", validationRules.firstName)}
+            />
+            <p>{errors.firstName?.message}</p>
+            <p>
+              {
+                errorResponse?.find((el) => el.field === "purchaser.firstName")
+                  ?.message
+              }
+            </p>
+          </div>
+          <div className={styles.input}>
+            <label htmlFor="lastName">Pavardė</label>
+            <input
+              id="lastName"
+              type="text"
+              autoComplete="on"
+              {...register("lastName", validationRules.lastName)}
+            />
+            <p>{errors.lastName?.message}</p>
+            <p>
+              {
+                errorResponse?.find((el) => el.field === "purchaser.lastName")
+                  ?.message
+              }
+            </p>
+          </div>
+          <div className={styles.input}>
+            <label htmlFor="phone">Telefono Nr.</label>
+            <input
+              id="phone"
+              type="text"
+              autoComplete="on"
+              {...register("phone", validationRules.phone)}
             />
             <p>{errors.phone?.message}</p>
             <p>
@@ -260,9 +188,14 @@ export function PurchasingFormHook() {
               }
             </p>
           </div>
-          <div>
-            <label>E-paštas</label>
-            <input {...register("email", validationOptions.email)} />
+          <div className={styles.input}>
+            <label htmlFor="email">E-paštas</label>
+            <input
+              id="email"
+              type="email"
+              autoComplete="on"
+              {...register("email", validationRules.email)}
+            />
             <p>{errors.email?.message}</p>
             <p>
               {
@@ -271,11 +204,13 @@ export function PurchasingFormHook() {
               }
             </p>
           </div>
-          <div>
-            <label>Gatvės pavadinimas</label>
+          <div className={styles.input}>
+            <label htmlFor="address">Gatvės pavadinimas</label>
             <input
+              id="address"
               type="text"
-              {...register("street", validationOptions.street)}
+              autoComplete="on"
+              {...register("street", validationRules.street)}
             />
             <p>{errors.street?.message}</p>
             <p>
@@ -285,9 +220,14 @@ export function PurchasingFormHook() {
               }
             </p>
           </div>
-          <div>
-            <label>Miestas</label>
-            <input type="text" {...register("town", validationOptions.town)} />
+          <div className={styles.input}>
+            <label htmlFor="town">Miestas</label>
+            <input
+              id="town"
+              type="text"
+              autoComplete="on"
+              {...register("town", validationRules.town)}
+            />
             <p>{errors.town?.message}</p>
             <p>
               {
@@ -296,11 +236,13 @@ export function PurchasingFormHook() {
               }
             </p>
           </div>
-          <div>
-            <label>Pašto kodas</label>
+          <div className={styles.input}>
+            <label htmlFor="postCode">Pašto kodas</label>
             <input
+              id="postCode"
               type="text"
-              {...register("postCode", validationOptions.postCode)}
+              autoComplete="on"
+              {...register("postCode", validationRules.postCode)}
             />
             <p>{errors.postCode?.message}</p>
             <p>
@@ -311,20 +253,24 @@ export function PurchasingFormHook() {
             </p>
           </div>
           <div>
-            <label>Sutinku su pirkimo sąlygomos</label>
-            <input
-              type="checkbox"
-              {...register("termsConfirmed", {
-                required:
-                  "Prašome pažymtėti, kad sutinkate su pirkimo salygomis.",
-              })}
-              onChange={(e) => {
-                setValue("termsConfirmed", e.target.checked);
-              }}
-            />
+            <div className={styles.checkbox}>
+              <label htmlFor="terms">Sutinku su pirkimo sąlygomos</label>
+              <input
+                id="terms"
+                type="checkbox"
+                autoComplete="on"
+                {...register("termsConfirmed", {
+                  required:
+                    "Prašome pažymtėti, kad sutinkate su pirkimo salygomis.",
+                })}
+                onChange={(e) => {
+                  setValue("termsConfirmed", e.target.checked);
+                }}
+              />
+            </div>
             <p>{errors.termsConfirmed?.message}</p>
           </div>
-          <input type="submit" />
+          <input type="submit" className={styles.btn} />
 
           {/* <button>Pereiti prie apmokėjimo</button> */}
         </form>
