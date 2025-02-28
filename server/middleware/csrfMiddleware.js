@@ -8,7 +8,7 @@ const csrcMiddleware = (req, res, next) => {
     res.cookie("csrfToken", csrfToken, {
       httpOnly: true,
       secure: true,
-      sameSite: "Strict",
+      sameSite: "Lax",
     });
     req.csrfToken = csrfToken;
   } else {
