@@ -11,7 +11,7 @@ type ResponseObject = {
   message: string;
   paymentStatus?: string;
   redirectToPayment?: boolean;
-  userIp?: string;
+  userIp?: string | null;
   redirectUrl?: string;
 };
 

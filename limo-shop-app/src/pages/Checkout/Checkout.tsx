@@ -5,7 +5,7 @@ type CheckoutObject = {
   message: string;
   orderId: string;
   amount?: string;
-  userIp: string;
+  userIp: string | null | undefined;
 };
 
 const URL = import.meta.env.VITE_URL;
