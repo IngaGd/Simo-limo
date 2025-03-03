@@ -8,7 +8,7 @@ export function useGetPaymentStatus() {
   useEffect(() => {
     const intervalId = setInterval(async () => {
       try {
-        const response = await fetch(`${URL}check-session`, {
+        const response = await fetch(`${URL}check-payment-status`, {
           method: "GET",
           credentials: "include",
         });

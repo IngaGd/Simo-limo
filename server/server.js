@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 
 const app = express();
-const port = 8080;
+const port = process.env.PORT;
 
 app.set("trust proxy", true);
 
@@ -18,7 +18,7 @@ app.use((req, res, next) => {
 
 const corsOptions = {
   origin: ["http://localhost:5173"],
-  //origin: [`http://${process.env.SERVER_URL}:${port}`],
+  //origin: [`${process.env.SERVER_URL}`],
   methods: ["GET", "POST"],
   credentials: true,
   optionsSuccessStatus: 200,
@@ -35,7 +35,7 @@ app.use(
       directives: {
         "default-src": ["'self'"],
         "script-src": ["'self'"],
-        //"img-src": ["'none'"],
+        //"img-src": ["none"],
         "connect-src": ["'self'", "https://sheets.googleapis.com"],
       },
     },
@@ -50,6 +50,8 @@ app.use("/api", require("./routes/orders"));
 app.use("/api", require("./routes/payments"));
 app.use("/api", require("./routes/notifications"));
 app.use("/api", require("./routes/paymentStatuses"));
+
+// app.get("/api", require("./routes/paymentStatuses"));
 
 app.use(express.static(path.join(__dirname, "../limo-shop-app/dist")));
 
