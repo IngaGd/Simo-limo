@@ -73,6 +73,25 @@ export function PurchasingFormHook() {
 
   const validationRules = validationOptions();
 
+  useEffect(() => {
+    const fetchCsrfToken = async () => {
+      try {
+        const response = await fetch(`${URL}csrf-token`, {
+          method: "GET",
+          credentials: "include",
+        });
+        if (!response.ok) {
+          throw new Error("Data failed fetch");
+        }
+        const responseJson = await response.json();
+        setCsrfToken(responseJson.csrfToken);
+      } catch (error) {
+        console.log("Error: ", error);
+      }
+    };
+    fetchCsrfToken();
+  }, []);
+
   const onSubmit: SubmitHandler<Purchaser> = (data) => {
     const sanitizedData = {
       ...data,
@@ -105,25 +124,6 @@ export function PurchasingFormHook() {
     setData(order);
     setOrderAmount(amount);
   }, [order]);
-
-  useEffect(() => {
-    const fetchCsrfToken = async () => {
-      try {
-        const response = await fetch(`${URL}csrf-token`, {
-          method: "GET",
-          credentials: "include",
-        });
-        if (!response.ok) {
-          throw new Error("Data failed fetch");
-        }
-        const responseJson = await response.json();
-        setCsrfToken(responseJson.csrfToken);
-      } catch (error) {
-        console.log("Error: ", error);
-      }
-    };
-    fetchCsrfToken();
-  }, []);
 
   return (
     <div className={styles.content}>
