@@ -7,14 +7,12 @@ exports.updateTransactionStatus = async (req, res) => {
   try {
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: PRODUCT_LIST_ID,
-      range: "Orders!A3:N",
+      range: "Orders!A3:O",
     });
     const rows = response.data.values;
     if (!rows && !rows.length) {
       return res.status(404).send({ message: "No data found" });
     }
-
-    console.log("Rows in put: ", rows);
 
     const rowIndexes = rows
       .map((col, index) => (col[7] === reference ? index + 3 : -1))
@@ -24,10 +22,8 @@ exports.updateTransactionStatus = async (req, res) => {
       return res.status(404).json({ message: "Order not found" });
     }
 
-    console.log("rowIndexes: ", rowIndexes);
-
     for (const rowIndex of rowIndexes) {
-      const updateRange = `Orders!N${rowIndex}:O${rowIndex}`;
+      const updateRange = `Orders!O${rowIndex}:P${rowIndex}`;
 
       await sheets.spreadsheets.values.update({
         spreadsheetId: PRODUCT_LIST_ID,
