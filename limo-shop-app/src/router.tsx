@@ -10,7 +10,8 @@ import { Terms } from "./pages/Terms";
 //import { Purchasing } from "./pages/Purchasing/Purchasing";
 import { PurchasingFormHook } from "./pages/Purchasing/PurchasingFormHook";
 import { PaymentSuccess } from "./pages/PaymentSuccess/PaymentSuccess";
-import { PaymentCansel } from "./pages/PaymentCansel";
+import { PaymentCancel } from "./pages/PaymentCancel";
+import { PaymentLoading } from "./pages/PaymentLoading/PaymentLoading";
 
 const routes = [
   {
@@ -25,8 +26,9 @@ const routes = [
       //{ path: "/login", element: <Login /> },
       //{ path: "/purchasing", element: <Purchasing /> },
       { path: "/purchasing", element: <PurchasingFormHook /> },
+      { path: "/payment-loading", element: <PaymentLoading /> },
       { path: "/payment-success", element: <PaymentSuccess /> },
-      { path: "/payment-cansel", element: <PaymentCansel /> },
+      { path: "/payment-cancel", element: <PaymentCancel /> },
     ],
   },
 ];
