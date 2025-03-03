@@ -9,6 +9,7 @@ exports.createOrder = async (req, res) => {
   console.log("Request received on /api/order");
 
   const orderNo = uuidv4();
+  const sessionId = uuidv4();
 
   const { _csrf, products, purchaser, paymentStatus } = req.body;
   if (_csrf !== req.csrfToken) {
@@ -19,7 +20,8 @@ exports.createOrder = async (req, res) => {
     "Payload being sent to Google Sheets:",
     purchaser.firstName,
     purchaser.termsConfirmed,
-    products[0].title
+    products[0].title,
+    paymentStatus
   );
 
   const arrOfProducts = [];
@@ -33,10 +35,10 @@ exports.createOrder = async (req, res) => {
   });
   console.log("arrOfProducts: ", arrOfProducts);
 
-  const orderValues = (arr1, arr2, status) => {
+  const orderValues = (arr1, arr2, session, status) => {
     let arr = [];
     for (const element of arr2) {
-      arr.push(arr1.concat(element).concat(status));
+      arr.push(arr1.concat(element).concat(session).concat(status));
     }
     return arr;
   };
@@ -44,7 +46,7 @@ exports.createOrder = async (req, res) => {
   try {
     await sheets.spreadsheets.values.append({
       spreadsheetId: PRODUCT_LIST_ID,
-      range: "Orders!A2",
+      range: "Orders!A3:O",
       valueInputOption: "USER_ENTERED",
       insertDataOption: "INSERT_ROWS",
       resource: {
@@ -62,9 +64,15 @@ exports.createOrder = async (req, res) => {
             purchaser.termsConfirmed,
           ],
           arrOfProducts,
+          sessionId,
           paymentStatus
         ),
       },
+    });
+    res.cookie("session", sessionId, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "Lax",
     });
     res.status(200).json({
       status: 200,
