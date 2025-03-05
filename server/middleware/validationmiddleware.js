@@ -36,7 +36,6 @@ const validateOrder = [
     .withMessage("Privalomas laukas")
     .bail()
     .isEmail()
-    .normalizeEmail()
     .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
   body("purchaser.street")
     .notEmpty()

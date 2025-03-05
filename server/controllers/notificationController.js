@@ -22,7 +22,7 @@ exports.postNotification = async (req, res) => {
     const updateResult = await updatePaymentData.json();
     console.log("Update Response: ", updateResult);
 
-    res.status(200).send("OK");
+    res.status(200).send({ message: "Updated" });
   } catch (error) {
     console.error("Error in notification post", error);
     res.status(400).send("Invalid notification data");

@@ -17,8 +17,7 @@ app.use((req, res, next) => {
 });
 
 const corsOptions = {
-  origin: ["http://localhost:5173"],
-  //origin: [`${process.env.SERVER_URL}`],
+  origin: [`${process.env.SERVER_URL}`],
   methods: ["GET", "POST"],
   credentials: true,
   optionsSuccessStatus: 200,
@@ -50,8 +49,6 @@ app.use("/api", require("./routes/orders"));
 app.use("/api", require("./routes/payments"));
 app.use("/api", require("./routes/notifications"));
 app.use("/api", require("./routes/paymentStatuses"));
-
-// app.get("/api", require("./routes/paymentStatuses"));
 
 app.use(express.static(path.join(__dirname, "../limo-shop-app/dist")));
 
