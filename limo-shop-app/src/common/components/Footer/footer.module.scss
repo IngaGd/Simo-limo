@@ -1,13 +1,12 @@
 @use "../../../styles/variables/index" as *;
 
 .footer {
-  justify-self: flex-end;
-
   display: flex;
+  margin: auto;
   align-items: center;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
+  justify-self: center;
+  width: 40%;
+  justify-content: space-between;
   padding: 2rem;
 
   a {
@@ -27,6 +26,8 @@
   }
 
   @media screen and (max-width: 976px) {
+    flex-wrap: wrap;
+    gap: 1rem;
     padding-top: 3rem;
   }
 }
