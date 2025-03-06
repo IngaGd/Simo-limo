@@ -12,6 +12,7 @@ import { PurchasingFormHook } from "./pages/Purchasing/PurchasingFormHook";
 import { PaymentSuccess } from "./pages/PaymentSuccess/PaymentSuccess";
 import { PaymentCancel } from "./pages/PaymentCancel";
 import { PaymentLoading } from "./pages/PaymentLoading/PaymentLoading";
+import { Policy } from "./pages/Policy/Policy";
 
 const routes = [
   {
@@ -23,6 +24,7 @@ const routes = [
       { path: "/contacts", element: <Contacts /> },
       { path: "/cart", element: <Cart /> },
       { path: "/terms", element: <Terms /> },
+      { path: "/privacy", element: <Policy /> },
       //{ path: "/login", element: <Login /> },
       //{ path: "/purchasing", element: <Purchasing /> },
       { path: "/purchasing", element: <PurchasingFormHook /> },
