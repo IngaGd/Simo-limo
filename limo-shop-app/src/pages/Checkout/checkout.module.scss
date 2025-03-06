@@ -1,0 +1,47 @@
+.checkout {
+  display: grid;
+  height: 73vh;
+  //width: 70%;
+
+  grid-template-rows: repeat(3, min-content);
+  //border: 1px solid black;
+  padding-top: 5rem;
+
+  .message {
+    grid-row: 1;
+
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 2rem;
+  }
+
+  .cart {
+    grid-row: 2;
+
+    display: flex;
+    width: 80%;
+    flex-direction: column;
+    gap: 1rem;
+    justify-self: center;
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 5rem 1rem 1rem;
+      border: 1px solid black;
+    }
+  }
+
+  .btn {
+    grid-row: 3;
+
+    display: flex;
+    justify-self: center;
+    width: 80%;
+    padding-top: 2rem;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

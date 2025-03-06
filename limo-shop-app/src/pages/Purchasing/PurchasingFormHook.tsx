@@ -7,11 +7,14 @@ import DOMPurify from "dompurify";
 import { Checkout } from "../Checkout/Checkout";
 import { validationOptions } from "./purchasing.logic";
 import styles from "./purchasing.module.scss";
+import { Link } from "react-router-dom";
 
 // const name = "Vardas";
 // const surname = "Pavardė";
 // const email = "El. paštas";
 // const street = "Adresas";
+const buttonText = "Siųsti";
+
 type Purchaser = {
   firstName: string;
   lastName: string;
@@ -254,14 +257,17 @@ export function PurchasingFormHook() {
           </div>
           <div>
             <div className={styles.checkbox}>
-              <label htmlFor="terms">Sutinku su pirkimo sąlygomos</label>
+              <label htmlFor="terms">
+                Sutinku su <Link to="/terms">pirkimo sąlygomos</Link> ir{" "}
+                <Link to="/privacy">privatumo politika</Link>.
+              </label>
               <input
                 id="terms"
                 type="checkbox"
                 autoComplete="on"
                 {...register("termsConfirmed", {
                   required:
-                    "Prašome pažymtėti, kad sutinkate su pirkimo salygomis.",
+                    "Prašome pažymtėti, kad sutinkate su pirkimo salygomis ir privatumo politika.",
                 })}
                 onChange={(e) => {
                   setValue("termsConfirmed", e.target.checked);
@@ -270,8 +276,11 @@ export function PurchasingFormHook() {
             </div>
             <p>{errors.termsConfirmed?.message}</p>
           </div>
-          <input type="submit" className={styles.btn} />
+          {/* <input type="submit" className={styles.btn} /> */}
 
+          <button type="submit" className={styles.btn}>
+            {buttonText}
+          </button>
           {/* <button>Pereiti prie apmokėjimo</button> */}
         </form>
       )}

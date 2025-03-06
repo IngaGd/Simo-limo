@@ -1,5 +1,12 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { Container } from "src/common/components/Container";
+import { ContainerType } from "src/common/components/Container/container.types";
+import { Image } from "src/common/components/Image";
+import { GlobalContext } from "src/common/context/GlobalContext";
+import { GlobalContextType } from "src/common/context/globalContext.types";
 import { usePostData } from "src/common/hooks/usePostData";
+import styles from "./checkout.module.scss";
+import { Button } from "src/common/components/Button";
 
 type CheckoutObject = {
   message: string;
@@ -9,12 +16,16 @@ type CheckoutObject = {
 };
 
 const URL = import.meta.env.VITE_URL;
+const quantity = "Kiekis vnt.";
+const price = "Kaina iš viso EUR";
+const items = "Prekės";
+const buttonText = "Apmokėti";
 
 export function Checkout({ message, orderId, amount, userIp }: CheckoutObject) {
   const checkoutUrl = `${URL}create-transaction`;
   console.log("checkoutUrl: ", checkoutUrl);
 
-  console.log("order id in checkout: ", orderId);
+  const { cartItems } = useContext(GlobalContext) as GlobalContextType;
 
   const { setData, response } = usePostData(checkoutUrl);
 
@@ -36,9 +47,37 @@ export function Checkout({ message, orderId, amount, userIp }: CheckoutObject) {
   }, [response]);
 
   return (
-    <div>
-      <div> {message}</div>
-      <button onClick={() => handleClick()}>Pereiti prie apmokėjimo</button>
+    <div className={styles.checkout}>
+      <div className={styles.message}>{message}</div>
+      <div className={styles.cart}>
+        <div>{items}:</div>
+        {cartItems.map((item) => (
+          <div key={item.id} className={styles.item}>
+            <Container containerType={ContainerType.ImageOfChechout}>
+              <Image imagePath={item.imagePath} />
+            </Container>
+            <div className={styles.description}>
+              <div className={styles.title}>
+                <div>{item.title}</div>
+              </div>
+              <div>
+                <div>
+                  {quantity}: {item.quantity}
+                </div>
+                <div>
+                  {price}: {item.price * item.quantity}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* <button onClick={() => handleClick()}>Apmokėti</button> */}
+      <div className={styles.btn}>
+        <div className={styles.amount}>Suma: {amount} EUR</div>
+        <Button buttonLabel={buttonText} handleClick={handleClick} />
+      </div>
     </div>
   );
 }

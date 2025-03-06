@@ -4,6 +4,7 @@ export enum ContainerType {
   ImageOfItem = "item",
   ImageOfProductList = "productList",
   ImageOfCart = "cartItem",
+  ImageOfChechout = "checkoutItem",
 }
 
 export type ContainerProps = {

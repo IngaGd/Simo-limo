@@ -16,6 +16,7 @@ const minusIcon = "-";
 const cartIsEmpty = "Krepšelis yra tuščias";
 const quantity = "Kiekis vnt.";
 const price = "Kaina iš viso EUR";
+const items = "Prekės";
 
 export function Cart() {
   const {
@@ -25,8 +26,6 @@ export function Cart() {
     handleDecrementCartItem,
     handleEmptyTheCart,
   } = useContext(GlobalContext) as GlobalContextType;
-
-  const items = "Prekės";
 
   return (
     <div className={styles.cart}>
