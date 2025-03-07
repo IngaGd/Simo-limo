@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 // const name = "Vardas";
 // const surname = "Pavardė";
 // const email = "El. paštas";
-// const street = "Adresas";
+// const address = "Adresas";
 const buttonText = "Siųsti";
 
 type Purchaser = {
@@ -20,7 +20,7 @@ type Purchaser = {
   lastName: string;
   phone: string;
   email: string;
-  street: string;
+  address: string;
   town: string;
   postCode: string;
   termsConfirmed: boolean;
@@ -53,7 +53,7 @@ export function PurchasingFormHook() {
       lastName: "",
       phone: "",
       email: "",
-      street: "",
+      address: "",
       town: "",
       postCode: "",
       termsConfirmed: false,
@@ -102,7 +102,7 @@ export function PurchasingFormHook() {
       lastName: DOMPurify.sanitize(data.lastName),
       phone: DOMPurify.sanitize(data.phone),
       email: DOMPurify.sanitize(data.email),
-      street: DOMPurify.sanitize(data.street),
+      address: DOMPurify.sanitize(data.address),
       town: DOMPurify.sanitize(data.town),
       postCode: DOMPurify.sanitize(data.postCode),
       termsConfirmed: data.termsConfirmed,
@@ -213,12 +213,12 @@ export function PurchasingFormHook() {
               id="address"
               type="text"
               autoComplete="on"
-              {...register("street", validationRules.street)}
+              {...register("address", validationRules.address)}
             />
-            <p>{errors.street?.message}</p>
+            <p>{errors.address?.message}</p>
             <p>
               {
-                errorResponse?.find((el) => el.field === "purchaser.street")
+                errorResponse?.find((el) => el.field === "purchaser.address")
                   ?.message
               }
             </p>
@@ -245,6 +245,7 @@ export function PurchasingFormHook() {
               id="postCode"
               type="text"
               autoComplete="on"
+              placeholder="pvz.: 01234"
               {...register("postCode", validationRules.postCode)}
             />
             <p>{errors.postCode?.message}</p>
@@ -276,12 +277,9 @@ export function PurchasingFormHook() {
             </div>
             <p>{errors.termsConfirmed?.message}</p>
           </div>
-          {/* <input type="submit" className={styles.btn} /> */}
-
           <button type="submit" className={styles.btn}>
             {buttonText}
           </button>
-          {/* <button>Pereiti prie apmokėjimo</button> */}
         </form>
       )}
     </div>
