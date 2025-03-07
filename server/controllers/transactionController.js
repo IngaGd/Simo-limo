@@ -22,8 +22,19 @@ exports.updateTransactionStatus = async (req, res) => {
       return res.status(404).json({ message: "Order not found" });
     }
 
+    const completedOrderRefs = new Set(
+      rows.filter((row) => row[14] === "COMPLETED").map((row) => row[7])
+    );
+
+    console.log("Unique Completed Orders:", completedOrderRefs.size);
+
+    let orderNumber = 0;
+    if (status === "COMPLETED") {
+      orderNumber = completedOrderRefs.size + 1;
+    }
+
     for (const rowIndex of rowIndexes) {
-      const updateRange = `Orders!O${rowIndex}:P${rowIndex}`;
+      const updateRange = `Orders!O${rowIndex}:Q${rowIndex}`;
 
       await sheets.spreadsheets.values.update({
         spreadsheetId: PRODUCT_LIST_ID,
@@ -31,7 +42,9 @@ exports.updateTransactionStatus = async (req, res) => {
         valueInputOption: "USER_ENTERED",
         resource: {
           majorDimension: "ROWS",
-          values: [[status, transaction]],
+          values: [
+            [status, transaction, status === "COMPLETED" ? orderNumber : ""],
+          ],
         },
       });
     }

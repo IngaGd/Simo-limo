@@ -12,7 +12,7 @@ exports.getPaymentStatus = async (req, res) => {
   try {
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: PRODUCT_LIST_ID,
-      range: "Orders!A3:P",
+      range: "Orders!A3:Q",
     });
     const rows = response.data.values;
     if (!rows && !rows.length) {
@@ -29,12 +29,13 @@ exports.getPaymentStatus = async (req, res) => {
 
     const paymentStatus = matchedOrder[14];
     const email = matchedOrder[3];
+    const orderNo = matchedOrder[16];
     const msg = {
       to: email,
       from: "inga.gudaite@gmail.com",
       subject: "Užsakymas priimtas",
-      text: `Dėkojame, ${email}, jūsų užsakymas priimtas, užsakymo nr.:`,
-      html: `<div>Dėkojame, jūsų užsakymas priimtas, užsakymo nr.: <strong></strong>.</div><br> 
+      text: `Dėkojame, ${email}, jūsų užsakymas priimtas, užsakymo nr.:${orderNo}`,
+      html: `<div>Dėkojame, jūsų užsakymas priimtas, užsakymo nr. ${orderNo}: <strong></strong>.</div><br> 
             <table><thead><tr style="text-align: left">
             <th colspan="1" style="border: 1px solid black">Nr.</th>
             <th colspan="1" style="border: 1px solid black">Pavadinimas</th>
@@ -45,9 +46,10 @@ exports.getPaymentStatus = async (req, res) => {
 
     console.log("Email in payment status: ", email);
 
-    if (paymentStatus === "COMPLETED") {
+    if (paymentStatus === "COMPLETED" && orderNo > 0) {
       res.status(200).json({
         paymentStatus: paymentStatus,
+        clientOrderNo: orderNo,
         message: "Payment status is completed",
       });
       sgMail
