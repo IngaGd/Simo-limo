@@ -35,15 +35,35 @@
   font-family: "Courier New", Courier, monospace;
   input {
     padding: 0.5rem 1rem;
+    &:focus {
+      outline: none;
+    }
+    &::placeholder {
+      color: rgb(171, 168, 168);
+    }
   }
 }
 
 .checkbox {
   display: flex;
+  font-size: 1.4rem;
   justify-content: space-between;
   width: 100%;
-  padding: 1.5rem 1rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1rem;
+  align-items: center;
   font-family: "Courier New", Courier, monospace;
+  a {
+    color: $color-primary-3;
+  }
+  input[type="checkbox"] {
+    width: 1.8rem;
+    height: 1.8rem;
+    cursor: pointer;
+    &:checked {
+      accent-color: rgb(171, 168, 168);
+    }
+  }
 }
 
 .btn {
