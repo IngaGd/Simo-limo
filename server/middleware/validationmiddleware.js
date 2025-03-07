@@ -29,15 +29,15 @@ const validateOrder = [
     .notEmpty()
     .withMessage("Privalomas laukas")
     .bail()
-    .matches(/^\+?[0-9]{1,4}[0-9]{6,14}$/)
-    .withMessage("Telefono numerio pavyzdys (pavyzdys: +370656789)."),
+    .matches(/^\+?[0-9]{7,15}$/)
+    .withMessage("Telefono numerio pavyzdys: +3706...."),
   body("purchaser.email")
     .notEmpty()
     .withMessage("Privalomas laukas")
     .bail()
     .isEmail()
     .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
-  body("purchaser.street")
+  body("purchaser.address")
     .notEmpty()
     .withMessage("Privalomas laukas")
     .bail()
@@ -45,7 +45,7 @@ const validateOrder = [
     .withMessage("Gatvės pavadinimas gali būti nuo 2 iki 50 simbolių.")
     .bail()
     .isString()
-    .matches(/^[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ' -]+$/)
+    .matches(/^[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ0-9' /.-]+$/)
     .withMessage("Pašalinkite negalimus simbolius, galimi - raidės, (-), (')")
     .trim()
     .escape(),
@@ -67,8 +67,8 @@ const validateOrder = [
     .bail()
     .isString()
     .replace()
-    .matches(/^[A-Z]{2}\d{4,10}$/)
-    .withMessage("Pašto kodo pavyzdys LT01234"),
+    .matches(/^\d{4,10}$/)
+    .withMessage("Pašto kodo pavyzdys 01234"),
   // sanitizeBody("notifyOnReply").toBoolean(),
   (req, res, next) => {
     const errors = validationResult(req);

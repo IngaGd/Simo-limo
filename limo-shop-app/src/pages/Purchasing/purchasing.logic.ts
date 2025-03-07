@@ -29,8 +29,8 @@ export const validationOptions = () => ({
   phone: {
     required: "Privalomas laukas",
     pattern: {
-      value: /^\+?[0-9]{1,4}[0-9]{6,14}$/,
-      message: "Telefono numerio pavyzdys (pavyzdys: +370656789).",
+      value: /^\+?[0-9]{7,15}$/,
+      message: "Telefono numerio pavyzdys: +3706....",
     },
   },
   email: {
@@ -40,10 +40,10 @@ export const validationOptions = () => ({
       message: "Neteisingai suvestas el. pašto adresas.",
     },
   },
-  street: {
+  address: {
     required: "Privalomas laukas",
     pattern: {
-      value: /^[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ' -]+$/,
+      value: /^[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ0-9' /.-]+$/,
       message: "Pašalinkite negalimus simbolius, galimi - raidės, (-), (')",
     },
     minLength: { value: 2, message: "Vardas turi būti ne mažiau 2 raidžių." },
@@ -70,8 +70,8 @@ export const validationOptions = () => ({
   postCode: {
     required: "Privalomas laukas",
     pattern: {
-      value: /^[A-Z]{2}\d{4,10}$/,
-      message: "Pašto kodo pavyzdys LT01234",
+      value: /^\d{4,10}$/,
+      message: "Pašto kodo pavyzdys 01234",
     },
   },
 });
