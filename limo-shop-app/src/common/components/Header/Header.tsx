@@ -32,9 +32,7 @@ export function Header() {
         </Link>
         {/* <Link to="/login">Login</Link> */}
       </div>
-      <p className={styles.slogan}>
-        Pasaulis gražesnis, kai turi šaldytuve limonado.
-      </p>
+      <p className={styles.slogan}>Laukinis limonadas</p>
     </header>
   );
 }
