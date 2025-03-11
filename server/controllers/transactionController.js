@@ -43,7 +43,11 @@ exports.updateTransactionStatus = async (req, res) => {
         resource: {
           majorDimension: "ROWS",
           values: [
-            [status, transaction, status === "COMPLETED" ? orderNumber : ""],
+            [
+              status,
+              transaction,
+              status === "COMPLETED" ? orderNumber.toString() : "",
+            ],
           ],
         },
       });

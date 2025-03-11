@@ -2,7 +2,7 @@ const { google } = require("googleapis");
 const path = require("path");
 const fs = require("fs");
 
-const pathToJson = path.join(__dirname, "../limo.json");
+const pathToJson = path.join(__dirname, "../simo-limo.json");
 const credentials = JSON.parse(fs.readFileSync(pathToJson));
 
 const auth = new google.auth.GoogleAuth({
