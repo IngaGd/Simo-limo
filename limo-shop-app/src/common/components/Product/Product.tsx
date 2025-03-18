@@ -28,7 +28,6 @@ export function Product({ product }: ProductPropsTypes) {
       <DescriptionTableDropDown
         product={product}
         handleIsActive={handleIsActive}
-        isActive={isActive}
       />
     </div>
   );
