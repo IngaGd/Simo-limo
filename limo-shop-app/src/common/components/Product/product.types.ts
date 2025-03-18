@@ -8,4 +8,5 @@ export type ProductObject = {
 
 export type ProductPropsTypes = {
   product: ProductObject;
+  handleIsActive: () => void;
 };

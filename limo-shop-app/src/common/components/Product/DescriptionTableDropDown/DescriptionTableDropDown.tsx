@@ -13,7 +13,10 @@ const currency = "Eur";
 const plusIcon = "+";
 const minusIcon = "-";
 
-export function DescriptionTableDropDown({ product }: ProductPropsTypes) {
+export function DescriptionTableDropDown({
+  product,
+  handleIsActive,
+}: ProductPropsTypes) {
   const {
     handleIncrement,
     handleDecrement,
@@ -67,7 +70,10 @@ export function DescriptionTableDropDown({ product }: ProductPropsTypes) {
         </div>
         <Button
           buttonLabel={buttonText}
-          handleClick={() => handleAddToCart(product)}
+          handleClick={() => {
+            handleAddToCart(product);
+            handleIsActive();
+          }}
         />
       </div>
     </div>
