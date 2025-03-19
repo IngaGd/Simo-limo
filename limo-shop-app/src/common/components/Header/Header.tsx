@@ -7,7 +7,9 @@ import { GlobalContext } from "src/common/context/GlobalContext";
 import { GlobalContextType } from "src/common/context/globalContext.types";
 
 export function Header() {
-  const { cartItems } = useContext(GlobalContext) as GlobalContextType;
+  const { cartItems, imageToCart } = useContext(
+    GlobalContext
+  ) as GlobalContextType;
 
   const sumQuantities = cartItems.reduce((n, { quantity }) => n + quantity, 0);
 
@@ -20,7 +22,10 @@ export function Header() {
         <Link to="/" className={styles.logo}>
           <Logo />
         </Link>
-        <Link to="/cart" className={styles.cart}>
+        <Link
+          to="/cart"
+          className={`${styles.cart} ${imageToCart ? styles.animated : ""}`}
+        >
           <div className={styles.counter}>
             <IconCart size="medium" />
             {cartItems.length > 0 && (

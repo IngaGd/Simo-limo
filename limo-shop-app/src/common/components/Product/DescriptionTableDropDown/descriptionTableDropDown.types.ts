@@ -1,5 +1,9 @@
+import { ProductObject } from "../product.types";
+
 export type DescriptionTableProps = {
-  addToCart: () => void;
-  handleIncrement: () => void;
-  handleDecrement: () => void;
+  product: ProductObject;
+  // addToCart: () => void;
+  // handleIncrement: () => void;
+  // handleDecrement: () => void;
+  handleIsActive: () => void;
 };

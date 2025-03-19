@@ -1,10 +1,10 @@
 import { Button } from "components/Button";
 import styles from "./descriptionTableDropDown.module.scss";
 import { Link } from "react-router-dom";
-import { ProductPropsTypes } from "../product.types";
 import { GlobalContext } from "src/common/context/GlobalContext";
 import { GlobalContextType } from "src/common/context/globalContext.types";
 import { useContext } from "react";
+import { DescriptionTableProps } from "./descriptionTableDropDown.types";
 
 const text1 = "Kiekis";
 const text2 = "Kaina";
@@ -16,13 +16,15 @@ const minusIcon = "-";
 export function DescriptionTableDropDown({
   product,
   handleIsActive,
-}: ProductPropsTypes) {
+}: DescriptionTableProps) {
   const {
     handleIncrement,
     handleDecrement,
     addToCart,
     quantities,
     setQuantities,
+    handleImageToCart,
+    resetImageToCart,
   } = useContext(GlobalContext) as GlobalContextType;
 
   const productQuantity =
@@ -73,6 +75,10 @@ export function DescriptionTableDropDown({
           handleClick={() => {
             handleAddToCart(product);
             handleIsActive();
+            handleImageToCart();
+            setTimeout(() => {
+              resetImageToCart();
+            }, 700);
           }}
         />
       </div>

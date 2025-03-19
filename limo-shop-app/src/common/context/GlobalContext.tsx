@@ -6,6 +6,7 @@ import {
 import { useHandleCart } from "../hooks/useHandleCart";
 import { useHandleQuantity } from "../hooks/useHandleQuantity";
 import { useHandleProductList } from "../hooks/useHandleProductList";
+import { useImageToCart } from "../hooks/useImageToCart";
 
 export const GlobalContext = createContext<GlobalContextType | null>(null);
 
@@ -23,6 +24,7 @@ export const GlobalContextProvider = ({
     handleDecrementCartItem,
     handleEmptyTheCart,
   } = useHandleCart(quantities);
+  const { imageToCart, handleImageToCart, resetImageToCart } = useImageToCart();
 
   return (
     <GlobalContext.Provider
@@ -38,6 +40,9 @@ export const GlobalContextProvider = ({
         handleDecrementCartItem,
         handleEmptyTheCart,
         products,
+        handleImageToCart,
+        imageToCart,
+        resetImageToCart,
       }}
     >
       {children}

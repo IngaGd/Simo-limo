@@ -34,6 +34,9 @@ export type GlobalContextType = {
   handleEmptyTheCart: () => void;
   cartItems: CartItemsType;
   products: ProductListType;
+  imageToCart: boolean;
+  handleImageToCart: () => void;
+  resetImageToCart: () => void;
 };
 
 export type GlobalContextProviderProps = {

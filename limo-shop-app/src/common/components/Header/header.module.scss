@@ -29,6 +29,13 @@
       justify-content: flex-end;
     }
 
+    .cart {
+      transition: all 0.3s;
+      &.animated {
+        transform: scale(1.3);
+      }
+    }
+
     .counter {
       position: relative;
       .quantity {
