@@ -5,7 +5,7 @@
   background-color: $color-primary-1;
 
   display: flex;
-  width: 36rem;
+  width: $width-size-m;
   align-self: flex-end;
   border: 1px solid black;
   padding-left: 1rem;
@@ -39,7 +39,7 @@
 
 .details {
   flex-direction: row;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .description {
@@ -47,8 +47,8 @@
   display: -moz-box;
   overflow: hidden;
   -webkit-box-orient: vertical;
-  line-clamp: 3;
-  -webkit-line-clamp: 3;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
 }
 
 .link {

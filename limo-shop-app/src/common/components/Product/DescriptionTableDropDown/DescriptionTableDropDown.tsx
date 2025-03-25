@@ -6,8 +6,9 @@ import { GlobalContextType } from "src/common/context/globalContext.types";
 import { useContext } from "react";
 import { DescriptionTableProps } from "./descriptionTableDropDown.types";
 
-const text1 = "Kiekis";
-const text2 = "Kaina";
+const text1 = "Pakuočių kiekis";
+const text2 = "Kaina(6 but.)";
+const text3 = "Depozitas (1 but.)";
 const buttonText = "Pirkti";
 const currency = "Eur";
 const plusIcon = "+";
@@ -56,17 +57,27 @@ export function DescriptionTableDropDown({
       </Link>
       <div className={`${styles.purchasing}`}>
         <div className={`${styles.quantity}`}>
-          <div> {text1}</div>
-          <div className={`${styles.details}`}>
+          <div>Pakuočių </div>
+          <div>kiekis</div>
+          <div className={styles.details}>
             <div>{productQuantity}</div>
             <div onClick={() => handleIncrement(product.id)}>{plusIcon}</div>
             <div onClick={() => handleDecrement(product.id)}>{minusIcon}</div>
           </div>
         </div>
         <div className={`${styles.price}`}>
-          <div> {text2}</div>
+          <div>Kaina</div>
+          <div>{product.packageQty} but.</div>
           <div className={`${styles.details}`}>
             <div>{productQuantity * product.price}</div>
+            <div>{currency}</div>
+          </div>
+        </div>
+        <div className={`${styles.price}`}>
+          <div>Depozitas</div>
+          <div>1 but.</div>
+          <div className={`${styles.details}`}>
+            <div>0.1</div>
             <div>{currency}</div>
           </div>
         </div>

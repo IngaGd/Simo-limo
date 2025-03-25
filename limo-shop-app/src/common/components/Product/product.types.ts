@@ -3,6 +3,7 @@ export type ProductObject = {
   title: string;
   imagePath: string;
   description: string;
+  packageQty: number;
   price: number;
   discountCode: string;
   discountValue: number;

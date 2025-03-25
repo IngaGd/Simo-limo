@@ -16,9 +16,12 @@ const buttonText4 = "Taikyti";
 const plusIcon = "+";
 const minusIcon = "-";
 const cartIsEmpty = "Krepšelis yra tuščias";
-const quantity = "Kiekis vnt.";
-const price = "Kaina iš viso EUR";
+const quantity = "Pakuočių kiekis vnt.";
+const deposit = "Taros kaina";
+const price = "Limonado kaina EUR";
+const totalPrice = "Suma EUR";
 const items = "Prekės";
+const delivery = "Pristatymo kaina";
 
 export function Cart() {
   const {
@@ -75,15 +78,31 @@ export function Cart() {
                   <div>
                     {quantity}: {item.quantity}
                   </div>
+                  <div>
+                    {deposit}:{" "}
+                    {(item.packageQty * 0.1 * item.quantity).toFixed(2)}
+                  </div>
                   {userDiscountValue > 0 ? (
                     <div style={{ color: "red" }}>
-                      {price}: {item.price * userDiscountValue * item.quantity}
+                      {price}:{" "}
+                      {(item.price * userDiscountValue * item.quantity).toFixed(
+                        2
+                      )}
                     </div>
                   ) : (
                     <div>
                       {price}: {item.price * item.quantity}
                     </div>
                   )}
+                  <div>{delivery}: 3.5 Eur</div>
+                  <div>
+                    {totalPrice}:{" "}
+                    {(
+                      item.packageQty * 0.1 * item.quantity +
+                      item.price * item.quantity +
+                      3.5
+                    ).toFixed(2)}
+                  </div>
                 </div>
               </div>
               <div className={styles.btn}>

@@ -20,6 +20,7 @@ export function useHandleCart(quantities: { id: number; qty: number }[]) {
     id: number;
     title: string;
     price: number;
+    packageQty: number;
     description: string;
     imagePath: string;
   }) => {
@@ -45,6 +46,7 @@ export function useHandleCart(quantities: { id: number; qty: number }[]) {
           id: p.id,
           title: p.title,
           quantity: cartItemQantity,
+          packageQty: p.packageQty,
           price: Number(p.price),
           imagePath: p.imagePath,
         },
@@ -62,7 +64,10 @@ export function useHandleCart(quantities: { id: number; qty: number }[]) {
     setCartItems(
       cartItems.map((item) => {
         if (item.id === id) {
-          return { ...item, quantity: item.quantity + 1 };
+          return {
+            ...item,
+            quantity: item.quantity + 1,
+          };
         } else {
           return item;
         }
@@ -74,7 +79,10 @@ export function useHandleCart(quantities: { id: number; qty: number }[]) {
     setCartItems(
       cartItems.map((item) => {
         if (item.id === id && item.quantity > 1) {
-          return { ...item, quantity: item.quantity - 1 };
+          return {
+            ...item,
+            quantity: item.quantity - 1,
+          };
         } else {
           return item;
         }

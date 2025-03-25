@@ -21,9 +21,10 @@ export function useHandleProductList() {
             title: column[1],
             imagePath: column[2],
             description: column[3],
-            price: Number(column[4]),
-            discountCode: column[5],
-            discountValue: Number(column[6]),
+            packageQty: Number(column[4]),
+            price: Number(column[5]),
+            discountCode: column[6],
+            discountValue: Number(column[7]),
           };
         });
         setProducts(productData);
