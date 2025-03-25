@@ -23,9 +23,10 @@ const buttonText = "Apmokėti";
 
 export function Checkout({ message, orderId, amount, userIp }: CheckoutObject) {
   const checkoutUrl = `${URL}create-transaction`;
-  console.log("checkoutUrl: ", checkoutUrl);
 
-  const { cartItems } = useContext(GlobalContext) as GlobalContextType;
+  const { cartItems, userDiscountCode, userDiscountValue } = useContext(
+    GlobalContext
+  ) as GlobalContextType;
 
   const { setData, response } = usePostData(checkoutUrl);
 
@@ -41,10 +42,15 @@ export function Checkout({ message, orderId, amount, userIp }: CheckoutObject) {
 
   useEffect(() => {
     if (response?.redirectUrl) {
-      console.log("Redirecting to payment page:", response.redirectUrl);
       window.location.href = response?.redirectUrl;
     }
   }, [response]);
+
+  const totalSum = cartItems
+    .map((product) => product.price)
+    .reduce((a, b) => a + b)
+    .toFixed(2)
+    .toString();
 
   return (
     <div className={styles.checkout}>
@@ -72,10 +78,15 @@ export function Checkout({ message, orderId, amount, userIp }: CheckoutObject) {
           </div>
         ))}
       </div>
-
-      {/* <button onClick={() => handleClick()}>Apmokėti</button> */}
       <div className={styles.btn}>
-        <div className={styles.amount}>Suma: {amount} EUR</div>
+        <div>
+          <div className={styles.amount}>Suma: {totalSum} EUR</div>
+          {userDiscountValue > 0 && userDiscountCode && (
+            <div className={styles.discount}>
+              Suma su nuolaida: {amount} EUR
+            </div>
+          )}
+        </div>
         <Button buttonLabel={buttonText} handleClick={handleClick} />
       </div>
     </div>

@@ -1,11 +1,11 @@
 .checkout {
   display: grid;
   height: 73vh;
-  //width: 70%;
+  width: 100%;
 
   grid-template-rows: repeat(3, min-content);
   //border: 1px solid black;
-  padding-top: 5rem;
+  padding-top: 3rem;
 
   .message {
     grid-row: 1;
@@ -21,7 +21,7 @@
     grid-row: 2;
 
     display: flex;
-    width: 80%;
+    width: 100%;
     flex-direction: column;
     gap: 1rem;
     justify-self: center;
@@ -31,6 +31,9 @@
       align-items: center;
       padding: 1rem 5rem 1rem 1rem;
       border: 1px solid black;
+      .description {
+        padding-left: 10rem;
+      }
     }
   }
 
@@ -39,9 +42,13 @@
 
     display: flex;
     justify-self: center;
-    width: 80%;
+    width: 100%;
     padding-top: 2rem;
     justify-content: space-between;
     align-items: center;
+
+    .discount {
+      color: red;
+    }
   }
 }
