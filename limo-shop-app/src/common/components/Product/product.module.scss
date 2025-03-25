@@ -25,17 +25,3 @@
   @media screen and (max-width: 976px) {
   }
 }
-
-.cartAnimation {
-  position: absolute;
-  width: 36rem;
-  height: 32rem;
-  //top: 20rem;
-  z-index: 0;
-
-  &.animated {
-    animation-name: moveInLeftTop;
-    animation-duration: 0.8s;
-    animation-timing-function: ease-out;
-  }
-}
