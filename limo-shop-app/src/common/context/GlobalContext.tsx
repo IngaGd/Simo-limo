@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 import {
   GlobalContextProviderProps,
   GlobalContextType,
@@ -25,6 +25,9 @@ export const GlobalContextProvider = ({
     handleEmptyTheCart,
   } = useHandleCart(quantities);
   const { imageToCart, handleImageToCart, resetImageToCart } = useImageToCart();
+  const [userDiscountCode, setUserDiscountCode] = useState("");
+  const [userDiscountValue, setUserDiscountValue] = useState(0);
+  const [message, setMessage] = useState("");
 
   return (
     <GlobalContext.Provider
@@ -43,6 +46,12 @@ export const GlobalContextProvider = ({
         handleImageToCart,
         imageToCart,
         resetImageToCart,
+        userDiscountCode,
+        userDiscountValue,
+        setMessage,
+        setUserDiscountValue,
+        setUserDiscountCode,
+        message,
       }}
     >
       {children}

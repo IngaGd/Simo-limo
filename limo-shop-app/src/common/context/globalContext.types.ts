@@ -37,6 +37,12 @@ export type GlobalContextType = {
   imageToCart: boolean;
   handleImageToCart: () => void;
   resetImageToCart: () => void;
+  userDiscountCode: string;
+  userDiscountValue: number;
+  message: string;
+  setMessage: (input: string) => void;
+  setUserDiscountValue: (discountValue: number) => void | null;
+  setUserDiscountCode: (userInputCode: string) => void | null;
 };
 
 export type GlobalContextProviderProps = {

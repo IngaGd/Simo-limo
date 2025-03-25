@@ -8,6 +8,7 @@ import { Checkout } from "../Checkout/Checkout";
 import { validationOptions } from "./purchasing.logic";
 import styles from "./purchasing.module.scss";
 import { Link } from "react-router-dom";
+import { useCsrfTokenFetch } from "src/common/hooks/useCsrfTokenFetch";
 
 // const name = "Vardas";
 // const surname = "Pavardė";
@@ -23,6 +24,7 @@ type Purchaser = {
   address: string;
   town: string;
   postCode: string;
+  discountCode: string;
   termsConfirmed: boolean;
 };
 
@@ -35,6 +37,7 @@ type PurchasingInputs = {
     totalPrice: number;
   }[];
   purchaser: Purchaser;
+  discountCode?: string;
   paymentStatus: string;
 };
 
@@ -61,39 +64,30 @@ export function PurchasingFormHook() {
   });
   const orderUrl = `${URL}order`;
 
-  const { cartItems } = useContext(GlobalContext) as GlobalContextType;
+  const { cartItems, userDiscountCode, userDiscountValue } = useContext(
+    GlobalContext
+  ) as GlobalContextType;
+  // const { userDiscountCode, userDiscountValue } = useHandleDiscount();
+  const { csrfToken } = useCsrfTokenFetch();
   const { setData, errorResponse, response, orderId } = usePostData(orderUrl);
   const [orderAmount, setOrderAmount] = useState<string | undefined>();
   const [order, setOrder] = useState<PurchasingInputs | null>(null);
-  const [csrfToken, setCsrfToken] = useState("");
 
   const orderProduct = cartItems.map((item) => ({
     id: item.id,
     title: item.title,
     quantity: item.quantity,
-    totalPrice: item.price * item.quantity,
+    totalPrice:
+      userDiscountValue > 0
+        ? item.price * userDiscountValue * item.quantity
+        : item.price * item.quantity,
   }));
 
   const validationRules = validationOptions();
 
   useEffect(() => {
-    const fetchCsrfToken = async () => {
-      try {
-        const response = await fetch(`${URL}csrf-token`, {
-          method: "GET",
-          credentials: "include",
-        });
-        if (!response.ok) {
-          throw new Error("Data failed fetch");
-        }
-        const responseJson = await response.json();
-        setCsrfToken(responseJson.csrfToken);
-      } catch (error) {
-        console.log("Error: ", error);
-      }
-    };
-    fetchCsrfToken();
-  }, []);
+    console.log("Purchasing form dicount code: ", userDiscountCode);
+  }, [userDiscountCode]);
 
   const onSubmit: SubmitHandler<Purchaser> = (data) => {
     const sanitizedData = {
@@ -111,6 +105,7 @@ export function PurchasingFormHook() {
       _csrf: csrfToken,
       products: orderProduct,
       purchaser: sanitizedData,
+      discountCode: userDiscountCode,
       paymentStatus: "pending",
     });
     console.log("Submitted Data:", order);
@@ -132,6 +127,7 @@ export function PurchasingFormHook() {
     <div className={styles.content}>
       {response?.redirectToPayment === true ? (
         <Checkout
+          products={order?.products}
           message={response.message}
           orderId={orderId}
           amount={orderAmount}
@@ -208,7 +204,7 @@ export function PurchasingFormHook() {
             </p>
           </div>
           <div className={styles.input}>
-            <label htmlFor="address">Gatvės pavadinimas</label>
+            <label htmlFor="address">Pristatymo adresas</label>
             <input
               id="address"
               type="text"

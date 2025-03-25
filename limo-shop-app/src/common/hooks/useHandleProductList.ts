@@ -22,6 +22,8 @@ export function useHandleProductList() {
             imagePath: column[2],
             description: column[3],
             price: Number(column[4]),
+            discountCode: column[5],
+            discountValue: Number(column[6]),
           };
         });
         setProducts(productData);

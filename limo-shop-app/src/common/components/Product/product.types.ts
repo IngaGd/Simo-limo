@@ -4,6 +4,8 @@ export type ProductObject = {
   imagePath: string;
   description: string;
   price: number;
+  discountCode: string;
+  discountValue: number;
 };
 
 export type ProductPropsTypes = {

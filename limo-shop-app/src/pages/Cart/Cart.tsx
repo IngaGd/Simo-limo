@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "src/common/components/Button";
 import { Container } from "src/common/components/Container";
@@ -7,10 +7,12 @@ import { Image } from "src/common/components/Image";
 import { GlobalContext } from "src/common/context/GlobalContext";
 import { GlobalContextType } from "src/common/context/globalContext.types";
 import styles from "./cart.module.scss";
+import { useHandleProductList } from "src/common/hooks/useHandleProductList";
 
 const buttonText1 = "Pašalinti";
 const buttonText2 = "Išvalyti";
 const buttonText3 = "Formuoti užsakymą";
+const buttonText4 = "Taikyti";
 const plusIcon = "+";
 const minusIcon = "-";
 const cartIsEmpty = "Krepšelis yra tuščias";
@@ -25,7 +27,35 @@ export function Cart() {
     handleIncrementCartItem,
     handleDecrementCartItem,
     handleEmptyTheCart,
+    userDiscountValue,
+    message,
+    setUserDiscountCode,
+    setUserDiscountValue,
+    setMessage,
   } = useContext(GlobalContext) as GlobalContextType;
+  const [userInputCode, setUserInputCode] = useState("");
+  const { products } = useHandleProductList();
+
+  const handleAddDiscount = () => {
+    if (products && products[0].discountCode === userInputCode) {
+      setUserDiscountCode(userInputCode);
+      const discountValue = products[0].discountValue / 100;
+      setUserDiscountValue(discountValue);
+      setUserInputCode("");
+      setMessage("Nuolaida pritaikyta");
+    } else {
+      setUserDiscountCode("");
+      setUserDiscountValue(0);
+      setMessage("Neteisingas nuolaidos kodas");
+    }
+  };
+
+  const handleEmptyCartButtonClick = () => {
+    handleEmptyTheCart();
+    setUserDiscountCode("");
+    setUserDiscountValue(0);
+    setMessage("");
+  };
 
   return (
     <div className={styles.cart}>
@@ -45,9 +75,15 @@ export function Cart() {
                   <div>
                     {quantity}: {item.quantity}
                   </div>
-                  <div>
-                    {price}: {item.price * item.quantity}
-                  </div>
+                  {userDiscountValue > 0 ? (
+                    <div style={{ color: "red" }}>
+                      {price}: {item.price * userDiscountValue * item.quantity}
+                    </div>
+                  ) : (
+                    <div>
+                      {price}: {item.price * item.quantity}
+                    </div>
+                  )}
                 </div>
               </div>
               <div className={styles.btn}>
@@ -68,13 +104,30 @@ export function Cart() {
               </div>
             </div>
           ))}
+          <div>
+            {message ? (
+              <p style={{ color: "red" }}>{message}</p>
+            ) : (
+              <p>Suveskite nuolaidos kodą</p>
+            )}
+            <label htmlFor="">Nuolaidos kodas</label>
+            <input
+              type="text"
+              value={userInputCode}
+              onChange={(e) => setUserInputCode(e.target.value)}
+            />
+            <Button
+              buttonLabel={buttonText4}
+              handleClick={() => handleAddDiscount()}
+            />
+          </div>
           <Link to="/purchasing" className={styles.link}>
             {buttonText3}
           </Link>
           <div className={styles.removeCart}>
             <Button
               buttonLabel={buttonText2}
-              handleClick={() => handleEmptyTheCart()}
+              handleClick={() => handleEmptyCartButtonClick()}
             />
           </div>
         </div>

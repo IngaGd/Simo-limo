@@ -74,4 +74,10 @@ export const validationOptions = () => ({
       message: "Pašto kodo pavyzdys 01234",
     },
   },
+  discountCode: {
+    pattern: {
+      value: /^[A-Z]{4}\d{4}$/,
+      message: "Nuolaidos kodas neteisingas",
+    },
+  },
 });
