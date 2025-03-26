@@ -7,6 +7,7 @@
   padding-top: 4rem;
   align-self: center;
   justify-self: center;
+  padding-bottom: 2rem;
 
   @media screen and (max-width: 837px) {
     width: 100%;
@@ -123,12 +124,6 @@
 }
 
 .discount {
-  // display: grid;
-  // padding: 1rem;
-  // width: 100%;
-  // grid-template-columns: repeat(2, max-content);
-  // gap: 0.5rem;
-  // border: 1px solid black;
   display: flex;
   flex-direction: column;
   padding: 1rem;
@@ -137,12 +132,10 @@
   }
 
   p {
-    // grid-row: 1;
     width: 100%;
     padding-bottom: 1rem;
   }
   div {
-    // grid-row: 2;
     width: 100%;
     display: flex;
     gap: 1rem;
@@ -174,4 +167,18 @@
 
 .link {
   @include link-button;
+}
+
+.emptyCart {
+  height: 63vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 10rem;
+  align-items: center;
+  .link {
+    margin-top: 4rem;
+    @include link-button;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }

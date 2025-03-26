@@ -22,6 +22,7 @@ const price = "Limonado kaina EUR";
 const totalPrice = "Suma EUR";
 const items = "Prekės";
 const delivery = "Pristatymo kaina EUR";
+const linkText = "Eiti į parduotuvę";
 
 export function Cart() {
   const {
@@ -172,7 +173,12 @@ export function Cart() {
           </div>
         </div>
       ) : (
-        <div>{cartIsEmpty}</div>
+        <div className={styles.emptyCart}>
+          <div>{cartIsEmpty}</div>
+          <Link to="/" className={styles.link}>
+            {linkText}
+          </Link>
+        </div>
       )}
     </div>
   );
