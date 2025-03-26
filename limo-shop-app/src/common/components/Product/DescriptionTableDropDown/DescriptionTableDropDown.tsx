@@ -6,9 +6,6 @@ import { GlobalContextType } from "src/common/context/globalContext.types";
 import { useContext } from "react";
 import { DescriptionTableProps } from "./descriptionTableDropDown.types";
 
-const text1 = "Pakuočių kiekis";
-const text2 = "Kaina(6 but.)";
-const text3 = "Depozitas (1 but.)";
 const buttonText = "Pirkti";
 const currency = "Eur";
 const plusIcon = "+";

@@ -23,9 +23,11 @@ export type GlobalContextType = {
   addToCart: (p: {
     id: number;
     title: string;
-    price: number;
-    description: string;
     imagePath: string;
+    description: string;
+    packageQty: number;
+    packageUnitPrice: number;
+    price: number;
   }) => void;
   handleIncrement: (id: number) => void;
   handleDecrement: (id: number) => void;
