@@ -57,7 +57,7 @@ exports.createOrder = async (req, res) => {
             DOMPurify.sanitize(purchaser.lastName),
             DOMPurify.sanitize(purchaser.phone),
             DOMPurify.sanitize(purchaser.email),
-            DOMPurify.sanitize(purchaser.street),
+            DOMPurify.sanitize(purchaser.address),
             DOMPurify.sanitize(purchaser.town),
             DOMPurify.sanitize(purchaser.postCode),
             orderNo,

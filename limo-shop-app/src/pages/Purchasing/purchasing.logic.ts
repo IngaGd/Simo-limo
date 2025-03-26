@@ -44,7 +44,8 @@ export const validationOptions = () => ({
     required: "Privalomas laukas",
     pattern: {
       value: /^[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ0-9' /.-]+$/,
-      message: "Pašalinkite negalimus simbolius, galimi - raidės, (-), (')",
+      message:
+        "Leidžiami simboliai: raidės, skaičiai, tarpai, (-), ('), (/), (.)",
     },
     minLength: { value: 2, message: "Vardas turi būti ne mažiau 2 raidžių." },
     maxLength: {

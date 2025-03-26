@@ -46,9 +46,10 @@ const validateOrder = [
     .bail()
     .isString()
     .matches(/^[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ0-9' /.-]+$/)
-    .withMessage("Pašalinkite negalimus simbolius, galimi - raidės, (-), (')")
-    .trim()
-    .escape(),
+    .withMessage(
+      "Leidžiami simboliai: raidės, skaičiai, tarpai, (-), ('), (/), (.)"
+    )
+    .trim(),
   body("purchaser.town")
     .notEmpty()
     .withMessage("Privalomas laukas")
