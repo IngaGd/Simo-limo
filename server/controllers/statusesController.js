@@ -1,7 +1,5 @@
 const { sheets, PRODUCT_LIST_ID } = require("../utils/googleSheets");
 const axios = require("axios");
-// const sgMail = require("@sendgrid/mail");
-// sgMail.setApiKey(process.env.SENDGRID_KEY);
 
 exports.getPaymentStatus = async (req, res) => {
   console.log("Call check-session, cookie: ", req.cookies.session);
@@ -20,33 +18,26 @@ exports.getPaymentStatus = async (req, res) => {
       return res.status(404).send({ message: "No data found" });
     }
 
-    const matchedOrder = rows.find((col) => col[13] === sessionId);
+    const matchedOrders = rows.filter((col) => col[13] === sessionId);
+    const orderItems = matchedOrders.map((order) => {
+      return {
+        title: order[10],
+        quantity: order[11],
+        price: order[12],
+      };
+    });
 
-    if (!matchedOrder) {
+    if (!matchedOrders) {
       return res
         .status(403)
         .json({ message: "Invalid session, or order not found" });
     }
 
-    const paymentStatus = matchedOrder[14];
-    const email = matchedOrder[3];
-    const orderNo = matchedOrder[16];
-    // const msg = {
-    //   to: email,
-    //   from: "inga.gudaite@gmail.com",
-    //   subject: "Užsakymas priimtas",
-    //   text: `Dėkojame, ${email}, jūsų užsakymas priimtas, užsakymo nr.:${orderNo}`,
-    //   html: `<div>Dėkojame, jūsų užsakymas priimtas, užsakymo nr. ${orderNo}: <strong></strong>.</div><br>
-    //         <table><thead><tr style="text-align: left">
-    //         <th colspan="1" style="border: 1px solid black">Nr.</th>
-    //         <th colspan="1" style="border: 1px solid black">Pavadinimas</th>
-    //         <th colspan="1" style="border: 1px solid black">Kaina</th>
-    //         <th colspan="1" style="border: 1px solid black">Kiekis</th>
-    //         </tr></thead></table>`,
-    // };
+    const paymentStatus = matchedOrders[0][14];
+    const email = matchedOrders[0][3];
+    const orderNo = matchedOrders[0][16];
 
     console.log("Email in payment status: ", email);
-    console.log("order number: ", orderNo, "type: ", typeof orderNo);
 
     if (paymentStatus === "COMPLETED" && orderNo > 0) {
       axios
@@ -54,9 +45,14 @@ exports.getPaymentStatus = async (req, res) => {
           process.env.GOOGLE_SCRIPT_URL,
           JSON.stringify({
             orderNo: `${orderNo}`,
-            email: `${matchedOrder[3]}`,
-            firstName: `${matchedOrder[0]}`,
-            lastName: `${matchedOrder[1]}`,
+            email: `${matchedOrders[0][3]}`,
+            firstName: `${matchedOrders[0][0]}`,
+            lastName: `${matchedOrders[0][1]}`,
+            phone: `${matchedOrders[0][2]}`,
+            address: `${matchedOrders[0][4]}`,
+            town: `${matchedOrders[0][5]}`,
+            postCode: `${matchedOrders[0][6]}`,
+            items: orderItems,
           }),
           {
             headers: { "Content-type": "application/json" },
@@ -75,17 +71,6 @@ exports.getPaymentStatus = async (req, res) => {
         clientOrderNo: orderNo,
         message: "Payment status is completed",
       });
-      // sgMail
-      //   .send(msg)
-      //   .then(() => {
-      //     console.log("Email sent successfully");
-      //   })
-      //   .catch((emailError) => {
-      //     console.log(emailError);
-      //     if (emailError.response) {
-      //       console.error(emailError.response.body);
-      //     }
-      //   });
     } else {
       res.status(200).json({
         paymentStatus: paymentStatus,
