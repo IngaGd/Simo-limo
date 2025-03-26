@@ -5,10 +5,11 @@
   margin: auto;
   align-items: center;
   justify-self: center;
-  width: 40%;
+  width: 60%;
   height: min-content;
   justify-content: space-between;
-  padding: 2rem;
+  font-size: 1.4rem;
+  padding-bottom: 1rem;
 
   a {
     padding-top: $spacing-xxxxs;
@@ -27,8 +28,10 @@
   }
 
   @media screen and (max-width: 976px) {
-    flex-wrap: wrap;
+    width: 100%;
+    flex-direction: column;
     gap: 1rem;
     padding-top: 3rem;
+    padding-bottom: 3rem;
   }
 }

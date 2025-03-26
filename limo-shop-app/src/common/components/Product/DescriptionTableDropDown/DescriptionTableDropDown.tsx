@@ -81,17 +81,19 @@ export function DescriptionTableDropDown({
             <div>{currency}</div>
           </div>
         </div>
-        <Button
-          buttonLabel={buttonText}
-          handleClick={() => {
-            handleAddToCart(product);
-            handleIsActive();
-            handleImageToCart();
-            setTimeout(() => {
-              resetImageToCart();
-            }, 700);
-          }}
-        />
+        <div className={styles.btn}>
+          <Button
+            buttonLabel={buttonText}
+            handleClick={() => {
+              handleAddToCart(product);
+              handleIsActive();
+              handleImageToCart();
+              setTimeout(() => {
+                resetImageToCart();
+              }, 700);
+            }}
+          />
+        </div>
       </div>
     </div>
   );
