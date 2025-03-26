@@ -13,6 +13,7 @@ export type CartItemType = {
   packageQty: number;
   price: number;
   imagePath: string;
+  packageUnitPrice: number;
 };
 
 export type CartItemsType = Array<CartItemType>;

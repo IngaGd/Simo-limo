@@ -4,7 +4,9 @@ export type ProductObject = {
   imagePath: string;
   description: string;
   packageQty: number;
+  packageUnitPrice: number;
   price: number;
+  deliveryPrice: number;
   discountCode: string;
   discountValue: number;
 };

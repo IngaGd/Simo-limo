@@ -19,10 +19,11 @@ export function useHandleCart(quantities: { id: number; qty: number }[]) {
   const addToCart = (p: {
     id: number;
     title: string;
-    price: number;
-    packageQty: number;
-    description: string;
     imagePath: string;
+    description: string;
+    packageQty: number;
+    packageUnitPrice: number;
+    price: number;
   }) => {
     const cartItemQantity =
       quantities.find((element) => element.id === p.id)?.qty || 1;
@@ -48,6 +49,7 @@ export function useHandleCart(quantities: { id: number; qty: number }[]) {
           quantity: cartItemQantity,
           packageQty: p.packageQty,
           price: Number(p.price),
+          packageUnitPrice: Number(p.packageUnitPrice),
           imagePath: p.imagePath,
         },
       ]);

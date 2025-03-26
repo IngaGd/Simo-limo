@@ -22,9 +22,11 @@ export function useHandleProductList() {
             imagePath: column[2],
             description: column[3],
             packageQty: Number(column[4]),
-            price: Number(column[5]),
-            discountCode: column[6],
-            discountValue: Number(column[7]),
+            packageUnitPrice: Number(column[5]),
+            price: Number(column[6]),
+            deliveryPrice: Number(column[7]),
+            discountCode: column[8],
+            discountValue: Number(column[9]),
           };
         });
         setProducts(productData);

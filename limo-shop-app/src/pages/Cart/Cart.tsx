@@ -39,6 +39,8 @@ export function Cart() {
   const [userInputCode, setUserInputCode] = useState("");
   const { products } = useHandleProductList();
 
+  const deliveryPrice = products ? products[0]?.deliveryPrice : 0;
+
   const handleAddDiscount = () => {
     if (products && products[0].discountCode === userInputCode) {
       setUserDiscountCode(userInputCode);
@@ -80,7 +82,7 @@ export function Cart() {
                   </div>
                   <div>
                     {deposit}:{" "}
-                    {(item.packageQty * 0.1 * item.quantity).toFixed(2)}
+                    {Number(item.packageQty * 0.1 * item.quantity).toFixed(2)}
                   </div>
                   {userDiscountValue > 0 ? (
                     <div style={{ color: "red" }}>
@@ -94,13 +96,15 @@ export function Cart() {
                       {price}: {item.price * item.quantity}
                     </div>
                   )}
-                  <div>{delivery}: 3.5 Eur</div>
+                  <div>
+                    {delivery}: {deliveryPrice} Eur
+                  </div>
                   <div>
                     {totalPrice}:{" "}
                     {(
                       item.packageQty * 0.1 * item.quantity +
                       item.price * item.quantity +
-                      3.5
+                      deliveryPrice
                     ).toFixed(2)}
                   </div>
                 </div>

@@ -77,7 +77,7 @@ export function DescriptionTableDropDown({
           <div>Depozitas</div>
           <div>1 but.</div>
           <div className={`${styles.details}`}>
-            <div>0.1</div>
+            <div>{product.packageUnitPrice}</div>
             <div>{currency}</div>
           </div>
         </div>
