@@ -26,6 +26,31 @@
   height: 20rem;
 }
 
+.cartItem {
+  width: 20rem;
+  height: 20rem;
+
+  @media screen and (max-width: 680px) {
+    width: 36rem;
+    height: 32rem;
+  }
+
+  @media screen and (max-width: 436px) {
+    width: 30rem;
+    height: 28rem;
+  }
+
+  @media screen and (max-width: 378px) {
+    width: 26rem;
+    height: 24rem;
+  }
+
+  @media screen and (max-width: 357px) {
+    width: 20rem;
+    height: 18rem;
+  }
+}
+
 .productList {
   @include box-size-m;
   border-radius: 3px;

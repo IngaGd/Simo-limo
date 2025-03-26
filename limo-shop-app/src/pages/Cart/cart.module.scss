@@ -2,10 +2,29 @@
 @use "../../styles/variables/index" as *;
 
 .cart {
-  width: 70%;
+  width: 80rem;
   height: 100%;
   padding-top: 4rem;
   align-self: center;
+  justify-self: center;
+
+  @media screen and (max-width: 837px) {
+    width: 100%;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  @media screen and (max-width: 680px) {
+    width: 42rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  @media screen and (max-width: 436px) {
+    width: 100%;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
 
 .list {
@@ -19,7 +38,51 @@
   justify-content: space-between;
   border: 1px solid black;
   border-radius: 3px;
-  padding: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+
+  @media screen and (max-width: 680px) {
+    display: grid;
+    grid-template-rows: min-content 20rem min-content;
+    grid-template-columns: 1fr;
+    align-items: center;
+    justify-items: center;
+
+    .imageContainer {
+      grid-row: 1;
+    }
+
+    .description {
+      grid-row: 2;
+      text-align: justify;
+    }
+
+    .btn {
+      grid-row: 3;
+    }
+  }
+}
+
+.detailsContainer {
+  width: 28rem;
+
+  @media screen and (max-width: 378px) {
+    width: 24rem;
+  }
+
+  @media screen and (max-width: 320px) {
+    width: 100%;
+  }
+}
+
+.details {
+  display: flex;
+  justify-content: space-between;
+  .discountPrice {
+    color: red;
+  }
 }
 
 .description {
@@ -30,8 +93,15 @@
   flex-direction: column;
   justify-content: space-between;
 
+  @media screen and (max-width: 680px) {
+    font-size: 1.4rem;
+  }
+
   .title {
     font-size: 1.8rem;
+    @media screen and (max-width: 680px) {
+      font-size: 1.6rem;
+    }
   }
 }
 
@@ -50,6 +120,56 @@
 .removeCart {
   display: flex;
   justify-content: flex-end;
+}
+
+.discount {
+  // display: grid;
+  // padding: 1rem;
+  // width: 100%;
+  // grid-template-columns: repeat(2, max-content);
+  // gap: 0.5rem;
+  // border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  @media screen and (max-width: 680px) {
+    font-size: 1.4rem;
+  }
+
+  p {
+    // grid-row: 1;
+    width: 100%;
+    padding-bottom: 1rem;
+  }
+  div {
+    // grid-row: 2;
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+
+    @media screen and (max-width: 680px) {
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    input {
+      padding: 0.25rem 1rem;
+      &:focus {
+        outline: none;
+      }
+    }
+
+    label,
+    input {
+      margin-right: 2rem;
+    }
+
+    input {
+      @media screen and (max-width: 680px) {
+        margin-right: 0;
+      }
+    }
+  }
 }
 
 .link {

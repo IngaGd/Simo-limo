@@ -17,11 +17,11 @@ const plusIcon = "+";
 const minusIcon = "-";
 const cartIsEmpty = "Krepšelis yra tuščias";
 const quantity = "Pakuočių kiekis vnt.";
-const deposit = "Taros kaina";
+const deposit = "Taros kaina EUR";
 const price = "Limonado kaina EUR";
 const totalPrice = "Suma EUR";
 const items = "Prekės";
-const delivery = "Pristatymo kaina";
+const delivery = "Pristatymo kaina EUR";
 
 export function Cart() {
   const {
@@ -66,46 +66,59 @@ export function Cart() {
     <div className={styles.cart}>
       {cartItems.length > 0 ? (
         <div className={styles.list}>
-          {items}:{" "}
+          <div>{items}:</div>
           {cartItems.map((item) => (
             <div key={item.id} className={styles.item}>
-              <Container containerType={ContainerType.ImageOfCart}>
-                <Image imagePath={item.imagePath} />
-              </Container>
+              <div className={styles.imageContainer}>
+                <Container containerType={ContainerType.ImageOfCart}>
+                  <Image imagePath={item.imagePath} />
+                </Container>
+              </div>
               <div className={styles.description}>
                 <div className={styles.title}>
                   <div>{item.title}</div>
                 </div>
-                <div>
-                  <div>
-                    {quantity}: {item.quantity}
-                  </div>
-                  <div>
-                    {deposit}:{" "}
-                    {Number(item.packageQty * 0.1 * item.quantity).toFixed(2)}
+                <div className={styles.detailsContainer}>
+                  <div className={styles.details}>
+                    <div>{quantity}: </div>
+                    <div>{item.quantity}</div>
                   </div>
                   {userDiscountValue > 0 ? (
-                    <div style={{ color: "red" }}>
-                      {price}:{" "}
-                      {(item.price * userDiscountValue * item.quantity).toFixed(
-                        2
-                      )}
+                    <div className={styles.details}>
+                      <div> {price}:</div>
+                      <div className={styles.discountPrice}>
+                        {(
+                          item.price *
+                          userDiscountValue *
+                          item.quantity
+                        ).toFixed(2)}
+                      </div>
                     </div>
                   ) : (
-                    <div>
-                      {price}: {item.price * item.quantity}
+                    <div className={styles.details}>
+                      <div>{price}:</div>
+                      <div>{(item.price * item.quantity).toFixed(2)}</div>
                     </div>
                   )}
-                  <div>
-                    {delivery}: {deliveryPrice} Eur
+                  <div className={styles.details}>
+                    <div>{deposit}:</div>
+                    <div>
+                      {Number(item.packageQty * 0.1 * item.quantity).toFixed(2)}
+                    </div>
                   </div>
-                  <div>
-                    {totalPrice}:{" "}
-                    {(
-                      item.packageQty * 0.1 * item.quantity +
-                      item.price * item.quantity +
-                      deliveryPrice
-                    ).toFixed(2)}
+                  <div className={styles.details}>
+                    <div>{delivery}:</div>
+                    <div> {deliveryPrice.toFixed(2)}</div>
+                  </div>
+                  <div className={styles.details}>
+                    <div>{totalPrice}:</div>
+                    <div>
+                      {(
+                        item.packageQty * 0.1 * item.quantity +
+                        item.price * item.quantity +
+                        deliveryPrice
+                      ).toFixed(2)}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -127,22 +140,26 @@ export function Cart() {
               </div>
             </div>
           ))}
-          <div>
+          <div className={styles.discount}>
             {message ? (
               <p style={{ color: "red" }}>{message}</p>
             ) : (
               <p>Suveskite nuolaidos kodą</p>
             )}
-            <label htmlFor="">Nuolaidos kodas</label>
-            <input
-              type="text"
-              value={userInputCode}
-              onChange={(e) => setUserInputCode(e.target.value)}
-            />
-            <Button
-              buttonLabel={buttonText4}
-              handleClick={() => handleAddDiscount()}
-            />
+            <div>
+              <div>
+                <label htmlFor="">Nuolaidos kodas</label>
+                <input
+                  type="text"
+                  value={userInputCode}
+                  onChange={(e) => setUserInputCode(e.target.value)}
+                />
+              </div>
+              <Button
+                buttonLabel={buttonText4}
+                handleClick={() => handleAddDiscount()}
+              />
+            </div>
           </div>
           <Link to="/purchasing" className={styles.link}>
             {buttonText3}
