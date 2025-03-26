@@ -127,7 +127,6 @@ export function PurchasingFormHook() {
     <div className={styles.content}>
       {response?.redirectToPayment === true ? (
         <Checkout
-          products={order?.products}
           message={response.message}
           orderId={orderId}
           amount={orderAmount}

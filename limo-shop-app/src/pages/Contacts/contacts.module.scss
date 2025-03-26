@@ -1,0 +1,47 @@
+@use "../../styles/variables/index" as *;
+@use "../../styles/base/index" as *;
+
+.contacts {
+  padding-top: 5rem;
+  height: 68vh;
+  a {
+    display: flex;
+    color: $color-primary-3;
+    padding-bottom: 1rem;
+    gap: 1rem;
+    text-decoration: none;
+    align-items: center;
+  }
+  @media screen and (max-width: 720px) {
+    height: 65vh;
+  }
+}
+
+.contacts,
+address {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-style: normal;
+}
+
+.address {
+  padding-top: 5rem;
+  address {
+    align-items: center;
+  }
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  gap: 2.4rem;
+  @media screen and (max-width: 720px) {
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    .phone {
+      margin-left: -0.3rem;
+    }
+  }
+}

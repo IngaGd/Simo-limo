@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "src/common/context/GlobalContext";
 import { GlobalContextType } from "src/common/context/globalContext.types";
 import { useGetPaymentStatus } from "src/common/hooks/useGetPaymentStatus";
+import styles from "./loginPage.module.scss";
 
 export function PaymentLoading() {
   const { handleEmptyTheCart } = useContext(GlobalContext) as GlobalContextType;
@@ -18,5 +19,9 @@ export function PaymentLoading() {
     }
   }, [status]);
 
-  return <div>Loading...</div>;
+  return (
+    <div className={styles.loginPage}>
+      Laukiame atsakymo iš banko, neuždarykite prašome lango. Dėkojame.
+    </div>
+  );
 }

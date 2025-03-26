@@ -1,0 +1,7 @@
+@use "../../styles/abstracts/index" as *;
+
+.cancelPage {
+  @include basic-page;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}

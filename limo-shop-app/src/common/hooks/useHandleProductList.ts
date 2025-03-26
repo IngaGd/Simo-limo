@@ -30,6 +30,7 @@ export function useHandleProductList() {
           };
         });
         setProducts(productData);
+        console.log("discountCode: ", productData[0].discountCode);
       } catch (error) {
         console.log(error);
       }

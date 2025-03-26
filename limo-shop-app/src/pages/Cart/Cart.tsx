@@ -23,6 +23,7 @@ const totalPrice = "Suma EUR";
 const items = "Prekės";
 const delivery = "Pristatymo kaina EUR";
 const linkText = "Eiti į parduotuvę";
+const paymentPrice = "Mokėtina suma EUR";
 
 export function Cart() {
   const {
@@ -108,10 +109,6 @@ export function Cart() {
                     </div>
                   </div>
                   <div className={styles.details}>
-                    <div>{delivery}:</div>
-                    <div> {deliveryPrice.toFixed(2)}</div>
-                  </div>
-                  <div className={styles.details}>
                     <div>{totalPrice}:</div>
                     <div>
                       {(
@@ -141,6 +138,14 @@ export function Cart() {
               </div>
             </div>
           ))}
+          <div className={styles.priceDetails}>
+            <div>{delivery}:</div>
+            <div> {deliveryPrice.toFixed(2)}</div>
+          </div>
+          <div className={styles.priceDetails}>
+            <div>{paymentPrice}:</div>
+            <div> </div>
+          </div>
           <div className={styles.discount}>
             {message ? (
               <p style={{ color: "red" }}>{message}</p>

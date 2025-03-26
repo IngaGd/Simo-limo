@@ -1,0 +1,11 @@
+@use "../../styles/abstracts/index" as *;
+
+.successPage {
+  @include basic-page;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  div {
+    padding-top: 2rem;
+    text-align: center;
+  }
+}
