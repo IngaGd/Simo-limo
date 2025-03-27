@@ -32,9 +32,11 @@ export function DescriptionTableDropDown({
     title: string;
     imagePath: string;
     description: string;
+    price: number;
     packageQty: number;
     packageUnitPrice: number;
-    price: number;
+    packageTotalPrice: number;
+    deliveryPrice: number;
   }) => {
     addToCart(p);
     setQuantities(
@@ -78,14 +80,6 @@ export function DescriptionTableDropDown({
             <div>{currency}</div>
           </div>
         </div>
-        {/* <div className={`${styles.price}`}>
-          <div>Depozitas</div>
-          <div>1 but.</div>
-          <div className={`${styles.details}`}>
-            <div>{product.packageUnitPrice}</div>
-            <div>{currency}</div>
-          </div>
-        </div> */}
         <div className={styles.btn}>
           <Button
             buttonLabel={buttonText}
