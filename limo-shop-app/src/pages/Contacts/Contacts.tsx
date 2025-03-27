@@ -1,8 +1,4 @@
-import {
-  IconInstagram,
-  IconEmail,
-  IconPhone,
-} from "src/common/components/Icon";
+import { IconInstagram, IconEmail } from "src/common/components/Icon";
 import styles from "./contacts.module.scss";
 
 export function Contacts() {

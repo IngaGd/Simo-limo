@@ -9,8 +9,6 @@ import { IconMinus, IconPlus } from "../../Icon";
 
 const buttonText = "Pirkti";
 const currency = "EUR";
-const plusIcon = "+";
-const minusIcon = "-";
 
 export function DescriptionTableDropDown({
   product,
