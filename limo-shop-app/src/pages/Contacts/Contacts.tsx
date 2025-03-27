@@ -14,10 +14,6 @@ export function Contacts() {
           <IconEmail size="medium" />
           mbmaistas@gmail.com
         </a>
-        <a href="tel:+37069319891" className={styles.phone}>
-          <IconPhone size="medium" />
-          (+370) 693-19891
-        </a>
         <a href="https://www.instagram.com/simo.delicatessen/" className="">
           <IconInstagram size="medium" />
           simo.delicatessen

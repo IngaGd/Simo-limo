@@ -17,7 +17,7 @@ export function Header() {
     <header className={styles.header}>
       <div className={styles.nav}>
         <Link to="/contacts" className={styles.envelope}>
-          <IconEnvelop size="large" />
+          <IconEnvelop size="medium" />
         </Link>
         <Link to="/" className={styles.logo}>
           <Logo />
@@ -37,7 +37,7 @@ export function Header() {
         </Link>
         {/* <Link to="/login">Login</Link> */}
       </div>
-      <p className={styles.slogan}>Laukinis limonadas</p>
+      <p className={styles.slogan}>Skanus fermentuotas limonadas</p>
     </header>
   );
 }

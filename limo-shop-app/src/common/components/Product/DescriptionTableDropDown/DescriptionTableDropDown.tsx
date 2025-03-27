@@ -5,9 +5,10 @@ import { GlobalContext } from "src/common/context/GlobalContext";
 import { GlobalContextType } from "src/common/context/globalContext.types";
 import { useContext } from "react";
 import { DescriptionTableProps } from "./descriptionTableDropDown.types";
+import { IconMinus, IconPlus } from "../../Icon";
 
 const buttonText = "Pirkti";
-const currency = "Eur";
+const currency = "EUR";
 const plusIcon = "+";
 const minusIcon = "-";
 
@@ -31,9 +32,11 @@ export function DescriptionTableDropDown({
   const handleAddToCart = (p: {
     id: number;
     title: string;
-    price: number;
-    description: string;
     imagePath: string;
+    description: string;
+    packageQty: number;
+    packageUnitPrice: number;
+    price: number;
   }) => {
     addToCart(p);
     setQuantities(
@@ -54,30 +57,37 @@ export function DescriptionTableDropDown({
       </Link>
       <div className={`${styles.purchasing}`}>
         <div className={`${styles.quantity}`}>
-          <div>Pakuočių </div>
-          <div>kiekis</div>
+          <div>Kiekis</div>
           <div className={styles.details}>
             <div>{productQuantity}</div>
-            <div onClick={() => handleIncrement(product.id)}>{plusIcon}</div>
-            <div onClick={() => handleDecrement(product.id)}>{minusIcon}</div>
+            <div
+              onClick={() => handleIncrement(product.id)}
+              className={styles.iconBox}
+            >
+              <IconPlus size="medium" />
+            </div>
+            <div
+              onClick={() => handleDecrement(product.id)}
+              className={styles.iconBox}
+            >
+              <IconMinus size="medium" />
+            </div>
           </div>
         </div>
         <div className={`${styles.price}`}>
-          <div>Kaina</div>
-          <div>{product.packageQty} but.</div>
           <div className={`${styles.details}`}>
             <div>{productQuantity * product.price}</div>
             <div>{currency}</div>
           </div>
         </div>
-        <div className={`${styles.price}`}>
+        {/* <div className={`${styles.price}`}>
           <div>Depozitas</div>
           <div>1 but.</div>
           <div className={`${styles.details}`}>
             <div>{product.packageUnitPrice}</div>
             <div>{currency}</div>
           </div>
-        </div>
+        </div> */}
         <div className={styles.btn}>
           <Button
             buttonLabel={buttonText}

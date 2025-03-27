@@ -32,14 +32,36 @@
   justify-content: space-between;
 }
 
+.quantity {
+  .details {
+    justify-content: space-between;
+    align-items: center;
+    width: 10rem;
+  }
+}
+
 .quantity,
 .price {
   flex-direction: column;
 }
 
+.quantity {
+  gap: 1rem;
+}
+
 .details {
   flex-direction: row;
   gap: 1rem;
+  font-size: 2rem;
+}
+
+.price {
+  display: flex;
+  justify-content: flex-end;
+  .details {
+    align-self: flex-end;
+    font-size: 1.8rem;
+  }
 }
 
 .description {
@@ -64,6 +86,23 @@
   }
 }
 
+.iconBox {
+  border: 1px solid black;
+  border-radius: 2px;
+  width: 2.8rem;
+  height: 2.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  &:hover {
+    background-color: $color-primary-3;
+  }
+}
+
 .btn {
   align-self: flex-end;
+  button {
+    height: 3.4rem;
+  }
 }

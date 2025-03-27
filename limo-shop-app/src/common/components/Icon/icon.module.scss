@@ -15,33 +15,50 @@
 .envelope {
   justify-self: flex-end;
   margin-right: 2rem;
+  &.medium {
+    width: 4.3rem;
+    height: 4.3rem;
+  }
 }
 .cart {
   justify-content: flex-start;
   margin-left: 2rem;
-}
-
-.medium {
-  width: 3.2rem;
-  height: 3.2rem;
-}
-
-.large {
-  width: 4.2rem;
-  height: 4.2rem;
+  &.medium {
+    width: 3.7rem;
+    height: 3.7rem;
+  }
 }
 
 .instagram {
-  width: 2rem;
-  height: 2rem;
+  &.medium {
+    width: 2rem;
+    height: 2rem;
+  }
 }
 
 .phone {
-  width: 2.6rem;
-  height: 2.6rem;
+  &.medium {
+    width: 2.6rem;
+    height: 2.6rem;
+  }
 }
 
 .email {
-  width: 1.8rem;
-  height: 1.8rem;
+  &.medium {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+}
+
+.plus,
+.minus {
+  padding: 0;
+  &.medium {
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+  transition: all 0.2s;
+  &:hover {
+    color: $color-primary-1;
+  }
 }

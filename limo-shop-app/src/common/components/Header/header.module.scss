@@ -3,25 +3,26 @@
 .header {
   justify-self: flex-start;
 
-  //display: grid;
-  //align-items: center;
   height: min-content;
   width: 100%;
-  //grid-template-columns: [start] 1fr (min-content) 1fr [end];
-  // grid-template-rows: 1fr 2rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 
   .nav {
-    // grid-row: 1;
-    // grid-template-columns: start/end;
-
     display: flex;
     width: 100%;
     justify-content: center;
     align-items: center;
 
-    .envelope,
-    .cart {
+    .envelope {
       margin-top: 0.8rem;
+      margin-right: 2rem;
+    }
+
+    .cart {
+      margin-top: 0rem;
+      margin-left: 2rem;
     }
 
     .envelope {
@@ -41,9 +42,9 @@
       .quantity {
         position: absolute;
         top: -1.6rem;
-        left: 2.9rem;
-        width: 1.6rem;
-        height: 1.6rem;
+        left: 3.1rem;
+        width: 1.7rem;
+        height: 1.7rem;
         border-radius: 50%;
         background-color: $color-primary-3;
         cursor: pointer;
@@ -61,5 +62,6 @@
     font-size: 1.6rem;
     padding: 0.5rem;
     justify-self: center;
+    align-self: center;
   }
 }
