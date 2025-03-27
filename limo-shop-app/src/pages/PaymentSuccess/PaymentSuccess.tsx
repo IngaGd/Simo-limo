@@ -8,7 +8,7 @@ export function PaymentSuccess() {
   return (
     <div className={styles.successPage}>
       <h2>{text}</h2>
-      <div>Apmokėjimą gavome, sąskaita išsiųsta el paštu.</div>
+      <div>Ačiū. Mokėjimą gavau. Sąskaita išsiųsta nurodytu el paštu.</div>
       <Link to="/" className={styles.link}>
         {linkText}
       </Link>

@@ -23,6 +23,7 @@ export function useHandleProductList() {
             description: column[3],
             packageQty: Number(column[4]),
             packageUnitPrice: Number(column[5]),
+            packageTotalPrice: Number(column[4]) * Number(column[5]),
             price: Number(column[6]),
             deliveryPrice: Number(column[7]),
             discountCode: column[8],
@@ -30,7 +31,6 @@ export function useHandleProductList() {
           };
         });
         setProducts(productData);
-        console.log("discountCode: ", productData[0].discountCode);
       } catch (error) {
         console.log(error);
       }

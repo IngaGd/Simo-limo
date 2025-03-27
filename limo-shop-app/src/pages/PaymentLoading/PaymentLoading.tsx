@@ -21,7 +21,7 @@ export function PaymentLoading() {
 
   return (
     <div className={styles.loginPage}>
-      Laukiame atsakymo iš banko, neuždarykite prašome lango. Dėkojame.
+      Laukiu atsakymo iš banko, prašau dar neuždaryti šio lango.
     </div>
   );
 }

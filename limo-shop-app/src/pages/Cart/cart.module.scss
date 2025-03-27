@@ -39,14 +39,14 @@
   justify-content: space-between;
   border: 1px solid black;
   border-radius: 3px;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
   padding-top: 3rem;
   padding-bottom: 3rem;
 
   @media screen and (max-width: 680px) {
     display: grid;
-    grid-template-rows: min-content 20rem min-content;
+    grid-template-rows: min-content 22rem min-content;
     grid-template-columns: 1fr;
     align-items: center;
     justify-items: center;
@@ -56,6 +56,10 @@
     }
 
     .description {
+      padding-top: 1rem;
+      padding-bottom: 5rem;
+      gap: 1rem;
+      align-items: center;
       grid-row: 2;
       text-align: justify;
     }
@@ -67,10 +71,10 @@
 }
 
 .detailsContainer {
-  width: 28rem;
-
+  width: 30rem;
+  padding: 1rem;
   @media screen and (max-width: 378px) {
-    width: 24rem;
+    width: 22rem;
   }
 
   @media screen and (max-width: 320px) {
@@ -82,12 +86,22 @@
   display: flex;
   justify-content: space-between;
   .discountPrice {
-    color: red;
+    color: $color-red;
+  }
+  &.deposit {
+    background-color: $color-secondary-2;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .depositPrice {
+    align-self: center;
   }
 }
 
 .description {
-  height: 80%;
+  height: 100%;
   align-self: center;
 
   display: flex;
@@ -120,10 +134,18 @@
 
 .priceDetails {
   display: flex;
-  height: 1rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  height: 3.4rem;
+  width: 100%;
+  background-color: $color-primary-2;
+  color: $color-primary-3;
+  padding-left: 2rem;
+  padding-right: 2rem;
   justify-content: space-between;
+  align-items: center;
+  .amount {
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
 }
 
 .removeCart {

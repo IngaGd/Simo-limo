@@ -14,6 +14,8 @@ export type CartItemType = {
   price: number;
   imagePath: string;
   packageUnitPrice: number;
+  packageTotalPrice: number;
+  deliveryPrice: number;
 };
 
 export type CartItemsType = Array<CartItemType>;
@@ -27,6 +29,8 @@ export type GlobalContextType = {
     description: string;
     packageQty: number;
     packageUnitPrice: number;
+    packageTotalPrice: number;
+    deliveryPrice: number;
     price: number;
   }) => void;
   handleIncrement: (id: number) => void;
@@ -44,6 +48,7 @@ export type GlobalContextType = {
   userDiscountCode: string;
   userDiscountValue: number;
   message: string;
+  amount: string;
   setMessage: (input: string) => void;
   setUserDiscountValue: (discountValue: number) => void | null;
   setUserDiscountCode: (userInputCode: string) => void | null;

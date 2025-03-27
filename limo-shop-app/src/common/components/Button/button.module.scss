@@ -3,11 +3,15 @@
 
 .button {
   font-family: inherit;
+  font-size: 1.4rem;
+  -webkit-text-size-adjust: 1.4rem;
   padding-left: $spacing-xxs;
   padding-right: $spacing-xxs;
   padding-top: $spacing-xxxxxs;
   padding-bottom: $spacing-xxxxxs;
   background-color: $color-primary-2;
+  color: $color-primary-3;
+  -webkit-text-fill-color: $color-primary-3;
   border: 1px solid black;
   border-radius: 3px;
   cursor: pointer;

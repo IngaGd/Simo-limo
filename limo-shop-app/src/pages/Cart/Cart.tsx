@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "src/common/components/Button";
 import { Container } from "src/common/components/Container";
@@ -17,13 +17,12 @@ const plusIcon = "+";
 const minusIcon = "-";
 const cartIsEmpty = "Krepšelis yra tuščias";
 const quantity = "Pakuočių kiekis vnt.";
-const deposit = "Taros kaina EUR";
 const price = "Limonado kaina EUR";
 const totalPrice = "Suma EUR";
 const items = "Prekės";
 const delivery = "Pristatymo kaina EUR";
 const linkText = "Eiti į parduotuvę";
-const paymentPrice = "Mokėtina suma EUR";
+const paymentPrice = "Suma apmokėjimui EUR";
 
 export function Cart() {
   const {
@@ -37,9 +36,14 @@ export function Cart() {
     setUserDiscountCode,
     setUserDiscountValue,
     setMessage,
+    amount,
   } = useContext(GlobalContext) as GlobalContextType;
   const [userInputCode, setUserInputCode] = useState("");
   const { products } = useHandleProductList();
+
+  useEffect(() => {
+    console.log("products :", products);
+  }, [products]);
 
   const deliveryPrice = products ? products[0]?.deliveryPrice : 0;
 
@@ -102,21 +106,40 @@ export function Cart() {
                       <div>{(item.price * item.quantity).toFixed(2)}</div>
                     </div>
                   )}
-                  <div className={styles.details}>
-                    <div>{deposit}:</div>
+                  <div className={`${styles.details} ${styles.deposit}`}>
                     <div>
-                      {Number(item.packageQty * 0.1 * item.quantity).toFixed(2)}
+                      Taros depozito mokestis EUR ({item.packageQty} but. X 0.1
+                      EUR):
+                    </div>
+                    <div className={styles.depositPrice}>
+                      {Number(item.packageTotalPrice * item.quantity).toFixed(
+                        2
+                      )}
                     </div>
                   </div>
                   <div className={styles.details}>
+                    <div>{delivery}:</div>
+                    <div> {deliveryPrice.toFixed(2)}</div>
+                  </div>
+                  <div className={styles.details}>
                     <div>{totalPrice}:</div>
-                    <div>
-                      {(
-                        item.packageQty * 0.1 * item.quantity +
-                        item.price * item.quantity +
-                        deliveryPrice
-                      ).toFixed(2)}
-                    </div>
+                    {userDiscountValue > 0 ? (
+                      <div>
+                        {(
+                          item.packageTotalPrice * item.quantity +
+                          item.price * userDiscountValue * item.quantity +
+                          deliveryPrice
+                        ).toFixed(2)}
+                      </div>
+                    ) : (
+                      <div>
+                        {(
+                          item.packageTotalPrice * item.quantity +
+                          item.price * item.quantity +
+                          deliveryPrice
+                        ).toFixed(2)}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -139,12 +162,8 @@ export function Cart() {
             </div>
           ))}
           <div className={styles.priceDetails}>
-            <div>{delivery}:</div>
-            <div> {deliveryPrice.toFixed(2)}</div>
-          </div>
-          <div className={styles.priceDetails}>
-            <div>{paymentPrice}:</div>
-            <div> </div>
+            <div>{paymentPrice}</div>
+            <div className={styles.amount}>{amount} </div>
           </div>
           <div className={styles.discount}>
             {message ? (

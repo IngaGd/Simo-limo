@@ -1,3 +1,5 @@
+@use "../../styles/variables/index" as *;
+
 .checkout {
   display: grid;
   height: 73vh;
@@ -48,7 +50,7 @@
     align-items: center;
 
     .discount {
-      color: red;
+      color: $color-red;
     }
   }
 }

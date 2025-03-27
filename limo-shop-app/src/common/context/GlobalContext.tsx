@@ -29,6 +29,23 @@ export const GlobalContextProvider = ({
   const [userDiscountValue, setUserDiscountValue] = useState(0);
   const [message, setMessage] = useState("");
 
+  const amount =
+    cartItems.length > 0
+      ? cartItems
+          .map((item) => ({
+            totalPaymentPrice:
+              item.deliveryPrice +
+              item.packageTotalPrice * item.quantity +
+              (userDiscountValue > 0
+                ? userDiscountValue * item.price * item.quantity
+                : item.price * item.quantity),
+          }))
+          .map((item) => item.totalPaymentPrice)
+          .reduce((a, b) => a + b)
+          .toFixed(2)
+          .toString()
+      : "";
+
   return (
     <GlobalContext.Provider
       value={{
@@ -52,6 +69,7 @@ export const GlobalContextProvider = ({
         setUserDiscountValue,
         setUserDiscountCode,
         message,
+        amount,
       }}
     >
       {children}
