@@ -76,7 +76,7 @@ exports.createOrder = async (req, res) => {
     });
     res.status(200).json({
       status: 200,
-      message: "Užsakymą gavome",
+      message: `Užsakymą gavau. Spauskite žemiau "apmokėti".`,
       orderId: `${orderNo}`,
       paymentStatus: "pending",
       redirectToPayment: true,
