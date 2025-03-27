@@ -45,8 +45,6 @@ export function Cart() {
     console.log("products :", products);
   }, [products]);
 
-  const deliveryPrice = products ? products[0]?.deliveryPrice : 0;
-
   const handleAddDiscount = () => {
     if (products && products[0].discountCode === userInputCode) {
       setUserDiscountCode(userInputCode);
@@ -119,7 +117,7 @@ export function Cart() {
                   </div>
                   <div className={styles.details}>
                     <div>{delivery}:</div>
-                    <div> {deliveryPrice.toFixed(2)}</div>
+                    <div> {item.deliveryPrice.toFixed(2)}</div>
                   </div>
                   <div className={styles.details}>
                     <div>{totalPrice}:</div>
@@ -128,7 +126,7 @@ export function Cart() {
                         {(
                           item.packageTotalPrice * item.quantity +
                           item.price * userDiscountValue * item.quantity +
-                          deliveryPrice
+                          item.deliveryPrice
                         ).toFixed(2)}
                       </div>
                     ) : (
@@ -136,7 +134,7 @@ export function Cart() {
                         {(
                           item.packageTotalPrice * item.quantity +
                           item.price * item.quantity +
-                          deliveryPrice
+                          item.deliveryPrice
                         ).toFixed(2)}
                       </div>
                     )}

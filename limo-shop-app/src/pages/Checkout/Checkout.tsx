@@ -11,20 +11,21 @@ import { Button } from "src/common/components/Button";
 type CheckoutObject = {
   message: string;
   orderId: string;
-  amount?: string;
   userIp: string | null | undefined;
 };
 
 const URL = import.meta.env.VITE_URL;
 const quantity = "Kiekis vnt.";
 const price = "Kaina iš viso EUR";
+const totalPrice = "Suma EUR";
 const items = "Prekės";
+const delivery = "Pristatymo kaina EUR";
 const buttonText = "Apmokėti";
 
-export function Checkout({ message, orderId, amount, userIp }: CheckoutObject) {
+export function Checkout({ message, orderId, userIp }: CheckoutObject) {
   const checkoutUrl = `${URL}create-transaction`;
 
-  const { cartItems, userDiscountCode, userDiscountValue } = useContext(
+  const { cartItems, amount, userDiscountCode, userDiscountValue } = useContext(
     GlobalContext
   ) as GlobalContextType;
 
@@ -46,48 +47,96 @@ export function Checkout({ message, orderId, amount, userIp }: CheckoutObject) {
     }
   }, [response]);
 
-  const totalSum = cartItems
-    .map((product) => product.price)
-    .reduce((a, b) => a + b)
-    .toFixed(2)
-    .toString();
-
   return (
     <div className={styles.checkout}>
       <div className={styles.message}>{message}</div>
       <div className={styles.cart}>
-        <div>{items}:</div>
-        {cartItems.map((item) => (
-          <div key={item.id} className={styles.item}>
-            <Container containerType={ContainerType.ImageOfChechout}>
-              <Image imagePath={item.imagePath} />
-            </Container>
-            <div className={styles.description}>
-              <div className={styles.title}>
-                <div>{item.title}</div>
+        <div className={styles.list}>
+          <div>{items}</div>
+          {cartItems.map((item) => (
+            <div key={item.id} className={styles.item}>
+              <div className={styles.imageContainer}>
+                <Container containerType={ContainerType.ImageOfCart}>
+                  <Image imagePath={item.imagePath} />
+                </Container>
               </div>
-              <div>
-                <div>
-                  {quantity}: {item.quantity}
+              <div className={styles.description}>
+                <div className={styles.title}>
+                  <div>{item.title}</div>
                 </div>
-                <div>
-                  {price}: {item.price * item.quantity}
+                <div className={styles.detailsContainer}>
+                  <div className={styles.details}>
+                    <div>{quantity}: </div>
+                    <div>{item.quantity}</div>
+                  </div>
+                  {userDiscountValue > 0 ? (
+                    <div className={styles.details}>
+                      <div> {price}:</div>
+                      <div className={styles.discountPrice}>
+                        {(
+                          item.price *
+                          userDiscountValue *
+                          item.quantity
+                        ).toFixed(2)}
+                      </div>
+                    </div>
+                  ) : (
+                    <div className={styles.details}>
+                      <div>{price}:</div>
+                      <div>{(item.price * item.quantity).toFixed(2)}</div>
+                    </div>
+                  )}
+                  <div className={`${styles.details} ${styles.deposit}`}>
+                    <div>
+                      Taros depozito mokestis EUR ({item.packageQty} but. X 0.1
+                      EUR):
+                    </div>
+                    <div className={styles.depositPrice}>
+                      {Number(item.packageTotalPrice * item.quantity).toFixed(
+                        2
+                      )}
+                    </div>
+                  </div>
+                  <div className={styles.details}>
+                    <div>{delivery}:</div>
+                    <div> {item.deliveryPrice.toFixed(2)}</div>
+                  </div>
+                  <div className={styles.details}>
+                    <div>{totalPrice}:</div>
+                    {userDiscountValue > 0 ? (
+                      <div>
+                        {(
+                          item.packageTotalPrice * item.quantity +
+                          item.price * userDiscountValue * item.quantity +
+                          item.deliveryPrice
+                        ).toFixed(2)}
+                      </div>
+                    ) : (
+                      <div>
+                        {(
+                          item.packageTotalPrice * item.quantity +
+                          item.price * item.quantity +
+                          item.deliveryPrice
+                        ).toFixed(2)}
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
+          ))}
+          <div className={styles.btn}>
+            <div>
+              <div className={styles.amount}>Suma apmokėti: {amount} EUR</div>
+              {userDiscountValue > 0 && userDiscountCode && (
+                <div className={styles.discount}>
+                  Suma apmokėti su nuolaida: {amount} EUR
+                </div>
+              )}
+            </div>
+            <Button buttonLabel={buttonText} handleClick={handleClick} />
           </div>
-        ))}
-      </div>
-      <div className={styles.btn}>
-        <div>
-          <div className={styles.amount}>Suma: {totalSum} EUR</div>
-          {userDiscountValue > 0 && userDiscountCode && (
-            <div className={styles.discount}>
-              Suma su nuolaida: {amount} EUR
-            </div>
-          )}
         </div>
-        <Button buttonLabel={buttonText} handleClick={handleClick} />
       </div>
     </div>
   );

@@ -70,7 +70,6 @@ export function PurchasingFormHook() {
   // const { userDiscountCode, userDiscountValue } = useHandleDiscount();
   const { csrfToken } = useCsrfTokenFetch();
   const { setData, errorResponse, response, orderId } = usePostData(orderUrl);
-  const [orderAmount, setOrderAmount] = useState<string | undefined>();
   const [order, setOrder] = useState<PurchasingInputs | null>(null);
 
   const orderProduct = cartItems.map((item) => ({
@@ -107,25 +106,17 @@ export function PurchasingFormHook() {
     console.log("Submitted Data:", order);
   };
 
-  const amount = order?.products
-    .map((product) => product.totalPrice)
-    .reduce((a, b) => a + b)
-    .toFixed(2)
-    .toString();
-
   useEffect(() => {
     if (!order) return;
     setData(order);
-    setOrderAmount(amount);
   }, [order]);
 
   return (
-    <div className={styles.content}>
+    <>
       {response?.redirectToPayment === true ? (
         <Checkout
           message={response.message}
           orderId={orderId}
-          amount={orderAmount}
           userIp={response.userIp}
         />
       ) : (
@@ -142,7 +133,11 @@ export function PurchasingFormHook() {
               autoComplete="on"
               {...register("firstName", validationRules.firstName)}
             />
-            <p>{touchedFields.lastName && errors.firstName?.message}</p>
+            <p>
+              {(touchedFields.lastName && errors.firstName?.message) ||
+                errorResponse?.find((el) => el.field === "purchaser.firstName")
+                  ?.message}
+            </p>
             {/* <p>
               {
  ||
@@ -277,6 +272,6 @@ export function PurchasingFormHook() {
           </button>
         </form>
       )}
-    </div>
+    </>
   );
 }
