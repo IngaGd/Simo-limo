@@ -174,8 +174,9 @@ export function Cart() {
             )}
             <div>
               <div>
-                <label htmlFor="">Nuolaidos kodas</label>
+                <label htmlFor="discount">Nuolaidos kodas</label>
                 <input
+                  id="discount"
                   type="text"
                   value={userInputCode}
                   onChange={(e) => setUserInputCode(e.target.value)}
