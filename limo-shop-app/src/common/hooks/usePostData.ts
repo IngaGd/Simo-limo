@@ -27,11 +27,8 @@ export function usePostData(url: string) {
   useEffect(() => {
     const postData = async () => {
       if (!data) return;
-      console.log("UseEffect data: ", data);
 
       try {
-        console.log(url);
-
         const response = await fetch(url, {
           method: "POST",
           headers: {
@@ -40,13 +37,11 @@ export function usePostData(url: string) {
           credentials: "include",
           body: JSON.stringify(data),
         });
-        console.log("JSON.stringify(data):", JSON.stringify(data));
 
         if (!response) return;
 
         if (response.ok) {
           const result = await response.json();
-          console.log("result", result);
           setResponse({
             status: result.status,
             message: result.message,
@@ -55,12 +50,10 @@ export function usePostData(url: string) {
             userIp: result.userIp,
             redirectUrl: result.redirectUrl,
           });
-          console.log("UserIp: ", result.userIp);
           setOrderId(result.orderId);
           setPaymentStatus(result.paymentStatus);
         } else {
           const errorResult = await response.json();
-          console.log("errorResult: ", errorResult);
           const errorObject = errorResult.errors.map(
             (errorsArray: { path: string; msg: string }) => {
               return {
@@ -71,7 +64,6 @@ export function usePostData(url: string) {
             }
           );
           setErrorResponse(errorObject);
-          console.log("setResponse: ", errorObject);
         }
       } catch (error) {
         console.error("Error: ", error);

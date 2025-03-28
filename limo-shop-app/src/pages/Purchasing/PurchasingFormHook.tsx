@@ -103,7 +103,6 @@ export function PurchasingFormHook() {
       discountCode: userDiscountCode,
       paymentStatus: "pending",
     });
-    console.log("Submitted Data:", order);
   };
 
   useEffect(() => {

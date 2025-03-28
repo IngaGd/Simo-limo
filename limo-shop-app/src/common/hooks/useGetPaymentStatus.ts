@@ -16,7 +16,6 @@ export function useGetPaymentStatus() {
           throw new Error("Data failed to fetch");
         }
         const responseJson = await response.json();
-        console.log("useGetPaymentStatus responseJson: ", responseJson);
         setStatus(responseJson.paymentStatus);
         if (
           responseJson.paymentStatus === "COMPLETED" ||

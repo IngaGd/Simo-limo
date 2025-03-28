@@ -41,10 +41,6 @@ export function Cart() {
   const [userInputCode, setUserInputCode] = useState("");
   const { products } = useHandleProductList();
 
-  useEffect(() => {
-    console.log("products :", products);
-  }, [products]);
-
   const handleAddDiscount = () => {
     if (products && products[0].discountCode === userInputCode) {
       setUserDiscountCode(userInputCode);

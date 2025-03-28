@@ -32,7 +32,7 @@ export function useHandleProductList() {
         });
         setProducts(productData);
       } catch (error) {
-        console.log(error);
+        console.log("Error:", error);
       }
     };
     getProductData();
