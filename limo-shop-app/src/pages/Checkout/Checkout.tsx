@@ -25,7 +25,7 @@ const buttonText = "Apmokėti";
 export function Checkout({ message, orderId, userIp }: CheckoutObject) {
   const checkoutUrl = `${URL}create-transaction`;
 
-  const { cartItems, amount, userDiscountCode, userDiscountValue } = useContext(
+  const { cartItems, amount, userDiscountValue } = useContext(
     GlobalContext
   ) as GlobalContextType;
 
