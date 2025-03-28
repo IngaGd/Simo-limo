@@ -2,20 +2,20 @@
 @use "../../styles/variables/index" as *;
 
 .cart {
-  width: 80rem;
+  width: 90rem;
   height: auto;
   padding-top: 4rem;
   align-self: center;
   justify-self: center;
   padding-bottom: 2rem;
 
-  @media screen and (max-width: 837px) {
+  @media screen and (max-width: 960px) {
     width: 100%;
     padding-left: 2rem;
     padding-right: 2rem;
   }
 
-  @media screen and (max-width: 680px) {
+  @media screen and (max-width: 746px) {
     width: 42rem;
     padding-left: 2rem;
     padding-right: 2rem;
@@ -44,9 +44,9 @@
   padding-top: 3rem;
   padding-bottom: 3rem;
 
-  @media screen and (max-width: 680px) {
+  @media screen and (max-width: 746px) {
     display: grid;
-    grid-template-rows: min-content 22rem min-content;
+    grid-template-rows: min-content auto min-content;
     grid-template-columns: 1fr;
     align-items: center;
     justify-items: center;
@@ -61,25 +61,32 @@
       gap: 1rem;
       align-items: center;
       grid-row: 2;
-      text-align: justify;
     }
 
     .btn {
       grid-row: 3;
     }
+    @media screen and (max-width: 410px) {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
   }
 }
 
 .detailsContainer {
-  width: 30rem;
+  width: 35rem;
   padding: 1rem;
-  @media screen and (max-width: 378px) {
-    width: 22rem;
+  @media screen and (max-width: 810px) {
+    font-size: 1.4rem;
+    width: 32rem;
   }
-
-  @media screen and (max-width: 320px) {
+  @media screen and (max-width: 378px) {
     width: 100%;
   }
+
+  // @media screen and (max-width: 320px) {
+  //   width: 100%;
+  // }
 }
 
 .details {
@@ -97,6 +104,10 @@
   }
   .depositPrice {
     align-self: center;
+    padding-left: 4rem;
+    @media screen and (max-width: 810px) {
+      padding-left: 3rem;
+    }
   }
 }
 
@@ -114,7 +125,8 @@
 
   .title {
     font-size: 1.8rem;
-    @media screen and (max-width: 680px) {
+    padding-left: 1rem;
+    @media screen and (max-width: 810px) {
       font-size: 1.6rem;
     }
   }

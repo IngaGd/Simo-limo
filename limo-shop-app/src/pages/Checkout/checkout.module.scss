@@ -55,7 +55,7 @@
       justify-items: center;
     }
 
-    @media screen and (max-width: 680px) {
+    @media screen and (max-width: 746px) {
       width: 42rem;
       padding-left: 2rem;
       padding-right: 2rem;
@@ -89,12 +89,14 @@
       padding-right: 2rem;
     }
 
-    @media screen and (max-width: 680px) {
+    @media screen and (max-width: 746px) {
       display: grid;
       grid-template-rows: min-content auto;
       grid-template-columns: 1fr;
       align-items: center;
       justify-items: center;
+      padding-left: 1rem;
+      padding-right: 1rem;
 
       .imageContainer {
         grid-row: 1;
@@ -117,7 +119,7 @@
       width: 100%;
       padding-left: 6rem;
     }
-    @media screen and (max-width: 680px) {
+    @media screen and (max-width: 746px) {
       padding-left: 1rem;
     }
     @media screen and (max-width: 378px) {
@@ -145,9 +147,11 @@
     .depositPrice {
       align-self: center;
       padding-left: 4rem;
-      @media screen and (max-width: 680px) {
+      @media screen and (max-width: 838px) {
         padding-left: 6rem;
-        color: red;
+      }
+      @media screen and (max-width: 393px) {
+        padding-left: 3rem;
       }
     }
   }
@@ -160,7 +164,7 @@
     flex-direction: column;
     justify-content: space-between;
 
-    @media screen and (max-width: 680px) {
+    @media screen and (max-width: 746px) {
       font-size: 1.4rem;
     }
 
@@ -169,7 +173,8 @@
       @media screen and (max-width: 837px) {
         padding-left: 6rem;
       }
-      @media screen and (max-width: 680px) {
+      @media screen and (max-width: 746px) {
+        padding-left: 0rem;
         font-size: 1.6rem;
       }
     }
@@ -195,7 +200,11 @@
       color: $color-red;
     }
 
-    @media screen and (max-width: 680px) {
+    @media screen and (max-width: 746px) {
+      font-size: 1.4rem;
+    }
+
+    @media screen and (max-width: 426px) {
       padding: 1rem;
       font-size: 1.4rem;
       flex-wrap: wrap;
