@@ -18,6 +18,13 @@
   transition: all 0.3s;
 }
 
+@mixin hover-white {
+  background-color: $color-primary-1;
+  color: $color-primary-3;
+  -webkit-text-fill-color: $color-primary-3;
+  transition: all 0.3s;
+}
+
 @mixin product-list {
   display: flex;
   cursor: pointer;

@@ -82,6 +82,7 @@ export function DescriptionTableDropDown({
         </div>
         <div className={styles.btn}>
           <Button
+            colorMode="grey"
             buttonLabel={buttonText}
             handleClick={() => {
               handleAddToCart(product);

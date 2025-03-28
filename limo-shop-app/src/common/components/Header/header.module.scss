@@ -64,5 +64,11 @@
     justify-self: center;
     align-self: center;
     text-align: center;
+
+    @media screen and (max-width: 360px) {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      font-size: 1.4rem;
+    }
   }
 }

@@ -9,12 +9,25 @@
   padding-right: $spacing-xxs;
   padding-top: $spacing-xxxxxs;
   padding-bottom: $spacing-xxxxxs;
-  background-color: $color-primary-2;
-  color: $color-primary-3;
   -webkit-text-fill-color: $color-primary-3;
   border: 1px solid black;
   border-radius: 3px;
   cursor: pointer;
+
+  &.grey {
+    background-color: $color-primary-2;
+    color: $color-primary-3;
+    -webkit-text-fill-color: $color-primary-3;
+  }
+
+  &.dark {
+    background-color: $color-primary-3;
+    color: $color-primary-1;
+    -webkit-text-fill-color: $color-primary-1;
+    &:hover {
+      @include hover-white;
+    }
+  }
 
   &:hover {
     @include hover-dark;

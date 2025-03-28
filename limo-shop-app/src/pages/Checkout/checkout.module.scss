@@ -20,8 +20,10 @@
     align-items: center;
     padding-bottom: 2rem;
     @media screen and (max-width: 837px) {
-      padding-top: 1rem;
+      padding-top: 3rem;
       padding-bottom: 1rem;
+      padding-left: 2rem;
+      padding-right: 2rem;
     }
 
     @media screen and (max-width: 470px) {
@@ -38,7 +40,7 @@
   ///////////////// - to refactor, make teusible
 
   .cart {
-    width: 65rem;
+    width: 70rem;
     height: auto;
     padding-top: 4rem;
     padding-bottom: 2rem;
@@ -104,16 +106,19 @@
         gap: 1rem;
         align-items: center;
         grid-row: 2;
-        text-align: justify;
       }
     }
   }
 
   .detailsContainer {
-    width: 30rem;
+    width: 38rem;
     padding: 1rem;
-    @media screen and (max-width: 680px) {
+    @media screen and (max-width: 837px) {
       width: 100%;
+      padding-left: 6rem;
+    }
+    @media screen and (max-width: 680px) {
+      padding-left: 1rem;
     }
     @media screen and (max-width: 378px) {
       width: 22rem;
@@ -139,8 +144,10 @@
     }
     .depositPrice {
       align-self: center;
+      padding-left: 4rem;
       @media screen and (max-width: 680px) {
-        padding-left: 4rem;
+        padding-left: 6rem;
+        color: red;
       }
     }
   }
@@ -159,6 +166,9 @@
 
     .title {
       font-size: 1.8rem;
+      @media screen and (max-width: 837px) {
+        padding-left: 6rem;
+      }
       @media screen and (max-width: 680px) {
         font-size: 1.6rem;
       }

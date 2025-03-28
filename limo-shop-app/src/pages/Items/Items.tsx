@@ -14,5 +14,6 @@ export function Items() {
   if (!item) {
     return <div>Item not found</div>;
   }
+
   return <Item product={item} />;
 }

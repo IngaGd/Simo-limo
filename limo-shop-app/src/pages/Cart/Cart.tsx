@@ -144,15 +144,18 @@ export function Cart() {
               <div className={styles.btn}>
                 <div className={styles.btnCount}>
                   <Button
+                    colorMode="grey"
                     buttonLabel={plusIcon}
                     handleClick={() => handleIncrementCartItem(item.id)}
                   />
                   <Button
+                    colorMode="grey"
                     buttonLabel={minusIcon}
                     handleClick={() => handleDecrementCartItem(item.id)}
                   />
                 </div>
                 <Button
+                  colorMode="grey"
                   buttonLabel={buttonText1}
                   handleClick={() => removeItemFromCart(item.id)}
                 />
@@ -179,6 +182,7 @@ export function Cart() {
                 />
               </div>
               <Button
+                colorMode="grey"
                 buttonLabel={buttonText4}
                 handleClick={() => handleAddDiscount()}
               />
@@ -189,6 +193,7 @@ export function Cart() {
           </Link>
           <div className={styles.removeCart}>
             <Button
+              colorMode="grey"
               buttonLabel={buttonText2}
               handleClick={() => handleEmptyCartButtonClick()}
             />

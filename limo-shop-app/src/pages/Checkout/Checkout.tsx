@@ -52,7 +52,7 @@ export function Checkout({ message, orderId, userIp }: CheckoutObject) {
       <div className={styles.message}>{message}</div>
       <div className={styles.cart}>
         <div className={styles.list}>
-          <div>{items}</div>
+          <div className={styles.title}>{items}</div>
           {cartItems.map((item) => (
             <div key={item.id} className={styles.item}>
               <div className={styles.imageContainer}>
@@ -134,7 +134,11 @@ export function Checkout({ message, orderId, userIp }: CheckoutObject) {
                 </div>
               )}
             </div>
-            <Button buttonLabel={buttonText} handleClick={handleClick} />
+            <Button
+              colorMode="dark"
+              buttonLabel={buttonText}
+              handleClick={handleClick}
+            />
           </div>
         </div>
       </div>
