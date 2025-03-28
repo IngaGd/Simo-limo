@@ -1,6 +1,8 @@
 import styles from "./image.module.scss";
 import { ImageProps } from "./image.types";
 
-export function Image({ imagePath }: ImageProps) {
-  return <img src={imagePath} alt="" className={styles.image} />;
+export function Image({ imagePath, handleLoad }: ImageProps) {
+  return (
+    <img src={imagePath} alt="" className={styles.image} onLoad={handleLoad} />
+  );
 }

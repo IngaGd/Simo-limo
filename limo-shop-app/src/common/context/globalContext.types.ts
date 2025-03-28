@@ -52,6 +52,8 @@ export type GlobalContextType = {
   setMessage: (input: string) => void;
   setUserDiscountValue: (discountValue: number) => void | null;
   setUserDiscountCode: (userInputCode: string) => void | null;
+  imageIsLoaded: boolean;
+  setImageIsLoaded: (value: boolean) => void;
 };
 
 export type GlobalContextProviderProps = {
