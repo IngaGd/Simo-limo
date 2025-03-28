@@ -127,11 +127,12 @@ export function Checkout({ message, orderId, userIp }: CheckoutObject) {
           ))}
           <div className={styles.btn}>
             <div>
-              <div className={styles.amount}>Suma apmokėti: {amount} EUR</div>
-              {userDiscountValue > 0 && userDiscountCode && (
+              {userDiscountValue > 0 ? (
                 <div className={styles.discount}>
                   Suma apmokėti su nuolaida: {amount} EUR
                 </div>
+              ) : (
+                <div className={styles.amount}>Suma apmokėti: {amount} EUR</div>
               )}
             </div>
             <Button
