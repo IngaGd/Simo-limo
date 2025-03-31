@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import {
   GlobalContextProviderProps,
   GlobalContextType,
@@ -28,33 +28,8 @@ export const GlobalContextProvider = ({
   const [userDiscountCode, setUserDiscountCode] = useState("");
   const [userDiscountValue, setUserDiscountValue] = useState(0);
   const [message, setMessage] = useState("");
-  const [imageIsLoaded, setImageIsLoaded] = useState(0);
-  const [imagesToLoad, setImagesToLoad] = useState(0);
-  const [allImagesLoaded, setAllImagesLoaded] = useState(false);
+  const [imageIsLoaded, setImageIsLoaded] = useState(false);
   const [footerIsVisible, setFooterIsVisible] = useState(false);
-
-  useEffect(() => {
-    if (products) {
-      setImagesToLoad(products.length);
-      setImageIsLoaded((prev) => {
-        const next = prev + 1;
-        if (next === imagesToLoad) {
-          setAllImagesLoaded(true);
-        }
-        return next;
-      });
-    }
-  }, [products]);
-
-  const handleLoad = () => {
-    setImageIsLoaded((prev) => {
-      const next = prev + 1;
-      if (next === imagesToLoad) {
-        setAllImagesLoaded(true);
-      }
-      return next;
-    });
-  };
 
   const amount =
     cartItems.length > 0
@@ -72,6 +47,10 @@ export const GlobalContextProvider = ({
           .toFixed(2)
           .toString()
       : "";
+
+  const handleLoad = () => {
+    setImageIsLoaded(true);
+  };
 
   return (
     <GlobalContext.Provider
@@ -97,12 +76,11 @@ export const GlobalContextProvider = ({
         setUserDiscountCode,
         message,
         amount,
+        imageIsLoaded,
+        setImageIsLoaded,
         footerIsVisible,
         setFooterIsVisible,
         handleLoad,
-        allImagesLoaded,
-        imageIsLoaded,
-        setAllImagesLoaded,
       }}
     >
       {children}

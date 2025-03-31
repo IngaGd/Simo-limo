@@ -52,9 +52,8 @@ export type GlobalContextType = {
   setMessage: (input: string) => void;
   setUserDiscountValue: (discountValue: number) => void | null;
   setUserDiscountCode: (userInputCode: string) => void | null;
-  allImagesLoaded: boolean;
-  setAllImagesLoaded: (value: boolean) => void;
-  imageIsLoaded: number;
+  imageIsLoaded: boolean;
+  setImageIsLoaded: (value: boolean) => void;
   footerIsVisible: boolean;
   setFooterIsVisible: (value: boolean) => void;
   handleLoad?: () => void;
