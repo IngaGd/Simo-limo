@@ -11,17 +11,18 @@ exports.createOrder = async (req, res) => {
   const orderNo = uuidv4();
   const sessionId = uuidv4();
 
-  const { _csrf, products, purchaser, paymentStatus } = req.body;
+  const { _csrf, products, purchaser, discountCode, paymentStatus } = req.body;
   if (_csrf !== req.csrfToken) {
     return res.status(403).send("CSRF token missmatch");
   }
 
   console.log(
     "Payload being sent to Google Sheets:",
-    purchaser.firstName,
-    purchaser.termsConfirmed,
-    products[0].title,
-    paymentStatus
+    purchaser,
+    discountCode,
+    paymentStatus,
+    "Package: ",
+    products[0].packageQty
   );
 
   const arrOfProducts = [];
@@ -30,15 +31,31 @@ exports.createOrder = async (req, res) => {
       product.id,
       product.title,
       product.quantity,
+      product.price,
       product.totalPrice,
+      product.packageTotalQty,
+      product.packageTotalPrice,
+      product.deliveryPrice,
     ]);
   });
   console.log("arrOfProducts: ", arrOfProducts);
 
-  const orderValues = (arr1, arr2, session, status) => {
+  const orderValues = (
+    purchaser,
+    arrOfProducts,
+    discountCode,
+    session,
+    status
+  ) => {
     let arr = [];
-    for (const element of arr2) {
-      arr.push(arr1.concat(element).concat(session).concat(status));
+    for (const product of arrOfProducts) {
+      arr.push(
+        purchaser
+          .concat(product)
+          .concat(discountCode)
+          .concat(session)
+          .concat(status)
+      );
     }
     return arr;
   };
@@ -46,7 +63,7 @@ exports.createOrder = async (req, res) => {
   try {
     await sheets.spreadsheets.values.append({
       spreadsheetId: PRODUCT_LIST_ID,
-      range: "Orders!A3:O",
+      range: "Orders!A3:T",
       valueInputOption: "USER_ENTERED",
       insertDataOption: "INSERT_ROWS",
       resource: {
@@ -64,6 +81,7 @@ exports.createOrder = async (req, res) => {
             purchaser.termsConfirmed,
           ],
           arrOfProducts,
+          discountCode,
           sessionId,
           paymentStatus
         ),

@@ -107,8 +107,8 @@ export function Cart() {
                   )}
                   <div className={`${styles.details} ${styles.deposit}`}>
                     <div>
-                      Taros depozito mokestis EUR ({item.packageQty} but. X 0.1
-                      EUR):
+                      Taros depozito mokestis EUR (
+                      {item.packageQty * item.quantity} but. X 0.1 EUR):
                     </div>
                     <div className={styles.depositPrice}>
                       {Number(item.packageTotalPrice * item.quantity).toFixed(

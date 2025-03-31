@@ -13,10 +13,10 @@ import { GlobalContextType } from "src/common/context/globalContext.types";
 
 export function Product({ product }: ProductPropsTypes) {
   const { handleIsActive, isActive } = useIsActive();
-  const { setAllImagesLoaded } = useContext(GlobalContext) as GlobalContextType;
+  const { setImageIsLoaded } = useContext(GlobalContext) as GlobalContextType;
 
   useEffect(() => {
-    setAllImagesLoaded(false);
+    setImageIsLoaded(false);
   }, []);
 
   return (

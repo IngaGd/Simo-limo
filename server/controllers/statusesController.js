@@ -11,19 +11,23 @@ exports.getPaymentStatus = async (req, res) => {
   try {
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: PRODUCT_LIST_ID,
-      range: "Orders!A3:Q",
+      range: "Orders!A3:V",
     });
     const rows = response.data.values;
     if (!rows && !rows.length) {
       return res.status(404).send({ message: "No data found" });
     }
 
-    const matchedOrders = rows.filter((col) => col[13] === sessionId);
+    const matchedOrders = rows.filter((col) => col[18] === sessionId);
     const orderItems = matchedOrders.map((order) => {
       return {
         title: order[10],
         quantity: order[11],
         price: order[12],
+        totalPrice: order[13],
+        packageTotalQty: order[14],
+        packageTotalPrice: order[15],
+        deliveryPrice: order[16],
       };
     });
 
@@ -33,9 +37,9 @@ exports.getPaymentStatus = async (req, res) => {
         .json({ message: "Invalid session, or order not found" });
     }
 
-    const paymentStatus = matchedOrders[0][14];
+    const paymentStatus = matchedOrders[0][19];
     const email = matchedOrders[0][3];
-    const orderNo = matchedOrders[0][16];
+    const orderNo = matchedOrders[0][21];
 
     console.log("Email in payment status: ", email);
 

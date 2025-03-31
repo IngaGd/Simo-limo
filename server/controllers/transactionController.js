@@ -7,7 +7,7 @@ exports.updateTransactionStatus = async (req, res) => {
   try {
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: PRODUCT_LIST_ID,
-      range: "Orders!A3:O",
+      range: "Orders!A3:V",
     });
     const rows = response.data.values;
     if (!rows && !rows.length) {
@@ -23,7 +23,7 @@ exports.updateTransactionStatus = async (req, res) => {
     }
 
     const completedOrderRefs = new Set(
-      rows.filter((row) => row[14] === "COMPLETED").map((row) => row[7])
+      rows.filter((row) => row[19] === "COMPLETED").map((row) => row[7])
     );
 
     console.log("Unique Completed Orders:", completedOrderRefs.size);
@@ -34,7 +34,7 @@ exports.updateTransactionStatus = async (req, res) => {
     }
 
     for (const rowIndex of rowIndexes) {
-      const updateRange = `Orders!O${rowIndex}:Q${rowIndex}`;
+      const updateRange = `Orders!T${rowIndex}:V${rowIndex}`;
 
       await sheets.spreadsheets.values.update({
         spreadsheetId: PRODUCT_LIST_ID,

@@ -37,7 +37,7 @@ type PurchasingInputs = {
     totalPrice: number;
   }[];
   purchaser: Purchaser;
-  discountCode?: string;
+  discountCode: string;
   paymentStatus: string;
 };
 
@@ -76,11 +76,19 @@ export function PurchasingFormHook() {
     id: item.id,
     title: item.title,
     quantity: item.quantity,
+    price: item.price,
     totalPrice:
       userDiscountValue > 0
         ? item.price * userDiscountValue * item.quantity
         : item.price * item.quantity,
+    packageTotalQty: item.packageQty * item.quantity,
+    packageTotalPrice: item.packageQty * item.quantity * 0.1,
+    deliveryPrice: item.deliveryPrice,
   }));
+
+  useEffect(() => {
+    console.log("orderProduct: ", orderProduct);
+  }, [orderProduct]);
 
   const validationRules = validationOptions();
 
