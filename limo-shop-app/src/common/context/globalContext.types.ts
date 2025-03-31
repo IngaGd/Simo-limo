@@ -54,6 +54,8 @@ export type GlobalContextType = {
   setUserDiscountCode: (userInputCode: string) => void | null;
   imageIsLoaded: boolean;
   setImageIsLoaded: (value: boolean) => void;
+  footerIsVisible: boolean;
+  setFooterIsVisible: (value: boolean) => void;
 };
 
 export type GlobalContextProviderProps = {

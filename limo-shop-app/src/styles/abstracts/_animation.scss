@@ -18,3 +18,28 @@
     left: 80rem;
   } /* finish */
 }
+
+@keyframes moveInBottom {
+  /*using usualy 2 properties - opacity and transform*/
+  0% {
+    opacity: 0;
+    transform: translateY(
+      5rem
+    ); /*animation in Y direction, positive moving down*/
+  } /*start*/
+
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  } /* finish */
+}
+
+.visible {
+  opacity: 1;
+  transition: all 0.3s;
+}
+
+.hidden {
+  opacity: 0;
+  transition: all 0.3s;
+}

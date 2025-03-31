@@ -29,6 +29,7 @@ export const GlobalContextProvider = ({
   const [userDiscountValue, setUserDiscountValue] = useState(0);
   const [message, setMessage] = useState("");
   const [imageIsLoaded, setImageIsLoaded] = useState(false);
+  const [footerIsVisible, setFooterIsVisible] = useState(false);
 
   const amount =
     cartItems.length > 0
@@ -73,6 +74,8 @@ export const GlobalContextProvider = ({
         amount,
         imageIsLoaded,
         setImageIsLoaded,
+        footerIsVisible,
+        setFooterIsVisible,
       }}
     >
       {children}
