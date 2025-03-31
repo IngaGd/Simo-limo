@@ -37,6 +37,7 @@ export function Cart() {
     setUserDiscountValue,
     setMessage,
     amount,
+    imageIsLoaded,
   } = useContext(GlobalContext) as GlobalContextType;
   const [userInputCode, setUserInputCode] = useState("");
   const { products } = useHandleProductList();
@@ -63,7 +64,11 @@ export function Cart() {
   };
 
   return (
-    <div className={styles.cart}>
+    <div
+      className={`${styles.cart} ${
+        imageIsLoaded ? styles.visible : styles.hidden
+      }`}
+    >
       {cartItems.length > 0 ? (
         <div className={styles.list}>
           <div>{items}:</div>

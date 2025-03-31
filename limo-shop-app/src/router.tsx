@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import { MainLayout } from "./common/layouts/MainLayout/MainLayout";
-import { Home } from "./pages/Home/Home";
 import { Items } from "./pages/Items";
 import { Contacts } from "./pages/Contacts";
 import { Cart } from "./pages/Cart";
@@ -13,6 +12,8 @@ import { PaymentSuccess } from "./pages/PaymentSuccess/PaymentSuccess";
 import { PaymentCancel } from "./pages/PaymentCancel";
 import { PaymentLoading } from "./pages/PaymentLoading/PaymentLoading";
 import { Policy } from "./pages/Policy/Policy";
+import { lazy } from "react";
+const Home = lazy(() => import("./pages/Home/Home"));
 
 const routes = [
   {

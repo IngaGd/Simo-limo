@@ -69,3 +69,13 @@
   width: 15rem;
   height: 10em;
 }
+
+.visible {
+  opacity: 1;
+  transition: all 0.2s;
+}
+
+.hidden {
+  opacity: 0;
+  transition: all 0.2s;
+}

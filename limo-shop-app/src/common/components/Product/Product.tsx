@@ -1,4 +1,3 @@
-//import { useContext } from "react";
 import { DescriptionTableDropDown } from "./DescriptionTableDropDown";
 import styles from "./product.module.scss";
 import { Title } from "components/Title";
@@ -11,14 +10,10 @@ import { useIsActive } from "src/common/hooks/useIsActive";
 import { useContext } from "react";
 import { GlobalContext } from "src/common/context/GlobalContext";
 import { GlobalContextType } from "src/common/context/globalContext.types";
-// import { GlobalContext } from "src/common/context/GlobalContext";
-// import { GlobalContextType } from "src/common/context/globalContext.types";
 
 export function Product({ product }: ProductPropsTypes) {
   const { handleIsActive, isActive } = useIsActive();
-  const { imageIsLoaded, setImageIsLoaded } = useContext(
-    GlobalContext
-  ) as GlobalContextType;
+  const { setImageIsLoaded } = useContext(GlobalContext) as GlobalContextType;
 
   const handleLoad = () => {
     setImageIsLoaded(true);
@@ -37,13 +32,10 @@ export function Product({ product }: ProductPropsTypes) {
           titleSize={TitleSize.Medium}
         />
       </Container>
-
-      {imageIsLoaded && (
-        <DescriptionTableDropDown
-          product={product}
-          handleIsActive={handleIsActive}
-        />
-      )}
+      <DescriptionTableDropDown
+        product={product}
+        handleIsActive={handleIsActive}
+      />
     </div>
   );
 }

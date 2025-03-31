@@ -22,6 +22,7 @@ export function DescriptionTableDropDown({
     setQuantities,
     handleImageToCart,
     resetImageToCart,
+    imageIsLoaded,
   } = useContext(GlobalContext) as GlobalContextType;
 
   const productQuantity =
@@ -50,7 +51,11 @@ export function DescriptionTableDropDown({
   };
 
   return (
-    <div className={`${styles.table}`}>
+    <div
+      className={`${styles.table} ${
+        imageIsLoaded ? styles.visible : styles.hidden
+      }`}
+    >
       <p className={`${styles.description}`}>{product.description}</p>
       <Link to={`/items/${product.id}`} className={styles.link}>
         Plačiau

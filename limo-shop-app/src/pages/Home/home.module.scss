@@ -1,3 +1,16 @@
+.loadingEl {
+  width: 100%;
+  height: 65vh;
+  display: grid;
+  justify-self: center;
+  align-self: center;
+  grid-template-columns: 1fr;
+  @media screen and (max-width: 976px) {
+    padding-top: 10rem;
+    height: 45vh;
+  }
+}
+
 .home {
   width: 80%;
   height: 100%;

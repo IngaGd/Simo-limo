@@ -6,6 +6,8 @@ const URL = import.meta.env.VITE_URL;
 export function useHandleProductList() {
   const productsUrl = `${URL}products`;
   const [products, setProducts] = useState<ProductListType>();
+  const [loader, setLoader] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const getProductData = async () => {
@@ -15,6 +17,7 @@ export function useHandleProductList() {
           throw new Error("Data failed to fetch");
         }
         const responseJson = await response.json();
+        setLoader(true);
         const productData = responseJson.map((column: string) => {
           return {
             id: parseInt(column[0]),
@@ -31,12 +34,16 @@ export function useHandleProductList() {
           };
         });
         setProducts(productData);
+        setError(false);
       } catch (error) {
         console.log("Error:", error);
+        setError(true);
+      } finally {
+        setLoader(false);
       }
     };
     getProductData();
   }, []);
 
-  return { products };
+  return { products, loader, error };
 }
