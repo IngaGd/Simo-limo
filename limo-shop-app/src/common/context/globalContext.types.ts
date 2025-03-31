@@ -52,10 +52,12 @@ export type GlobalContextType = {
   setMessage: (input: string) => void;
   setUserDiscountValue: (discountValue: number) => void | null;
   setUserDiscountCode: (userInputCode: string) => void | null;
-  imageIsLoaded: boolean;
-  setImageIsLoaded: (value: boolean) => void;
+  allImagesLoaded: boolean;
+  setAllImagesLoaded: (value: boolean) => void;
+  imageIsLoaded: number;
   footerIsVisible: boolean;
   setFooterIsVisible: (value: boolean) => void;
+  handleLoad?: () => void;
 };
 
 export type GlobalContextProviderProps = {

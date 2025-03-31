@@ -10,14 +10,14 @@ export default function Home() {
     GlobalContext
   ) as GlobalContextType;
   const { ref, inView } = useInView({
-    threshold: 1,
+    threshold: 0.2,
   });
 
   useEffect(() => {
     if (inView) {
       setTimeout(() => {
         setFooterIsVisible(true);
-      }, 1000);
+      }, 2000);
     }
   }, [inView]);
 

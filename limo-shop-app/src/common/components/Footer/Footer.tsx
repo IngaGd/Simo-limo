@@ -7,7 +7,7 @@ const privacy = "Privatumo politika";
 
 export function Footer() {
   return (
-    <div className={styles.footer}>
+    <div className={`${styles.footer} ${styles.animated}`}>
       <Link to="/">{home}</Link>
       <Link to="/terms">{terms}</Link>
       <Link to="/privacy">{privacy}</Link>

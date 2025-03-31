@@ -43,3 +43,18 @@
   opacity: 0;
   transition: all 0.3s;
 }
+
+@keyframes apperance {
+  /*using usualy 2 properties - opacity and transform*/
+  0% {
+    opacity: 0;
+    // transform: translateY(
+    //     15rem
+    // ); /*animation in Y direction, positive moving down*/
+  } /*start*/
+
+  100% {
+    opacity: 1;
+    // transform: translate(0);
+  } /* finish */
+}
