@@ -53,15 +53,19 @@
 }
 
 @mixin basic-page {
-  height: 45vh;
   display: flex;
+  height: 100%;
   flex-direction: column;
   padding-top: 10rem;
   align-items: center;
+  justify-self: flex-start;
   .link {
     margin-top: 4rem;
     @include link-button;
     padding-left: 2rem;
     padding-right: 2rem;
+  }
+  @media screen and (max-width: 976px) {
+    height: 45vh;
   }
 }

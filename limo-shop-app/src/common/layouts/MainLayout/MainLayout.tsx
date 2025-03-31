@@ -7,9 +7,7 @@ import { GlobalContext } from "src/common/context/GlobalContext";
 import { GlobalContextType } from "src/common/context/globalContext.types";
 
 export function MainLayout() {
-  const { footerIsVisible, products } = useContext(
-    GlobalContext
-  ) as GlobalContextType;
+  const { products } = useContext(GlobalContext) as GlobalContextType;
 
   useEffect(() => {
     if (!products || products.length === 0) return;
@@ -24,8 +22,8 @@ export function MainLayout() {
       <Header />
       <Suspense fallback={null}>
         <Outlet />
-        {footerIsVisible && <Footer />}
       </Suspense>
+      <Footer />
     </div>
   );
 }
