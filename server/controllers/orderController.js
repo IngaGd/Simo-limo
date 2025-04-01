@@ -11,7 +11,16 @@ exports.createOrder = async (req, res) => {
   const orderNo = uuidv4();
   const sessionId = uuidv4();
 
-  const { _csrf, products, purchaser, discountCode, paymentStatus } = req.body;
+  const {
+    _csrf,
+    products,
+    amountWithPVM,
+    amountPVM,
+    amountWithoutPVM,
+    purchaser,
+    discountCode,
+    paymentStatus,
+  } = req.body;
   if (_csrf !== req.csrfToken) {
     return res.status(403).send("CSRF token missmatch");
   }
@@ -33,9 +42,9 @@ exports.createOrder = async (req, res) => {
       product.quantity,
       product.price,
       product.totalPrice,
-      product.packageTotalQty,
-      product.packageTotalPrice,
-      product.deliveryPrice,
+      Number(product.packageTotalQty),
+      Number(product.packageTotalPrice).toFixed(2),
+      Number(product.deliveryPrice).toFixed(2),
     ]);
   });
   console.log("arrOfProducts: ", arrOfProducts);
@@ -43,6 +52,9 @@ exports.createOrder = async (req, res) => {
   const orderValues = (
     purchaser,
     arrOfProducts,
+    amountWithPVM,
+    amountPVM,
+    amountWithoutPVM,
     discountCode,
     session,
     status
@@ -52,6 +64,9 @@ exports.createOrder = async (req, res) => {
       arr.push(
         purchaser
           .concat(product)
+          .concat(amountWithPVM)
+          .concat(amountPVM)
+          .concat(amountWithoutPVM)
           .concat(discountCode)
           .concat(session)
           .concat(status)
@@ -63,7 +78,7 @@ exports.createOrder = async (req, res) => {
   try {
     await sheets.spreadsheets.values.append({
       spreadsheetId: PRODUCT_LIST_ID,
-      range: "Orders!A3:T",
+      range: "Orders!A3:Z",
       valueInputOption: "USER_ENTERED",
       insertDataOption: "INSERT_ROWS",
       resource: {
@@ -81,6 +96,9 @@ exports.createOrder = async (req, res) => {
             purchaser.termsConfirmed,
           ],
           arrOfProducts,
+          Number(amountWithPVM).toFixed(2),
+          Number(amountPVM).toFixed(2),
+          Number(amountWithoutPVM).toFixed(2),
           discountCode,
           sessionId,
           paymentStatus

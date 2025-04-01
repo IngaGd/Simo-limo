@@ -11,25 +11,26 @@ exports.getPaymentStatus = async (req, res) => {
   try {
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: PRODUCT_LIST_ID,
-      range: "Orders!A3:V",
+      range: "Orders!A3:Z",
     });
     const rows = response.data.values;
     if (!rows && !rows.length) {
       return res.status(404).send({ message: "No data found" });
     }
 
-    const matchedOrders = rows.filter((col) => col[18] === sessionId);
+    const matchedOrders = rows.filter((col) => col[21] === sessionId);
     const orderItems = matchedOrders.map((order) => {
       return {
         title: order[10],
         quantity: order[11],
-        price: order[12],
-        totalPrice: order[13],
-        packageTotalQty: order[14],
-        packageTotalPrice: order[15],
-        deliveryPrice: order[16],
+        price: Number(order[12]).toFixed(2),
+        totalPrice: Number(order[13]).toFixed(2),
+        // packageTotalQty: Number(order[14]),
+        // packageTotalPrice: Number(order[15]),
+        // deliveryPrice: Number(order[16]),
       };
     });
+    console.log("orderItems: ", orderItems);
 
     if (!matchedOrders) {
       return res
@@ -37,11 +38,31 @@ exports.getPaymentStatus = async (req, res) => {
         .json({ message: "Invalid session, or order not found" });
     }
 
-    const paymentStatus = matchedOrders[0][19];
+    const paymentStatus = matchedOrders[0][22];
     const email = matchedOrders[0][3];
-    const orderNo = matchedOrders[0][21];
+    const orderNo = matchedOrders[0][24];
+    const packageTotalQty =
+      matchedOrders.length > 1
+        ? Number(matchedOrders[0][14]) + Number(matchedOrders[1][14])
+        : Number(matchedOrders[0][14]);
+    const packageTotalPrice =
+      matchedOrders.length > 1
+        ? (Number(matchedOrders[0][15]) + Number(matchedOrders[1][15])).toFixed(
+            2
+          )
+        : Number(matchedOrders[0][15]).toFixed(2);
+    const deliveryPrice =
+      matchedOrders.length > 1
+        ? (Number(matchedOrders[0][16]) + Number(matchedOrders[1][16])).toFixed(
+            2
+          )
+        : Number(matchedOrders[0][16]).toFixed(2);
+    const amountWithPVM = Number(matchedOrders[0][17]).toFixed(2);
+    const amountPVM = Number(matchedOrders[0][18]).toFixed(2);
+    const amountWithoutPVM = Number(matchedOrders[0][19]).toFixed(2);
 
     console.log("Email in payment status: ", email);
+    console.log("packageTotalQty: ", packageTotalQty);
 
     if (paymentStatus === "COMPLETED" && orderNo > 0) {
       axios
@@ -56,6 +77,13 @@ exports.getPaymentStatus = async (req, res) => {
             address: `${matchedOrders[0][4]}`,
             town: `${matchedOrders[0][5]}`,
             postCode: `${matchedOrders[0][6]}`,
+            packageTotalQty: packageTotalQty,
+            packageTotalPrice: packageTotalPrice,
+            deliveryPrice: deliveryPrice,
+            amountWithPVM: amountWithPVM,
+            amountPVM: amountPVM,
+            amountWithoutPVM: amountWithoutPVM,
+            date: `${matchedOrders[0][25]}`,
             items: orderItems,
           }),
           {

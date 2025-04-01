@@ -19,7 +19,7 @@ exports.createTransaction = async (req, res) => {
           method: "GET",
         },
         cancel_url: {
-          url: process.env.RETURN_URL,
+          url: process.env.CANCEL_URL,
           method: "GET",
         },
         notification_url: {

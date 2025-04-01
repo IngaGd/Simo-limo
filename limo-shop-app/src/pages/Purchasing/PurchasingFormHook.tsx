@@ -36,6 +36,9 @@ type PurchasingInputs = {
     quantity: number;
     totalPrice: number;
   }[];
+  amountWithPVM: number;
+  amountPVM: number;
+  amountWithoutPVM: number;
   purchaser: Purchaser;
   discountCode: string;
   paymentStatus: string;
@@ -64,7 +67,7 @@ export function PurchasingFormHook() {
   });
   const orderUrl = `${URL}order`;
 
-  const { cartItems, userDiscountCode, userDiscountValue } = useContext(
+  const { cartItems, amount, userDiscountCode, userDiscountValue } = useContext(
     GlobalContext
   ) as GlobalContextType;
   // const { userDiscountCode, userDiscountValue } = useHandleDiscount();
@@ -86,10 +89,6 @@ export function PurchasingFormHook() {
     deliveryPrice: item.deliveryPrice,
   }));
 
-  useEffect(() => {
-    console.log("orderProduct: ", orderProduct);
-  }, [orderProduct]);
-
   const validationRules = validationOptions();
 
   const onSubmit: SubmitHandler<Purchaser> = (data) => {
@@ -107,6 +106,9 @@ export function PurchasingFormHook() {
     setOrder({
       _csrf: csrfToken,
       products: orderProduct,
+      amountWithPVM: Number(amount),
+      amountPVM: Number(((Number(amount) * 21) / 121).toFixed(2)),
+      amountWithoutPVM: Number((Number(amount) / 1.21).toFixed(2)),
       purchaser: sanitizedData,
       discountCode: userDiscountCode,
       paymentStatus: "pending",
