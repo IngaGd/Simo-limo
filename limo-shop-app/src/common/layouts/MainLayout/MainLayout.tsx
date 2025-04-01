@@ -22,8 +22,8 @@ export function MainLayout() {
       <Header />
       <Suspense fallback={null}>
         <Outlet />
+        <Footer />
       </Suspense>
-      <Footer />
     </div>
   );
 }

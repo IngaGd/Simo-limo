@@ -214,6 +214,8 @@
 
 .emptyCart {
   @include basic-page;
+  align-self: center;
+  justify-self: center;
 }
 
 .visible {

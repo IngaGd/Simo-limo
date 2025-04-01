@@ -4,6 +4,7 @@ import { GlobalContext } from "src/common/context/GlobalContext";
 import { GlobalContextType } from "src/common/context/globalContext.types";
 import { useGetPaymentStatus } from "src/common/hooks/useGetPaymentStatus";
 import styles from "./loginPage.module.scss";
+import { Loader } from "src/common/components/Loader/Loader";
 
 export function PaymentLoading() {
   const { handleEmptyTheCart } = useContext(GlobalContext) as GlobalContextType;
@@ -21,7 +22,8 @@ export function PaymentLoading() {
 
   return (
     <div className={styles.loginPage}>
-      Laukiu atsakymo iš banko, prašau dar neuždaryti šio lango.
+      <p>Laukiu atsakymo iš banko, prašau dar neuždaryti šio lango.</p>
+      <Loader />
     </div>
   );
 }
