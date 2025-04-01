@@ -169,11 +169,7 @@ export function Cart() {
               <div className={styles.amount}>{amount} </div>
             </div>
             <div className={styles.discount}>
-              {message ? (
-                <p style={{ color: "red" }}>{message}</p>
-              ) : (
-                <p>Suveskite nuolaidos kodą</p>
-              )}
+              {message ? <p>{message}</p> : <p>Suveskite nuolaidos kodą</p>}
               <div>
                 <div>
                   <label htmlFor="discount">Nuolaidos kodas</label>
