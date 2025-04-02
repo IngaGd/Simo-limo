@@ -1,19 +1,23 @@
 import { createContext, useState } from "react";
 import {
+  ErrorResponseObject,
   GlobalContextProviderProps,
   GlobalContextType,
 } from "./globalContext.types";
 import { useHandleCart } from "../hooks/useHandleCart";
 import { useHandleQuantity } from "../hooks/useHandleQuantity";
-import { useHandleProductList } from "../hooks/useHandleProductList";
+//import { useHandleProductList } from "../hooks/useHandleProductList";
 import { useImageToCart } from "../hooks/useImageToCart";
+import { ProductListType } from "src/pages/Home/productList.types";
 
 export const GlobalContext = createContext<GlobalContextType | null>(null);
 
 export const GlobalContextProvider = ({
   children,
 }: GlobalContextProviderProps) => {
-  const { products } = useHandleProductList();
+  const [error, setError] = useState<ErrorResponseObject | null>(null);
+  // const { products } = useHandleProductList();
+  const [products, setProducts] = useState<ProductListType>([]);
   const { quantities, handleIncrement, handleDecrement, setQuantities } =
     useHandleQuantity(products);
   const {
@@ -66,6 +70,7 @@ export const GlobalContextProvider = ({
         handleDecrementCartItem,
         handleEmptyTheCart,
         products,
+        setProducts,
         handleImageToCart,
         imageToCart,
         resetImageToCart,
@@ -81,6 +86,8 @@ export const GlobalContextProvider = ({
         footerIsVisible,
         setFooterIsVisible,
         handleLoad,
+        error,
+        setError,
       }}
     >
       {children}

@@ -1,20 +1,26 @@
-import { useEffect, useState } from "react";
-import { ProductListType } from "src/pages/Home/productList.types";
+import { useContext, useEffect, useState } from "react";
+// import { ProductListType } from "src/pages/Home/productList.types";
+import { GlobalContext } from "../context/GlobalContext";
+import { GlobalContextType } from "../context/globalContext.types";
 
 const URL = import.meta.env.VITE_URL;
 
 export function useHandleProductList() {
   const productsUrl = `${URL}products`;
-  const [products, setProducts] = useState<ProductListType>();
+  const { setError, setProducts } = useContext(
+    GlobalContext
+  ) as GlobalContextType;
+  // const [products, setProducts] = useState<ProductListType>();
   const [loader, setLoader] = useState(true);
-  const [error, setError] = useState(false);
 
   useEffect(() => {
     const getProductData = async () => {
       try {
         const response = await fetch(productsUrl, { method: "GET" });
         if (!response.ok) {
-          throw new Error("Data failed to fetch");
+          const errorData = await response.json();
+          setError(errorData);
+          return;
         }
         const responseJson = await response.json();
         setLoader(true);
@@ -34,10 +40,13 @@ export function useHandleProductList() {
           };
         });
         setProducts(productData);
-        setError(false);
+        setError(null);
       } catch (error) {
-        console.log("Error:", error);
-        setError(true);
+        setError({
+          status: 500,
+          message: "Nežinoma klaida. Bandykite dar kartą.",
+          location: "products",
+        });
       } finally {
         setLoader(false);
       }
@@ -45,5 +54,5 @@ export function useHandleProductList() {
     getProductData();
   }, []);
 
-  return { products, loader, error };
+  return { loader };
 }

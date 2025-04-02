@@ -20,6 +20,15 @@ export type CartItemType = {
 
 export type CartItemsType = Array<CartItemType>;
 
+type ErrorLocation = "global" | "products" | "orders" | "payments";
+
+export type ErrorResponseObject = {
+  status: number;
+  field?: string;
+  message: string;
+  location?: ErrorLocation;
+};
+
 export type GlobalContextType = {
   quantities: Array<QuantityType>;
   addToCart: (p: {
@@ -42,6 +51,7 @@ export type GlobalContextType = {
   handleEmptyTheCart: () => void;
   cartItems: CartItemsType;
   products: ProductListType;
+  setProducts: React.Dispatch<React.SetStateAction<ProductListType>>;
   imageToCart: boolean;
   handleImageToCart: () => void;
   resetImageToCart: () => void;
@@ -57,6 +67,8 @@ export type GlobalContextType = {
   footerIsVisible: boolean;
   setFooterIsVisible: (value: boolean) => void;
   handleLoad?: () => void;
+  error: ErrorResponseObject | null;
+  setError: (value: ErrorResponseObject | null) => void;
 };
 
 export type GlobalContextProviderProps = {

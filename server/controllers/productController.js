@@ -12,13 +12,16 @@ exports.getProducts = async (req, res) => {
       console.log("Rows data: ", rows);
       res.status(200).json(rows);
     } else {
-      res.status(404).send({ message: "No data found" });
+      res.status(404).send({ message: "Prekių sąrašas tuščias" });
     }
   } catch (error) {
-    console.error(
-      "Error reading data: ",
-      error.response?.data || error.message
-    );
-    res.status(500).send("Server error");
+    const status = error.code === 403 ? 403 : 500;
+    const message =
+      error.code === 403
+        ? "Prieiga prie prekių sąrašo negalima"
+        : "Serverio klaida. Bandykite vėliau";
+    res
+      .status(status)
+      .json({ status: status, message: message, location: "products" });
   }
 };

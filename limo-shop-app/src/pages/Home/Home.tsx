@@ -4,9 +4,12 @@ import styles from "./home.module.scss";
 import { Product } from "src/common/components/Product";
 import { GlobalContext } from "src/common/context/GlobalContext";
 import { GlobalContextType } from "src/common/context/globalContext.types";
+import { useHandleProductList } from "src/common/hooks/useHandleProductList";
+import { ErrorBanner } from "src/pages/ErrorBanner/ErrorBanner";
 
 export default function Home() {
-  const { products, setFooterIsVisible } = useContext(
+  useHandleProductList();
+  const { products, error, setFooterIsVisible } = useContext(
     GlobalContext
   ) as GlobalContextType;
   const { ref, inView } = useInView({
@@ -22,12 +25,22 @@ export default function Home() {
   }, [inView]);
 
   return (
-    <div className={`${styles.home} ${styles.animated}`} ref={ref}>
-      {products?.map((p) => (
-        <div className={styles.box} key={p.id}>
-          <Product product={p} />
+    <>
+      {error ? (
+        <ErrorBanner />
+      ) : (
+        <div className={`${styles.home} ${styles.animated}`} ref={ref}>
+          {error ? (
+            <ErrorBanner />
+          ) : (
+            products?.map((p) => (
+              <div className={styles.box} key={p.id}>
+                <Product product={p} />
+              </div>
+            ))
+          )}
         </div>
-      ))}
-    </div>
+      )}
+    </>
   );
 }
