@@ -3,7 +3,7 @@
 
 .contacts {
   padding-top: 5rem;
-  height: 68vh;
+  height: 100%;
   a {
     display: flex;
     color: $color-primary-3;
@@ -13,7 +13,7 @@
     align-items: center;
   }
   @media screen and (max-width: 720px) {
-    height: 65vh;
+    height: 48vh;
   }
 }
 
