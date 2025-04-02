@@ -21,8 +21,11 @@ exports.createOrder = async (req, res) => {
     discountCode,
     paymentStatus,
   } = req.body;
+
   if (_csrf !== req.csrfToken) {
-    return res.status(403).send("CSRF token missmatch");
+    return res
+      .status(403)
+      .send("Jūsų sesija pasibaigė. Įkelkite puslapį iš naujo.");
   }
 
   console.log(
@@ -109,6 +112,7 @@ exports.createOrder = async (req, res) => {
       httpOnly: true,
       secure: true,
       sameSite: "Lax",
+      maxAge: 30 * 60 * 1000,
     });
     res.status(200).json({
       status: 200,

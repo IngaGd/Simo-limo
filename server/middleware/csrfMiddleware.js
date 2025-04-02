@@ -9,6 +9,7 @@ const csrcMiddleware = (req, res, next) => {
       httpOnly: true,
       secure: true,
       sameSite: "Lax",
+      maxAge: 30 * 60 * 1000,
     });
     req.csrfToken = csrfToken;
   } else {
