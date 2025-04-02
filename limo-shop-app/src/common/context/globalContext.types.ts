@@ -69,6 +69,8 @@ export type GlobalContextType = {
   handleLoad?: () => void;
   error: ErrorResponseObject | null;
   setError: (value: ErrorResponseObject | null) => void;
+  csrfToken: string;
+  fetchCsrfToken: () => void;
 };
 
 export type GlobalContextProviderProps = {

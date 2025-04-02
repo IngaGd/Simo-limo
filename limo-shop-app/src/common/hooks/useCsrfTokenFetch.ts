@@ -1,28 +1,24 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const URL = import.meta.env.VITE_URL;
 
 export function useCsrfTokenFetch() {
   const [csrfToken, setCsrfToken] = useState("");
 
-  useEffect(() => {
-    const fetchCsrfToken = async () => {
-      try {
-        const response = await fetch(`${URL}csrf-token`, {
-          method: "GET",
-          credentials: "include",
-        });
-        if (!response.ok) {
-          throw new Error("Data failed fetch");
-        }
-        const responseJson = await response.json();
-        setCsrfToken(responseJson.csrfToken);
-      } catch (error) {
-        console.log("Error: ", error);
+  const fetchCsrfToken = async () => {
+    try {
+      const response = await fetch(`${URL}csrf-token`, {
+        method: "GET",
+        credentials: "include",
+      });
+      if (!response.ok) {
+        throw new Error("Data failed fetch");
       }
-    };
-    fetchCsrfToken();
-  }, []);
-
-  return { csrfToken };
+      const responseJson = await response.json();
+      setCsrfToken(responseJson.csrfToken);
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  };
+  return { csrfToken, fetchCsrfToken };
 }

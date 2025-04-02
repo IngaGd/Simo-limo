@@ -1,5 +1,6 @@
 import { IconInstagram, IconEmail } from "src/common/components/Icon";
 import styles from "./contacts.module.scss";
+import { Form } from "src/common/components/Form/Form";
 
 export function Contacts() {
   return (
@@ -15,6 +16,7 @@ export function Contacts() {
           simo.delicatessen
         </a>
       </div>
+      <Form />
       <div className={styles.address}>
         <address>
           Maistas, MB <br />

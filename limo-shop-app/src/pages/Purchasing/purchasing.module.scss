@@ -55,7 +55,8 @@
 .input {
   display: grid;
   font-family: "Courier New", Courier, monospace;
-  input {
+  input,
+  textarea {
     padding: 0.5rem 1rem;
     &:focus {
       outline: none;

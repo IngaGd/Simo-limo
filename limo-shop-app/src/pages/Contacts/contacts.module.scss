@@ -2,7 +2,6 @@
 @use "../../styles/base/index" as *;
 
 .contacts {
-  padding-top: 5rem;
   height: 100%;
   a {
     display: flex;
@@ -13,7 +12,7 @@
     align-items: center;
   }
   @media screen and (max-width: 720px) {
-    height: 48vh;
+    // height: 48vh;
   }
 }
 
@@ -26,7 +25,7 @@ address {
 }
 
 .address {
-  padding-top: 5rem;
+  // padding-top: 5rem;
   address {
     align-items: center;
   }

@@ -22,6 +22,8 @@ exports.createOrder = async (req, res) => {
     paymentStatus,
   } = req.body;
 
+  console.log("ored req.csrfToken: ", req.csrfToken);
+
   if (_csrf !== req.csrfToken) {
     return res
       .status(403)

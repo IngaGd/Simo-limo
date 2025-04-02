@@ -8,7 +8,6 @@ import { Checkout } from "../Checkout/Checkout";
 import { validationOptions } from "./purchasing.logic";
 import styles from "./purchasing.module.scss";
 import { Link } from "react-router-dom";
-import { useCsrfTokenFetch } from "src/common/hooks/useCsrfTokenFetch";
 
 // const name = "Vardas";
 // const surname = "Pavardė";
@@ -53,7 +52,7 @@ export function PurchasingFormHook() {
     setValue,
     formState: { errors, touchedFields },
   } = useForm<Purchaser>({
-    mode: "onChange",
+    mode: "onTouched",
     defaultValues: {
       firstName: "",
       lastName: "",
@@ -67,13 +66,21 @@ export function PurchasingFormHook() {
   });
   const orderUrl = `${URL}order`;
 
-  const { cartItems, amount, userDiscountCode, userDiscountValue } = useContext(
-    GlobalContext
-  ) as GlobalContextType;
+  const {
+    csrfToken,
+    fetchCsrfToken,
+    cartItems,
+    amount,
+    userDiscountCode,
+    userDiscountValue,
+  } = useContext(GlobalContext) as GlobalContextType;
   // const { userDiscountCode, userDiscountValue } = useHandleDiscount();
-  const { csrfToken } = useCsrfTokenFetch();
   const { setData, errorResponse, response, orderId } = usePostData(orderUrl);
   const [order, setOrder] = useState<PurchasingInputs | null>(null);
+
+  useEffect(() => {
+    fetchCsrfToken();
+  }, []);
 
   const orderProduct = cartItems.map((item) => ({
     id: item.id,

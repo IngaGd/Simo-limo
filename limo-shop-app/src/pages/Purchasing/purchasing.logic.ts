@@ -81,4 +81,21 @@ export const validationOptions = () => ({
       message: "Nuolaidos kodas neteisingas",
     },
   },
+  message: {
+    // required: "Privalomas laukas",
+    pattern: {
+      value: /^[\p{L}\p{N}\s\.,!?'"()\-]+$/u,
+      message:
+        "Galimi simboliai: raidės, skaičiai, kableliai, kabutės, skliausteliai ir kiti įprasti simboliai.",
+    },
+    minLength: {
+      value: 2,
+      message: "Būtų smagu gauti bent dviejų simbolių žinutę.",
+    },
+    maxLength: {
+      value: 1000,
+      message:
+        "Žinutė truputį per ilga, gal galėtum sutrumpinti iki 1000 simbolių?",
+    },
+  },
 });
