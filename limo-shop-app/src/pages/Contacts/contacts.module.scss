@@ -3,6 +3,7 @@
 
 .contacts {
   height: 100%;
+  width: 100%;
   a {
     display: flex;
     color: $color-primary-3;
@@ -25,7 +26,10 @@ address {
 }
 
 .address {
-  // padding-top: 5rem;
+  padding-bottom: 5rem;
+  @media screen and (max-width: 976px) {
+    padding-bottom: 1rem;
+  }
   address {
     align-items: center;
   }

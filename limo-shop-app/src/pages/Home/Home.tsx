@@ -30,15 +30,11 @@ export default function Home() {
         <ErrorBanner />
       ) : (
         <div className={`${styles.home} ${styles.animated}`} ref={ref}>
-          {error ? (
-            <ErrorBanner />
-          ) : (
-            products?.map((p) => (
-              <div className={styles.box} key={p.id}>
-                <Product product={p} />
-              </div>
-            ))
-          )}
+          {products?.map((p) => (
+            <div className={styles.box} key={p.id}>
+              <Product product={p} />
+            </div>
+          ))}
         </div>
       )}
     </>

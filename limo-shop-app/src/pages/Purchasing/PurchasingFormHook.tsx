@@ -127,6 +127,12 @@ export function PurchasingFormHook() {
     setData(order);
   }, [order]);
 
+  useEffect(() => {
+    if (response?.status === 200) {
+      setData(null);
+    }
+  }, [response]);
+
   return (
     <>
       {response?.redirectToPayment === true ? (

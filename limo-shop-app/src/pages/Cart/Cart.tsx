@@ -7,7 +7,6 @@ import { Image } from "src/common/components/Image";
 import { GlobalContext } from "src/common/context/GlobalContext";
 import { GlobalContextType } from "src/common/context/globalContext.types";
 import styles from "./cart.module.scss";
-import { useHandleProductList } from "src/common/hooks/useHandleProductList";
 
 const buttonText1 = "Pašalinti";
 const buttonText2 = "Išvalyti";
@@ -38,9 +37,9 @@ export function Cart() {
     setMessage,
     amount,
     imageIsLoaded,
+    products,
   } = useContext(GlobalContext) as GlobalContextType;
   const [userInputCode, setUserInputCode] = useState("");
-  const { products } = useHandleProductList();
 
   const handleAddDiscount = () => {
     if (products && products[0].discountCode === userInputCode) {

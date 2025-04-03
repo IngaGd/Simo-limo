@@ -6,7 +6,6 @@ import { useContext, useEffect, useState } from "react";
 import { usePostData } from "src/common/hooks/usePostData";
 import { GlobalContext } from "src/common/context/GlobalContext";
 import { GlobalContextType } from "src/common/context/globalContext.types";
-import { useCsrfTokenFetch } from "src/common/hooks/useCsrfTokenFetch";
 
 const buttonText = "Siųsti";
 const URL = import.meta.env.VITE_URL;
@@ -26,10 +25,12 @@ export function Form() {
   const {
     register,
     handleSubmit,
-    formState: { errors, touchedFields },
+    reset,
+    formState: { errors },
   } = useForm<UserMessage>({
     mode: "onSubmit",
     defaultValues: {
+      firstName: "",
       email: "",
       message: "",
     },
@@ -39,7 +40,7 @@ export function Form() {
   const { csrfToken, fetchCsrfToken } = useContext(
     GlobalContext
   ) as GlobalContextType;
-  const { setData } = usePostData(userMessageUrl);
+  const { setData, response, setResponse } = usePostData(userMessageUrl);
 
   const validationRules = validationOptions();
 
@@ -65,8 +66,23 @@ export function Form() {
     setData(userMessage);
   }, [userMessage]);
 
+  useEffect(() => {
+    console.log("user message response: ", response);
+    if (response?.status === 200) {
+      reset();
+      setUserMessage(null);
+      setData(null);
+      const timeout = setTimeout(() => {
+        setResponse(null);
+      }, 3000);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [response]);
+
   return (
-    <div>
+    <>
+      {response ? <div>{response?.message}</div> : <div></div>}
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <input type="hidden" name="_csrf" value={csrfToken} />
         <div className={styles.input}>
@@ -88,7 +104,7 @@ export function Form() {
             placeholder="pašto@adresas.lt"
             {...register("email", validationRules.email)}
           />
-          <p>{touchedFields.message && errors.email?.message}</p>
+          <p>{errors.email?.message}</p>
           {/* <p>
               {
                 errorResponse?.find((el) => el.field === "purchaser.email")
@@ -115,6 +131,6 @@ export function Form() {
           {buttonText}
         </button>
       </form>
-    </div>
+    </>
   );
 }

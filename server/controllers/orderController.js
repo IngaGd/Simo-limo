@@ -118,7 +118,7 @@ exports.createOrder = async (req, res) => {
     });
     res.status(200).json({
       status: 200,
-      message: `Užsakymą gavau. Spauskite žemiau "apmokėti".`,
+      message: `Užsakymas formuojamas. Spausk `,
       orderId: `${orderNo}`,
       paymentStatus: "pending",
       redirectToPayment: true,
@@ -126,6 +126,6 @@ exports.createOrder = async (req, res) => {
     });
   } catch (error) {
     console.error("Error updating data:", error);
-    res.status(500).json("Error updating data");
+    res.status(500).json({ status: 500, message: "Error updating data" });
   }
 };

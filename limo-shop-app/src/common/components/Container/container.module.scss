@@ -61,7 +61,10 @@
   position: absolute;
   z-index: 1;
 
-  @media screen and (max-width: 976px) {
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 }
 

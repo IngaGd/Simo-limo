@@ -3,6 +3,37 @@
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
+  .countdown {
+    display: flex;
+    width: 80rem;
+    align-self: center;
+    flex-direction: column;
+    font-size: 1.4rem;
+    text-align: center;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    @media screen and (max-width: 860px) {
+      width: 100%;
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+    p {
+      padding-bottom: 1rem;
+      width: 100%;
+    }
+    .date {
+      display: flex;
+      gap: 2rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      background-color: black;
+      border-radius: 3px;
+      color: white;
+    }
+  }
   // background-image: linear-gradient(
   //   90deg,
   //   pink 0%,

@@ -24,6 +24,8 @@ export function usePostData(url: string) {
     ErrorResponseObject[] | null
   >(null);
 
+  console.log("post hook data:", data);
+
   useEffect(() => {
     const postData = async () => {
       if (!data) return;
@@ -54,16 +56,22 @@ export function usePostData(url: string) {
           setPaymentStatus(result.paymentStatus);
         } else {
           const errorResult = await response.json();
-          const errorObject = errorResult.errors.map(
-            (errorsArray: { path: string; msg: string }) => {
-              return {
-                status: response.status,
-                field: errorsArray.path,
-                message: errorsArray.msg,
-              };
-            }
-          );
-          setErrorResponse(errorObject);
+          if (Array.isArray(errorResult.errors)) {
+            const errorArray = errorResult.errors.map(
+              (errorsArray: { path: string; msg: string }) => {
+                return {
+                  status: response.status,
+                  field: errorsArray.path,
+                  message: errorsArray.msg,
+                };
+              }
+            );
+            setErrorResponse(errorArray);
+          } else {
+            setErrorResponse([
+              { status: errorResult.status, message: errorResult.message },
+            ]);
+          }
         }
       } catch (error) {
         console.error("Error: ", error);
@@ -73,5 +81,12 @@ export function usePostData(url: string) {
     postData();
   }, [data]);
 
-  return { setData, errorResponse, response, orderId, paymentStatus };
+  return {
+    setData,
+    setResponse,
+    errorResponse,
+    response,
+    orderId,
+    paymentStatus,
+  };
 }

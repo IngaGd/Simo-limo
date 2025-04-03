@@ -49,7 +49,14 @@ export function Checkout({ message, orderId, userIp }: CheckoutObject) {
 
   return (
     <div className={styles.checkout}>
-      <div className={styles.message}>{message}</div>
+      <div className={styles.message}>
+        <div>{message}</div>
+        <Button
+          colorMode="grey"
+          buttonLabel={buttonText}
+          handleClick={handleClick}
+        />
+      </div>
       <div className={styles.cart}>
         <div className={styles.list}>
           <div className={styles.title}>{items}</div>

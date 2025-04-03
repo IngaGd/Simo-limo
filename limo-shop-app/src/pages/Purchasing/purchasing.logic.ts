@@ -3,12 +3,12 @@ export const validationOptions = () => ({
     required: "Privalomas laukas",
     pattern: {
       value: /^[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ' -]+$/,
-      message: "Pašalinkite negalimus sximbolius, galimi - raidės, (-), (')",
+      message: "Galimi simboliai - raidės, (-), (')",
     },
-    minLength: { value: 2, message: "Vardas turi būti ne mažiau 2 raidžių." },
+    minLength: { value: 2, message: "Vardas turėtų būti ne mažiau 2 raidžių." },
     maxLength: {
       value: 50,
-      message: "Vardas turi būti ne daugiau 50 raidžių.",
+      message: "Vardas turėtų būti ne daugiau 50 raidžių.",
     },
   },
   lastName: {
@@ -19,11 +19,11 @@ export const validationOptions = () => ({
     },
     minLength: {
       value: 2,
-      message: "Pavardė turi būti ne mažiau 2 raidžių.",
+      message: "Pavardė turėtų būti ne mažiau 2 raidžių.",
     },
     maxLength: {
       value: 50,
-      message: "Pavardė turi būti ne daugiau 50 raidžių.",
+      message: "Pavardė turėtų būti ne daugiau 50 raidžių.",
     },
   },
   phone: {
@@ -44,10 +44,9 @@ export const validationOptions = () => ({
     required: "Privalomas laukas",
     pattern: {
       value: /^[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ0-9' /.-]+$/,
-      message:
-        "Leidžiami simboliai: raidės, skaičiai, tarpai, (-), ('), (/), (.)",
+      message: "Galimi simboliai: raidės, skaičiai, tarpai, (-), ('), (/), (.)",
     },
-    minLength: { value: 2, message: "Vardas turi būti ne mažiau 2 raidžių." },
+    minLength: { value: 4, message: "Turėtų būti vent 4 simboliai." },
     maxLength: {
       value: 50,
       message: "Gatvė turi būti ne daugiau 50 raidžių.",
@@ -57,11 +56,11 @@ export const validationOptions = () => ({
     required: "Privalomas laukas",
     pattern: {
       value: /^[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ' -]+$/,
-      message: "Pašalinkite negalimus simbolius, galimi - raidės, (-), (')",
+      message: "Galimi simboliai - raidės, (-), (')",
     },
     minLength: {
-      value: 2,
-      message: "Miestas turi būti ne mažiau 2 raidžių.",
+      value: 4,
+      message: "Miestas turėtų būti bent 4 raidžių ilgio.",
     },
     maxLength: {
       value: 50,
