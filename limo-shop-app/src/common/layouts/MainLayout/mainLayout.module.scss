@@ -5,13 +5,14 @@
   height: 100vh;
   .countdown {
     display: flex;
-    width: 80rem;
+    width: 82rem;
     align-self: center;
     flex-direction: column;
     font-size: 1.4rem;
-    text-align: center;
+    text-align: justify;
+    justify-content: center;
     align-items: center;
-    padding-top: 1rem;
+    padding-top: 3rem;
     padding-bottom: 1rem;
     padding-left: 1rem;
     padding-right: 1rem;

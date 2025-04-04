@@ -75,7 +75,7 @@ export function PurchasingFormHook() {
     userDiscountValue,
   } = useContext(GlobalContext) as GlobalContextType;
   // const { userDiscountCode, userDiscountValue } = useHandleDiscount();
-  const { setData, errorResponse, response, orderId } = usePostData(orderUrl);
+  const { setData, validationError, response, orderId } = usePostData(orderUrl);
   const [order, setOrder] = useState<PurchasingInputs | null>(null);
 
   useEffect(() => {
@@ -157,13 +157,14 @@ export function PurchasingFormHook() {
             />
             <p>
               {(touchedFields.lastName && errors.firstName?.message) ||
-                errorResponse?.find((el) => el.field === "purchaser.firstName")
-                  ?.message}
+                validationError?.find(
+                  (el) => el.field === "purchaser.firstName"
+                )?.message}
             </p>
             {/* <p>
               {
  ||
-                errorResponse?.find((el) => el.field === "purchaser.firstName")
+                validationError?.find((el) => el.field === "purchaser.firstName")
                   ?.message
               }
             </p> */}
@@ -179,7 +180,7 @@ export function PurchasingFormHook() {
             <p>{touchedFields.phone && errors.lastName?.message}</p>
             {/* <p>
               {
-                errorResponse?.find((el) => el.field === "purchaser.lastName")
+                validationError?.find((el) => el.field === "purchaser.lastName")
                   ?.message
               }
             </p> */}
@@ -196,7 +197,7 @@ export function PurchasingFormHook() {
             <p>{touchedFields.email && errors.phone?.message}</p>
             {/* <p>
               {
-                errorResponse?.find((el) => el.field === "purchaser.phone")
+                validationError?.find((el) => el.field === "purchaser.phone")
                   ?.message
               }
             </p> */}
@@ -213,7 +214,7 @@ export function PurchasingFormHook() {
             <p>{touchedFields.address && errors.email?.message}</p>
             {/* <p>
               {
-                errorResponse?.find((el) => el.field === "purchaser.email")
+                validationError?.find((el) => el.field === "purchaser.email")
                   ?.message
               }
             </p> */}
@@ -230,7 +231,7 @@ export function PurchasingFormHook() {
             <p>{touchedFields.town && errors.address?.message}</p>
             {/* <p>
               {
-                errorResponse?.find((el) => el.field === "purchaser.address")
+                validationError?.find((el) => el.field === "purchaser.address")
                   ?.message
               }
             </p> */}
@@ -246,7 +247,7 @@ export function PurchasingFormHook() {
             <p>{touchedFields.postCode && errors.town?.message}</p>
             {/* <p>
               {
-                errorResponse?.find((el) => el.field === "purchaser.town")
+                validationError?.find((el) => el.field === "purchaser.town")
                   ?.message
               }
             </p> */}
@@ -263,7 +264,7 @@ export function PurchasingFormHook() {
             <p>{touchedFields.termsConfirmed && errors.postCode?.message}</p>
             {/* <p>
               {
-                errorResponse?.find((el) => el.field === "purchaser.postCode")
+                validationError?.find((el) => el.field === "purchaser.postCode")
                   ?.message
               }
             </p> */}

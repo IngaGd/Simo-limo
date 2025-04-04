@@ -6,6 +6,8 @@ import { GiRotaryPhone } from "react-icons/gi";
 import { BsFillEnvelopeAtFill } from "react-icons/bs";
 import { GoPlus } from "react-icons/go";
 import { GoDash } from "react-icons/go";
+import { FaCheckCircle } from "react-icons/fa";
+import { IoMdAlert } from "react-icons/io";
 import styles from "./icon.module.scss";
 import { IconProps } from "./icon.types";
 
@@ -41,4 +43,12 @@ export function IconPlus({ size }: IconProps) {
 
 export function IconMinus({ size }: IconProps) {
   return <GoDash className={`${styles.minus} ${styles[`${size}`]}`} />;
+}
+
+export function IconSuccess({ size }: IconProps) {
+  return <FaCheckCircle className={`${styles.success} ${styles[`${size}`]}`} />;
+}
+
+export function IconError({ size }: IconProps) {
+  return <IoMdAlert className={`${styles.error} ${styles[`${size}`]}`} />;
 }

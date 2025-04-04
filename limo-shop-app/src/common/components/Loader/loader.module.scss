@@ -1,6 +1,19 @@
+@use "../../../styles/abstracts/index" as *;
+
 .loader {
   display: flex;
   width: 100%;
-  padding-top: 5rem;
   justify-content: center;
+  align-content: center;
+
+  &.fullscreen {
+    @include fullscreenOverlay;
+    .fullscr {
+      margin-top: -20rem;
+
+      @media screen and (max-width: 976px) {
+        margin-top: 0rem;
+      }
+    }
+  }
 }

@@ -29,7 +29,11 @@ exports.sendUserMessage = async (req, res) => {
     console.log("User message data: ", response.data);
     res
       .status(200)
-      .json({ status: 200, message: "Žinutė išsiųsta sėkmingai." });
+      .json({
+        type: "success",
+        status: 200,
+        message: "Žinutė išsiųsta sėkmingai.",
+      });
   } catch (error) {
     console.error(
       "Failed to send user message",
@@ -37,6 +41,10 @@ exports.sendUserMessage = async (req, res) => {
     );
     res
       .status(500)
-      .json({ status: 500, message: "Įvyko klaida siunčiant žinutę." });
+      .json({
+        type: "error",
+        status: 500,
+        message: "Įvyko klaida siunčiant žinutę.",
+      });
   }
 };

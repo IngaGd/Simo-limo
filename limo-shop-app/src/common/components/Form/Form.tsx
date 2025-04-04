@@ -6,6 +6,8 @@ import { useContext, useEffect, useState } from "react";
 import { usePostData } from "src/common/hooks/usePostData";
 import { GlobalContext } from "src/common/context/GlobalContext";
 import { GlobalContextType } from "src/common/context/globalContext.types";
+import { Notification } from "../Notification/Notification";
+import { Loader } from "../Loader/Loader";
 
 const buttonText = "Siųsti";
 const URL = import.meta.env.VITE_URL;
@@ -37,10 +39,10 @@ export function Form() {
   });
   const userMessageUrl = `${URL}user-message`;
   const [userMessage, setUserMessage] = useState<FormInputs | null>(null);
-  const { csrfToken, fetchCsrfToken } = useContext(
+  const { csrfToken, notification, loader, fetchCsrfToken } = useContext(
     GlobalContext
   ) as GlobalContextType;
-  const { setData, response, setResponse } = usePostData(userMessageUrl);
+  const { setData, setNotification } = usePostData(userMessageUrl);
 
   const validationRules = validationOptions();
 
@@ -67,22 +69,39 @@ export function Form() {
   }, [userMessage]);
 
   useEffect(() => {
-    console.log("user message response: ", response);
-    if (response?.status === 200) {
-      reset();
-      setUserMessage(null);
-      setData(null);
+    console.log("user message response: ", notification);
+    if (loader || notification) {
+      document.body.style.overflow = "hidden";
+      if (notification?.type === "success") {
+        reset();
+        setUserMessage(null);
+        setData(null);
+      }
       const timeout = setTimeout(() => {
-        setResponse(null);
-      }, 3000);
-
+        setNotification(null);
+      }, 2000);
       return () => clearTimeout(timeout);
+    } else {
+      document.body.style.overflow = "";
     }
-  }, [response]);
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [notification, loader]);
 
   return (
     <>
-      {response ? <div>{response?.message}</div> : <div></div>}
+      {loader ? (
+        <Loader size="fullscreen" />
+      ) : notification ? (
+        <Notification
+          message={notification?.message}
+          type={notification?.type}
+          size="fullscreen"
+        />
+      ) : (
+        <div></div>
+      )}
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <input type="hidden" name="_csrf" value={csrfToken} />
         <div className={styles.input}>

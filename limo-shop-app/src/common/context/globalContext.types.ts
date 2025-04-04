@@ -20,13 +20,10 @@ export type CartItemType = {
 
 export type CartItemsType = Array<CartItemType>;
 
-type ErrorLocation = "global" | "products" | "orders" | "payments";
-
-export type ErrorResponseObject = {
-  status: number;
-  field?: string;
+export type Notification = {
+  type: "success" | "error";
   message: string;
-  location?: ErrorLocation;
+  status?: number;
 };
 
 export type GlobalContextType = {
@@ -67,10 +64,12 @@ export type GlobalContextType = {
   footerIsVisible: boolean;
   setFooterIsVisible: (value: boolean) => void;
   handleLoad?: () => void;
-  error: ErrorResponseObject | null;
-  setError: (value: ErrorResponseObject | null) => void;
+  notification: Notification | null;
+  setNotification: (value: Notification | null) => void;
   csrfToken: string;
   fetchCsrfToken: () => void;
+  loader: boolean;
+  setLoader: (value: boolean) => void;
 };
 
 export type GlobalContextProviderProps = {

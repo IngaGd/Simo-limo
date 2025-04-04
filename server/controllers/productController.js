@@ -22,6 +22,6 @@ exports.getProducts = async (req, res) => {
         : "Serverio klaida. Bandykite vėliau";
     res
       .status(status)
-      .json({ status: status, message: message, location: "products" });
+      .json({ status: status, message: message, type: "errors" });
   }
 };

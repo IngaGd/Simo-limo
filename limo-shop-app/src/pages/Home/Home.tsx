@@ -9,7 +9,7 @@ import { ErrorBanner } from "src/pages/ErrorBanner/ErrorBanner";
 
 export default function Home() {
   useHandleProductList();
-  const { products, error, setFooterIsVisible } = useContext(
+  const { products, notification, setFooterIsVisible } = useContext(
     GlobalContext
   ) as GlobalContextType;
   const { ref, inView } = useInView({
@@ -26,7 +26,7 @@ export default function Home() {
 
   return (
     <>
-      {error ? (
+      {notification?.type === "error" ? (
         <ErrorBanner />
       ) : (
         <div className={`${styles.home} ${styles.animated}`} ref={ref}>

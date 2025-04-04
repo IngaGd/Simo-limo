@@ -52,6 +52,20 @@
   }
 }
 
+.success {
+  &.medium {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+}
+
+.error {
+  &.medium {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+}
+
 .plus,
 .minus {
   padding: 0;

@@ -126,6 +126,10 @@ exports.createOrder = async (req, res) => {
     });
   } catch (error) {
     console.error("Error updating data:", error);
-    res.status(500).json({ status: 500, message: "Error updating data" });
+    res.status(500).json({
+      type: "error",
+      status: error.status,
+      message: "Serverio klaida, bandyk vėliau.",
+    });
   }
 };

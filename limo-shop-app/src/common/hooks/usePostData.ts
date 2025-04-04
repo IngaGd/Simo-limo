@@ -1,9 +1,17 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { GlobalContext } from "../context/GlobalContext";
+import { GlobalContextType } from "../context/globalContext.types";
 
 type ErrorResponseObject = {
   status: number;
   field?: string;
   message: string;
+};
+
+export type Notification = {
+  type: "success" | "error";
+  message: string;
+  status?: number;
 };
 
 type ResponseObject = {
@@ -17,10 +25,15 @@ type ResponseObject = {
 
 export function usePostData(url: string) {
   const [data, setData] = useState<Object | null>(null);
+  // const [loader, setLoader] = useState(false);
+  // const [notification, setNotification] = useState<Notification | null>(null);
   const [response, setResponse] = useState<ResponseObject | null>(null);
+  const { setNotification, setLoader } = useContext(
+    GlobalContext
+  ) as GlobalContextType;
   const [orderId, setOrderId] = useState<string>("");
   const [paymentStatus, setPaymentStatus] = useState<string | null>(null);
-  const [errorResponse, setErrorResponse] = useState<
+  const [validationError, setValidationError] = useState<
     ErrorResponseObject[] | null
   >(null);
 
@@ -29,6 +42,8 @@ export function usePostData(url: string) {
   useEffect(() => {
     const postData = async () => {
       if (!data) return;
+
+      setLoader(true);
 
       try {
         const response = await fetch(url, {
@@ -54,6 +69,11 @@ export function usePostData(url: string) {
           });
           setOrderId(result.orderId);
           setPaymentStatus(result.paymentStatus);
+          setNotification({
+            type: result.type,
+            status: result.status,
+            message: result.message,
+          });
         } else {
           const errorResult = await response.json();
           if (Array.isArray(errorResult.errors)) {
@@ -66,15 +86,19 @@ export function usePostData(url: string) {
                 };
               }
             );
-            setErrorResponse(errorArray);
+            setValidationError(errorArray);
           } else {
-            setErrorResponse([
-              { status: errorResult.status, message: errorResult.message },
-            ]);
+            setNotification({
+              type: errorResult.error,
+              status: errorResult.status,
+              message: errorResult.message,
+            });
           }
         }
       } catch (error) {
         console.error("Error: ", error);
+      } finally {
+        setLoader(false);
       }
     };
 
@@ -84,9 +108,12 @@ export function usePostData(url: string) {
   return {
     setData,
     setResponse,
-    errorResponse,
+    validationError,
     response,
     orderId,
     paymentStatus,
+    // loader,
+    // notification,
+    setNotification,
   };
 }

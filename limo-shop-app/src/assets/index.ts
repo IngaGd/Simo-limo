@@ -1,11 +1,11 @@
-import drop from "./images/drop.jpg";
-import limo from "./images/limo.jpg";
+import drop1 from "./images/drop1.jpg";
+import limo1 from "./images/limo1.jpg";
 import logo from "./logo/logo.png";
 import logoTransparent from "./logo/logo-transparent.png";
 
 export const allAssets = {
-  drop,
-  limo,
+  drop1,
+  limo1,
   logo,
   logoTransparent,
 };

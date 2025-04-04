@@ -7,7 +7,7 @@ const URL = import.meta.env.VITE_URL;
 
 export function useHandleProductList() {
   const productsUrl = `${URL}products`;
-  const { setError, setProducts } = useContext(
+  const { setNotification, setProducts } = useContext(
     GlobalContext
   ) as GlobalContextType;
   // const [products, setProducts] = useState<ProductListType>();
@@ -17,13 +17,17 @@ export function useHandleProductList() {
     const getProductData = async () => {
       try {
         const response = await fetch(productsUrl, { method: "GET" });
+        setLoader(true);
         if (!response.ok) {
           const errorData = await response.json();
-          setError(errorData);
+          setNotification({
+            type: errorData.type,
+            message: errorData.message,
+            status: errorData.status,
+          });
           return;
         }
         const responseJson = await response.json();
-        setLoader(true);
         const productData = responseJson.map((column: string) => {
           return {
             id: parseInt(column[0]),
@@ -40,12 +44,12 @@ export function useHandleProductList() {
           };
         });
         setProducts(productData);
-        setError(null);
+        setNotification(null);
       } catch (error) {
-        setError({
+        setNotification({
           status: 500,
           message: "Nežinoma klaida. Bandykite dar kartą.",
-          location: "products",
+          type: "error",
         });
       } finally {
         setLoader(false);

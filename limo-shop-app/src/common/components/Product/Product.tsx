@@ -14,7 +14,7 @@ import { ErrorBanner } from "../../../pages/ErrorBanner/ErrorBanner";
 
 export function Product({ product }: ProductPropsTypes) {
   const { handleIsActive, isActive } = useIsActive();
-  const { setImageIsLoaded, error } = useContext(
+  const { setImageIsLoaded, notification } = useContext(
     GlobalContext
   ) as GlobalContextType;
 
@@ -24,7 +24,7 @@ export function Product({ product }: ProductPropsTypes) {
 
   return (
     <>
-      {error ? (
+      {notification?.type === "error" ? (
         <ErrorBanner />
       ) : (
         <div className={isActive ? styles.active : styles.product}>
