@@ -3,7 +3,7 @@ import styles from "./descriptionTableDropDown.module.scss";
 import { Link } from "react-router-dom";
 import { GlobalContext } from "src/common/context/GlobalContext";
 import { GlobalContextType } from "src/common/context/globalContext.types";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { DescriptionTableProps } from "./descriptionTableDropDown.types";
 import { IconMinus, IconPlus } from "../../Icon";
 
@@ -50,6 +50,10 @@ export function DescriptionTableDropDown({
     );
   };
 
+  useEffect(() => {
+    console.log("product.category:", product);
+  }, [product]);
+
   return (
     <div
       className={`${styles.table} ${
@@ -57,7 +61,7 @@ export function DescriptionTableDropDown({
       }`}
     >
       <p className={`${styles.description}`}>{product.description}</p>
-      <Link to={`/items/${product.id}`} className={styles.link}>
+      <Link to={`/items/${product.category}`} className={styles.link}>
         Plačiau
       </Link>
       <div className={`${styles.purchasing}`}>

@@ -5,7 +5,7 @@ exports.getProducts = async (req, res) => {
   try {
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: PRODUCT_LIST_ID,
-      range: "Products!A2:J",
+      range: "Products!A2:K",
     });
     const rows = response.data.values;
     if (rows && rows.length) {

@@ -6,10 +6,8 @@ import { GlobalContextType } from "src/common/context/globalContext.types";
 
 export function Items() {
   const { products } = useContext(GlobalContext) as GlobalContextType;
-
-  const { id } = useParams();
-  const itemId = Number(id);
-  const item = products?.find((p) => p.id === itemId);
+  const { category } = useParams();
+  const item = products?.find((p) => p.category === category);
 
   if (!item) {
     return <div>Item not found</div>;

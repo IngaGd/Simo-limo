@@ -13,9 +13,9 @@ export function Contacts() {
     <div className={styles.contacts}>
       <div className="heading-secondary">Kontaktai:</div>
       <div className={styles.links}>
-        <a href="mailto:mbmaistas@gmail.com">
+        <a href="mailto:simolimonadai@gmail.com">
           <IconEmail size="medium" />
-          mbmaistas@gmail.com
+          simolimonadai@gmail.com
         </a>
         <a href="https://www.instagram.com/simo.delicatessen/" className="">
           <IconInstagram size="medium" />

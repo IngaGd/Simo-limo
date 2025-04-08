@@ -12,7 +12,7 @@
 .active {
   @include product-list;
   height: 50rem;
-  background-color: rgba($color-primary-2, 1);
+  background-color: rgba($color-primary-1, 1);
   @media screen and (max-width: 976px) {
   }
 }

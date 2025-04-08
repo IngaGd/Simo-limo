@@ -21,7 +21,7 @@ const routes = [
     element: <MainLayout />,
     children: [
       { path: "/", element: <Home /> },
-      { path: "/items/:id", element: <Items /> },
+      { path: "/items/:category", element: <Items /> },
       { path: "/contacts", element: <Contacts /> },
       { path: "/cart", element: <Cart /> },
       { path: "/terms", element: <Terms /> },

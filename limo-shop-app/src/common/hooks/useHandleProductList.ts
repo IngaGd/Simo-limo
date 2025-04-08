@@ -41,6 +41,7 @@ export function useHandleProductList() {
             deliveryPrice: Number(column[7]),
             discountCode: column[8],
             discountValue: Number(column[9]),
+            category: column[10],
           };
         });
         setProducts(productData);
