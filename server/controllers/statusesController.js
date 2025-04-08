@@ -69,6 +69,7 @@ exports.getPaymentStatus = async (req, res) => {
         .post(
           process.env.GOOGLE_SCRIPT_URL,
           JSON.stringify({
+            apiKey: process.env.GOOGLE_SCRIPT_SECRET,
             orderNo: `${orderNo}`,
             email: `${matchedOrders[0][3]}`,
             firstName: `${matchedOrders[0][0]}`,

@@ -18,6 +18,7 @@ exports.sendUserMessage = async (req, res) => {
     const response = await axios.post(
       process.env.GOOGLE_SCRIPT_MESSAGES_URL,
       JSON.stringify({
+        apiKey: process.env.GOOGLE_SCRIPT_USER_MESSAGE_SECRET,
         email: userMessage.email,
         firstName: userMessage.firstName,
         message: userMessage.message,
@@ -27,24 +28,20 @@ exports.sendUserMessage = async (req, res) => {
       }
     );
     console.log("User message data: ", response.data);
-    res
-      .status(200)
-      .json({
-        type: "success",
-        status: 200,
-        message: "Žinutė išsiųsta sėkmingai.",
-      });
+    res.status(200).json({
+      type: "success",
+      status: 200,
+      message: "Žinutė išsiųsta sėkmingai.",
+    });
   } catch (error) {
     console.error(
       "Failed to send user message",
       error.response?.data || error.message
     );
-    res
-      .status(500)
-      .json({
-        type: "error",
-        status: 500,
-        message: "Įvyko klaida siunčiant žinutę.",
-      });
+    res.status(500).json({
+      type: "error",
+      status: 500,
+      message: "Įvyko klaida siunčiant žinutę.",
+    });
   }
 };
