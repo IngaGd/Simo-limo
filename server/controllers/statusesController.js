@@ -1,4 +1,5 @@
 const { sheets, PRODUCT_LIST_ID } = require("../utils/googleSheets");
+const logger = require("../utils/logger");
 const axios = require("axios");
 
 exports.getPaymentStatus = async (req, res) => {
@@ -30,7 +31,6 @@ exports.getPaymentStatus = async (req, res) => {
         // deliveryPrice: Number(order[16]),
       };
     });
-    console.log("orderItems: ", orderItems);
 
     if (!matchedOrders) {
       return res
@@ -60,9 +60,6 @@ exports.getPaymentStatus = async (req, res) => {
     const amountWithPVM = Number(matchedOrders[0][17]).toFixed(2);
     const amountPVM = Number(matchedOrders[0][18]).toFixed(2);
     const amountWithoutPVM = Number(matchedOrders[0][19]).toFixed(2);
-
-    console.log("Email in payment status: ", email);
-    console.log("packageTotalQty: ", packageTotalQty);
 
     if (paymentStatus === "COMPLETED" && orderNo > 0) {
       axios
@@ -97,6 +94,13 @@ exports.getPaymentStatus = async (req, res) => {
             "Failed to trigger invoice generation:",
             error.response?.data || error.message
           );
+          logger.error({
+            context: "statusesController",
+            timestamp: new Date().toISOString(),
+            message: error.response?.data?.message || error.message,
+            errors: error.response?.data?.errors,
+            sessionId: error.response?.data?.sessionId,
+          });
         });
 
       res.status(200).json({
@@ -112,6 +116,18 @@ exports.getPaymentStatus = async (req, res) => {
     }
   } catch (error) {
     console.error("Error reading data: ", error);
-    return res.status(500).json({ message: "Server error" });
+    logger.error({
+      context: "orderController",
+      timestamp: new Date().toISOString(),
+      path: req.originalUrl,
+      message: error.message,
+      stack: error.stack,
+      transactionRef: req.reference,
+    });
+    res.status(error.status || 500).json({
+      type: "error",
+      status: error.status,
+      message: "Serverio klaida, perkrauk puslapį arba bandyk vėliau.",
+    });
   }
 };

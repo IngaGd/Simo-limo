@@ -1,8 +1,11 @@
 const axios = require("axios");
+const createDOMPurify = require("dompurify");
+const { JSDOM } = require("jsdom");
+const window = new JSDOM("").window;
+const DOMPurify = createDOMPurify(window);
+const logger = require("../utils/logger");
 
 exports.sendUserMessage = async (req, res) => {
-  console.log("Request received on UserMessage");
-
   const { _csrf, userMessage } = req.body;
 
   if (_csrf !== req.csrfToken) {
@@ -19,9 +22,9 @@ exports.sendUserMessage = async (req, res) => {
       process.env.GOOGLE_SCRIPT_MESSAGES_URL,
       JSON.stringify({
         apiKey: process.env.GOOGLE_SCRIPT_USER_MESSAGE_SECRET,
-        email: userMessage.email,
-        firstName: userMessage.firstName,
-        message: userMessage.message,
+        email: DOMPurify.sanitize(userMessage.email),
+        firstName: DOMPurify.sanitize(userMessage.firstName),
+        message: DOMPurify.sanitize(userMessage.message),
       }),
       {
         headers: { "Content-type": "application/json" },
@@ -34,10 +37,13 @@ exports.sendUserMessage = async (req, res) => {
       message: "Žinutė išsiųsta sėkmingai.",
     });
   } catch (error) {
-    console.error(
-      "Failed to send user message",
-      error.response?.data || error.message
-    );
+    logger.error({
+      context: "userMessageController",
+      timestamp: new Date().toISOString(),
+      path: req.originalUrl,
+      message: error.message,
+      stack: error.stack,
+    });
     res.status(500).json({
       type: "error",
       status: 500,

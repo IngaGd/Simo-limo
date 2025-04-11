@@ -1,18 +1,15 @@
 require("dotenv").config();
 const axios = require("axios");
+const logger = require("../utils/logger");
 
 exports.createTransaction = async (req, res) => {
-  console.log("Request received on /api/create-transaction");
-  console.log("User IP: ", req.userIp);
-
-  const { tarnsactionData } = req.body;
-
+  const { transactionData } = req.body;
   const requestTransactionData = {
     transaction: {
-      amount: tarnsactionData.amount.toString(),
-      currency: tarnsactionData.currency,
-      reference: tarnsactionData.reference,
-      //merchant_data: `Internal Order ID: ${tarnsactionData.reference}`,
+      amount: transactionData.amount.toString(),
+      currency: transactionData.currency,
+      reference: transactionData.reference,
+      //merchant_data: `Internal Order ID: ${transactionData.reference}`,
       transaction_url: {
         return_url: {
           url: process.env.RETURN_URL,
@@ -60,6 +57,61 @@ exports.createTransaction = async (req, res) => {
       redirectUrl: redirectPaymentUrl,
     });
   } catch (error) {
-    console.error("Error: ", error.response?.data || error.message);
+    if (!error.response) {
+      logger.error({
+        context: "createTransaction",
+        timestamp: new Date().toISOString(),
+        message: error.message,
+      });
+      return res.status(500).json({
+        status: 500,
+        message:
+          "Nepavyko prisijungti prie mokėjimo paslaugos. Bandykite vėliau.",
+        type: "error",
+      });
+    }
+    const code = error.response?.data?.code;
+    logger.error({
+      context: "createTransaction",
+      timestamp: new Date().toISOString(),
+      code: error.response?.data?.code,
+      message: error.response?.data?.message,
+      errors: error.response?.data?.errors,
+      input: transactionData.reference,
+    });
+    if (code === 1001) {
+      res.status(400).json({
+        status: 400,
+        message:
+          "Neteisingas užklausos formatas. Patikrink siunčiamus duomenis.",
+        type: "error",
+      });
+    } else if (code === 1036) {
+      res.status(400).json({
+        status: 400,
+        message:
+          "Nepavyko autentifikuotis. Patikrinkite prisijungimo duomenis.",
+        type: "error",
+      });
+    } else if (code === 1032) {
+      res.status(400).json({
+        status: 400,
+        message: "Nepavyko atlikti mokėjimo, patikrink duomens",
+        type: "error",
+      });
+    } else if (code === 1004) {
+      res.status(400).json({
+        status: 400,
+        message:
+          "Nepavyko prisijungti prie paslaugos. Bandykite dar kartą vėliau.",
+        type: "error",
+      });
+    } else {
+      res.status(500).json({
+        status: 500,
+        message: "Nenumatyta klaida, bandyk vėliau.",
+        type: "error",
+      });
+    }
   }
 };

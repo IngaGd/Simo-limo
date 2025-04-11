@@ -9,13 +9,13 @@ import { useHandleQuantity } from "../hooks/useHandleQuantity";
 //import { useHandleProductList } from "../hooks/useHandleProductList";
 import { useImageToCart } from "../hooks/useImageToCart";
 import { ProductListType } from "src/pages/Home/productList.types";
-import { useCsrfTokenFetch } from "../hooks/useCsrfTokenFetch";
 
 export const GlobalContext = createContext<GlobalContextType | null>(null);
 
 export const GlobalContextProvider = ({
   children,
 }: GlobalContextProviderProps) => {
+  const [csrfToken, setCsrfToken] = useState("");
   const [notification, setNotification] = useState<Notification | null>(null);
   const [loader, setLoader] = useState(false);
   // const { products } = useHandleProductList();
@@ -36,7 +36,6 @@ export const GlobalContextProvider = ({
   const [message, setMessage] = useState("");
   const [imageIsLoaded, setImageIsLoaded] = useState(false);
   const [footerIsVisible, setFooterIsVisible] = useState(false);
-  const { csrfToken, fetchCsrfToken } = useCsrfTokenFetch();
 
   const amount =
     cartItems.length > 0
@@ -92,7 +91,7 @@ export const GlobalContextProvider = ({
         notification,
         setNotification,
         csrfToken,
-        fetchCsrfToken,
+        setCsrfToken,
         loader,
         setLoader,
       }}

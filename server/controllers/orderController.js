@@ -125,11 +125,18 @@ exports.createOrder = async (req, res) => {
       userIp: req.userIp,
     });
   } catch (error) {
-    console.error("Error updating data:", error);
-    res.status(500).json({
+    logger.error({
+      context: "orderController",
+      timestamp: new Date().toISOString(),
+      path: req.originalUrl,
+      message: error.message,
+      stack: error.stack,
+      transactionRef: req.reference,
+    });
+    res.status(error.status || 500).json({
       type: "error",
       status: error.status,
-      message: "Serverio klaida, bandyk vėliau.",
+      message: "Serverio klaida, perkrauk puslapį arba bandyk vėliau.",
     });
   }
 };

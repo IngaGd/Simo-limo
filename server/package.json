@@ -25,7 +25,8 @@
     "googleapis": "^144.0.0",
     "helmet": "^8.0.0",
     "jsdom": "^26.0.0",
-    "uuid": "^11.0.4"
+    "uuid": "^11.0.4",
+    "winston": "^3.17.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.9"

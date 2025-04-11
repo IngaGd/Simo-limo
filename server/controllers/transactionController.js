@@ -1,4 +1,5 @@
 const { sheets, PRODUCT_LIST_ID } = require("../utils/googleSheets");
+const logger = require("../utils/logger");
 
 exports.updateTransactionStatus = async (req, res) => {
   const { status, reference, transaction } = req.body;
@@ -10,8 +11,11 @@ exports.updateTransactionStatus = async (req, res) => {
       range: "Orders!A3:Z",
     });
     const rows = response.data.values;
-    if (!rows && !rows.length) {
-      return res.status(404).send({ message: "No data found" });
+    if (!rows || rows.length === 0) {
+      return res.status(404).send({
+        type: "error",
+        message: "Nepavyko rasti užsakymo, suvesk iš naujo.",
+      });
     }
 
     const rowIndexes = rows
@@ -19,14 +23,14 @@ exports.updateTransactionStatus = async (req, res) => {
       .filter((index) => index > -1);
 
     if (rowIndexes.length === 0) {
-      return res.status(404).json({ message: "Order not found" });
+      return res.status(403).json({
+        message: "Nepavyko rasti užsakymo, suvesk iš naujo.",
+      });
     }
 
     const completedOrderRefs = new Set(
       rows.filter((row) => row[22] === "COMPLETED").map((row) => row[7])
     );
-
-    console.log("Unique Completed Orders:", completedOrderRefs.size);
 
     let orderNumber = 0;
     if (status === "COMPLETED") {
@@ -60,10 +64,19 @@ exports.updateTransactionStatus = async (req, res) => {
       message: `Payment status updated to ${status}, Transaction ID: ${transaction}`,
     });
   } catch (error) {
-    console.error(
-      "Error reading data: ",
-      error.response?.data || error.message
-    );
-    res.status(500).send("Server error");
+    console.error("Error reading data: ", error);
+    logger.error({
+      context: "orderController",
+      timestamp: new Date().toISOString(),
+      path: req.originalUrl,
+      message: error?.response?.data?.error?.message || error.message,
+      stack: error.stack,
+      transactionRef: req.reference,
+    });
+    res.status(error.status || 500).json({
+      type: "error",
+      status: error.status,
+      message: "Serverio klaida, perkrauk puslapį arba bandyk vėliau.",
+    });
   }
 };

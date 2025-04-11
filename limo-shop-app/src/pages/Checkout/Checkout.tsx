@@ -7,6 +7,7 @@ import { GlobalContextType } from "src/common/context/globalContext.types";
 import { usePostData } from "src/common/hooks/usePostData";
 import styles from "./checkout.module.scss";
 import { Button } from "src/common/components/Button";
+import { Notification } from "src/common/components/Notification/Notification";
 
 type CheckoutObject = {
   message: string;
@@ -25,30 +26,37 @@ const buttonText = "Apmokėti";
 export function Checkout({ message, orderId, userIp }: CheckoutObject) {
   const checkoutUrl = `${URL}create-transaction`;
 
-  const { cartItems, amount, userDiscountValue } = useContext(
+  const { cartItems, amount, userDiscountValue, notification } = useContext(
     GlobalContext
   ) as GlobalContextType;
 
   const { setData, response } = usePostData(checkoutUrl);
 
   const handleClick = () => {
-    const tarnsactionData = {
+    const transactionData = {
       amount: amount,
       currency: "EUR",
       reference: orderId,
     };
     const user = { userIp: userIp };
-    setData({ tarnsactionData, user });
+    setData({ transactionData, user });
   };
 
   useEffect(() => {
     if (response?.redirectUrl) {
       window.location.href = response?.redirectUrl;
     }
+    if (notification?.type === "error") {
+    }
   }, [response]);
 
   return (
     <div className={styles.checkout}>
+      {notification?.type === "error" ? (
+        <Notification type="error" size="line" message={notification.message} />
+      ) : (
+        <div></div>
+      )}
       <div className={styles.message}>
         <div>{message}</div>
         <Button

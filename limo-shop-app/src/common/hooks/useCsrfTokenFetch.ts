@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useContext } from "react";
+import { GlobalContext } from "../context/GlobalContext";
+import { GlobalContextType } from "../context/globalContext.types";
 
 const URL = import.meta.env.VITE_URL;
 
 export function useCsrfTokenFetch() {
-  const [csrfToken, setCsrfToken] = useState("");
+  const { setNotification, setCsrfToken } = useContext(
+    GlobalContext
+  ) as GlobalContextType;
 
   const fetchCsrfToken = async () => {
     try {
@@ -12,13 +16,23 @@ export function useCsrfTokenFetch() {
         credentials: "include",
       });
       if (!response.ok) {
-        throw new Error("Data failed fetch");
+        const errorResult = await response.json();
+        setNotification({
+          type: errorResult.type,
+          status: errorResult.status,
+          message: errorResult.message,
+        });
+        return;
       }
       const responseJson = await response.json();
       setCsrfToken(responseJson.csrfToken);
     } catch (error) {
-      console.log("Error: ", error);
+      setNotification({
+        type: "error",
+        status: 500,
+        message: "Sesija baigėsi, perkrauk puslapį.",
+      });
     }
   };
-  return { csrfToken, fetchCsrfToken };
+  return { fetchCsrfToken };
 }

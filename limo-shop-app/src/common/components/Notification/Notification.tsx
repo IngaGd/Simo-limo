@@ -3,7 +3,7 @@ import styles from "./notification.module.scss";
 
 type Notification = {
   type: "success" | "error";
-  size: "fullscreen";
+  size: "fullscreen" | "line";
   message: string;
 };
 
@@ -11,7 +11,7 @@ export function Notification({ message, type, size }: Notification) {
   return (
     <div
       className={`${styles.notification} ${
-        size === "fullscreen" ? styles.fullscreen : ""
+        size === "fullscreen" ? styles.fullscreen : styles.line
       }`}
     >
       <div

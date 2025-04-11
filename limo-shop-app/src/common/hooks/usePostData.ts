@@ -25,8 +25,6 @@ type ResponseObject = {
 
 export function usePostData(url: string) {
   const [data, setData] = useState<Object | null>(null);
-  // const [loader, setLoader] = useState(false);
-  // const [notification, setNotification] = useState<Notification | null>(null);
   const [response, setResponse] = useState<ResponseObject | null>(null);
   const { setNotification, setLoader } = useContext(
     GlobalContext
@@ -89,7 +87,7 @@ export function usePostData(url: string) {
             setValidationError(errorArray);
           } else {
             setNotification({
-              type: errorResult.error,
+              type: errorResult.type,
               status: errorResult.status,
               message: errorResult.message,
             });
@@ -97,6 +95,11 @@ export function usePostData(url: string) {
         }
       } catch (error) {
         console.error("Error: ", error);
+        setNotification({
+          type: "error",
+          status: 500,
+          message: "Tinklo klaida, perkrauk puslapį arba bandyk vėliau.",
+        });
       } finally {
         setLoader(false);
       }
@@ -112,8 +115,6 @@ export function usePostData(url: string) {
     response,
     orderId,
     paymentStatus,
-    // loader,
-    // notification,
     setNotification,
   };
 }

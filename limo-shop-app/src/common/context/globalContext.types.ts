@@ -67,7 +67,7 @@ export type GlobalContextType = {
   notification: Notification | null;
   setNotification: (value: Notification | null) => void;
   csrfToken: string;
-  fetchCsrfToken: () => void;
+  setCsrfToken: (value: string) => void;
   loader: boolean;
   setLoader: (value: boolean) => void;
 };

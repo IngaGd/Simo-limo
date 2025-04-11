@@ -1,21 +1,33 @@
 const { generateCsrfToken } = require("../utils/csrfTokenGenerator");
+const logger = require("../utils/logger");
 
 const csrcMiddleware = (req, res, next) => {
-  console.log("Cookies: ", req.cookies);
-
-  if (!req.cookies.csrfToken) {
-    const csrfToken = generateCsrfToken();
-    res.cookie("csrfToken", csrfToken, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "Lax",
-      maxAge: 30 * 60 * 1000,
+  try {
+    if (!req.cookies.csrfToken) {
+      const csrfToken = generateCsrfToken();
+      res.cookie("csrfToken", csrfToken, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "Lax",
+        maxAge: 30 * 60 * 1000,
+      });
+      req.csrfToken = csrfToken;
+    } else {
+      req.csrfToken = req.cookies.csrfToken;
+    }
+    next();
+  } catch (error) {
+    logger.error({
+      context: "csrcMiddleware",
+      timestamp: new Date().toISOString(),
+      path: req.originalUrl,
+      message: error.message,
+      stack: error.stack,
     });
-    req.csrfToken = csrfToken;
-  } else {
-    req.csrfToken = req.cookies.csrfToken;
+    res.status(error.status || 500).json({
+      type: "error",
+      message: "Nepavyko įkelti saugumo duomenų. Pabandyk perkrauti puslapį.",
+    });
   }
-  next();
 };
-
 module.exports = { csrcMiddleware };

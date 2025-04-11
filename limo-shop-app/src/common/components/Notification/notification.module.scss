@@ -5,33 +5,49 @@
   &.fullscreen {
     @include fullscreenOverlay;
     // color: whitesmoke;
+    .module {
+      width: 40rem;
+      border-radius: 3px;
+      padding: 1rem 4rem 1rem 4rem;
+      display: flex;
+      gap: 3rem;
+      background-color: rgba(black, 0.8);
+      margin-top: -20rem;
+      @media screen and (max-width: 976px) {
+        margin-top: 0rem;
+      }
+      &.success {
+        color: yellowgreen;
+        border: 2px solid yellowgreen;
+      }
+      &.error {
+        color: coral;
+        border: 2px solid coral;
+      }
+      @media screen and (max-width: 460px) {
+        width: 30rem;
+        height: auto;
+        .message {
+          font-size: 1.4rem;
+          flex-wrap: wrap;
+        }
+      }
+    }
   }
-
-  .module {
-    width: 40rem;
-    border-radius: 3px;
-    padding: 1rem 4rem 1rem 4rem;
-    display: flex;
-    gap: 3rem;
-    background-color: rgba(black, 0.8);
-    margin-top: -20rem;
-    @media screen and (max-width: 976px) {
-      margin-top: 0rem;
-    }
-    &.success {
-      color: yellowgreen;
-      border: 2px solid yellowgreen;
-    }
-    &.error {
-      color: coral;
-      border: 2px solid coral;
-    }
-    @media screen and (max-width: 460px) {
-      width: 30rem;
-      height: auto;
-      .message {
-        font-size: 1.4rem;
-        flex-wrap: wrap;
+  &.line {
+    .module {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 1.4rem;
+      padding: 1rem 2rem 1rem 2rem;
+      &.success {
+        color: yellowgreen;
+        border: 2px solid yellowgreen;
+      }
+      &.error {
+        color: coral;
+        border: 2px solid coral;
       }
     }
   }

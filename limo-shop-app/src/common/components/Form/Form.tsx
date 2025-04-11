@@ -8,6 +8,7 @@ import { GlobalContext } from "src/common/context/GlobalContext";
 import { GlobalContextType } from "src/common/context/globalContext.types";
 import { Notification } from "../Notification/Notification";
 import { Loader } from "../Loader/Loader";
+import { useCsrfTokenFetch } from "src/common/hooks/useCsrfTokenFetch";
 
 const buttonText = "Siųsti";
 const URL = import.meta.env.VITE_URL;
@@ -39,24 +40,39 @@ export function Form() {
   });
   const userMessageUrl = `${URL}user-message`;
   const [userMessage, setUserMessage] = useState<FormInputs | null>(null);
-  const { csrfToken, notification, loader, fetchCsrfToken } = useContext(
+  const { fetchCsrfToken } = useCsrfTokenFetch();
+  const { notification, loader, csrfToken, setNotification } = useContext(
     GlobalContext
   ) as GlobalContextType;
-  const { setData, setNotification } = usePostData(userMessageUrl);
+  const { setData } = usePostData(userMessageUrl);
 
   const validationRules = validationOptions();
+
+  // useEffect(() => {
+  //   setNotification(null);
+  // }, [notification]);
 
   useEffect(() => {
     fetchCsrfToken();
   }, []);
 
   const onSubmit: SubmitHandler<UserMessage> = (data) => {
+    if (!csrfToken) {
+      setNotification({
+        type: "error",
+        status: 403,
+        message:
+          "Nepavyko gauti saugumo ženklo. Pabandykite perkrauti puslapį.",
+      });
+      return;
+    }
     const sanitizedData = {
       ...data,
       firstName: DOMPurify.sanitize(data.firstName),
       email: DOMPurify.sanitize(data.email),
       message: DOMPurify.sanitize(data.message),
     };
+
     setUserMessage({
       _csrf: csrfToken,
       userMessage: sanitizedData,
