@@ -1,7 +1,12 @@
 @use "../../../styles/variables/index" as *;
 
 .header {
+  background-color: $color-primary-1;
   justify-self: flex-start;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 2;
 
   height: min-content;
   width: 100%;
