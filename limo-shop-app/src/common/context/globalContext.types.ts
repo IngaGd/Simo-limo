@@ -61,8 +61,9 @@ export type GlobalContextType = {
   setUserDiscountCode: (userInputCode: string) => void | null;
   imageIsLoaded: boolean;
   setImageIsLoaded: (value: boolean) => void;
-  footerIsVisible: boolean;
-  setFooterIsVisible: (value: boolean) => void;
+  isVisible: boolean;
+  setIsVisible: (value: boolean) => void;
+  handleIsVisible: () => void;
   handleLoad?: () => void;
   notification: Notification | null;
   setNotification: (value: Notification | null) => void;

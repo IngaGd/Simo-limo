@@ -35,7 +35,7 @@ export const GlobalContextProvider = ({
   const [userDiscountValue, setUserDiscountValue] = useState(0);
   const [message, setMessage] = useState("");
   const [imageIsLoaded, setImageIsLoaded] = useState(false);
-  const [footerIsVisible, setFooterIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   const amount =
     cartItems.length > 0
@@ -56,6 +56,10 @@ export const GlobalContextProvider = ({
 
   const handleLoad = () => {
     setImageIsLoaded(true);
+  };
+
+  const handleIsVisible = () => {
+    setIsVisible(!isVisible);
   };
 
   return (
@@ -85,8 +89,9 @@ export const GlobalContextProvider = ({
         amount,
         imageIsLoaded,
         setImageIsLoaded,
-        footerIsVisible,
-        setFooterIsVisible,
+        isVisible,
+        setIsVisible,
+        handleIsVisible,
         handleLoad,
         notification,
         setNotification,
