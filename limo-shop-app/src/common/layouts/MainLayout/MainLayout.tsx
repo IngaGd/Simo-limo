@@ -6,6 +6,7 @@ import { Suspense } from "react";
 // import { GlobalContext } from "src/common/context/GlobalContext";
 // import { GlobalContextType } from "src/common/context/globalContext.types";
 import useDateCountDown from "src/common/hooks/useDateCountDown";
+import { ScrollToTop } from "src/common/components/ScrollToTop/ScrollToTop";
 
 export function MainLayout() {
   // const { products } = useContext(GlobalContext) as GlobalContextType;
@@ -39,6 +40,7 @@ export function MainLayout() {
           <div>{seconds} s</div>
         </div>
       </div>
+      <ScrollToTop />
       <Suspense fallback={null}>
         <Outlet />
         <Footer />
