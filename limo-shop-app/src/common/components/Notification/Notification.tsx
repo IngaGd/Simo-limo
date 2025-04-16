@@ -15,7 +15,7 @@ export function Notification({ message, type, size }: Notification) {
       }`}
     >
       <div
-        className={`${styles.module} ${
+        className={`${styles.modal} ${
           type === "success" ? styles.success : styles.error
         }`}
       >

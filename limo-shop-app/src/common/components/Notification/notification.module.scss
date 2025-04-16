@@ -1,11 +1,12 @@
 @use "../../../styles/abstracts/index" as *;
+@use "../../../styles/variables/index" as *;
 
 .notification {
   display: flex;
   &.fullscreen {
     @include fullscreenOverlay;
     // color: whitesmoke;
-    .module {
+    .modal {
       width: 40rem;
       border-radius: 3px;
       padding: 1rem 4rem 1rem 4rem;
@@ -17,12 +18,12 @@
         margin-top: 0rem;
       }
       &.success {
-        color: yellowgreen;
-        border: 2px solid yellowgreen;
+        color: $color-green;
+        border: 2px solid $color-green;
       }
       &.error {
-        color: coral;
-        border: 2px solid coral;
+        color: $color-red;
+        border: 2px solid $color-red;
       }
       @media screen and (max-width: 460px) {
         width: 30rem;
@@ -35,19 +36,19 @@
     }
   }
   &.line {
-    .module {
+    .modal {
       display: flex;
       align-items: center;
       gap: 1rem;
       font-size: 1.4rem;
       padding: 1rem 2rem 1rem 2rem;
       &.success {
-        color: yellowgreen;
-        border: 2px solid yellowgreen;
+        color: $color-green;
+        border: 2px solid $color-green;
       }
       &.error {
-        color: coral;
-        border: 2px solid coral;
+        color: $color-red;
+        border: 2px solid $color-red;
       }
     }
   }
