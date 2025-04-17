@@ -8,8 +8,11 @@ import { GoPlus } from "react-icons/go";
 import { GoDash } from "react-icons/go";
 import { FaCheckCircle } from "react-icons/fa";
 import { IoMdAlert } from "react-icons/io";
-import styles from "./icon.module.scss";
 import { IconProps } from "./icon.types";
+import { FaRegCopy } from "react-icons/fa";
+import { ImCheckboxChecked } from "react-icons/im";
+
+import styles from "./icon.module.scss";
 
 export function IconEnvelop({ size }: IconProps) {
   return <TiMail className={`${styles.envelope} ${styles[`${size}`]}`} />;
@@ -51,4 +54,14 @@ export function IconSuccess({ size }: IconProps) {
 
 export function IconError({ size }: IconProps) {
   return <IoMdAlert className={`${styles.error} ${styles[`${size}`]}`} />;
+}
+
+export function IconCopy({ size }: IconProps) {
+  return <FaRegCopy className={`${styles.copy} ${styles[`${size}`]}`} />;
+}
+
+export function IconCopied({ size }: IconProps) {
+  return (
+    <ImCheckboxChecked className={`${styles.copied} ${styles[`${size}`]}`} />
+  );
 }

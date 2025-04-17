@@ -1,26 +1,50 @@
-import { IconInstagram, IconEmail } from "src/common/components/Icon";
+import {
+  IconInstagram,
+  IconEmail,
+  IconCopy,
+  IconCopied,
+} from "src/common/components/Icon";
 import styles from "./contacts.module.scss";
 import { Form } from "src/common/components/Form/Form";
-import { useEffect } from "react";
+import { useCopyToClipboard } from "src/common/hooks/useCopyToClipboard";
+import { contactData } from "../../assets/data/contacts";
 
 export function Contacts() {
-  useEffect(() => {
-    const heightContacts = document.body.scrollHeight;
-    console.log("Body scroll height:", heightContacts);
-  }, []);
+  const { handleCopy, contactCopied } = useCopyToClipboard();
 
   return (
     <div className={styles.contacts}>
       <div className="heading-secondary">Kontaktai:</div>
-      <div className={styles.links}>
-        <a href="mailto:simolimonadai@gmail.com">
-          <IconEmail size="medium" />
-          simolimonadai@gmail.com
-        </a>
-        <a href="https://www.instagram.com/simo.delicatessen/" className="">
-          <IconInstagram size="medium" />
-          simo.delicatessen
-        </a>
+      <div>
+        {contactData?.map((contact) => (
+          <div key={contact.id} className={styles.links}>
+            <div>
+              {contact.icon === "email" ? (
+                <a href="mailto:simolimonadai@gmail.com">
+                  <IconEmail size="medium" />
+                </a>
+              ) : (
+                <a
+                  href="https://www.instagram.com/simo.delicatessen/"
+                  target="_blank"
+                >
+                  <IconInstagram size="medium" />{" "}
+                </a>
+              )}
+            </div>
+            <div>{contact.contact}</div>
+
+            <button onClick={() => handleCopy(contact)}>
+              {" "}
+              {contactCopied.find((el) => el.id === contact.id)?.isCopied ===
+              true ? (
+                <IconCopied size="medium" />
+              ) : (
+                <IconCopy size="medium" />
+              )}
+            </button>
+          </div>
+        ))}
       </div>
       <Form />
       <div className={styles.address}>

@@ -35,8 +35,6 @@ export function usePostData(url: string) {
     ErrorResponseObject[] | null
   >(null);
 
-  console.log("post hook data:", data);
-
   useEffect(() => {
     const postData = async () => {
       if (!data) return;

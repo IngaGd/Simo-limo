@@ -78,3 +78,11 @@
     color: $color-primary-1;
   }
 }
+
+.copy,
+.copied {
+  &.medium {
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+}

@@ -85,7 +85,6 @@ export function Form() {
   }, [userMessage]);
 
   useEffect(() => {
-    console.log("user message response: ", notification);
     if (loader || notification) {
       document.body.style.overflow = "hidden";
       if (notification?.type === "success") {
