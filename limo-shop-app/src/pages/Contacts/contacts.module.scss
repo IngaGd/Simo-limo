@@ -39,11 +39,16 @@ address {
   display: flex;
   width: 100%;
   justify-content: center;
-  gap: 1.6rem;
+  // align-items: center;
+  gap: 2rem;
+  height: 4rem;
 }
 
 button {
+  margin-top: -1.6rem;
   border: none;
   background-color: $color-primary-1;
+  -webkit-text-fill-color: $color-primary-3;
+  color: $color-primary-3;
   cursor: pointer;
 }
