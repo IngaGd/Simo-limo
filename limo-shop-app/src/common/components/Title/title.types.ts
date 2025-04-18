@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export enum TitleType {
   ProductList = "title-product-list",
   Item = "title-item",
@@ -13,4 +15,5 @@ export type TitleProps = {
   titleType: TitleType;
   title: String;
   titleSize: TitleSize;
+  children?: ReactNode;
 };
