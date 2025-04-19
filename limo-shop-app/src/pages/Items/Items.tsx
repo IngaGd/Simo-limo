@@ -1,4 +1,3 @@
-import { Item } from "src/common/components/Item";
 import { useParams } from "react-router-dom";
 import { useContext } from "react";
 import { GlobalContext } from "src/common/context/GlobalContext";

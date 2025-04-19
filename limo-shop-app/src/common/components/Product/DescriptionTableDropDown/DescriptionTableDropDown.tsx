@@ -29,7 +29,7 @@ export function DescriptionTableDropDown({
   const [product, setProduct] = useState<ProductObject>(products[0]);
 
   const productQuantity =
-    quantities.find((element) => element.id === products[0].id)?.qty || 1;
+    quantities.find((element) => element.id === product.id)?.qty || 1;
 
   const handleAddToCart = (p: {
     id: number;
@@ -82,7 +82,7 @@ export function DescriptionTableDropDown({
       {product ? (
         <div className={`${styles.purchasing}`}>
           <div className={`${styles.quantity}`}>
-            <div>Kiekis pak.</div>
+            <div>Pakuočių kiekis</div>
             <div className={styles.details}>
               <div>{productQuantity}</div>
               <div
