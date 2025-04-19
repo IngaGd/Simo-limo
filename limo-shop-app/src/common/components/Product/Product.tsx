@@ -12,7 +12,7 @@ import { GlobalContext } from "src/common/context/GlobalContext";
 import { GlobalContextType } from "src/common/context/globalContext.types";
 import { Notification } from "../Notification/Notification";
 
-export function Product({ product }: ProductPropsTypes) {
+export function Product({ product, allProducts }: ProductPropsTypes) {
   const { handleIsActive, isActive } = useIsActive();
   const { setImageIsLoaded, notification } = useContext(
     GlobalContext
@@ -45,7 +45,7 @@ export function Product({ product }: ProductPropsTypes) {
         />
       </Container>
       <DescriptionTableDropDown
-        product={product}
+        products={allProducts}
         handleIsActive={handleIsActive}
       />
     </div>

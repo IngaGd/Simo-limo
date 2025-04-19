@@ -15,12 +15,13 @@
 }
 
 .home {
-  width: 80%;
+  width: 90%;
   height: 100%;
   display: grid;
   justify-self: flex-start;
   align-self: center;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
 
   margin-top: 4rem;
 

@@ -15,4 +15,5 @@ export type ProductObject = {
 
 export type ProductPropsTypes = {
   product: ProductObject;
+  allProducts: ProductObject[];
 };

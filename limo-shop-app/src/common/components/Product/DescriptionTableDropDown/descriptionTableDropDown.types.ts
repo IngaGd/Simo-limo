@@ -1,7 +1,7 @@
 import { ProductObject } from "../product.types";
 
 export type DescriptionTableProps = {
-  product: ProductObject;
+  products: ProductObject[];
   // addToCart: () => void;
   // handleIncrement: () => void;
   // handleDecrement: () => void;

@@ -87,8 +87,8 @@
   display: -moz-box;
   overflow: hidden;
   -webkit-box-orient: vertical;
-  line-clamp: 2;
-  -webkit-line-clamp: 2;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
 }
 
 .link {
@@ -122,5 +122,19 @@
   align-self: flex-end;
   button {
     height: 3.4rem;
+  }
+}
+
+.buttonLine {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .link {
+    align-self: center;
+  }
+  .pakBtn {
+    display: flex;
+    gap: 1rem;
+    padding-top: 0.5rem;
   }
 }
