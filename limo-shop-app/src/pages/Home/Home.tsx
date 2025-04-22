@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from "react";
-// import { useInView } from "react-intersection-observer";
+import { useContext, useEffect } from "react";
 import styles from "./home.module.scss";
 import { Product } from "src/common/components/Product";
 import { GlobalContext } from "src/common/context/GlobalContext";
@@ -13,8 +12,6 @@ import { getGroupedProducts } from "./home.logic.ts";
 import { Loader } from "src/common/components/Loader/Loader.tsx";
 
 export default function Home() {
-  // useHandleProductList();
-
   const { loader } = useHandleProductList();
   const { products, notification, setNotification, isVisible } = useContext(
     GlobalContext

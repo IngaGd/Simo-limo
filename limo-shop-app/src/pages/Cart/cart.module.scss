@@ -141,6 +141,7 @@
   .btnCount {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 2rem;
   }
 }
 
@@ -163,6 +164,7 @@
 .removeCart {
   display: flex;
   justify-content: flex-end;
+  padding-top: 1rem;
 }
 
 .discount {
@@ -174,18 +176,35 @@
     font-size: 1.4rem;
   }
 
+  .falseCode {
+    color: $color-red;
+  }
+
   p {
     width: 100%;
     padding-bottom: 1rem;
   }
-  div {
-    width: 100%;
+
+  .discountInput {
+    width: 35rem;
     display: flex;
     gap: 1rem;
+    .discountInputBtn {
+      display: flex;
+      padding-top: 2.4rem;
+      justify-content: flex-end;
+    }
 
-    @media screen and (max-width: 680px) {
-      flex-wrap: wrap;
-      justify-content: space-between;
+    @media screen and (max-width: 415px) {
+      width: 100%;
+    }
+
+    @media screen and (max-width: 379px) {
+      width: 100%;
+      flex-direction: column;
+      .discountInputBtn {
+        justify-content: flex-start;
+      }
     }
 
     input {
@@ -195,8 +214,7 @@
       }
     }
 
-    label,
-    input {
+    label {
       margin-right: 2rem;
     }
 

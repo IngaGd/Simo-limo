@@ -112,4 +112,6 @@
 .btn {
   margin-top: 3rem;
   @include link-button;
+  color: $color-primary-1;
+  -webkit-text-fill-color: $color-primary-1;
 }

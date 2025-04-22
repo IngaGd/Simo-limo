@@ -168,8 +168,12 @@ export function Cart() {
               <div className={styles.amount}>{amount} </div>
             </div>
             <div className={styles.discount}>
-              {message ? <p>{message}</p> : <p>Suveskite nuolaidos kodą</p>}
-              <div>
+              {message ? (
+                <p className={styles.falseCode}>{message}</p>
+              ) : (
+                <p>Suvesk nuolaidos kodą:</p>
+              )}
+              <div className={styles.discountInput}>
                 <div>
                   <label htmlFor="discount">Nuolaidos kodas</label>
                   <input
@@ -178,12 +182,14 @@ export function Cart() {
                     value={userInputCode}
                     onChange={(e) => setUserInputCode(e.target.value)}
                   />
+                  <div className={styles.discountInputBtn}>
+                    <Button
+                      colorMode="grey"
+                      buttonLabel={buttonText4}
+                      handleClick={() => handleAddDiscount()}
+                    />
+                  </div>
                 </div>
-                <Button
-                  colorMode="grey"
-                  buttonLabel={buttonText4}
-                  handleClick={() => handleAddDiscount()}
-                />
               </div>
             </div>
             <Link to="/purchasing" className={styles.link}>

@@ -15,13 +15,16 @@
 }
 
 .home {
-  width: 90%;
+  width: 100%;
   height: 100%;
-  display: grid;
-  justify-self: flex-start;
-  align-self: center;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 1rem;
+  // display: grid;
+  // justify-self: flex-start;
+  // align-self: center;
+  // grid-template-columns: 1fr 1fr 1fr;
+  // gap: 1rem;
+  // justify-self: center;
+  display: flex;
+  justify-content: space-evenly;
 
   margin-top: 4rem;
 
@@ -37,7 +40,14 @@
     align-items: flex-start;
   }
 
+  @media screen and (max-width: 1167px) {
+    flex-wrap: wrap;
+    height: auto;
+    gap: 6rem;
+  }
+
   @media screen and (max-width: 976px) {
+    display: grid;
     width: 100%;
     height: auto;
     margin-top: 4rem;
