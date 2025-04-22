@@ -10,15 +10,16 @@ import { useElementPositionInView } from "src/common/hooks/useElementPositionInV
 import { Popup } from "src/common/components/Popup/Popup";
 import { useScrollY } from "src/common/hooks/useScrollY";
 import { getGroupedProducts } from "./home.logic.ts";
+import { Loader } from "src/common/components/Loader/Loader.tsx";
 
 export default function Home() {
-  useHandleProductList();
+  // useHandleProductList();
+
+  const { loader } = useHandleProductList();
   const { products, notification, setNotification, isVisible } = useContext(
     GlobalContext
   ) as GlobalContextType;
-  const groupedProducts = getGroupedProducts(products);
   const { ref, deviceHeight } = useElementPositionInView();
-  // const [deviceHeight, setDeviceHeight] = useState(window.innerHeight);
   const scrollY = useScrollY();
 
   useEffect(() => {
@@ -33,29 +34,9 @@ export default function Home() {
     }
   }, [isVisible]);
 
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //     setDeviceHeight(window.innerHeight);
-  //   };
-  //   window.addEventListener("resize", handleResize);
-  //   return () => window.removeEventListener("resize", handleResize);
-  // }, []);
+  if (loader) return <Loader />;
 
-  useEffect(() => {
-    console.log("deviceHeight: ", deviceHeight);
-  }, [deviceHeight]);
-
-  // useEffect(() => {
-  //   const handleChange = (event: Event) => {
-  //     const orientation = event.target as ScreenOrientation;
-  //     console.log(orientation.type, orientation.angle);
-  //   };
-  //   screen.orientation.addEventListener("change", handleChange);
-  //   return () => screen.orientation.removeEventListener("change", handleChange);
-  // }, []);
-
-  useEffect(() => {});
-
+  const groupedProducts = getGroupedProducts(products);
   const obj = Object.entries(groupedProducts);
 
   return (
