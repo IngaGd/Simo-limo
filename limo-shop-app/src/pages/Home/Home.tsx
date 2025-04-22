@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 // import { useInView } from "react-intersection-observer";
 import styles from "./home.module.scss";
 import { Product } from "src/common/components/Product";
@@ -18,6 +18,7 @@ export default function Home() {
   ) as GlobalContextType;
   const groupedProducts = getGroupedProducts(products);
   const { ref, deviceHeight } = useElementPositionInView();
+  // const [deviceHeight, setDeviceHeight] = useState(window.innerHeight);
   const scrollY = useScrollY();
 
   useEffect(() => {
@@ -31,6 +32,29 @@ export default function Home() {
       document.documentElement.style.overflow = "";
     }
   }, [isVisible]);
+
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     setDeviceHeight(window.innerHeight);
+  //   };
+  //   window.addEventListener("resize", handleResize);
+  //   return () => window.removeEventListener("resize", handleResize);
+  // }, []);
+
+  useEffect(() => {
+    console.log("deviceHeight: ", deviceHeight);
+  }, [deviceHeight]);
+
+  // useEffect(() => {
+  //   const handleChange = (event: Event) => {
+  //     const orientation = event.target as ScreenOrientation;
+  //     console.log(orientation.type, orientation.angle);
+  //   };
+  //   screen.orientation.addEventListener("change", handleChange);
+  //   return () => screen.orientation.removeEventListener("change", handleChange);
+  // }, []);
+
+  useEffect(() => {});
 
   const obj = Object.entries(groupedProducts);
 

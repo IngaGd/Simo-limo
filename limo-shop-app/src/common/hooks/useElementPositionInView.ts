@@ -3,10 +3,10 @@ import { useInView } from "react-intersection-observer";
 
 export function useElementPositionInView() {
   const { ref, inView, entry } = useInView({
-    threshold: 1,
+    threshold: 0.2,
   });
 
-  const [deviceHeight, setDeviceHeight] = useState(0);
+  const [deviceHeight, setDeviceHeight] = useState(window.innerHeight);
   const [position, setPosition] = useState(0);
 
   useEffect(() => {
@@ -14,12 +14,16 @@ export function useElementPositionInView() {
     if (heigh) {
       setDeviceHeight(heigh);
     }
-    console.log("deviceHeight: ", deviceHeight);
     const position = entry?.boundingClientRect.top;
     if (position) {
       setPosition(position);
     }
-  }, [ref, inView]);
+    const handleResize = () => {
+      setDeviceHeight(window.innerHeight);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [ref, inView, entry]);
 
   return { ref, inView, deviceHeight, position };
 }
