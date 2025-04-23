@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { GlobalContext } from "src/common/context/GlobalContext";
 import { GlobalContextType } from "src/common/context/globalContext.types";
 import { useHandleProductList } from "src/common/hooks/useHandleProductList";
@@ -12,15 +12,25 @@ import { Text } from "src/common/components/Text";
 import { Title } from "src/common/components/Title";
 import { TitleSize, TitleType } from "src/common/components/Title/title.types";
 import { Button } from "src/common/components/Button";
+import { Popup } from "src/common/components/Popup/Popup";
+import { useElementPositionInView } from "src/common/hooks/useElementPositionInView";
+import { useScrollY } from "src/common/hooks/useScrollY";
 
 const buttonText = "Pirkti";
 
 export function Items() {
   const { loader } = useHandleProductList();
-  const { products, addToCart, quantities, setQuantities } = useContext(
-    GlobalContext
-  ) as GlobalContextType;
+  const {
+    products,
+    addToCart,
+    quantities,
+    setQuantities,
+    isVisible,
+    setIsVisible,
+  } = useContext(GlobalContext) as GlobalContextType;
   const { category } = useParams();
+  const { ref, deviceHeight } = useElementPositionInView();
+  const scrollY = useScrollY();
 
   const handleAddToCart = (p: {
     id: number;
@@ -44,6 +54,14 @@ export function Items() {
     );
   };
 
+  useEffect(() => {
+    if (isVisible) {
+      document.documentElement.style.overflow = "hidden";
+    } else {
+      document.documentElement.style.overflow = "";
+    }
+  }, [isVisible]);
+
   if (loader) return <Loader />;
 
   const item = products?.find((p) => p.category === category);
@@ -54,39 +72,43 @@ export function Items() {
   }
 
   return (
-    <div className={styles.item}>
-      <div className={styles.image}>
-        <Container containerType={ContainerType.ImageOfItem}>
-          <Image imagePath={item?.imagePath} />
-        </Container>
-        <Title
-          title={item.title}
-          titleSize={TitleSize.Medium}
-          titleType={TitleType.Item}
-        />
-        {items?.map((item) => (
-          <div className={styles.purchasingDetails} key={item.id}>
-            <div className={styles.purchasing}>
-              <div className={styles.priceDetails}>
-                <div className={styles.package}>{item.packageQty} but.</div>
-                <div className={styles.price}>{item.price} EUR</div>
-              </div>
-              <div className={styles.btn}>
-                <Button
-                  colorMode="grey"
-                  buttonLabel={buttonText}
-                  handleClick={() => {
-                    handleAddToCart(item);
-                  }}
-                />
+    <>
+      <div className={styles.item} ref={ref}>
+        <div className={styles.image}>
+          <Container containerType={ContainerType.ImageOfItem}>
+            <Image imagePath={item?.imagePath} />
+          </Container>
+          <Title
+            title={item.title}
+            titleSize={TitleSize.Medium}
+            titleType={TitleType.Item}
+          />
+          {items?.map((item) => (
+            <div className={styles.purchasingDetails} key={item.id}>
+              <div className={styles.purchasing}>
+                <div className={styles.priceDetails}>
+                  <div className={styles.package}>{item.packageQty} but.</div>
+                  <div className={styles.price}>{item.price} EUR</div>
+                </div>
+                <div className={styles.btn}>
+                  <Button
+                    colorMode="grey"
+                    buttonLabel={buttonText}
+                    handleClick={() => {
+                      handleAddToCart(item);
+                      setIsVisible(true);
+                    }}
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+        <div className={styles.description}>
+          <Text text={item.description} />
+        </div>
       </div>
-      <div className={styles.description}>
-        <Text text={item.description} />
-      </div>
-    </div>
+      {isVisible && <Popup height={deviceHeight} top={scrollY} />}
+    </>
   );
 }
