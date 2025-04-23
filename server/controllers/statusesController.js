@@ -26,9 +26,6 @@ exports.getPaymentStatus = async (req, res) => {
         quantity: order[11],
         price: Number(order[12]).toFixed(2),
         totalPrice: Number(order[13]).toFixed(2),
-        // packageTotalQty: Number(order[14]),
-        // packageTotalPrice: Number(order[15]),
-        // deliveryPrice: Number(order[16]),
       };
     });
 
@@ -41,22 +38,24 @@ exports.getPaymentStatus = async (req, res) => {
     const paymentStatus = matchedOrders[0][22];
     const email = matchedOrders[0][3];
     const orderNo = matchedOrders[0][24];
-    const packageTotalQty =
-      matchedOrders.length > 1
-        ? Number(matchedOrders[0][14]) + Number(matchedOrders[1][14])
-        : Number(matchedOrders[0][14]);
-    const packageTotalPrice =
-      matchedOrders.length > 1
-        ? (Number(matchedOrders[0][15]) + Number(matchedOrders[1][15])).toFixed(
-            2
-          )
-        : Number(matchedOrders[0][15]).toFixed(2);
-    const deliveryPrice =
-      matchedOrders.length > 1
-        ? (Number(matchedOrders[0][16]) + Number(matchedOrders[1][16])).toFixed(
-            2
-          )
-        : Number(matchedOrders[0][16]).toFixed(2);
+
+    let packageTotalQty = 0;
+    matchedOrders.forEach((row) => {
+      packageTotalQty += Number(row[14]);
+    });
+
+    let packageTotalPrice = 0;
+    matchedOrders.forEach((row) => {
+      packageTotalPrice += Number(row[15]);
+    });
+    const packageTotalPriceFloat = packageTotalPrice.toFixed(2);
+
+    let deliveryPrice = 0;
+    matchedOrders.forEach((row) => {
+      deliveryPrice += Number(row[16]);
+    });
+    const deliveryPriceFloat = deliveryPrice.toFixed(2);
+
     const amountWithPVM = Number(matchedOrders[0][17]).toFixed(2);
     const amountPVM = Number(matchedOrders[0][18]).toFixed(2);
     const amountWithoutPVM = Number(matchedOrders[0][19]).toFixed(2);
@@ -68,7 +67,7 @@ exports.getPaymentStatus = async (req, res) => {
           JSON.stringify({
             apiKey: process.env.GOOGLE_SCRIPT_SECRET,
             orderNo: `${orderNo}`,
-            email: `${matchedOrders[0][3]}`,
+            email: email,
             firstName: `${matchedOrders[0][0]}`,
             lastName: `${matchedOrders[0][1]}`,
             phone: `${matchedOrders[0][2]}`,
@@ -76,8 +75,8 @@ exports.getPaymentStatus = async (req, res) => {
             town: `${matchedOrders[0][5]}`,
             postCode: `${matchedOrders[0][6]}`,
             packageTotalQty: packageTotalQty,
-            packageTotalPrice: packageTotalPrice,
-            deliveryPrice: deliveryPrice,
+            packageTotalPrice: packageTotalPriceFloat,
+            deliveryPrice: deliveryPriceFloat,
             amountWithPVM: amountWithPVM,
             amountPVM: amountPVM,
             amountWithoutPVM: amountWithoutPVM,
