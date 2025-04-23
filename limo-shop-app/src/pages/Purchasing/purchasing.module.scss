@@ -114,4 +114,8 @@
   @include link-button;
   color: $color-primary-1;
   -webkit-text-fill-color: $color-primary-1;
+  &:hover {
+    color: $color-primary-3;
+    -webkit-text-fill-color: $color-primary-3;
+  }
 }

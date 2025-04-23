@@ -59,11 +59,13 @@ export function Checkout({ message, orderId, userIp }: CheckoutObject) {
       )}
       <div className={styles.message}>
         <div>{message}</div>
-        <Button
-          colorMode="grey"
-          buttonLabel={buttonText}
-          handleClick={handleClick}
-        />
+        <div>
+          <Button
+            colorMode="grey"
+            buttonLabel={buttonText}
+            handleClick={handleClick}
+          />
+        </div>
       </div>
       <div className={styles.cart}>
         <div className={styles.list}>
@@ -150,11 +152,13 @@ export function Checkout({ message, orderId, userIp }: CheckoutObject) {
                 <div className={styles.amount}>Suma apmokėti: {amount} EUR</div>
               )}
             </div>
-            <Button
-              colorMode="dark"
-              buttonLabel={buttonText}
-              handleClick={handleClick}
-            />
+            <div>
+              <Button
+                colorMode="dark"
+                buttonLabel={buttonText}
+                handleClick={handleClick}
+              />
+            </div>
           </div>
         </div>
       </div>
