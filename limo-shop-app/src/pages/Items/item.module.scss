@@ -56,21 +56,26 @@
   }
 }
 
-.title {
-  // width: 42rem;
+.purchasingDetails {
   align-items: center;
+  background-color: rgba($color-primary-3, 0.7);
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  border-bottom: 1px solid black;
   .purchasing {
     display: flex;
     width: 100%;
     justify-content: space-between;
-
+    color: $color-primary-1;
     align-items: center;
+    .priceDetails {
+      display: flex;
+      .package {
+        width: 8rem;
+      }
+    }
   }
   @media screen and (max-width: 471px) {
     font-size: 1.4rem;
-    .purchasing {
-      padding-top: 1rem;
-    }
   }
 }
 

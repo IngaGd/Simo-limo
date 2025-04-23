@@ -12,15 +12,11 @@
 
 .title-item {
   color: $color-primary-1;
-  position: relative;
   display: flex;
-  justify-content: space-around;
   align-items: center;
+  justify-content: center;
   background-color: rgba($color-primary-3, 0.7);
-  border: 1px solid black;
-  @media screen and (max-width: 471px) {
-    flex-wrap: wrap;
-  }
+  border-bottom: 1px solid $color-primary-1;
 }
 
 .size-s {
@@ -45,23 +41,4 @@
   padding-bottom: $spacing-xxxs;
   padding-left: $spacing-xs;
   padding-right: $spacing-xs;
-}
-
-.title {
-  width: 22rem;
-  @media screen and (max-width: 471px) {
-    width: 100%;
-    text-align: center;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid white;
-  }
-}
-
-.children {
-  display: flex;
-  justify-content: space-between;
-  @media screen and (max-width: 471px) {
-    width: 100%;
-    justify-content: space-between;
-  }
 }

@@ -59,26 +59,28 @@ export function Items() {
         <Container containerType={ContainerType.ImageOfItem}>
           <Image imagePath={item?.imagePath} />
         </Container>
+        <Title
+          title={item.title}
+          titleSize={TitleSize.Medium}
+          titleType={TitleType.Item}
+        />
         {items?.map((item) => (
-          <div className={styles.title} key={item.id}>
-            <Title
-              title={item.title}
-              titleSize={TitleSize.Medium}
-              titleType={TitleType.Item}
-            >
-              <div className={styles.purchasing}>
+          <div className={styles.purchasingDetails} key={item.id}>
+            <div className={styles.purchasing}>
+              <div className={styles.priceDetails}>
+                <div className={styles.package}>{item.packageQty} but.</div>
                 <div className={styles.price}>{item.price} EUR</div>
-                <div className={styles.btn}>
-                  <Button
-                    colorMode="grey"
-                    buttonLabel={buttonText}
-                    handleClick={() => {
-                      handleAddToCart(item);
-                    }}
-                  />
-                </div>
               </div>
-            </Title>
+              <div className={styles.btn}>
+                <Button
+                  colorMode="grey"
+                  buttonLabel={buttonText}
+                  handleClick={() => {
+                    handleAddToCart(item);
+                  }}
+                />
+              </div>
+            </div>
           </div>
         ))}
       </div>
