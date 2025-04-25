@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { Container } from "src/common/components/Container";
 import { ContainerType } from "src/common/components/Container/container.types";
-import { Image } from "src/common/components/Image";
+import { ImageComponent } from "src/common/components/ImageComponent";
 import { GlobalContext } from "src/common/context/GlobalContext";
 import { GlobalContextType } from "src/common/context/globalContext.types";
 import { usePostData } from "src/common/hooks/usePostData";
@@ -74,7 +74,10 @@ export function Checkout({ message, orderId, userIp }: CheckoutObject) {
             <div key={item.id} className={styles.item}>
               <div className={styles.imageContainer}>
                 <Container containerType={ContainerType.ImageOfCart}>
-                  <Image imagePath={item.imagePath} />
+                  <ImageComponent
+                    imagePath={item.imagePath}
+                    blurHash={item.blurHash}
+                  />
                 </Container>
               </div>
               <div className={styles.description}>

@@ -42,6 +42,7 @@ export function useHandleProductList() {
             discountCode: column[8],
             discountValue: Number(column[9]),
             category: column[10],
+            blurHash: column[11],
           };
         });
         setProducts(productData);

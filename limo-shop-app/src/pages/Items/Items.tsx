@@ -6,7 +6,7 @@ import { useHandleProductList } from "src/common/hooks/useHandleProductList";
 import { Loader } from "src/common/components/Loader/Loader";
 import styles from "./item.module.scss";
 import { Container } from "src/common/components/Container";
-import { Image } from "src/common/components/Image";
+import { ImageComponent } from "src/common/components/ImageComponent";
 import { ContainerType } from "src/common/components/Container/container.types";
 import { Text } from "src/common/components/Text";
 import { Title } from "src/common/components/Title";
@@ -36,6 +36,7 @@ export function Items() {
     id: number;
     title: string;
     imagePath: string;
+    blurHash: string;
     description: string;
     price: number;
     packageQty: number;
@@ -76,7 +77,10 @@ export function Items() {
       <div className={styles.item} ref={ref}>
         <div className={styles.image}>
           <Container containerType={ContainerType.ImageOfItem}>
-            <Image imagePath={item?.imagePath} />
+            <ImageComponent
+              imagePath={item.imagePath}
+              blurHash={item.blurHash}
+            />
           </Container>
           <Title
             title={item.title}

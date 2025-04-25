@@ -58,7 +58,10 @@
 }
 
 .productList {
-  @include box-size-m;
+  // @include box-size-m;
+  display: flex;
+  width: 38rem;
+  height: 32rem;
   border-radius: 3px;
   position: absolute;
   z-index: 1;

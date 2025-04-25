@@ -20,6 +20,7 @@ export function useHandleCart(quantities: { id: number; qty: number }[]) {
     id: number;
     title: string;
     imagePath: string;
+    blurHash: string;
     description: string;
     price: number;
     packageQty: number;
@@ -55,6 +56,7 @@ export function useHandleCart(quantities: { id: number; qty: number }[]) {
           packageTotalPrice: Number(p.packageTotalPrice),
           deliveryPrice: Number(p.deliveryPrice),
           imagePath: p.imagePath,
+          blurHash: p.blurHash,
         },
       ]);
     }

@@ -11,6 +11,7 @@ export type ProductObject = {
   discountCode: string;
   discountValue: number;
   category: string;
+  blurHash: string;
 };
 
 export type ProductPropsTypes = {

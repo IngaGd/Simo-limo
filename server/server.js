@@ -34,7 +34,8 @@ app.use(
       directives: {
         "default-src": ["'self'"],
         "script-src": ["'self'"],
-        //"img-src": ["none"],
+        "style-src": ["'self'", "'unsafe-inline'"],
+        "img-src": ["'self'"],
         "connect-src": ["'self'", "https://sheets.googleapis.com"],
       },
     },

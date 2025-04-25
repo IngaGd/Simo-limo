@@ -13,6 +13,7 @@ export type CartItemType = {
   packageQty: number;
   price: number;
   imagePath: string;
+  blurHash: string;
   packageUnitPrice: number;
   packageTotalPrice: number;
   deliveryPrice: number;
@@ -32,6 +33,7 @@ export type GlobalContextType = {
     id: number;
     title: string;
     imagePath: string;
+    blurHash: string;
     description: string;
     packageQty: number;
     packageUnitPrice: number;
@@ -59,12 +61,9 @@ export type GlobalContextType = {
   setMessage: (input: string) => void;
   setUserDiscountValue: (discountValue: number) => void | null;
   setUserDiscountCode: (userInputCode: string) => void | null;
-  imageIsLoaded: boolean;
-  setImageIsLoaded: (value: boolean) => void;
   isVisible: boolean;
   setIsVisible: (value: boolean) => void;
   handleIsVisible: () => void;
-  handleLoad?: () => void;
   notification: Notification | null;
   setNotification: (value: Notification | null) => void;
   csrfToken: string;

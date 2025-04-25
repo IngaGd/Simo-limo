@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "src/common/components/Button";
 import { Container } from "src/common/components/Container";
 import { ContainerType } from "src/common/components/Container/container.types";
-import { Image } from "src/common/components/Image";
+import { ImageComponent } from "src/common/components/ImageComponent";
 import { GlobalContext } from "src/common/context/GlobalContext";
 import { GlobalContextType } from "src/common/context/globalContext.types";
 import styles from "./cart.module.scss";
@@ -36,7 +36,7 @@ export function Cart() {
     setUserDiscountValue,
     setMessage,
     amount,
-    imageIsLoaded,
+    // imageIsLoaded,
     products,
   } = useContext(GlobalContext) as GlobalContextType;
   const [userInputCode, setUserInputCode] = useState("");
@@ -65,18 +65,17 @@ export function Cart() {
   return (
     <>
       {cartItems.length > 0 ? (
-        <div
-          className={`${styles.cart} ${
-            imageIsLoaded ? styles.visible : styles.hidden
-          }`}
-        >
+        <div className={`${styles.cart} ${styles.visible} `}>
           <div className={styles.list}>
             <div>{items}:</div>
             {cartItems.map((item) => (
               <div key={item.id} className={styles.item}>
                 <div className={styles.imageContainer}>
                   <Container containerType={ContainerType.ImageOfCart}>
-                    <Image imagePath={item.imagePath} />
+                    <ImageComponent
+                      imagePath={item.imagePath}
+                      blurHash={item.blurHash}
+                    />
                   </Container>
                 </div>
                 <div className={styles.description}>

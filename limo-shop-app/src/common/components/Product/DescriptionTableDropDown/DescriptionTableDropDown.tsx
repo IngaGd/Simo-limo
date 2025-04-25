@@ -23,7 +23,6 @@ export function DescriptionTableDropDown({
     setQuantities,
     handleImageToCart,
     resetImageToCart,
-    imageIsLoaded,
     handleIsVisible,
   } = useContext(GlobalContext) as GlobalContextType;
   const [product, setProduct] = useState<ProductObject>(products[0]);
@@ -35,6 +34,7 @@ export function DescriptionTableDropDown({
     id: number;
     title: string;
     imagePath: string;
+    blurHash: string;
     description: string;
     price: number;
     packageQty: number;
@@ -58,11 +58,7 @@ export function DescriptionTableDropDown({
   };
 
   return (
-    <div
-      className={`${styles.table} ${
-        imageIsLoaded ? styles.visible : styles.hidden
-      }`}
-    >
+    <div className={`${styles.table}`}>
       <p className={`${styles.description}`}>{products[0].description}</p>
       <div className={styles.buttonLine}>
         <Link to={`/items/${products[0].category}`} className={styles.link}>

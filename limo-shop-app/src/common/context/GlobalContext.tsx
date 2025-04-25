@@ -34,7 +34,6 @@ export const GlobalContextProvider = ({
   const [userDiscountCode, setUserDiscountCode] = useState("");
   const [userDiscountValue, setUserDiscountValue] = useState(0);
   const [message, setMessage] = useState("");
-  const [imageIsLoaded, setImageIsLoaded] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
   const amount =
@@ -53,10 +52,6 @@ export const GlobalContextProvider = ({
           .toFixed(2)
           .toString()
       : "";
-
-  const handleLoad = () => {
-    setImageIsLoaded(true);
-  };
 
   const handleIsVisible = () => {
     setIsVisible(!isVisible);
@@ -87,12 +82,9 @@ export const GlobalContextProvider = ({
         setUserDiscountCode,
         message,
         amount,
-        imageIsLoaded,
-        setImageIsLoaded,
         isVisible,
         setIsVisible,
         handleIsVisible,
-        handleLoad,
         notification,
         setNotification,
         csrfToken,
