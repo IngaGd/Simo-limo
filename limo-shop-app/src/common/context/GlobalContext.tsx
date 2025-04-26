@@ -35,6 +35,7 @@ export const GlobalContextProvider = ({
   const [userDiscountValue, setUserDiscountValue] = useState(0);
   const [message, setMessage] = useState("");
   const [isVisible, setIsVisible] = useState(false);
+  const [imageIsLoaded, setImageIsLoaded] = useState(false);
 
   const amount =
     cartItems.length > 0
@@ -91,6 +92,8 @@ export const GlobalContextProvider = ({
         setCsrfToken,
         loader,
         setLoader,
+        imageIsLoaded,
+        setImageIsLoaded,
       }}
     >
       {children}

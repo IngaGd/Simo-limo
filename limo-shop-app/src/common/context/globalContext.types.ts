@@ -70,6 +70,8 @@ export type GlobalContextType = {
   setCsrfToken: (value: string) => void;
   loader: boolean;
   setLoader: (value: boolean) => void;
+  imageIsLoaded: boolean;
+  setImageIsLoaded: (value: boolean) => void;
 };
 
 export type GlobalContextProviderProps = {

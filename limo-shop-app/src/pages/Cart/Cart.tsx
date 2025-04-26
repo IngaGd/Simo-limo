@@ -65,7 +65,7 @@ export function Cart() {
   return (
     <>
       {cartItems.length > 0 ? (
-        <div className={`${styles.cart} ${styles.visible} `}>
+        <div className={`${styles.cart}`}>
           <div className={styles.list}>
             <div>{items}:</div>
             {cartItems.map((item) => (

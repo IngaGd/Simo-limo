@@ -1,10 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import styles from "./imageComponent.module.scss";
 import { ImageProps } from "./imageComponent.types";
-import { Blurhash } from "react-blurhash";
+// import { Blurhash } from "react-blurhash";
+// import { useImageOnload } from "src/common/hooks/useImageOnload";
+import { GlobalContext } from "src/common/context/GlobalContext";
+import { GlobalContextType } from "src/common/context/globalContext.types";
 
-export function ImageComponent({ imagePath, blurHash }: ImageProps) {
-  const [imageIsLoaded, setImageIsLoaded] = useState(false);
+export function ImageComponent({ imagePath }: ImageProps) {
+  // const [imageIsLoaded, setImageIsLoaded] = useState(false);
+  const { imageIsLoaded, setImageIsLoaded } = useContext(
+    GlobalContext
+  ) as GlobalContextType;
 
   useEffect(() => {
     const img = new Image();
@@ -14,25 +20,31 @@ export function ImageComponent({ imagePath, blurHash }: ImageProps) {
     img.src = imagePath;
   }, [imagePath]);
 
+  useEffect(() => {
+    console.log("imageIsLoaded: ", imageIsLoaded);
+  }, [imageIsLoaded]);
+
   return (
     <>
-      <div style={{ display: imageIsLoaded ? "none" : "inline" }}>
-        <Blurhash
-          hash={blurHash}
-          width={200}
-          height={200}
-          resolutionX={32}
-          resolutionY={32}
-          punch={1}
-        />
-      </div>
+      {/* <div className={styles.wraper}> */}
       <img
         src={imagePath}
         alt=""
-        className={styles.image}
+        className={`${styles.image} ${imageIsLoaded ? styles.visible : ""}`}
         loading="lazy"
-        style={{ display: !imageIsLoaded ? "none" : "inline" }}
+        // style={{ display: !imageIsLoaded ? "none" : "inline" }}
       />
+      {/* <div className={`${styles.blur} ${imageIsLoaded ? styles.hidden : ""}`}>
+          <Blurhash
+            hash={blurHash}
+            // width={380}
+            // height={320}
+            resolutionX={32}
+            resolutionY={32}
+            punch={1}
+          />
+        </div> */}
+      {/* </div> */}
     </>
   );
 }
