@@ -1,10 +1,24 @@
+const crypto = require("crypto");
 const logger = require("../utils/logger");
 const { backupFailedUpdate } = require("../utils/backupFailedUpdate");
 
 exports.postNotification = async (req, res) => {
-  console.log("raw payment-notification body: ", req.body);
+  console.log("raw payment-notification body: ", req.body.json);
+  const jsonString = req.body.json;
+  const receivedMac = req.body.mac;
+  const calculatedMac = crypto
+    .createHash("sha512")
+    .update(jsonString + process.env.MAKECOMMERCE_SECRET_KEY)
+    .digest("hex")
+    .toUpperCase();
+  if (receivedMac !== calculatedMac) {
+    return res.status(400).send("Invalid Mac");
+  }
+
+  console.log("MAC validation passed");
+
   try {
-    const paymentData = JSON.parse(req.body.json);
+    const paymentData = JSON.parse(jsonString);
     const { status, reference, transaction } = paymentData;
     console.log(
       `Payment Notification - Status: ${status}, Reference: ${reference}, Transaction ID: ${transaction}`

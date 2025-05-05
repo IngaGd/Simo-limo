@@ -9,7 +9,6 @@ exports.getProducts = async (req, res) => {
     });
     const rows = response.data.values;
     if (rows && rows.length) {
-      console.log("Rows data: ", rows);
       res.status(200).json(rows);
     } else {
       res
