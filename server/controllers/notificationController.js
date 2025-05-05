@@ -3,7 +3,6 @@ const logger = require("../utils/logger");
 const { backupFailedUpdate } = require("../utils/backupFailedUpdate");
 
 exports.postNotification = async (req, res) => {
-  console.log("raw payment-notification body: ", req.body.json);
   const jsonString = req.body.json;
   const receivedMac = req.body.mac;
   const calculatedMac = crypto
@@ -20,9 +19,6 @@ exports.postNotification = async (req, res) => {
   try {
     const paymentData = JSON.parse(jsonString);
     const { status, reference, transaction } = paymentData;
-    console.log(
-      `Payment Notification - Status: ${status}, Reference: ${reference}, Transaction ID: ${transaction}`
-    );
 
     try {
       const updatePaymentData = await fetch(
