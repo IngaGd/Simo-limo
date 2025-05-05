@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "src/common/components/Button";
 import { Container } from "src/common/components/Container";
@@ -36,7 +36,7 @@ export function Cart() {
     setUserDiscountValue,
     setMessage,
     amount,
-    // imageIsLoaded,
+    setImageIsLoaded,
     products,
   } = useContext(GlobalContext) as GlobalContextType;
   const [userInputCode, setUserInputCode] = useState("");
@@ -61,6 +61,10 @@ export function Cart() {
     setUserDiscountValue(0);
     setMessage("");
   };
+
+  useEffect(() => {
+    setImageIsLoaded(false);
+  }, []);
 
   return (
     <>

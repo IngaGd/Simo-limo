@@ -3,10 +3,11 @@ import styles from "./descriptionTableDropDown.module.scss";
 import { Link } from "react-router-dom";
 import { GlobalContext } from "src/common/context/GlobalContext";
 import { GlobalContextType } from "src/common/context/globalContext.types";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DescriptionTableProps } from "./descriptionTableDropDown.types";
 import { IconMinus, IconPlus } from "../../Icon";
 import { ProductObject } from "../product.types";
+import { useHandleProductList } from "src/common/hooks/useHandleProductList";
 
 const buttonText = "Pirkti";
 const currency = "EUR";
@@ -26,6 +27,7 @@ export function DescriptionTableDropDown({
     handleIsVisible,
     imageIsLoaded,
   } = useContext(GlobalContext) as GlobalContextType;
+  const { loader } = useHandleProductList();
   const [product, setProduct] = useState<ProductObject>(products[0]);
 
   const productQuantity =
@@ -59,7 +61,11 @@ export function DescriptionTableDropDown({
   };
 
   return (
-    <div className={`${styles.table}  ${imageIsLoaded ? styles.visible : ""}`}>
+    <div
+      className={`${styles.table}  ${
+        !loader && imageIsLoaded ? styles.visible : ""
+      }`}
+    >
       <p className={`${styles.description}`}>{products[0].description}</p>
       <div className={styles.buttonLine}>
         <Link to={`/items/${products[0].category}`} className={styles.link}>

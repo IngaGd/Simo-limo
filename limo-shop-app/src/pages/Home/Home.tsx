@@ -13,15 +13,23 @@ import { Loader } from "src/common/components/Loader/Loader.tsx";
 
 export default function Home() {
   const { loader } = useHandleProductList();
-  const { products, notification, setNotification, isVisible } = useContext(
-    GlobalContext
-  ) as GlobalContextType;
+  const {
+    products,
+    notification,
+    setNotification,
+    isVisible,
+    setImageIsLoaded,
+  } = useContext(GlobalContext) as GlobalContextType;
   const { ref, deviceHeight } = useElementPositionInView();
   const scrollY = useScrollY();
 
   useEffect(() => {
     setNotification(null);
   }, [notification]);
+
+  useEffect(() => {
+    setImageIsLoaded(false);
+  }, []);
 
   useEffect(() => {
     if (isVisible) {

@@ -27,6 +27,7 @@ export function Items() {
     setQuantities,
     isVisible,
     setIsVisible,
+    setImageIsLoaded,
   } = useContext(GlobalContext) as GlobalContextType;
   const { category } = useParams();
   const { ref, deviceHeight } = useElementPositionInView();
@@ -54,6 +55,10 @@ export function Items() {
       })
     );
   };
+
+  useEffect(() => {
+    setImageIsLoaded(false);
+  }, []);
 
   useEffect(() => {
     if (isVisible) {

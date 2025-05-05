@@ -26,9 +26,13 @@ const buttonText = "Apmokėti";
 export function Checkout({ message, orderId, userIp }: CheckoutObject) {
   const checkoutUrl = `${URL}create-transaction`;
 
-  const { cartItems, amount, userDiscountValue, notification } = useContext(
-    GlobalContext
-  ) as GlobalContextType;
+  const {
+    cartItems,
+    amount,
+    userDiscountValue,
+    notification,
+    setImageIsLoaded,
+  } = useContext(GlobalContext) as GlobalContextType;
 
   const { setData, response } = usePostData(checkoutUrl);
 
@@ -41,6 +45,10 @@ export function Checkout({ message, orderId, userIp }: CheckoutObject) {
     const user = { userIp: userIp };
     setData({ transactionData, user });
   };
+
+  useEffect(() => {
+    setImageIsLoaded(false);
+  }, []);
 
   useEffect(() => {
     if (response?.redirectUrl) {
