@@ -3,14 +3,22 @@ import { TailSpin } from "react-loader-spinner";
 
 type LoaderProps = {
   size?: string;
+  height?: number;
+  top?: number;
 };
 
-export function Loader({ size }: LoaderProps) {
+export function Loader({ size, height, top }: LoaderProps) {
   return (
     <div
       className={`${styles.loader} ${
         size === "fullscreen" ? styles.fullscreen : ""
       }`}
+      style={
+        {
+          "--top": `${top}px`,
+          "--height": `${height}px`,
+        } as React.CSSProperties
+      }
     >
       {size === "fullscreen" ? (
         <div className={styles.fullscr}>

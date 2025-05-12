@@ -5,14 +5,28 @@ type Notification = {
   type: "success" | "error";
   size: "fullscreen" | "line";
   message: string;
+  height?: number;
+  top?: number;
 };
 
-export function Notification({ message, type, size }: Notification) {
+export function Notification({
+  message,
+  type,
+  size,
+  top,
+  height,
+}: Notification) {
   return (
     <div
       className={`${styles.notification} ${
         size === "fullscreen" ? styles.fullscreen : styles.line
       }`}
+      style={
+        {
+          "--top": `${top}px`,
+          "--height": `${height}px`,
+        } as React.CSSProperties
+      }
     >
       <div
         className={`${styles.modal} ${

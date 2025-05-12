@@ -1,15 +1,8 @@
 @use "../../../styles/variables/index" as *;
+@use "../../../styles/abstracts/index" as *;
 
 .popup {
-  height: var(--popup-height, 0px);
-  width: 100%;
-  background-color: rgba($color-primary-3, 0.2);
-  position: absolute;
-  z-index: 3;
-  top: var(--popup-top, 0px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include fullscreenOverlay;
   &:hidden {
     display: noe;
   }

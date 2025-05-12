@@ -19,8 +19,8 @@ export function Popup({ height, top }: PopupProps) {
       className={`${styles.popup} ${!isVisible ? styles.hidden : ""}`}
       style={
         {
-          "--popup-top": `${top}px`,
-          "--popup-height": `${height}px`,
+          "--top": `${top}px`,
+          "--height": `${height}px`,
         } as React.CSSProperties
       }
     >

@@ -6,8 +6,6 @@ import { useContext, useEffect, useState } from "react";
 import { usePostData } from "src/common/hooks/usePostData";
 import { GlobalContext } from "src/common/context/GlobalContext";
 import { GlobalContextType } from "src/common/context/globalContext.types";
-import { Notification } from "../Notification/Notification";
-import { Loader } from "../Loader/Loader";
 import { useCsrfTokenFetch } from "src/common/hooks/useCsrfTokenFetch";
 
 const buttonText = "Siųsti";
@@ -45,12 +43,7 @@ export function Form() {
     GlobalContext
   ) as GlobalContextType;
   const { setData } = usePostData(userMessageUrl);
-
   const validationRules = validationOptions();
-
-  // useEffect(() => {
-  //   setNotification(null);
-  // }, [notification]);
 
   useEffect(() => {
     fetchCsrfToken();
@@ -105,66 +98,53 @@ export function Form() {
   }, [notification, loader]);
 
   return (
-    <>
-      {loader ? (
-        <Loader size="fullscreen" />
-      ) : notification ? (
-        <Notification
-          message={notification?.message}
-          type={notification?.type}
-          size="fullscreen"
+    <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+      <input type="hidden" name="_csrf" value={csrfToken} />
+      <div className={styles.input}>
+        <label htmlFor="firstName">Vardas</label>
+        <input
+          id="firstName"
+          type="text"
+          autoComplete="on"
+          {...register("firstName", validationRules.firstName)}
         />
-      ) : (
-        <div></div>
-      )}
-      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-        <input type="hidden" name="_csrf" value={csrfToken} />
-        <div className={styles.input}>
-          <label htmlFor="firstName">Vardas</label>
-          <input
-            id="firstName"
-            type="text"
-            autoComplete="on"
-            {...register("firstName", validationRules.firstName)}
-          />
-          <p>{errors.firstName?.message}</p>
-        </div>
-        <div className={styles.input}>
-          <label htmlFor="email">E-paštas</label>
-          <input
-            id="email"
-            type="email"
-            autoComplete="on"
-            placeholder="pašto@adresas.lt"
-            {...register("email", validationRules.email)}
-          />
-          <p>{errors.email?.message}</p>
-          {/* <p>
+        <p>{errors.firstName?.message}</p>
+      </div>
+      <div className={styles.input}>
+        <label htmlFor="email">E-paštas</label>
+        <input
+          id="email"
+          type="email"
+          autoComplete="on"
+          placeholder="pašto@adresas.lt"
+          {...register("email", validationRules.email)}
+        />
+        <p>{errors.email?.message}</p>
+        {/* <p>
               {
                 errorResponse?.find((el) => el.field === "purchaser.email")
                   ?.message
               }
             </p> */}
-        </div>
-        <div className={styles.input}>
-          <label htmlFor="message">Žinutė</label>
-          <textarea
-            id="message"
-            rows={6}
-            {...register("message", validationRules.message)}
-          />
-          <p>{errors.message?.message}</p>
-          {/* <p>
+      </div>
+      <div className={styles.input}>
+        <label htmlFor="message">Žinutė</label>
+        <textarea
+          id="message"
+          rows={6}
+          {...register("message", validationRules.message)}
+        />
+        <p>{errors.message?.message}</p>
+        {/* <p>
               {
                 errorResponse?.find((el) => el.field === "purchaser.email")
                   ?.message
               }
             </p> */}
-        </div>
-        <button type="submit" className={styles.btn}>
-          {buttonText}
-        </button>
-      </form>
-    </>
+      </div>
+      <button type="submit" className={styles.btn}>
+        {buttonText}
+      </button>
+    </form>
   );
 }

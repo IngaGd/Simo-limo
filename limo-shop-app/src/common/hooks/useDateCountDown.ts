@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const useDateCountDown = () => {
-  const timeOfEvent = new Date("2025-05-12").getTime();
+  const timeOfEvent = new Date("2025-05-19").getTime();
   const timeNow = new Date().getTime();
   const distance = timeOfEvent - timeNow;
   const [days, setDays] = useState(0);

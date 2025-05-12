@@ -5,7 +5,6 @@
   display: flex;
   &.fullscreen {
     @include fullscreenOverlay;
-    // color: whitesmoke;
     .modal {
       width: 40rem;
       border-radius: 3px;
@@ -13,7 +12,6 @@
       display: flex;
       gap: 3rem;
       background-color: rgba(black, 0.8);
-      margin-top: -20rem;
       @media screen and (max-width: 976px) {
         margin-top: 0rem;
       }

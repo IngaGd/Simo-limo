@@ -19,7 +19,7 @@
   justify-content: space-between;
   gap: 1rem;
   opacity: 0;
-  transition: opacity 1s ease-in-out;
+  transition: opacity 0.2 s ease-in-out;
   &.visible {
     opacity: 1;
   }
@@ -42,29 +42,13 @@
   .price,
   .details {
     display: flex;
+    align-items: center;
     color: $color-primary-3;
   }
 }
 
 .purchasing {
   justify-content: space-between;
-}
-
-.quantity {
-  .details {
-    justify-content: space-between;
-    align-items: center;
-    width: 10rem;
-  }
-}
-
-.quantity,
-.price {
-  flex-direction: column;
-}
-
-.quantity {
-  gap: 1rem;
 }
 
 .details {
@@ -94,6 +78,7 @@
 .link {
   text-decoration: none;
   color: $color-primary-3;
+  background-color: $color-primary-2;
   padding: 0.25rem 1rem 0.25rem 1rem;
   border: 1px solid black;
   border-radius: 2px;
@@ -132,9 +117,8 @@
   .link {
     align-self: center;
   }
-  .pakBtn {
-    display: flex;
-    gap: 1rem;
-    padding-top: 0.5rem;
-  }
+}
+
+.pakBtn {
+  font-size: 1.8rem;
 }

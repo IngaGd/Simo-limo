@@ -5,7 +5,7 @@ import { GlobalContext } from "src/common/context/GlobalContext";
 import { GlobalContextType } from "src/common/context/globalContext.types";
 import { useContext, useState } from "react";
 import { DescriptionTableProps } from "./descriptionTableDropDown.types";
-import { IconMinus, IconPlus } from "../../Icon";
+// import { IconMinus, IconPlus } from "../../Icon";
 import { ProductObject } from "../product.types";
 import { useHandleProductList } from "src/common/hooks/useHandleProductList";
 
@@ -17,8 +17,8 @@ export function DescriptionTableDropDown({
   handleIsActive,
 }: DescriptionTableProps) {
   const {
-    handleIncrement,
-    handleDecrement,
+    // handleIncrement,
+    // handleDecrement,
     addToCart,
     quantities,
     setQuantities,
@@ -71,23 +71,13 @@ export function DescriptionTableDropDown({
         <Link to={`/items/${products[0].category}`} className={styles.link}>
           Plačiau
         </Link>
-        <div className={styles.pakBtn}>
-          {products?.map((p) => (
-            <Button
-              key={p.id}
-              colorMode="grey"
-              buttonLabel={p.packageQty.toString().concat(" but.")}
-              handleClick={() => handleProductSet(p)}
-            />
-          ))}
-        </div>
       </div>
       {product ? (
         <div className={`${styles.purchasing}`}>
-          <div className={`${styles.quantity}`}>
-            <div>Pakuočių kiekis</div>
-            <div className={styles.details}>
-              <div>{productQuantity}</div>
+          <div className={styles.quantity}>
+            {/* <div>Kiekis</div> */}
+            {/* <div className={styles.details}> */}
+            {/* <div>{productQuantity}</div>
               <div
                 onClick={() => handleIncrement(product.id)}
                 className={styles.iconBox}
@@ -99,8 +89,21 @@ export function DescriptionTableDropDown({
                 className={styles.iconBox}
               >
                 <IconMinus size="medium" />
-              </div>
+              </div> */}
+            <div className={styles.pakBtn}>
+              {products?.map((p) => (
+                // <Button
+                //   key={p.id}
+                //   colorMode="grey"
+                //   buttonLabel={p.packageQty.toString().concat(" but.")}
+                //   handleClick={() => handleProductSet(p)}
+                // />
+                <div onClick={() => handleProductSet(p)}>
+                  {p.packageQty.toString().concat(" but.")}
+                </div>
+              ))}
             </div>
+            {/* </div> */}
           </div>
           <div className={`${styles.price}`}>
             <div className={`${styles.details}`}>
@@ -110,7 +113,7 @@ export function DescriptionTableDropDown({
           </div>
           <div className={styles.btn}>
             <Button
-              colorMode="grey"
+              colorMode="dark"
               buttonLabel={buttonText}
               handleClick={() => {
                 handleAddToCart(product);
