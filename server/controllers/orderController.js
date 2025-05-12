@@ -6,8 +6,6 @@ const window = new JSDOM("").window;
 const DOMPurify = createDOMPurify(window);
 
 exports.createOrder = async (req, res) => {
-  console.log("Request received on /api/order");
-
   const orderNo = uuidv4();
   const sessionId = uuidv4();
 
@@ -22,22 +20,11 @@ exports.createOrder = async (req, res) => {
     paymentStatus,
   } = req.body;
 
-  console.log("ored req.csrfToken: ", req.csrfToken);
-
   if (_csrf !== req.csrfToken) {
     return res
       .status(403)
       .send("Jūsų sesija pasibaigė. Įkelkite puslapį iš naujo.");
   }
-
-  console.log(
-    "Payload being sent to Google Sheets:",
-    purchaser,
-    discountCode,
-    paymentStatus,
-    "Package: ",
-    products[0].packageQty
-  );
 
   const arrOfProducts = [];
   products.forEach((product) => {
@@ -52,7 +39,6 @@ exports.createOrder = async (req, res) => {
       Number(product.deliveryPrice).toFixed(2),
     ]);
   });
-  console.log("arrOfProducts: ", arrOfProducts);
 
   const orderValues = (
     purchaser,

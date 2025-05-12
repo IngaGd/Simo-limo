@@ -15,8 +15,6 @@ exports.sendUserMessage = async (req, res) => {
     });
   }
 
-  console.log(userMessage);
-
   try {
     const response = await axios.post(
       process.env.GOOGLE_SCRIPT_MESSAGES_URL,

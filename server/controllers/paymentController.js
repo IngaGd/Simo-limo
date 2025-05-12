@@ -48,11 +48,9 @@ exports.createTransaction = async (req, res) => {
         },
       }
     );
-    console.log("MakeCommerce response: ", response.data);
     const redirectPaymentUrl = response.data.payment_methods?.other?.find(
       (method) => method.name === "redirect"
     )?.url;
-    console.log("redirectPaymentUrl: ", redirectPaymentUrl);
     res.status(201).json({
       message: "Transaction created successfully",
       redirectUrl: redirectPaymentUrl,

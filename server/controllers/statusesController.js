@@ -3,7 +3,6 @@ const logger = require("../utils/logger");
 const axios = require("axios");
 
 exports.getPaymentStatus = async (req, res) => {
-  console.log("Call check-session, cookie: ", req.cookies.session);
   const sessionId = req.cookies.session;
   if (!sessionId) {
     return res.status(400).json({ message: "Session not found" });

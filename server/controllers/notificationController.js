@@ -43,7 +43,6 @@ exports.postNotification = async (req, res) => {
         return res.status(500).send("Failed update Sheets");
       }
       const updateResult = await updatePaymentData.json();
-      console.log("Update Response: ", updateResult);
       return res
         .status(200)
         .send({ message: "Notification received. DB updated." });

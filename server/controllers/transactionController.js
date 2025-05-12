@@ -3,7 +3,6 @@ const logger = require("../utils/logger");
 
 exports.updateTransactionStatus = async (req, res) => {
   const { status, reference, transaction } = req.body;
-  console.log("Put route is trugered, reference: ", reference);
 
   try {
     const response = await sheets.spreadsheets.values.get({

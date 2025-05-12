@@ -20,10 +20,6 @@ export function ImageComponent({ imagePath }: ImageProps) {
     img.src = imagePath;
   }, [imagePath]);
 
-  useEffect(() => {
-    console.log("imageIsLoaded: ", imageIsLoaded);
-  }, [imageIsLoaded]);
-
   return (
     <>
       {/* <div className={styles.wraper}> */}
