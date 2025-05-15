@@ -2,8 +2,6 @@
 
 ## Tech Stack
 
-## Tech Stack
-
 - **Frontend**: Vite + React + TypeScript
 - **Styling**: SCSS Modules
 - **Backend**: Node.js + Express

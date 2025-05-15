@@ -10,6 +10,7 @@ import { Popup } from "src/common/components/Popup/Popup";
 import { useScrollY } from "src/common/hooks/useScrollY";
 import { getGroupedProducts } from "./home.logic.ts";
 import { Loader } from "src/common/components/Loader/Loader.tsx";
+import { useTrackVisiting } from "src/common/hooks/useTrackVisiting.ts";
 
 export default function Home() {
   const { loader } = useHandleProductList();
@@ -22,6 +23,7 @@ export default function Home() {
   } = useContext(GlobalContext) as GlobalContextType;
   const { ref, deviceHeight } = useElementPositionInView();
   const scrollY = useScrollY();
+  useTrackVisiting();
 
   useEffect(() => {
     setNotification(null);

@@ -45,6 +45,7 @@ app.use(cookieParser());
 
 //Routes
 app.use("/api", require("./routes/products"));
+app.use("/api", require("./routes/trackings"));
 app.use("/api", require("./routes/csrfToken"));
 app.use("/api", require("./routes/userMessage"));
 app.use("/api", require("./routes/orders"));

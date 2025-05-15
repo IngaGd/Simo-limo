@@ -15,6 +15,7 @@ import { Button } from "src/common/components/Button";
 import { Popup } from "src/common/components/Popup/Popup";
 import { useElementPositionInView } from "src/common/hooks/useElementPositionInView";
 import { useScrollY } from "src/common/hooks/useScrollY";
+import { useTrackVisiting } from "src/common/hooks/useTrackVisiting";
 
 const buttonText = "Pirkti";
 
@@ -32,6 +33,7 @@ export function Items() {
   const { category } = useParams();
   const { ref, deviceHeight } = useElementPositionInView();
   const scrollY = useScrollY();
+  useTrackVisiting();
 
   const handleAddToCart = (p: {
     id: number;
