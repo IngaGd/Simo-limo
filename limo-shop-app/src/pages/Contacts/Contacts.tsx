@@ -70,7 +70,9 @@ export function Contacts() {
             </div>
           ))}
         </div>
-        <Form />
+        <div className={styles.form}>
+          <Form />
+        </div>
         <div className={styles.address}>
           <address>
             Maistas, MB <br />

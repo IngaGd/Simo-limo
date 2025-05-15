@@ -172,9 +172,7 @@ export function PurchasingFormHook() {
           )}
           <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
             <input type="hidden" name="_csrf" value={csrfToken} />
-            <div className={styles.heading}>
-              Užpildykite kontaktinius duomenis
-            </div>
+            <div className={styles.heading}>Užpildyk kontaktinius duomenis</div>
             <div className={styles.input}>
               <label htmlFor="firstName">Vardas</label>
               <input

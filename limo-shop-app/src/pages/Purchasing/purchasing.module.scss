@@ -29,7 +29,7 @@
   width: 70rem;
   @media (max-width: 780px) {
     padding: 1rem 3rem 2rem 3rem;
-    width: 90%;
+    width: 100%;
     // margin-left: 5rem;
     // margin-right: 5rem;
   }
@@ -106,6 +106,13 @@
     &:checked {
       accent-color: rgb(171, 168, 168);
     }
+  }
+}
+
+input {
+  font-size: 1.6rem;
+  @media (max-width: 686px) {
+    font-size: 1.4rem;
   }
 }
 
