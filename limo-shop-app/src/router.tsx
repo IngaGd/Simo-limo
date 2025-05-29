@@ -13,6 +13,8 @@ import { PaymentCancel } from "./pages/PaymentCancel";
 import { PaymentLoading } from "./pages/PaymentLoading/PaymentLoading";
 import { Policy } from "./pages/Policy/Policy";
 import { lazy } from "react";
+import { ShoppingPlaces } from "./pages/ShoppingPlaces/ShoppingPlaces";
+import { Events } from "./pages/Events/Events";
 const Home = lazy(() => import("./pages/Home/Home"));
 
 const routes = [
@@ -23,7 +25,9 @@ const routes = [
       { path: "/", element: <Home /> },
       { path: "/items/:category", element: <Items /> },
       { path: "/contacts", element: <Contacts /> },
+      { path: "/shopping-places", element: <ShoppingPlaces /> },
       { path: "/cart", element: <Cart /> },
+      { path: "/events", element: <Events /> },
       { path: "/terms", element: <Terms /> },
       { path: "/privacy", element: <Policy /> },
       //{ path: "/login", element: <Login /> },
