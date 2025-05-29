@@ -1,0 +1,67 @@
+@use "../../styles/variables/index" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-self: center;
+  padding-top: 2rem;
+  margin-left: 3rem;
+  margin-right: 3rem;
+  // background-color: aliceblue;
+  // width: 50%;
+}
+
+.towns {
+  display: flex;
+  flex-direction: column;
+}
+
+.town {
+  display: flex;
+  align-self: center;
+  justify-self: center;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 1.8rem;
+  letter-spacing: 2px;
+}
+
+.districts {
+  display: flex;
+  flex-direction: column;
+  // align-items: center;
+  padding-bottom: 2rem;
+}
+
+.district {
+  font-weight: 600;
+  display: flex;
+  align-self: start;
+  padding-bottom: 1rem;
+}
+
+.places {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  // display: flex;
+  // flex-wrap: wrap;
+  // justify-content: space-between;
+  gap: 1rem;
+  @media screen and (max-width: 600px) {
+    grid-template-columns: 1fr;
+    font-size: 1.4rem;
+  }
+}
+
+.place {
+  // padding: 2rem;
+  // border: 1px solid black;
+  justify-self: start;
+}
+
+.name {
+  // // padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+  // background-color: $color-secondary-1;
+  // color: white;
+}
