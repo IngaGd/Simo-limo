@@ -1,0 +1,15 @@
+@use "../../styles/abstracts/index" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  padding-top: 3rem;
+  margin-left: 3rem;
+  margin-right: 3rem;
+  text-align: center;
+}
+
+.form {
+  @include formLayout;
+}
