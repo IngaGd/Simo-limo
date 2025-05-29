@@ -1,6 +1,6 @@
 const { body, validationResult } = require("express-validator");
 
-const validateOrder = [
+const validateInput = [
   body("purchaser.firstName")
     .notEmpty()
     .withMessage("Privalomas laukas")
@@ -80,4 +80,4 @@ const validateOrder = [
   },
 ];
 
-module.exports = { validateOrder };
+module.exports = { validateInput };
