@@ -98,7 +98,7 @@ export function DescriptionTableDropDown({
                 //   buttonLabel={p.packageQty.toString().concat(" but.")}
                 //   handleClick={() => handleProductSet(p)}
                 // />
-                <div onClick={() => handleProductSet(p)}>
+                <div onClick={() => handleProductSet(p)} key={p.id}>
                   {p.packageQty.toString().concat(" but.")}
                 </div>
               ))}

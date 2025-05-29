@@ -1,8 +1,9 @@
 @use "../../styles/variables/index" as *;
 @use "../../styles/base/index" as *;
+@use "../../styles/abstracts/index" as *;
 
 .contacts {
-  height: 100%;
+  height: auto;
   width: 100%;
   a {
     display: flex;
@@ -45,8 +46,7 @@ address {
 }
 
 .form {
-  display: flex;
-  width: 100%;
+  @include formLayout;
 }
 
 button {
