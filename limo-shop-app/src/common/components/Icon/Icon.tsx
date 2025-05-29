@@ -11,6 +11,8 @@ import { IoMdAlert } from "react-icons/io";
 import { IconProps } from "./icon.types";
 import { FaRegCopy } from "react-icons/fa";
 import { ImCheckboxChecked } from "react-icons/im";
+import { FaShop } from "react-icons/fa6";
+import { BsCalendar2EventFill } from "react-icons/bs";
 
 import styles from "./icon.module.scss";
 
@@ -63,5 +65,15 @@ export function IconCopy({ size }: IconProps) {
 export function IconCopied({ size }: IconProps) {
   return (
     <ImCheckboxChecked className={`${styles.copied} ${styles[`${size}`]}`} />
+  );
+}
+
+export function IconShop({ size }: IconProps) {
+  return <FaShop className={`${styles.shop} ${styles[`${size}`]}`} />;
+}
+
+export function IconEvent({ size }: IconProps) {
+  return (
+    <BsCalendar2EventFill className={`${styles.event} ${styles[`${size}`]}`} />
   );
 }
