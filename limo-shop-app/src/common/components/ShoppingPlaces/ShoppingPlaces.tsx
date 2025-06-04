@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import {
   ShoppingPlace,
   ShoppingPlacesType,
-} from "src/pages/ShoppingPlaces/shoppingPlaces.types";
+} from "src/common/components/ShoppingPlaces/shoppingPlaces.types";
 import { useGetData } from "src/common/hooks/useGetData";
 import { getGroupedData, shoppingPlaces } from "./shoppingPlaces.logic";
 import styles from "./shoppingPlaces.module.scss";

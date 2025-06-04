@@ -1,4 +1,4 @@
-@use "../../styles/variables/index" as *;
+@use "../../../styles/variables/index" as *;
 
 .container {
   display: flex;
@@ -8,8 +8,6 @@
   padding-top: 2rem;
   margin-left: 3rem;
   margin-right: 3rem;
-  // background-color: aliceblue;
-  // width: 50%;
 }
 
 .towns {
@@ -44,10 +42,7 @@
 .places {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  // display: flex;
-  // flex-wrap: wrap;
-  // justify-content: space-between;
-  gap: 1rem;
+  gap: 5rem;
   @media screen and (max-width: 600px) {
     grid-template-columns: 1fr;
     font-size: 1.4rem;
@@ -55,13 +50,5 @@
 }
 
 .place {
-  // padding: 2rem;
-  // border: 1px solid black;
   justify-self: start;
-}
-
-.name {
-  // // padding: 0.25rem 0.5rem 0.25rem 0.5rem;
-  // background-color: $color-secondary-1;
-  // color: white;
 }

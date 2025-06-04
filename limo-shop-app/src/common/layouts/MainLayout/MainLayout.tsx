@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { Header } from "components/Header";
 import { Footer } from "components/Footer";
 import styles from "./mainLayout.module.scss";
@@ -30,12 +30,8 @@ export function MainLayout() {
       <div className={styles.countdown}>
         <p>
           Užsukai į <b>testinę</b> simo.limo puslapio versiją. Limonado jau yra.
-          Nori atsigerti? Spausk{" "}
-          <Link to="/shopping-places" className={styles.link}>
-            čia
-          </Link>
-          , arba parašyk man - forma kontaktuose, arba numesk žinutę IG.
-          E-parduotuvė dar fermentuojasi, iki atidarymo liko:
+          Nori atsigerti? Parašyk man - forma kontaktuose, arba numesk žinutę
+          IG. E-parduotuvė dar fermentuojasi, iki atidarymo liko:
         </p>
         <div className={styles.date}>
           <div>{days} d</div>

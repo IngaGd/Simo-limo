@@ -15,6 +15,7 @@ import { GlobalContext } from "src/common/context/GlobalContext";
 import { GlobalContextType } from "src/common/context/globalContext.types";
 import { Loader } from "src/common/components/Loader/Loader";
 import { Notification } from "src/common/components/Notification/Notification";
+import { ShoppingPlaces } from "src/common/components/ShoppingPlaces/ShoppingPlaces";
 
 export function Contacts() {
   const { notification, loader } = useContext(
@@ -49,10 +50,10 @@ export function Contacts() {
                   </a>
                 ) : (
                   <a
-                    href="https://www.instagram.com/simo.delicatessen/"
+                    href="https://www.instagram.com/simo.limo_/"
                     target="_blank"
                   >
-                    <IconInstagram size="medium" />{" "}
+                    <IconInstagram size="medium" />
                   </a>
                 )}
               </div>
@@ -73,6 +74,9 @@ export function Contacts() {
         <div className={styles.form}>
           <Form />
         </div>
+        <div className="heading-secondary">Parduotuvės:</div>
+        <ShoppingPlaces />
+        <div className="heading-secondary">Rekvizitai:</div>
         <div className={styles.address}>
           <address>
             Maistas, MB <br />

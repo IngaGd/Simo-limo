@@ -5,16 +5,12 @@ import { Items } from "./pages/Items";
 import { Contacts } from "./pages/Contacts";
 import { Cart } from "./pages/Cart";
 import { Terms } from "./pages/Terms";
-//import { Login } from "./pages/Login/Login";
-//import { Purchasing } from "./pages/Purchasing/Purchasing";
 import { PurchasingFormHook } from "./pages/Purchasing/PurchasingFormHook";
 import { PaymentSuccess } from "./pages/PaymentSuccess/PaymentSuccess";
 import { PaymentCancel } from "./pages/PaymentCancel";
 import { PaymentLoading } from "./pages/PaymentLoading/PaymentLoading";
 import { Policy } from "./pages/Policy/Policy";
 import { lazy } from "react";
-import { ShoppingPlaces } from "./pages/ShoppingPlaces/ShoppingPlaces";
-import { Events } from "./pages/Events/Events";
 const Home = lazy(() => import("./pages/Home/Home"));
 
 const routes = [
@@ -25,13 +21,9 @@ const routes = [
       { path: "/", element: <Home /> },
       { path: "/items/:category", element: <Items /> },
       { path: "/contacts", element: <Contacts /> },
-      { path: "/shopping-places", element: <ShoppingPlaces /> },
       { path: "/cart", element: <Cart /> },
-      { path: "/events", element: <Events /> },
       { path: "/terms", element: <Terms /> },
       { path: "/privacy", element: <Policy /> },
-      //{ path: "/login", element: <Login /> },
-      //{ path: "/purchasing", element: <Purchasing /> },
       { path: "/purchasing", element: <PurchasingFormHook /> },
       { path: "/payment-loading", element: <PaymentLoading /> },
       { path: "/payment-success", element: <PaymentSuccess /> },

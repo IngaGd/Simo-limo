@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { IconCart, IconEnvelop, IconShop, IconEvent } from "components/Icon";
+import { IconCart, IconEnvelop } from "components/Icon";
 import { Logo } from "components/Logo";
 import styles from "./header.module.scss";
 import { useContext } from "react";
@@ -16,9 +16,6 @@ export function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.nav}>
-        <Link to="/shopping-places" className={styles.shop}>
-          <IconShop size="medium" />
-        </Link>
         <Link to="/contacts" className={styles.envelope}>
           <IconEnvelop size="medium" />
         </Link>
@@ -38,10 +35,6 @@ export function Header() {
             )}
           </div>
         </Link>
-        <Link to="/events" className={styles.event}>
-          <IconEvent size="medium" />
-        </Link>
-        {/* <Link to="/login">Login</Link> */}
       </div>
       <p className={styles.slogan}>Skanus limonadas</p>
     </header>
