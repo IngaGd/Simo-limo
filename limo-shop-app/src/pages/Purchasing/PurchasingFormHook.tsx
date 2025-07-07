@@ -167,159 +167,163 @@ export function PurchasingFormHook() {
               type={notification?.type}
               size="line"
             />
-          ) : (
-            <div></div>
-          )}
-          <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-            <input type="hidden" name="_csrf" value={csrfToken} />
-            <div className={styles.heading}>Užpildyk kontaktinius duomenis</div>
-            <div className={styles.input}>
-              <label htmlFor="firstName">Vardas</label>
-              <input
-                id="firstName"
-                type="text"
-                autoComplete="on"
-                {...register("firstName", validationRules.firstName)}
-              />
-              <p>
-                {(touchedFields.lastName && errors.firstName?.message) ||
-                  validationError?.find(
-                    (el) => el.field === "purchaser.firstName"
-                  )?.message}
-              </p>
-              {/* <p>
+          ) : null}
+          <div className={styles.content}>
+            <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+              <input type="hidden" name="_csrf" value={csrfToken} />
+              <div className={styles.heading}>
+                Užpildyk kontaktinius duomenis
+              </div>
+              <div className={styles.input}>
+                <label htmlFor="firstName">Vardas</label>
+                <input
+                  id="firstName"
+                  type="text"
+                  autoComplete="on"
+                  {...register("firstName", validationRules.firstName)}
+                />
+                <p>
+                  {(touchedFields.lastName && errors.firstName?.message) ||
+                    validationError?.find(
+                      (el) => el.field === "purchaser.firstName"
+                    )?.message}
+                </p>
+                {/* <p>
               {
  ||
                 validationError?.find((el) => el.field === "purchaser.firstName")
                   ?.message
               }
             </p> */}
-            </div>
-            <div className={styles.input}>
-              <label htmlFor="lastName">Pavardė</label>
-              <input
-                id="lastName"
-                type="text"
-                autoComplete="on"
-                {...register("lastName", validationRules.lastName)}
-              />
-              <p>{touchedFields.phone && errors.lastName?.message}</p>
-              {/* <p>
+              </div>
+              <div className={styles.input}>
+                <label htmlFor="lastName">Pavardė</label>
+                <input
+                  id="lastName"
+                  type="text"
+                  autoComplete="on"
+                  {...register("lastName", validationRules.lastName)}
+                />
+                <p>{touchedFields.phone && errors.lastName?.message}</p>
+                {/* <p>
               {
                 validationError?.find((el) => el.field === "purchaser.lastName")
                   ?.message
               }
             </p> */}
-            </div>
-            <div className={styles.input}>
-              <label htmlFor="phone">Telefono Nr.</label>
-              <input
-                id="phone"
-                type="text"
-                autoComplete="on"
-                placeholder="+3706223322"
-                {...register("phone", validationRules.phone)}
-              />
-              <p>{touchedFields.email && errors.phone?.message}</p>
-              {/* <p>
+              </div>
+              <div className={styles.input}>
+                <label htmlFor="phone">Telefono Nr.</label>
+                <input
+                  id="phone"
+                  type="text"
+                  autoComplete="on"
+                  placeholder="+3706223322"
+                  {...register("phone", validationRules.phone)}
+                />
+                <p>{touchedFields.email && errors.phone?.message}</p>
+                {/* <p>
               {
                 validationError?.find((el) => el.field === "purchaser.phone")
                   ?.message
               }
             </p> */}
-            </div>
-            <div className={styles.input}>
-              <label htmlFor="email">E-paštas</label>
-              <input
-                id="email"
-                type="email"
-                autoComplete="on"
-                placeholder="pašto@adresas.lt"
-                {...register("email", validationRules.email)}
-              />
-              <p>{touchedFields.address && errors.email?.message}</p>
-              {/* <p>
+              </div>
+              <div className={styles.input}>
+                <label htmlFor="email">E-paštas</label>
+                <input
+                  id="email"
+                  type="email"
+                  autoComplete="on"
+                  placeholder="pašto@adresas.lt"
+                  {...register("email", validationRules.email)}
+                />
+                <p>{touchedFields.address && errors.email?.message}</p>
+                {/* <p>
               {
                 validationError?.find((el) => el.field === "purchaser.email")
                   ?.message
               }
             </p> */}
-            </div>
-            <div className={styles.input}>
-              <label htmlFor="address">Pristatymo adresas</label>
-              <input
-                id="address"
-                type="text"
-                autoComplete="on"
-                placeholder="Gatvė namo nr./buto nr."
-                {...register("address", validationRules.address)}
-              />
-              <p>{touchedFields.town && errors.address?.message}</p>
-              {/* <p>
+              </div>
+              <div className={styles.input}>
+                <label htmlFor="address">Pristatymo adresas</label>
+                <input
+                  id="address"
+                  type="text"
+                  autoComplete="on"
+                  placeholder="Gatvė namo nr./buto nr."
+                  {...register("address", validationRules.address)}
+                />
+                <p>{touchedFields.town && errors.address?.message}</p>
+                {/* <p>
               {
                 validationError?.find((el) => el.field === "purchaser.address")
                   ?.message
               }
             </p> */}
-            </div>
-            <div className={styles.input}>
-              <label htmlFor="town">Miestas</label>
-              <input
-                id="town"
-                type="text"
-                autoComplete="on"
-                {...register("town", validationRules.town)}
-              />
-              <p>{touchedFields.postCode && errors.town?.message}</p>
-              {/* <p>
+              </div>
+              <div className={styles.input}>
+                <label htmlFor="town">Miestas</label>
+                <input
+                  id="town"
+                  type="text"
+                  autoComplete="on"
+                  {...register("town", validationRules.town)}
+                />
+                <p>{touchedFields.postCode && errors.town?.message}</p>
+                {/* <p>
               {
                 validationError?.find((el) => el.field === "purchaser.town")
                   ?.message
               }
             </p> */}
-            </div>
-            <div className={styles.input}>
-              <label htmlFor="postCode">Pašto kodas</label>
-              <input
-                id="postCode"
-                type="text"
-                autoComplete="on"
-                placeholder="pvz.: 01234"
-                {...register("postCode", validationRules.postCode)}
-              />
-              <p>{touchedFields.termsConfirmed && errors.postCode?.message}</p>
-              {/* <p>
+              </div>
+              <div className={styles.input}>
+                <label htmlFor="postCode">Pašto kodas</label>
+                <input
+                  id="postCode"
+                  type="text"
+                  autoComplete="on"
+                  placeholder="pvz.: 01234"
+                  {...register("postCode", validationRules.postCode)}
+                />
+                <p>
+                  {touchedFields.termsConfirmed && errors.postCode?.message}
+                </p>
+                {/* <p>
               {
                 validationError?.find((el) => el.field === "purchaser.postCode")
                   ?.message
               }
             </p> */}
-            </div>
-            <div>
-              <div className={styles.checkbox}>
-                <label htmlFor="terms">
-                  Sutinku su <Link to="/terms">pirkimo sąlygomis</Link> ir{" "}
-                  <Link to="/privacy">privatumo politika</Link>.
-                </label>
-                <input
-                  id="terms"
-                  type="checkbox"
-                  autoComplete="on"
-                  {...register("termsConfirmed", {
-                    required:
-                      "Prašau pažymtėti, kad sutinkate su pirkimo salygomis ir privatumo politika.",
-                  })}
-                  onChange={(e) => {
-                    setValue("termsConfirmed", e.target.checked);
-                  }}
-                />
               </div>
-              <p>{errors.termsConfirmed?.message}</p>
-            </div>
-            <button type="submit" className={styles.btn}>
-              {buttonText}
-            </button>
-          </form>
+              <div>
+                <div className={styles.checkbox}>
+                  <label htmlFor="terms">
+                    Sutinku su <Link to="/terms">pirkimo sąlygomis</Link> ir{" "}
+                    <Link to="/privacy">privatumo politika</Link>.
+                  </label>
+                  <input
+                    id="terms"
+                    type="checkbox"
+                    autoComplete="on"
+                    {...register("termsConfirmed", {
+                      required:
+                        "Prašau pažymtėti, kad sutinkate su pirkimo salygomis ir privatumo politika.",
+                    })}
+                    onChange={(e) => {
+                      setValue("termsConfirmed", e.target.checked);
+                    }}
+                  />
+                </div>
+                <p>{errors.termsConfirmed?.message}</p>
+              </div>
+              <button type="submit" className={styles.btn}>
+                {buttonText}
+              </button>
+            </form>
+          </div>
         </div>
       )}
     </>

@@ -12,13 +12,13 @@
 html {
   box-sizing: border-box;
   font-size: 62.5%; // This makes 1rem = 10px
-  overflow-y: scroll;
 }
 
 body {
   font-family: $font-family-main;
   font-size: $font-size-m;
   font-weight: $font-weight-regular;
+  overflow-y: scroll;
   //-webkit-text-size-adjust: $font-size-m;
   line-height: 1.5;
   position: relative;

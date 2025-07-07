@@ -4,9 +4,14 @@
 .content {
   display: grid;
   align-self: center;
-  width: 100%;
+  width: 60%;
   // height: 60vh;
   justify-content: center;
+  @media (max-width: 780px) {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
 }
 
 .purchasing {
@@ -26,18 +31,19 @@
   align-self: center;
   margin-top: 2rem;
   margin-bottom: 2rem;
-  width: 70rem;
+  // width: 70rem;
+  width: 100%;
   @media (max-width: 780px) {
     padding: 1rem 3rem 2rem 3rem;
-    width: 100%;
+    // width: 100%;
     // margin-left: 5rem;
     // margin-right: 5rem;
   }
 
   @media (max-width: 520px) {
-    padding: 1rem 2rem 2rem 2rem;
-    margin-left: 3rem;
-    margin-right: 3rem;
+    // padding: 1rem 2rem 2rem 2rem;
+    // margin-left: 3rem;
+    // margin-right: 3rem;
   }
 
   p {
