@@ -5,6 +5,7 @@ type Notification = {
   type: "success" | "error";
   size: "fullscreen" | "line";
   message: string;
+  subscription?: boolean;
   height?: number;
   top?: number;
 };

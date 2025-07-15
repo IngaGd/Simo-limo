@@ -25,6 +25,7 @@ export type Notification = {
   type: "success" | "error";
   message: string;
   status?: number;
+  subscription?: boolean;
 };
 
 export type GlobalContextType = {
@@ -63,6 +64,10 @@ export type GlobalContextType = {
   setUserDiscountCode: (userInputCode: string) => void | null;
   isVisible: boolean;
   setIsVisible: (value: boolean) => void;
+  addToCartModal: boolean;
+  setAddToCartModal: (value: boolean) => void;
+  emailModal: boolean;
+  setEmailModal: (value: boolean) => void;
   handleIsVisible: () => void;
   notification: Notification | null;
   setNotification: (value: Notification | null) => void;

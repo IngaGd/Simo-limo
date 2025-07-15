@@ -1,0 +1,77 @@
+@use "../../../../styles/variables/index" as *;
+@use "../../../../styles/abstracts/index" as *;
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba($color-primary-3, 0.7);
+  border: 1px solid $color-primary-1;
+  width: 35rem;
+  height: auto;
+  padding: 1rem 2rem 1rem 2rem;
+  border-radius: 3px;
+  color: $color-primary-1;
+  gap: 1rem;
+  @media screen and (min-width: 600px) {
+    width: 50rem;
+    height: auto;
+  }
+  .btn {
+    display: flex;
+    width: 100%;
+    font-size: 1.2rem;
+    justify-content: space-around;
+
+    @media screen and (min-width: 600px) {
+      font-size: 1.4rem;
+    }
+    div,
+    .link {
+      color: $color-primary-1;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid $color-primary-1;
+      border-radius: 3px;
+      padding: 0.25rem 0.75rem 0.25rem 0.75rem;
+      &:hover {
+        background-color: $color-secondary-1;
+        color: $color-primary-3;
+        transition: all 0.3s;
+      }
+    }
+  }
+}
+
+.modalEmail {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  border-radius: 3px;
+  margin-left: 3rem;
+  margin-right: 3rem;
+  width: 50rem;
+  .close {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: 1rem;
+  }
+  .form {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 1rem;
+  }
+  .btn {
+    margin-right: -1rem;
+  }
+  p {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+}

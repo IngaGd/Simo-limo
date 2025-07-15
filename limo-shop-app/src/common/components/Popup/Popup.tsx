@@ -2,7 +2,8 @@ import { useContext } from "react";
 import { GlobalContext } from "src/common/context/GlobalContext";
 import { GlobalContextType } from "src/common/context/globalContext.types";
 import styles from "./popup.module.scss";
-import { Link } from "react-router-dom";
+import { AddToBasketModal } from "./Modal/AddToBasketModal";
+import { EmailModal } from "./Modal/EmailModal";
 
 type PopupProps = {
   height?: number;
@@ -10,7 +11,7 @@ type PopupProps = {
 };
 
 export function Popup({ height, top }: PopupProps) {
-  const { isVisible, setIsVisible } = useContext(
+  const { isVisible, emailModal, addToCartModal } = useContext(
     GlobalContext
   ) as GlobalContextType;
 
@@ -24,19 +25,8 @@ export function Popup({ height, top }: PopupProps) {
         } as React.CSSProperties
       }
     >
-      <div className={styles.modal}>
-        <p>Prekės krepšelyje</p>
-        <div className={styles.btn}>
-          <Link
-            to="/cart"
-            className={styles.link}
-            onClick={() => setIsVisible(!isVisible)}
-          >
-            Eiti į krepšelį
-          </Link>
-          <div onClick={() => setIsVisible(!isVisible)}>Tęsti apsipirkimą</div>
-        </div>
-      </div>
+      {addToCartModal && <AddToBasketModal />}
+      {emailModal && <EmailModal />}
     </div>
   );
 }

@@ -13,6 +13,7 @@ import { FaRegCopy } from "react-icons/fa";
 import { ImCheckboxChecked } from "react-icons/im";
 import { FaShop } from "react-icons/fa6";
 import { BsCalendar2EventFill } from "react-icons/bs";
+import { IoCloseOutline } from "react-icons/io5";
 
 import styles from "./icon.module.scss";
 
@@ -76,4 +77,8 @@ export function IconEvent({ size }: IconProps) {
   return (
     <BsCalendar2EventFill className={`${styles.event} ${styles[`${size}`]}`} />
   );
+}
+
+export function IconClose({ size }: IconProps) {
+  return <IoCloseOutline className={`${styles.close} ${styles[`${size}`]}`} />;
 }

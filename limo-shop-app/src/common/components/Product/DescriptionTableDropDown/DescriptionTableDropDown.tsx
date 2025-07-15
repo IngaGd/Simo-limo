@@ -26,6 +26,7 @@ export function DescriptionTableDropDown({
     resetImageToCart,
     handleIsVisible,
     imageIsLoaded,
+    setAddToCartModal,
   } = useContext(GlobalContext) as GlobalContextType;
   const { loader } = useHandleProductList();
   const [product, setProduct] = useState<ProductObject>(products[0]);
@@ -123,6 +124,7 @@ export function DescriptionTableDropDown({
                   resetImageToCart();
                 }, 700);
                 handleIsVisible();
+                setAddToCartModal(true);
               }}
             />
           </div>

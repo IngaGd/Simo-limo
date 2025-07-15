@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "./home.module.scss";
 import { Product } from "src/common/components/Product";
 import { GlobalContext } from "src/common/context/GlobalContext";
@@ -17,21 +17,45 @@ export default function Home() {
   const {
     products,
     notification,
-    setNotification,
     isVisible,
+    setIsVisible,
+    setEmailModal,
     setImageIsLoaded,
   } = useContext(GlobalContext) as GlobalContextType;
+  const [popupShown, setPopupShown] = useState(() => {
+    const isPopupShown = sessionStorage.getItem("popupShown");
+    return isPopupShown ? JSON.parse(isPopupShown) : false;
+  });
+  const [isSubscribed, setIsSubscribed] = useState(() => {
+    const subscription = localStorage.getItem("isSubscribed");
+    return subscription ? JSON.parse(subscription) : false;
+  });
   const { ref, deviceHeight } = useElementPositionInView();
   const scrollY = useScrollY();
   useTrackVisiting();
 
   useEffect(() => {
-    setNotification(null);
-  }, [notification]);
+    if (popupShown || isSubscribed) return;
+    setImageIsLoaded(false);
+    const timeoutId = setTimeout(() => {
+      setIsVisible(true);
+      setEmailModal(true);
+      setPopupShown(true);
+    }, 3000);
+    return () => clearTimeout(timeoutId);
+  }, []);
 
   useEffect(() => {
-    setImageIsLoaded(false);
-  }, []);
+    sessionStorage.setItem("popupShown", JSON.stringify(popupShown));
+    localStorage.setItem("isSubscribed", JSON.stringify(isSubscribed));
+    if (notification?.subscription) {
+      setIsSubscribed(true);
+    }
+  }, [popupShown, isSubscribed, notification]);
+
+  useEffect(() => {
+    console.log("isSubscribed: ", isSubscribed);
+  }, [isSubscribed]);
 
   useEffect(() => {
     if (isVisible) {

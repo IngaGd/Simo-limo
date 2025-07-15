@@ -69,6 +69,7 @@ export function usePostData(url: string) {
             type: result.type,
             status: result.status,
             message: result.message,
+            subscription: result.subscription,
           });
         } else {
           const errorResult = await response.json();

@@ -76,6 +76,7 @@ export function EmailForm() {
   useEffect(() => {
     if (loader || notification) {
       document.body.style.overflow = "hidden";
+      console.log("notification in email", notification);
       if (notification?.type === "success") {
         reset();
         setUserEmail(null);
@@ -83,7 +84,7 @@ export function EmailForm() {
       }
       const timeout = setTimeout(() => {
         setNotification(null);
-      }, 2000);
+      }, 3000);
       return () => clearTimeout(timeout);
     } else {
       document.body.style.overflow = "";

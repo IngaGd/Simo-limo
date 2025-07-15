@@ -35,6 +35,8 @@ export const GlobalContextProvider = ({
   const [userDiscountValue, setUserDiscountValue] = useState(0);
   const [message, setMessage] = useState("");
   const [isVisible, setIsVisible] = useState(false);
+  const [addToCartModal, setAddToCartModal] = useState(false);
+  const [emailModal, setEmailModal] = useState(false);
   const [imageIsLoaded, setImageIsLoaded] = useState(false);
 
   const amount =
@@ -94,6 +96,10 @@ export const GlobalContextProvider = ({
         setLoader,
         imageIsLoaded,
         setImageIsLoaded,
+        addToCartModal,
+        setAddToCartModal,
+        emailModal,
+        setEmailModal,
       }}
     >
       {children}
