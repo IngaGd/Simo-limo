@@ -32,6 +32,7 @@ exports.setUserSubscription = async (req, res) => {
       type: "success",
       status: 200,
       message: "Ačiū! Užregistravau.",
+      subscription: true,
     });
   } catch (error) {
     logger.error({
