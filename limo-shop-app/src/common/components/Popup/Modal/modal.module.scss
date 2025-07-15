@@ -56,6 +56,10 @@
   margin-left: 3rem;
   margin-right: 3rem;
   width: 50rem;
+  @media screen and (max-width: 480px) {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
   .close {
     display: flex;
     justify-content: flex-end;
