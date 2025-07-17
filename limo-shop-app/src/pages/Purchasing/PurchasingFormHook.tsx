@@ -182,19 +182,14 @@ export function PurchasingFormHook() {
                   autoComplete="on"
                   {...register("firstName", validationRules.firstName)}
                 />
+                <p>{touchedFields.lastName && errors.firstName?.message}</p>
                 <p>
-                  {(touchedFields.lastName && errors.firstName?.message) ||
+                  {
                     validationError?.find(
                       (el) => el.field === "purchaser.firstName"
-                    )?.message}
+                    )?.message
+                  }
                 </p>
-                {/* <p>
-              {
- ||
-                validationError?.find((el) => el.field === "purchaser.firstName")
-                  ?.message
-              }
-            </p> */}
               </div>
               <div className={styles.input}>
                 <label htmlFor="lastName">Pavardė</label>
@@ -205,12 +200,13 @@ export function PurchasingFormHook() {
                   {...register("lastName", validationRules.lastName)}
                 />
                 <p>{touchedFields.phone && errors.lastName?.message}</p>
-                {/* <p>
-              {
-                validationError?.find((el) => el.field === "purchaser.lastName")
-                  ?.message
-              }
-            </p> */}
+                <p>
+                  {
+                    validationError?.find(
+                      (el) => el.field === "purchaser.lastName"
+                    )?.message
+                  }
+                </p>
               </div>
               <div className={styles.input}>
                 <label htmlFor="phone">Telefono Nr.</label>
@@ -218,16 +214,17 @@ export function PurchasingFormHook() {
                   id="phone"
                   type="text"
                   autoComplete="on"
-                  placeholder="+3706223322"
+                  placeholder="+3706xxxxxxx"
                   {...register("phone", validationRules.phone)}
                 />
                 <p>{touchedFields.email && errors.phone?.message}</p>
-                {/* <p>
-              {
-                validationError?.find((el) => el.field === "purchaser.phone")
-                  ?.message
-              }
-            </p> */}
+                <p>
+                  {
+                    validationError?.find(
+                      (el) => el.field === "purchaser.phone"
+                    )?.message
+                  }
+                </p>
               </div>
               <div className={styles.input}>
                 <label htmlFor="email">E-paštas</label>
@@ -239,12 +236,13 @@ export function PurchasingFormHook() {
                   {...register("email", validationRules.email)}
                 />
                 <p>{touchedFields.address && errors.email?.message}</p>
-                {/* <p>
-              {
-                validationError?.find((el) => el.field === "purchaser.email")
-                  ?.message
-              }
-            </p> */}
+                <p>
+                  {
+                    validationError?.find(
+                      (el) => el.field === "purchaser.email"
+                    )?.message
+                  }
+                </p>
               </div>
               <div className={styles.input}>
                 <label htmlFor="address">Pristatymo adresas</label>
@@ -253,15 +251,16 @@ export function PurchasingFormHook() {
                   type="text"
                   autoComplete="on"
                   placeholder="Gatvė namo nr./buto nr."
-                  {...register("address", validationRules.address)}
+                  {...register("address")}
                 />
                 <p>{touchedFields.town && errors.address?.message}</p>
-                {/* <p>
-              {
-                validationError?.find((el) => el.field === "purchaser.address")
-                  ?.message
-              }
-            </p> */}
+                <p>
+                  {
+                    validationError?.find(
+                      (el) => el.field === "purchaser.address"
+                    )?.message
+                  }
+                </p>
               </div>
               <div className={styles.input}>
                 <label htmlFor="town">Miestas</label>
@@ -272,12 +271,12 @@ export function PurchasingFormHook() {
                   {...register("town", validationRules.town)}
                 />
                 <p>{touchedFields.postCode && errors.town?.message}</p>
-                {/* <p>
-              {
-                validationError?.find((el) => el.field === "purchaser.town")
-                  ?.message
-              }
-            </p> */}
+                <p>
+                  {
+                    validationError?.find((el) => el.field === "purchaser.town")
+                      ?.message
+                  }
+                </p>
               </div>
               <div className={styles.input}>
                 <label htmlFor="postCode">Pašto kodas</label>
@@ -286,17 +285,18 @@ export function PurchasingFormHook() {
                   type="text"
                   autoComplete="on"
                   placeholder="pvz.: 01234"
-                  {...register("postCode", validationRules.postCode)}
+                  {...register("postCode")}
                 />
                 <p>
                   {touchedFields.termsConfirmed && errors.postCode?.message}
                 </p>
-                {/* <p>
-              {
-                validationError?.find((el) => el.field === "purchaser.postCode")
-                  ?.message
-              }
-            </p> */}
+                <p>
+                  {
+                    validationError?.find(
+                      (el) => el.field === "purchaser.postCode"
+                    )?.message
+                  }
+                </p>
               </div>
               <div>
                 <div className={styles.checkbox}>
@@ -308,16 +308,20 @@ export function PurchasingFormHook() {
                     id="terms"
                     type="checkbox"
                     autoComplete="on"
-                    {...register("termsConfirmed", {
-                      required:
-                        "Prašau pažymtėti, kad sutinkate su pirkimo salygomis ir privatumo politika.",
-                    })}
+                    {...register("termsConfirmed")}
                     onChange={(e) => {
                       setValue("termsConfirmed", e.target.checked);
                     }}
                   />
                 </div>
                 <p>{errors.termsConfirmed?.message}</p>
+                <p>
+                  {
+                    validationError?.find(
+                      (el) => el.field === "purchaser.termsConfirmed"
+                    )?.message
+                  }
+                </p>
               </div>
               <button type="submit" className={styles.btn}>
                 {buttonText}

@@ -29,8 +29,8 @@ export const validationOptions = () => ({
   phone: {
     required: "Privalomas laukas",
     pattern: {
-      value: /^\+?[0-9]{7,15}$/,
-      message: "Telefono numerio pavyzdys: +3706....",
+      value: /^\+370\d{8}$/,
+      message: "Telefono numerio pavyzdys: +3706xxxxxxx",
     },
   },
   email: {
@@ -43,10 +43,10 @@ export const validationOptions = () => ({
   address: {
     required: "Privalomas laukas",
     pattern: {
-      value: /^[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ0-9' /.-]+$/,
-      message: "Galimi simboliai: raidės, skaičiai, tarpai, (-), ('), (/), (.)",
+      value: /^(?=.*\d)[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ0-9' /.-]+$/,
+      message: "Adrese nurodyk gatvės pavadinimą, namo/buto numerį.",
     },
-    minLength: { value: 4, message: "Turėtų būti vent 4 simboliai." },
+    minLength: { value: 5, message: "Turėtų būti vent 5 simboliai." },
     maxLength: {
       value: 50,
       message: "Gatvė turi būti ne daugiau 50 raidžių.",
@@ -59,8 +59,8 @@ export const validationOptions = () => ({
       message: "Galimi simboliai - raidės, (-), (')",
     },
     minLength: {
-      value: 4,
-      message: "Miestas turėtų būti bent 4 raidžių ilgio.",
+      value: 2,
+      message: "Miestas turėtų būti bent 2 raidžių ilgio.",
     },
     maxLength: {
       value: 50,
@@ -70,7 +70,7 @@ export const validationOptions = () => ({
   postCode: {
     required: "Privalomas laukas",
     pattern: {
-      value: /^\d{4,10}$/,
+      value: /^\d{5}$/,
       message: "Pašto kodo pavyzdys 01234",
     },
   },

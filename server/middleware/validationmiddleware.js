@@ -18,7 +18,7 @@ const validateInput = [
     .withMessage("Privalomas laukas")
     .bail()
     .isLength({ min: 2, max: 50 })
-    .withMessage("Vardas gali būti nuo 2 iki 50 simbolių.")
+    .withMessage("Pavardė gali būti nuo 2 iki 50 simbolių.")
     .bail()
     .isString()
     .matches(/^[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ' -]+$/)
@@ -29,37 +29,36 @@ const validateInput = [
     .notEmpty()
     .withMessage("Privalomas laukas")
     .bail()
-    .matches(/^\+?[0-9]{7,15}$/)
-    .withMessage("Telefono numerio pavyzdys: +3706...."),
+    .matches(/^\+370\d{8}$/)
+    .withMessage("Telefono numerio pavyzdys: +3706xxxxxxx arba +3705xxxxxxx"),
   body("purchaser.email")
     .notEmpty()
     .withMessage("Privalomas laukas")
     .bail()
     .isEmail()
-    .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
+    // .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
+    .withMessage("Netinkamas el. pašto formatas (pvz., vardas@domenas.lt)"),
   body("purchaser.address")
     .notEmpty()
     .withMessage("Privalomas laukas")
     .bail()
-    .isLength({ min: 2, max: 50 })
-    .withMessage("Gatvės pavadinimas gali būti nuo 2 iki 50 simbolių.")
+    .isLength({ min: 5, max: 50 })
+    .withMessage("Adresas turi būti nuo 5 iki 50 simbolių.")
     .bail()
     .isString()
-    .matches(/^[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ0-9' /.-]+$/)
-    .withMessage(
-      "Leidžiami simboliai: raidės, skaičiai, tarpai, (-), ('), (/), (.)"
-    )
+    .matches(/^(?=.*\d)[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ0-9' /.-]+$/)
+    .withMessage("Adrese nurodyk gatvės pavadinimą, namo/buto numerį.")
     .trim(),
   body("purchaser.town")
     .notEmpty()
     .withMessage("Privalomas laukas")
     .bail()
     .isLength({ min: 2, max: 50 })
-    .withMessage("Gatvės pavadinimas gali būti nuo 2 iki 50 simbolių.")
+    .withMessage("Miesto pavadinimas turi būti nuo 2 iki 50 simbolių.")
     .bail()
     .isString()
     .matches(/^[a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ' -]+$/)
-    .withMessage("Pašalinkite negalimus simbolius, galimi - raidės, (-), (')")
+    .withMessage("Galimi simboliai - raidės, (-), (').")
     .trim()
     .escape(),
   body("purchaser.postCode")
@@ -67,9 +66,13 @@ const validateInput = [
     .withMessage("Privalomas laukas")
     .bail()
     .isString()
-    .replace()
-    .matches(/^\d{4,10}$/)
+    .matches(/^\d{5}$/)
     .withMessage("Pašto kodo pavyzdys 01234"),
+  body("purchaser.termsConfirmed")
+    .equals("true")
+    .withMessage(
+      "Pažymėk sutikimą su pirkimo sąlygomis ir privatumo politika."
+    ),
   // sanitizeBody("notifyOnReply").toBoolean(),
   (req, res, next) => {
     const errors = validationResult(req);
