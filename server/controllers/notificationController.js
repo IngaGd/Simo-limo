@@ -14,8 +14,6 @@ exports.postNotification = async (req, res) => {
     return res.status(400).send("Invalid Mac");
   }
 
-  console.log("MAC validation passed");
-
   try {
     const paymentData = JSON.parse(jsonString);
     const { status, reference, transaction } = paymentData;

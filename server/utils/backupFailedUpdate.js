@@ -3,7 +3,6 @@ const logger = require("../utils/logger");
 const { errorEmailMessage } = require("../utils/errorEmailMessage");
 
 const backupFailedUpdate = async ({ status, reference, transaction }) => {
-  console.log("Backup attempt:", { status, reference, transaction });
   const receivedAt = new Date().toISOString();
   const synced = false;
 

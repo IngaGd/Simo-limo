@@ -8,8 +8,6 @@ const logger = require("../utils/logger");
 exports.setUserSubscription = async (req, res) => {
   const { _csrf, userEmail } = req.body;
 
-  console.log("email: ", userEmail.email, "csrf: ", _csrf);
-
   if (_csrf !== req.csrfToken) {
     return res.status(403).json({
       status: 403,

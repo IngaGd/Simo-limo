@@ -1,12 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const orderController = require("../controllers/orderController");
-const { validateInput } = require("../middleware/validationmiddleware");
+const {
+  validatePurchaserInput,
+} = require("../middleware/validatePurchaserInput");
 const { csrcMiddleware } = require("../middleware/csrfMiddleware");
 
 router.post(
   "/order",
-  validateInput,
+  validatePurchaserInput,
   csrcMiddleware,
   orderController.createOrder
 );

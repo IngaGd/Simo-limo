@@ -1,12 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const userMessageController = require("../controllers/userMessageController");
-const { validateInput } = require("../middleware/validationmiddleware");
+const {
+  validateUserMessageInput,
+} = require("../middleware/validateUserMessageInput");
 const { csrcMiddleware } = require("../middleware/csrfMiddleware");
 
 router.post(
   "/user-message",
-  validateInput,
+  validateUserMessageInput,
   csrcMiddleware,
   userMessageController.sendUserMessage
 );
