@@ -27,7 +27,7 @@ export function Form() {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, touchedFields },
   } = useForm<UserMessage>({
     mode: "onSubmit",
     defaultValues: {
@@ -42,7 +42,7 @@ export function Form() {
   const { notification, loader, csrfToken, setNotification } = useContext(
     GlobalContext
   ) as GlobalContextType;
-  const { setData } = usePostData(userMessageUrl);
+  const { setData, validationError } = usePostData(userMessageUrl);
   const validationRules = validationOptions();
 
   useEffect(() => {
@@ -108,7 +108,13 @@ export function Form() {
           autoComplete="on"
           {...register("firstName", validationRules.firstName)}
         />
-        <p>{errors.firstName?.message}</p>
+        <p>{touchedFields.email && errors.firstName?.message}</p>
+        <p>
+          {
+            validationError?.find((el) => el.field === "userMessage.firstName")
+              ?.message
+          }
+        </p>
       </div>
       <div className={styles.input}>
         <label htmlFor="email">E-paštas</label>
@@ -119,13 +125,13 @@ export function Form() {
           placeholder="pašto@adresas.lt"
           {...register("email", validationRules.email)}
         />
-        <p>{errors.email?.message}</p>
-        {/* <p>
-              {
-                errorResponse?.find((el) => el.field === "purchaser.email")
-                  ?.message
-              }
-            </p> */}
+        <p>{touchedFields.message && errors.email?.message}</p>
+        <p>
+          {
+            validationError?.find((el) => el.field === "userMessage.email")
+              ?.message
+          }
+        </p>
       </div>
       <div className={styles.input}>
         <label htmlFor="message">Žinutė</label>
@@ -135,12 +141,12 @@ export function Form() {
           {...register("message", validationRules.message)}
         />
         <p>{errors.message?.message}</p>
-        {/* <p>
-              {
-                errorResponse?.find((el) => el.field === "purchaser.email")
-                  ?.message
-              }
-            </p> */}
+        <p>
+          {
+            validationError?.find((el) => el.field === "userMessage.message")
+              ?.message
+          }
+        </p>
       </div>
       <button type="submit" className={styles.btn}>
         {buttonText}

@@ -81,7 +81,7 @@ export const validationOptions = () => ({
     },
   },
   message: {
-    // required: "Privalomas laukas",
+    required: "Privalomas laukas",
     pattern: {
       value: /^[\p{L}\p{N}\s\.,!?'"()\-]+$/u,
       message:
@@ -93,8 +93,7 @@ export const validationOptions = () => ({
     },
     maxLength: {
       value: 1000,
-      message:
-        "Žinutė truputį per ilga, gal galėtum sutrumpinti iki 1000 simbolių?",
+      message: "Žinutė per ilga, gal galėtum sutrumpinti iki 1000 simbolių?",
     },
   },
 });
