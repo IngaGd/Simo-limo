@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import {
+  ErrorResponseObject,
   GlobalContextProviderProps,
   GlobalContextType,
   Notification,
@@ -38,6 +39,9 @@ export const GlobalContextProvider = ({
   const [addToCartModal, setAddToCartModal] = useState(false);
   const [emailModal, setEmailModal] = useState(false);
   const [imageIsLoaded, setImageIsLoaded] = useState(false);
+  const [validationError, setValidationError] = useState<
+    ErrorResponseObject[] | null
+  >(null);
 
   const amount =
     cartItems.length > 0
@@ -100,6 +104,8 @@ export const GlobalContextProvider = ({
         setAddToCartModal,
         emailModal,
         setEmailModal,
+        validationError,
+        setValidationError,
       }}
     >
       {children}

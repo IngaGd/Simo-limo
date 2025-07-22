@@ -39,10 +39,9 @@ export function Form() {
   const userMessageUrl = `${URL}user-message`;
   const [userMessage, setUserMessage] = useState<FormInputs | null>(null);
   const { fetchCsrfToken } = useCsrfTokenFetch();
-  const { notification, loader, csrfToken, setNotification } = useContext(
-    GlobalContext
-  ) as GlobalContextType;
-  const { setData, validationError } = usePostData(userMessageUrl);
+  const { notification, loader, csrfToken, setNotification, validationError } =
+    useContext(GlobalContext) as GlobalContextType;
+  const { setData } = usePostData(userMessageUrl);
   const validationRules = validationOptions();
 
   useEffect(() => {

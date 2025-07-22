@@ -28,6 +28,12 @@ export type Notification = {
   subscription?: boolean;
 };
 
+export type ErrorResponseObject = {
+  status: number;
+  field?: string;
+  message: string;
+};
+
 export type GlobalContextType = {
   quantities: Array<QuantityType>;
   addToCart: (p: {
@@ -71,6 +77,8 @@ export type GlobalContextType = {
   handleIsVisible: () => void;
   notification: Notification | null;
   setNotification: (value: Notification | null) => void;
+  validationError: ErrorResponseObject[] | null;
+  setValidationError: (value: ErrorResponseObject[] | null) => void;
   csrfToken: string;
   setCsrfToken: (value: string) => void;
   loader: boolean;

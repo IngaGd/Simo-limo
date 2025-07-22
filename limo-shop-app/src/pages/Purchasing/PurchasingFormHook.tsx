@@ -77,10 +77,11 @@ export function PurchasingFormHook() {
     userDiscountValue,
     setNotification,
     notification,
+    validationError,
   } = useContext(GlobalContext) as GlobalContextType;
   const { fetchCsrfToken } = useCsrfTokenFetch();
   // const { userDiscountCode, userDiscountValue } = useHandleDiscount();
-  const { setData, validationError, response, orderId } = usePostData(orderUrl);
+  const { setData, response, orderId } = usePostData(orderUrl);
   const [order, setOrder] = useState<PurchasingInputs | null>(null);
 
   useEffect(() => {

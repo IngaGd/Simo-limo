@@ -12,9 +12,7 @@ const buttonText = "Siųsti";
 const URL = import.meta.env.VITE_URL;
 
 type UserEmail = {
-  firstName: string;
   email: string;
-  message: string;
 };
 
 type FormInputs = {
@@ -34,6 +32,7 @@ export function EmailForm() {
       email: "",
     },
   });
+  const { validationError } = useContext(GlobalContext) as GlobalContextType;
   const userEmailUrl = `${URL}user-subscription`;
   const [userEmail, setUserEmail] = useState<FormInputs | null>(null);
   const { fetchCsrfToken } = useCsrfTokenFetch();
@@ -107,12 +106,12 @@ export function EmailForm() {
           {...register("email", validationRules.email)}
         />
         <p>{errors.email?.message}</p>
-        {/* <p>
-              {
-                errorResponse?.find((el) => el.field === "purchaser.email")
-                  ?.message
-              }
-            </p> */}
+        <p>
+          {
+            validationError?.find((el) => el.field === "userEmail.email")
+              ?.message
+          }
+        </p>
       </div>
       <button type="submit" className={styles.btn}>
         {buttonText}

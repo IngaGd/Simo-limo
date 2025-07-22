@@ -2,12 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 import { GlobalContextType } from "../context/globalContext.types";
 
-type ErrorResponseObject = {
-  status: number;
-  field?: string;
-  message: string;
-};
-
 export type Notification = {
   type: "success" | "error";
   message: string;
@@ -26,14 +20,11 @@ type ResponseObject = {
 export function usePostData(url: string) {
   const [data, setData] = useState<Object | null>(null);
   const [response, setResponse] = useState<ResponseObject | null>(null);
-  const { setNotification, setLoader } = useContext(
+  const { setNotification, setValidationError, setLoader } = useContext(
     GlobalContext
   ) as GlobalContextType;
   const [orderId, setOrderId] = useState<string>("");
   const [paymentStatus, setPaymentStatus] = useState<string | null>(null);
-  const [validationError, setValidationError] = useState<
-    ErrorResponseObject[] | null
-  >(null);
 
   useEffect(() => {
     const postData = async () => {
@@ -83,6 +74,7 @@ export function usePostData(url: string) {
                 };
               }
             );
+            console.log("errorResult: ", errorResult);
             setValidationError(errorArray);
           } else {
             setNotification({
@@ -110,7 +102,6 @@ export function usePostData(url: string) {
   return {
     setData,
     setResponse,
-    validationError,
     response,
     orderId,
     paymentStatus,

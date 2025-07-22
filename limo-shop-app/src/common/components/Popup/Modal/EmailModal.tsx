@@ -56,9 +56,9 @@ export function EmailModal() {
               <IconClose size="medium" />
             </button>
           </div>
-          <div className={styles.form}>
+          <div>
             <p>
-              Kad vyktų smagūs dalykai, reikia kontakto. Palik savo el-paštą:
+              Kad vyktų smagūs dalykai, reikia kontakto. Sutinki? Palik savo:
             </p>
             <EmailForm />
           </div>
