@@ -105,8 +105,8 @@ export function EmailForm() {
           placeholder="pašto@adresas.lt"
           {...register("email", validationRules.email)}
         />
-        <p>{errors.email?.message}</p>
-        <p>
+        <p className={styles.emailFormError}>{errors.email?.message}</p>
+        <p className={styles.emailFormError}>
           {
             validationError?.find((el) => el.field === "userEmail.email")
               ?.message

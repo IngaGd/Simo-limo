@@ -29,7 +29,7 @@ export function Form() {
     reset,
     formState: { errors, touchedFields },
   } = useForm<UserMessage>({
-    mode: "onSubmit",
+    mode: "onTouched",
     defaultValues: {
       firstName: "",
       email: "",
@@ -37,12 +37,12 @@ export function Form() {
     },
   });
   const userMessageUrl = `${URL}user-message`;
+  const validationRules = validationOptions();
   const [userMessage, setUserMessage] = useState<FormInputs | null>(null);
   const { fetchCsrfToken } = useCsrfTokenFetch();
   const { notification, loader, csrfToken, setNotification, validationError } =
     useContext(GlobalContext) as GlobalContextType;
   const { setData } = usePostData(userMessageUrl);
-  const validationRules = validationOptions();
 
   useEffect(() => {
     fetchCsrfToken();
