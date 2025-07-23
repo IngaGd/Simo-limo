@@ -1,0 +1,17 @@
+@use "../../../styles/abstracts/index" as *;
+@use "../../../styles/variables/index" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  @include coverFit;
+  color: $color-primary-1;
+  background-color: rgba($color: $color-primary-3, $alpha: 0.5);
+  .link {
+    color: $color-primary-1;
+    margin-left: 1rem;
+  }
+}

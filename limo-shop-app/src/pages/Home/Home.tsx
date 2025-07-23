@@ -54,10 +54,6 @@ export default function Home() {
   }, [popupShown, isSubscribed, notification]);
 
   useEffect(() => {
-    console.log("isSubscribed: ", isSubscribed);
-  }, [isSubscribed]);
-
-  useEffect(() => {
     if (isVisible) {
       document.documentElement.style.overflow = "hidden";
     } else {

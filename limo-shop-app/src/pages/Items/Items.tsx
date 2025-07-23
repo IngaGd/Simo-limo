@@ -29,6 +29,7 @@ export function Items() {
     isVisible,
     setIsVisible,
     setImageIsLoaded,
+    setAddToCartModal,
   } = useContext(GlobalContext) as GlobalContextType;
   const { category } = useParams();
   const { ref, deviceHeight } = useElementPositionInView();
@@ -102,14 +103,17 @@ export function Items() {
                   <div className={styles.price}>{item.price} EUR</div>
                 </div>
                 <div className={styles.btn}>
-                  <Button
-                    colorMode="grey"
-                    buttonLabel={buttonText}
-                    handleClick={() => {
-                      handleAddToCart(item);
-                      setIsVisible(true);
-                    }}
-                  />
+                  {item.stock > 0 && (
+                    <Button
+                      colorMode="grey"
+                      buttonLabel={buttonText}
+                      handleClick={() => {
+                        handleAddToCart(item);
+                        setIsVisible(true);
+                        setAddToCartModal(true);
+                      }}
+                    />
+                  )}
                 </div>
               </div>
             </div>

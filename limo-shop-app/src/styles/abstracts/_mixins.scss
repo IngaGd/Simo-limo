@@ -96,3 +96,11 @@
     padding-right: 0rem;
   }
 }
+
+@mixin coverFit {
+  object-fit: cover;
+  object-position: center;
+  border-radius: 3px;
+  width: 100%;
+  height: 100%;
+}

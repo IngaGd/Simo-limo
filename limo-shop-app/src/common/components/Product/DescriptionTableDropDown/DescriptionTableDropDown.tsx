@@ -113,20 +113,22 @@ export function DescriptionTableDropDown({
             </div>
           </div>
           <div className={styles.btn}>
-            <Button
-              colorMode="dark"
-              buttonLabel={buttonText}
-              handleClick={() => {
-                handleAddToCart(product);
-                handleIsActive();
-                handleImageToCart();
-                setTimeout(() => {
-                  resetImageToCart();
-                }, 700);
-                handleIsVisible();
-                setAddToCartModal(true);
-              }}
-            />
+            {product.stock > 0 && (
+              <Button
+                colorMode="dark"
+                buttonLabel={buttonText}
+                handleClick={() => {
+                  handleAddToCart(product);
+                  handleIsActive();
+                  handleImageToCart();
+                  setTimeout(() => {
+                    resetImageToCart();
+                  }, 700);
+                  handleIsVisible();
+                  setAddToCartModal(true);
+                }}
+              />
+            )}
           </div>
         </div>
       ) : (

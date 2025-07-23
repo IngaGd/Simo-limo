@@ -11,6 +11,7 @@ import { useContext } from "react";
 import { GlobalContext } from "src/common/context/GlobalContext";
 import { GlobalContextType } from "src/common/context/globalContext.types";
 import { Notification } from "../Notification/Notification";
+import { OutOfStockCover } from "../OutOfStockCover/OutOfStockCover";
 
 export function Product({ product, allProducts }: ProductPropsTypes) {
   const { handleIsActive, isActive } = useIsActive();
@@ -24,9 +25,8 @@ export function Product({ product, allProducts }: ProductPropsTypes) {
           type={notification?.type}
           size="line"
         />
-      ) : (
-        <div></div>
-      )}
+      ) : null}
+
       <Container
         containerType={ContainerType.ImageOfProductList}
         handleClick={() => handleIsActive()}
@@ -40,6 +40,7 @@ export function Product({ product, allProducts }: ProductPropsTypes) {
           title={product.title}
           titleSize={TitleSize.Medium}
         />
+        {product.stock === 0 ? <OutOfStockCover /> : null}
       </Container>
       <DescriptionTableDropDown
         products={allProducts}

@@ -43,6 +43,7 @@ export function useHandleProductList() {
             discountValue: Number(column[9]),
             category: column[10],
             blurHash: column[11],
+            stock: Number(column[12]),
           };
         });
         setProducts(productData);
