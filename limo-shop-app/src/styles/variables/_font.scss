@@ -5,7 +5,22 @@
   font-style: normal;
 }
 
-$font-family-main: "courier", monospace;
+@font-face {
+  font-family: "helvetica";
+  src: url("assets/font/Helvetica.ttf") format("turetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "impact";
+  src: url("assets/font/Impact.ttf") format("turetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+$font-family-title: "impact", monospace;
+$font-family-main: "helvetica", monospace;
 
 $font-size-l: 1.8rem;
 $font-size-m: 1.6rem;
