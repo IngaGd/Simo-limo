@@ -19,6 +19,7 @@
     justify-content: center;
     align-items: center;
     padding-bottom: 2rem;
+    font-size: 1.4rem;
     @media screen and (max-width: 837px) {
       padding-top: 3rem;
       padding-bottom: 1rem;
@@ -27,7 +28,6 @@
     }
 
     @media screen and (max-width: 470px) {
-      font-size: 1.6rem;
       flex-wrap: wrap;
       justify-self: center;
       text-align: center;
@@ -72,6 +72,7 @@
   .list {
     display: grid;
     gap: 2rem;
+    font-size: 1.4rem;
   }
 
   .item {
@@ -170,7 +171,9 @@
     }
 
     .title {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
+      font-family: $font-family-title;
+      letter-spacing: 1px;
       @media screen and (max-width: 837px) {
         padding-left: 6rem;
       }

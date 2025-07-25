@@ -5,6 +5,7 @@
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
+  font-size: 1.6rem;
   .countdown {
     display: flex;
     width: 82rem;
@@ -18,15 +19,21 @@
     padding-bottom: 1rem;
     padding-left: 1rem;
     padding-right: 1rem;
+    p {
+      padding-bottom: 1rem;
+      width: 77%;
+    }
+
     @media screen and (max-width: 860px) {
       width: 100%;
       padding-left: 3rem;
       padding-right: 3rem;
+      p {
+        padding-bottom: 1rem;
+        width: 90%;
+      }
     }
-    p {
-      padding-bottom: 1rem;
-      width: 92%;
-    }
+
     .date {
       display: flex;
       gap: 2rem;

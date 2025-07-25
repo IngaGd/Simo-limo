@@ -5,6 +5,7 @@
 .contacts {
   height: auto;
   width: 100%;
+  font-size: 1.4rem;
   a {
     display: flex;
     color: $color-primary-3;
@@ -28,6 +29,7 @@ address {
 
 .address {
   padding-bottom: 5rem;
+  font-size: 1.4rem;
   @media screen and (max-width: 976px) {
     padding-bottom: 1rem;
   }

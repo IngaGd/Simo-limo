@@ -10,6 +10,7 @@ import styles from "./purchasing.module.scss";
 import { Link } from "react-router-dom";
 import { useCsrfTokenFetch } from "src/common/hooks/useCsrfTokenFetch";
 import { Notification } from "src/common/components/Notification/Notification";
+import { useElementPositionInView } from "src/common/hooks/useElementPositionInView";
 
 // const name = "Vardas";
 // const surname = "Pavardė";
@@ -83,10 +84,7 @@ export function PurchasingFormHook() {
   // const { userDiscountCode, userDiscountValue } = useHandleDiscount();
   const { setData, response, orderId } = usePostData(orderUrl);
   const [order, setOrder] = useState<PurchasingInputs | null>(null);
-
-  useEffect(() => {
-    setNotification(null);
-  }, [notification]);
+  const { ref, deviceHeight } = useElementPositionInView();
 
   useEffect(() => {
     fetchCsrfToken();
@@ -152,6 +150,21 @@ export function PurchasingFormHook() {
     }
   }, [response]);
 
+  useEffect(() => {
+    if (notification) {
+      document.body.style.overflow = "hidden";
+      const timeout = setTimeout(() => {
+        setNotification(null);
+      }, 3000);
+      return () => clearTimeout(timeout);
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [notification]);
+
   return (
     <>
       {response?.redirectToPayment === true ? (
@@ -166,10 +179,12 @@ export function PurchasingFormHook() {
             <Notification
               message={notification?.message}
               type={notification?.type}
-              size="line"
+              size="fullscreen"
+              top={scrollY}
+              height={deviceHeight}
             />
           ) : null}
-          <div className={styles.content}>
+          <div className={styles.content} ref={ref}>
             <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
               <input type="hidden" name="_csrf" value={csrfToken} />
               <div className={styles.heading}>

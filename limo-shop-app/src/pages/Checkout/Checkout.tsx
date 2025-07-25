@@ -62,9 +62,7 @@ export function Checkout({ message, orderId, userIp }: CheckoutObject) {
     <div className={styles.checkout}>
       {notification?.type === "error" ? (
         <Notification type="error" size="line" message={notification.message} />
-      ) : (
-        <div></div>
-      )}
+      ) : null}
       <div className={styles.message}>
         <div>{message}</div>
         <div>

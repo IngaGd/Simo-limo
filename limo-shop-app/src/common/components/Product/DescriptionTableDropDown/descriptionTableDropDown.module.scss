@@ -3,6 +3,7 @@
 
 .table {
   background-color: $color-primary-1;
+  font-size: 1.4rem;
 
   display: flex;
   width: $width-size-m;
@@ -54,15 +55,15 @@
 .details {
   flex-direction: row;
   gap: 1rem;
-  font-size: 2rem;
+  font-size: 1.6rem;
 }
 
 .price {
   display: flex;
   justify-content: flex-end;
+  font-size: 1.6rem;
   .details {
     align-self: flex-end;
-    font-size: 1.8rem;
   }
 }
 
@@ -120,5 +121,5 @@
 }
 
 .pakBtn {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
 }
